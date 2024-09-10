@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    tools:context=".Login_to_existing">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_marginTop="30dp"
+        android:id="@+id/toolbar"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:backgroundTint="@color/main_background"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/text_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter the address of the WordPress site you'd like to connect."
+            android:textSize="16dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Site address"
+            android:layout_below="@id/textView2"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            style="@style/text_style"
+            android:textSize="12dp"
+            android:textColor="@color/blue"/>
+
+        <EditText
+            android:id="@+id/input_adress"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_below="@id/textView2"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/border_blue"
+            android:ems="10"
+            android:inputType="text"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/find_site_btn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_adress"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/roboto"
+            android:text="Find your site address"
+            android:textColor="@color/blue" />
+
+        <Button
+            android:id="@+id/continue_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continue"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="@color/gray"
+            app:cornerRadius="8dp"
+            android:fontFamily="@font/roboto"
+            android:textSize="16dp"
+            android:layout_marginBottom="30dp"
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
