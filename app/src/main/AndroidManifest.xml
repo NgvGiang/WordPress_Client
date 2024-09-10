@@ -19,6 +19,9 @@
             android:name=".UserWebMangement"
             android:exported="false" />
         <activity
+            android:name=".PagesActivity"
+            android:exported="false" />
+        <activity
             android:name=".FirstLoginActivity"
             android:exported="true">
             <intent-filter>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -12,9 +12,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_anchor="@+id/linearLayout"
-        app:layout_anchorGravity="center">
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -26,7 +24,7 @@
             android:title="Page" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+            android:id="@+id/PagetabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#121212"
@@ -59,10 +57,10 @@
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
+            android:id="@+id/PageviewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_anchor="@id/tabLayout"
+            app:layout_anchor="@id/PagetabLayout"
             app:layout_anchorGravity="bottom" />
     </LinearLayout>
 
@@ -70,11 +68,11 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="40dp"
         android:src="@drawable/add"
-        app:backgroundTint="#484444"
-        app:tint="@android:color/white"/>
+        android:backgroundTint="#484444"
+        app:tint="@color/white"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>
