@@ -2,6 +2,7 @@ package vn.edu.usth.wordpressclient;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -16,42 +17,44 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-public class CommentActivity extends AppCompatActivity {
+import vn.edu.usth.wordpressclient.commentgroupfragments.AllTabFragment;
+import vn.edu.usth.wordpressclient.commentgroupfragments.ApprovedTabFragment;
+import vn.edu.usth.wordpressclient.commentgroupfragments.PendingTabFragment;
+import vn.edu.usth.wordpressclient.commentgroupfragments.SpamTabFragment;
+import vn.edu.usth.wordpressclient.commentgroupfragments.TrashedTabFragment;
+import vn.edu.usth.wordpressclient.commentgroupfragments.UnrepliedTabFragment;
 
-    private TabLayout mTabLayout;
-    private ViewPager2 mViewPager;
-    private CommentViewPagerAdapter mCommentViewPagerAdapter;
+public class CommentActivity extends AppCompatActivity {
+    private TabLayout tabLayout;
+    private ViewPager2 viewPager2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_comment);;
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_comment);
-        mTabLayout = findViewById(R.id.comment_tab_mode);
-        mViewPager = findViewById(R.id.comment_view_pager);
-        mCommentViewPagerAdapter = new CommentViewPagerAdapter(this);
-        mViewPager.setAdapter(mCommentViewPagerAdapter);
-        new TabLayoutMediator(mTabLayout, mViewPager, (tab, position) -> {
-            switch (position) {
-                case 0:
-                    tab.setText("ALL");
-                    break;
-                case 1:
-                    tab.setText("PENDING");
-                    break;
-                case 2:
-                    tab.setText("UNREPLIED");
-                    break;
-                case 3:
-                    tab.setText("APPROVED");
-                    break;
-                case 4:
-                    tab.setText("SPAM");
-                    break;
-                case 5:
-                    tab.setText("TRASHED");
-                    break;
-            }
+
+        Toolbar toolbar = findViewById(R.id.comment_tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setTitle("Comments");
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+        tabLayout = findViewById(R.id.comment_tab_mode);
+        viewPager2 = findViewById(R.id.comment_view_pager);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
+        viewPagerAdapter.addFragment(new AllTabFragment(), "ALL");
+        viewPagerAdapter.addFragment(new PendingTabFragment(), "PENDING");
+        viewPagerAdapter.addFragment(new UnrepliedTabFragment(), "UNREPLIED");
+        viewPagerAdapter.addFragment(new ApprovedTabFragment(), "APPROVED");
+        viewPagerAdapter.addFragment(new SpamTabFragment(), "SPAM");
+        viewPagerAdapter.addFragment(new TrashedTabFragment(), "TRASHED");
+        viewPager2.setAdapter(viewPagerAdapter);
+        new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
+            tab.setText(viewPagerAdapter.getTitle(position));
         }).attach();
     }
 }
