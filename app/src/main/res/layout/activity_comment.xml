@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -9,17 +9,20 @@
     tools:context=".CommentActivity"
     android:background="#121212">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/title_and_btn"
+        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/back_btn"
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/back_button" />
+            android:layout_gravity="center"
+            android:src="@drawable/back_button"
+            android:contentDescription="@string/image_button_description"
+            android:padding="16dp"
+            android:background="#121212"/>
 
         <TextView
             android:id="@+id/title"
@@ -31,8 +34,7 @@
             android:textStyle="bold"
             android:layout_toRightOf="@+id/back_btn"
             android:layout_margin="20dp"/>
-    </RelativeLayout>
-
+    </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/comment_tab_mode"
@@ -42,7 +44,8 @@
         app:tabSelectedTextColor="@color/white"
         android:background="#121212"
         app:tabIndicatorColor="@color/blue"
-        app:tabIndicatorFullWidth="true">
+        app:tabIndicatorFullWidth="true"
+        android:layout_below="@+id/title_and_btn">
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,6 +75,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/comment_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/comment_tab_mode"/>
 
-</LinearLayout>
+</RelativeLayout>
