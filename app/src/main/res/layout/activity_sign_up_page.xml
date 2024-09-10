@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    tools:context=".Login_to_existing">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_marginTop="30dp"
+        android:id="@+id/toolbar"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:backgroundTint="@color/main_background"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/TextView1"
+            style="@style/text_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter your email address to log in or create a WordPress.com account."
+            android:textSize="16dp">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/input_address"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_below="@id/TextView1"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/border_blue"
+            android:ems="10"
+            android:hint="Email address"
+            android:textColorHint="@color/gray"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:paddingLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/term_service_btn"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_address"
+            android:layout_marginTop="5dp"
+            android:clickable="true"
+            android:focusable="true"
+            style="@style/text_style"
+            android:text="By continuing, you agree to our Terms of Service."
+            android:layout_centerHorizontal="true"
+            android:textSize="12dp"
+            />
+        <Button
+            android:id="@+id/continue_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continue"
+            android:layout_below="@id/term_service_btn"
+            android:backgroundTint="@color/gray"
+            app:cornerRadius="8dp"
+            android:fontFamily="@font/roboto"
+            android:textSize="16dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_above="@+id/google_button">
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OR"
+                android:textColor="@color/gray"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="14sp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray" />
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/google_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_above="@+id/terms_text"
+            android:background="@drawable/border_blue"
+            android:clickable="true"
+            android:focusable="true"
+            >
+
+
+            <TextView
+                android:id="@+id/continue_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Continue with Google"
+                android:textSize="16dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                style="@style/text_style"
+                />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/google"
+                android:layout_toLeftOf="@id/continue_text"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/terms_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="If you continue with Google and don't already have a WordPress.com account, you are creating an account and you agree to our Terms of Service."
+            android:gravity="center"
+            android:textSize="13dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            style="@style/text_style"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
