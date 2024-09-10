@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "vn.edu.usth.wordpressclient"
-        minSdk = 34
+        minSdk = 27
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
