@@ -13,16 +13,19 @@
         android:theme="@style/Theme.WordPressClient"
         tools:targetApi="31">
         <activity
-            android:name=".PagesActivity"
+            android:name=".Login_to_existing"
+            android:exported="false" />
+        <activity
+            android:name=".UserWebMangement"
             android:exported="false" />
         <activity
             android:name=".FirstLoginActivity"
             android:exported="true">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
