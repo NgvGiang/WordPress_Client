@@ -72,7 +72,7 @@
             android:id="@+id/content_text"
             style="@style/text_style"
             android:layout_width="match_parent"
-            android:layout_height="49dp"
+            android:layout_height="40dp"
             android:alpha="0.5"
             android:gravity="center|left"
             android:text="     Content"
@@ -88,11 +88,15 @@
                 android:id="@+id/posts_row"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/button_click"
+                >
 
 
                 <ImageView
-                    android:id="@+id/imageView16"
+                    android:id="@+id/posts_icon"
                     android:layout_width="62dp"
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
@@ -100,40 +104,40 @@
                     app:srcCompat="@drawable/posts" />
 
                 <TextView
-                    android:id="@+id/posts_btn"
+                    android:id="@+id/posts_text"
                     style="@style/text_style"
-                    android:layout_width="70dp"
+                    android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_toRightOf="@+id/imageView16"
-                    android:clickable="true"
-                    android:focusable="true"
+                    android:layout_toRightOf="@+id/posts_icon"
                     android:gravity="center|left"
                     android:text="Posts"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/pages_row"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/button_click">
 
 
                 <ImageView
-                    android:id="@+id/imageView17"
+                    android:id="@+id/pages_icon"
                     android:layout_width="62dp"
                     android:layout_height="30dp"
                     app:srcCompat="@drawable/pages"
                     android:layout_centerVertical="true"/>
 
                 <TextView
-                    android:id="@+id/pages_btn"
+                    android:id="@+id/pages_text"
                     style="@style/text_style"
-                    android:layout_width="70dp"
+                    android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_toRightOf="@id/imageView17"
-                    android:clickable="true"
-                    android:focusable="true"
+                    android:layout_toRightOf="@id/pages_icon"
                     android:gravity="center|left"
                     android:text="Pages"
                     android:textStyle="bold" />
@@ -143,25 +147,26 @@
                 android:id="@+id/media_row"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/button_click">
 
                 <ImageView
-                    android:id="@+id/imageView18"
+                    android:id="@+id/media_icon"
                     android:layout_width="62dp"
                     android:layout_height="30dp"
                     app:srcCompat="@drawable/media"
                     android:layout_centerVertical="true"/>
 
                 <TextView
-                    android:id="@+id/media_btn"
-                    android:layout_width="62dp"
+                    android:id="@+id/media_text"
+                    style="@style/text_style"
+                    android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_toRightOf="@id/imageView18"
-                    android:clickable="true"
-                    android:focusable="true"
+                    android:layout_toRightOf="@id/media_icon"
                     android:gravity="center|left"
                     android:text="Media"
-                    style="@style/text_style"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -169,7 +174,11 @@
                 android:id="@+id/comment_row"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/button_click">
+                >
 
                 <ImageView
                     android:id="@+id/comment_icon"
@@ -179,13 +188,11 @@
                     android:layout_centerVertical="true"/>
 
                 <TextView
-                    android:id="@+id/comments_btn"
+                    android:id="@+id/comments_text"
                     style="@style/text_style"
-                    android:layout_width="70dp"
+                    android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_toRightOf="@+id/comment_icon"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:gravity="center|left"
                     android:text="Comments"
                     android:textStyle="bold" />
@@ -196,7 +203,7 @@
             android:id="@+id/Manage_text"
             style="@style/text_style"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="40dp"
             android:alpha="0.5"
             android:gravity="center|left"
             android:text="    Manage"
@@ -212,7 +219,10 @@
                 android:id="@+id/me_row"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/button_click">
 
                 <ImageView
                     android:id="@+id/me_icon"
@@ -222,24 +232,24 @@
                     android:layout_centerVertical="true"/>
 
                 <TextView
-                    android:id="@+id/me_btn"
-                    android:layout_width="70dp"
+                    android:id="@+id/me_text"
+                    style="@style/text_style"
+                    android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:clickable="true"
-                    android:focusable="true"
+                    android:layout_toRightOf="@+id/me_icon"
                     android:gravity="center|left"
                     android:text="Me"
-                    android:textStyle="bold"
-                    style="@style/text_style"
-                    android:layout_toRightOf="@+id/me_icon"
-                    />
+                    android:textStyle="bold" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/site_setting_row"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/button_click">
 
                 <ImageView
                     android:id="@+id/setting_icon"
@@ -249,12 +259,11 @@
                     android:layout_centerVertical="true"/>
 
                 <TextView
+                    android:id="@+id/setting_text"
                     style="@style/text_style"
-                    android:layout_width="80dp"
+                    android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_toRightOf="@id/setting_icon"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:gravity="center|left"
                     android:text="Site Setting"
                     android:textStyle="bold" />
@@ -266,10 +275,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/button_click"
                 >
 
                 <ImageView
-                    android:id="@+id/imageView22"
+                    android:id="@+id/Admin_icon"
                     android:layout_width="62dp"
                     android:layout_height="30dp"
                     app:srcCompat="@drawable/logo"
@@ -278,10 +290,10 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/imageView22">
+                    android:layout_toRightOf="@id/Admin_icon">
 
                     <TextView
-                        android:id="@+id/textView22"
+                        android:id="@+id/admin_text"
                         android:layout_width="70dp"
                         android:layout_height="48dp"
                         android:text="WP Admin"
@@ -292,14 +304,14 @@
                         android:focusable="true"/>
 
                     <ImageButton
-                        android:id="@+id/image_button"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:id="@+id/openin_btn_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/admin_text"
                         android:background="?attr/selectableItemBackground"
                         android:scaleType="fitXY"
-                        android:src="@drawable/openin"
-                        android:layout_toRightOf="@+id/textView22"
-                        android:layout_centerVertical="true">
+                        android:src="@drawable/openin">
 
                     </ImageButton>
 

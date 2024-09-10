@@ -15,6 +15,5 @@ public class UserWebMangement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_user_web_mangement);
-
-    };
+    }
 }
