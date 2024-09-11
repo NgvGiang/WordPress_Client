@@ -16,6 +16,18 @@
             android:name=".MeWebsiteActivity"
             android:exported="false" />
         <activity
+            android:name=".PostsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Login_to_existing"
+            android:exported="false" />
+        <activity
+            android:name=".UserWebMangement"
+            android:exported="false" />
+        <activity
+            android:name=".PagesActivity"
+            android:exported="false" />
+        <activity
             android:name=".FirstLoginActivity"
             android:exported="true" >
             <intent-filter>

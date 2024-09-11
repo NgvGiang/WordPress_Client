@@ -1,20 +1,19 @@
 package vn.edu.usth.wordpressclient;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
-public class FirstLoginActivity extends AppCompatActivity {
+public class UserWebMangement extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_first_login);
+        setContentView(R.layout.activity_user_web_mangement);
     }
 }
