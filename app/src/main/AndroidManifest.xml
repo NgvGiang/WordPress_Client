@@ -22,13 +22,13 @@
             android:name=".UserWebMangement"
             android:exported="false" />
         <activity
-            android:name=".PagesActivity"
+            android:name=".WordPress_media"
             android:exported="false" />
         <activity
             android:name=".FirstLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".WordPress_media"
+            android:name=".PagesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

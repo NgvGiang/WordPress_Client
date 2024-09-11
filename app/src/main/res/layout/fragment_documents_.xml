@@ -3,12 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Documents_Fragment">
+    android:background="@color/main_background"
+    tools:context=".MediaFragments.Documents_Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/iconMedia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/wordpress_media_icon"
+            android:contentDescription="icon media" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You don't have any documents"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"/>
+
+        <Button
+            android:id="@+id/uploadMediaButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload media"
+            android:layout_marginTop="20dp"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
 
 </FrameLayout>
