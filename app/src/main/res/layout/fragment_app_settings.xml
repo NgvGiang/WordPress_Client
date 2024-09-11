@@ -1,18 +1,18 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"> <!-- Ensures content fills the viewport -->
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/main_background"
-        android:padding="16dp">
+        android:paddingTop="16dp">
 
         <!-- Toolbar -->
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_activity_me"
+            android:id="@+id/toolbar_app_settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#121212"
@@ -20,174 +20,363 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <!-- Interface Language -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Interface Language"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"/>
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/interface_language"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/gray"
+            android:fontFamily="@font/roboto"
             android:text="@your_language"
-            android:background="@android:color/white"
-            android:padding="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"/>
+            android:textSize="13sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
 
         <!-- Appearance -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Appearance"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"/>
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/appearance"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/gray"
+            android:fontFamily="@font/roboto"
             android:text="System Default"
-            android:background="@android:color/white"
-            android:padding="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"/>
-
+            android:textSize="13sp"/>
+        </LinearLayout>
+    </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
         <!-- Privacy settings -->
+    <LinearLayout
+        android:id="@+id/privacy_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical"
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Privacy settings"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/white"
+            android:textSize="13sp"
             android:textStyle="bold"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp"/>
+    </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
 
         <!-- Open device settings -->
+    <LinearLayout
+        android:id="@+id/open_device_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Open device settings"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"/>
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp"/>
+    </LinearLayout>
 
         <!-- Media section -->
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Media"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"/>
-
+            android:clickable="false"
+            android:focusable="true"
+            android:orientation="vertical"
+            android:layout_marginTop="11dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Media"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/light_blue"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
         <!-- Optimize Images Switch -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="8dp">
+            android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="0dp"
+
+            <LinearLayout
+                android:layout_width="346dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Optimize Images"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:padding="10dp"/>
+                android:clickable="false">
 
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginBottom="19dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Optimize Images"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/optimize_images_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/gray"
+                        android:text="Enable to resize and compress pictures"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+            </LinearLayout>
             <Switch
                 android:id="@+id/switch_optimize_images"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
         <!-- Maximum Image Size -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Maximum Image Size"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="8dp"/>
+            android:fontFamily="@font/roboto"
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:textColor="@color/white"
+            />
 
         <TextView
             android:id="@+id/maximum_image_size"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2000px"
-            android:background="@android:color/white"
-            android:padding="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"/>
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
+        </LinearLayout>
+    </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
 
         <!-- Image Quality -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Image Quality"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"/>
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/image_quality"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Medium"
-            android:background="@android:color/white"
-            android:padding="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"/>
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
+        </LinearLayout>
+    </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
 
         <!-- Remove location from media -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="8dp">
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="346dp"
+                android:layout_height="wrap_content"
+                android:clickable="false">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Remove location from media"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:padding="10dp"/>
-
+                android:fontFamily="@font/roboto"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="13sp"/>
+            </LinearLayout>
+            </LinearLayout>
             <Switch
                 android:id="@+id/switch_remove_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
         <!-- Optimize Videos Switch -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="8dp">
+            android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="346dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Optimize Videos"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:padding="10dp"/>
+                android:clickable="false">
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginBottom="19dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Optimize Videos"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/optimize_videos_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enable to resize and compress videos"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/gray"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+            </LinearLayout>
 
             <Switch
                 android:id="@+id/switch_optimize_videos"
@@ -195,41 +384,82 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
         <!-- Maximum Video Size -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="true"
+        android:orientation="vertical">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Maximum Video Size"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="8dp"/>
+            android:fontFamily="@font/roboto"
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:textColor="@color/gray"/>
 
         <TextView
             android:id="@+id/maximum_video_size"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="720p"
-            android:background="@android:color/white"
-            android:padding="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"/>
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
+        </LinearLayout>
+    </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
 
         <!-- Video Quality -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="true"
+        android:orientation="vertical">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Video Quality"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"/>
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/gray"
+            android:textSize="13sp"
+            />
 
         <TextView
             android:id="@+id/video_quality"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="High"
-            android:background="@android:color/white"
-            android:padding="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"/>
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/gray"
+            android:textSize="13sp"/>
+        </LinearLayout>
+    </LinearLayout>
     </LinearLayout>
 </ScrollView>
