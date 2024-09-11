@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/main_background"
+    android:paddingTop="16dp"
+    >
+
+    <!-- Toolbar Section with Back Button -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_about_wordpress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#121212"
+        android:paddingTop="25dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <!-- WordPress Logo   -->
+    <ImageView
+        android:id="@+id/ic_wordpress"
+        app:tint="#FFFFFF"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginEnd="15dp"
+
+        android:src="@drawable/ic_wordpress" />
+
+    <!--  WordPress Logo Text  -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="WordPress"
+        android:textFontWeight="400"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="10dp"/>
+    <!-- Version  -->
+    <!-- Username label -->
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="55dp"
+        android:fontFamily="@font/roboto"
+        android:text="Version 25.2.1"
+        android:textColor="@color/gray"
+        android:textSize="13sp" />
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444444" />
+
+        <!--  Rate Us -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:textSize="13sp"
+            android:text="Rate Us"
+            android:clickable="true"
+            android:id="@+id/rate_us"
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="25dp"
+            android:textColor="@color/gray"
+/>
+
+
+    <!-- Share with Friends -->
+
+        <TextView
+            android:id="@+id/share_wordpress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Share with Friends"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:textSize="13dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/gray" />
+
+    <!-- Twitter -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="Twitter"
+            android:clickable="true"
+            android:id="@+id/twitter"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:textColor="@color/gray"
+            android:layout_marginBottom="25dp"
+            android:layout_marginStart="20dp"/>
+    <!--  News  -->
+        <TextView
+            android:id="@+id/news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="News"
+            android:clickable="true"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:textColor="@color/gray"
+            android:layout_marginBottom="18dp"
+            android:layout_marginStart="20dp"/>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#444444" />
+    <!-- Legal and More -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Legal and More"
+            android:clickable="true"
+            android:id="@+id/legal_and_more"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/gray"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
+            android:layout_marginStart="20dp"/>
+    <!-- Divider -->
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#444444" />
+    <!-- Contribute  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/contribute"
+            android:clickable="true"
+            android:text="Contribute"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/gray"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="19dp"
+            android:layout_marginStart="20dp"/>
+
+</LinearLayout>
