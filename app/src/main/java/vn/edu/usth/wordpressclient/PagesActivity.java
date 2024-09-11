@@ -1,18 +1,20 @@
 package vn.edu.usth.wordpressclient;
 
 import android.os.Bundle;
-import android.view.Menu;
+
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import vn.edu.usth.wordpressclient.PagesFragments.PageDraftFragment;
+import vn.edu.usth.wordpressclient.PagesFragments.PagePublishedFragment;
+import vn.edu.usth.wordpressclient.PagesFragments.PageScheduledFragment;
+import vn.edu.usth.wordpressclient.PagesFragments.PageTrashedFragment;
 
 public class PagesActivity extends AppCompatActivity {
     private TabLayout tabLayout;

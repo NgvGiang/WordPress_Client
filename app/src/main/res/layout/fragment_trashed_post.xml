@@ -5,37 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#121212"
-    tools:context=".PagesFragments.PageDraftFragment">
+    tools:context=".PostsFragments.TrashedPostFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView1"
         style="@style/page_text"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:text="You don't have any trashed pages"
+        android:text="You don't have any trashed post"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.605" />
-
     <Button
-        android:id="@+id/trashed_page_button"
+        android:id="@+id/trashed_post_button"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:backgroundTint="@color/blue"
-        android:text="Create a page"
+        android:text="Create a post"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
         app:layout_constraintVertical_bias="0.143" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="173dp"
@@ -48,6 +46,5 @@
         app:layout_constraintVertical_bias="0.391"
         app:layout_constraintHorizontal_bias="0.5"
         />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
