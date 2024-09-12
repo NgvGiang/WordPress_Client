@@ -9,13 +9,13 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/MedialinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/Mediatoolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#121212"
@@ -24,7 +24,7 @@
             android:title="WordPress Media" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/PagetabLayout"
+            android:id="@+id/MediatabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#121212"
@@ -57,7 +57,7 @@
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/PageviewPager"
+            android:id="@+id/MediaviewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_anchor="@id/PagetabLayout"
@@ -65,7 +65,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/Mediafab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

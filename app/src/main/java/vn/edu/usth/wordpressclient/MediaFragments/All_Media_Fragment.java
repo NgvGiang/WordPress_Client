@@ -11,9 +11,10 @@ import android.view.ViewGroup;
 import vn.edu.usth.wordpressclient.R;
 
 
-public class Videos_Fragment extends Fragment {
+public class All_Media_Fragment extends Fragment {
 
-    public Videos_Fragment() {
+
+    public All_Media_Fragment() {
         // Required empty public constructor
     }
 
@@ -21,6 +22,6 @@ public class Videos_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_videos_, container, false);
+        return inflater.inflate(R.layout.fragment_media_all_, container, false);
     }
 }
