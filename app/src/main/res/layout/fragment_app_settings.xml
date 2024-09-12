@@ -95,7 +95,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#444444" />
-
         <!-- Privacy settings -->
     <LinearLayout
         android:id="@+id/privacy_settings"
@@ -164,7 +163,6 @@
                     android:textSize="13sp"/>
             </LinearLayout>
         </LinearLayout>
-
         <!-- Optimize Images Switch -->
         <LinearLayout
             android:layout_width="match_parent"
