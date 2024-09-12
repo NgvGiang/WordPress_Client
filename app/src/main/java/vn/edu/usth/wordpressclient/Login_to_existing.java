@@ -20,11 +20,11 @@ public class Login_to_existing extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_to_existing);
-        // Set up the toolbar
+        // Set up toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Set the title
+        // Set title
         getSupportActionBar().setTitle("Log In");
         //title color
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
@@ -37,15 +37,14 @@ public class Login_to_existing extends AppCompatActivity {
         });
     }
 
-    // Inflate the menu for the info icon
+    // info icon
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar_menu, menu); // Define a menu for the info icon
+        inflater.inflate(R.menu.toolbar_menu, menu);
         return true;
     }
-
-    // Handle menu item clicks (for the info icon)
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.info_icon) {

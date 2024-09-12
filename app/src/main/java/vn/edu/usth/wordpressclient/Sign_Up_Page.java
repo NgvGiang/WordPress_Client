@@ -56,14 +56,14 @@ public class Sign_Up_Page extends AppCompatActivity {
             }
         });
     }
-    // Inflate the menu for the info icon
+    //info icon
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu, menu); // Define a menu for the info icon
         return true;
     }
-    // Handle menu item clicks (for the info icon)
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.info_icon) {

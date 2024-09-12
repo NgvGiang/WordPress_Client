@@ -51,14 +51,13 @@
         android:text="You can switch sites any time."
         android:textSize="12dp" />
 
-    <!-- Use weightSum to manage space -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <!-- RecyclerView takes available space -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/web_recycler_view"
             android:layout_width="match_parent"
@@ -74,14 +73,12 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <!-- Left Line -->
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray" />
 
-            <!-- Text in the center -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,7 +88,6 @@
                 android:textColor="@android:color/white"
                 android:textSize="14dp" />
 
-            <!-- Right Line -->
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
@@ -101,7 +97,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Button always at the bottom -->
     <Button
         android:id="@+id/create_site_btn"
         style="@style/text_style"
