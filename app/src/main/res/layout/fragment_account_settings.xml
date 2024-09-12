@@ -3,11 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/main_background"
-    android:paddingTop="16dp"
-    >
+    android:background="@color/main_background">
 
-    <!-- Toolbar Section with Back Button -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_account_settings"
         android:layout_width="match_parent"
@@ -16,193 +13,233 @@
         android:paddingTop="25dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <!-- Username label -->
+    <!-- Username -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
+        android:clickable="false"
         android:focusable="true"
         android:orientation="vertical">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Username"
         android:fontFamily="@font/roboto"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="19dp"/>
+        android:textSize="13sp"
+        android:textStyle="bold"/>
 
-    <!--  Username value -->
     <TextView
-        android:id="@+id/user_name"
+        android:id="@+id/your_user_name_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:textSize="13sp"
         android:text="@your_user_name"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/gray"
-        android:layout_marginBottom="19dp"/>
+        android:textColor="@color/gray"/>
+
+        </LinearLayout>
     </LinearLayout>
-    <!-- Divider -->
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#444444" />
 
-    <!-- Email label -->
+    <!-- Email -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
+        android:clickable="false"
         android:focusable="true"
         android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginTop="19dp"/>
 
-    <!-- Email Address value -->
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@your-address"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/gray"
-        android:layout_marginBottom="19dp"/>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email address"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/your_email_address_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:textSize="13sp"
+                android:text="@your_address"
+                android:textColor="@color/gray"/>
+
+        </LinearLayout>
     </LinearLayout>
-    <!-- Divider -->
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#444444" />
 
-    <!-- Primary site label -->
+    <!-- Primary site -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
+        android:clickable="false"
         android:focusable="true"
         android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Primary site"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:layout_marginStart="10dp"
-        android:textStyle="bold"
-        android:layout_marginTop="19dp"/>
 
-    <!-- Primary site name value -->
-    <TextView
-        android:id="@+id/primary_site"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="@name"
-        android:textColor="@color/gray"
-        android:layout_marginBottom="19dp"
-        android:layout_marginStart="10dp"/>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Primary site"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/your_primary_site_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:textSize="13sp"
+                android:text="@name"
+                android:textColor="@color/gray"/>
+
+        </LinearLayout>
     </LinearLayout>
-    <!-- Divider -->
+
     <View
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#444444" />
-    <!--  Web Address Label  -->
+
+    <!--  Web Address -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
+        android:clickable="false"
         android:focusable="true"
         android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Web address"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:layout_marginStart="10dp"
-        android:textStyle="bold"
-        android:layout_marginTop="19dp"/>
 
-    <!-- Web Address value -->
-    <TextView
-        android:id="@+id/web_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="@Web_address"
-        android:textColor="@color/gray"
-        android:layout_marginBottom="19dp"
-        android:layout_marginStart="10dp"/>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Web address"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/your_web_address_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:textSize="13sp"
+                android:text="@Web_address"
+                android:textColor="@color/gray"/>
+
+        </LinearLayout>
     </LinearLayout>
-    <!-- Divider -->
+
     <View
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#444444" />
-    <!-- Change Password label -->
+
+    <!-- Change Password -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Change Password"
         android:id="@+id/change_password"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginTop="19dp"
-        android:layout_marginBottom="19dp"
-        android:layout_marginStart="10dp"/>
-    </LinearLayout>
-    <!-- Divider -->
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="#444444" />
-    <!-- Close Account Label  -->
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/close_account"
-        android:text="Close Account"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/red"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginTop="19dp"
-        android:layout_marginBottom="19dp"
-        android:layout_marginStart="140dp"/>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change password"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
     </LinearLayout>
-    <!-- Divider -->
+
     <View
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444444" />
+
+    <!-- Close Account -->
+    <LinearLayout
+        android:id="@+id/close_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Close Account"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/red"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#444444" />
 
