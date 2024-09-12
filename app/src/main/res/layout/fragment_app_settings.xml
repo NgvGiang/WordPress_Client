@@ -44,13 +44,13 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/interface_language"
+            android:id="@+id/interface_language_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/gray"
             android:fontFamily="@font/roboto"
             android:text="@your_language"
-            android:textSize="13sp" />
+            android:textSize="13sp"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -83,7 +83,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/appearance"
+            android:id="@+id/appearance_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/gray"
@@ -219,11 +219,13 @@
 
         <!-- Maximum Image Size -->
     <LinearLayout
+        android:id="@+id/maximum_image_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical">
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -242,7 +244,7 @@
             />
 
         <TextView
-            android:id="@+id/maximum_image_size"
+            android:id="@+id/maximum_image_size_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2000px"
@@ -280,7 +282,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/image_quality"
+            android:id="@+id/image_quality_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Medium"
@@ -413,7 +415,7 @@
             android:textColor="@color/gray"/>
 
         <TextView
-            android:id="@+id/maximum_video_size"
+            android:id="@+id/maximum_video_size_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="720p"
@@ -452,7 +454,7 @@
             />
 
         <TextView
-            android:id="@+id/video_quality"
+            android:id="@+id/video_quality_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="High"
