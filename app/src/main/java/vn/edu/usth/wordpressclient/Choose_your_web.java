@@ -34,6 +34,8 @@ public class Choose_your_web extends AppCompatActivity {
         webModels.add(new Web_card_model(R.drawable.compass, "Example Site 4", "www.example4.com"));
         webModels.add(new Web_card_model(R.drawable.compass, "Example Site 5", "www.example5.com"));
         webModels.add(new Web_card_model(R.drawable.compass, "Example Site 6", "www.example6.com"));
+        webModels.add(new Web_card_model(R.drawable.compass, "Example Site 7", "www.example7.com"));
+        webModels.add(new Web_card_model(R.drawable.compass, "Example Site 8", "www.example8.com"));
 
 
         //set up
