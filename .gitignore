@@ -15,6 +15,9 @@ captures/
 *.apk
 output.json
 
+# DS_Store
+*.DS_Store
+
 # IntelliJ
 *.iml
 .idea/
