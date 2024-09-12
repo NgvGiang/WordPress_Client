@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Choose_your_web"
+    android:background="@color/main_background"
+    android:paddingTop="35dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+
+    <ImageView
+        android:id="@+id/profile_pic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/profile"
+        />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="User name"
+        style="@style/text_style"
+        android:textSize="25dp"/>
+
+    <TextView
+        android:id="@+id/acc_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Account Name"
+        style="@style/text_style"
+        android:alpha="0.5"
+        />
+
+    <TextView
+        style="@style/text_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Choose a site to open"
+        android:textSize="14dp" />
+
+    <TextView
+        style="@style/text_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:alpha="0.5"
+        android:text="You can switch sites any time."
+        android:textSize="12dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/web_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="308dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp">
+
+        <Button
+            android:id="@+id/create_site_btn"
+            style="@style/text_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="-1dp"
+            android:background="@drawable/border_blue"
+            android:text="Create a new site" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:alpha="0.5"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_above="@+id/create_site_btn">
+
+            <!-- Left Line -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray" />
+
+            <!-- Text in the center -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="OR"
+                android:textColor="@android:color/white"
+                android:textSize="14dp" />
+
+            <!-- Right Line -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
