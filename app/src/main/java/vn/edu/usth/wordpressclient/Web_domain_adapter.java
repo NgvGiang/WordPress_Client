@@ -51,10 +51,11 @@ public class Web_domain_adapter extends RecyclerView.Adapter<Web_domain_adapter.
         ImageView WebIcon;
         TextView WebTitle, WebDomain;
 
+
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            // Grabbing views from the item layout (R.layout.website_cardview)
+            // Grabbing views
             WebIcon = itemView.findViewById(R.id.web_icon);
             WebTitle = itemView.findViewById(R.id.web_title);
             WebDomain = itemView.findViewById(R.id.web_domain);
