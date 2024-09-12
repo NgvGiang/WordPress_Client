@@ -10,32 +10,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
         android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/iconMedia"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/wordpress_media_icon"
-            android:contentDescription="icon_media" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="You don't have any media"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:layout_marginTop="20dp"/>
-
-        <Button
-            android:id="@+id/uploadMediaButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upload media"
             android:layout_marginTop="20dp"
-            android:textAllCaps="false" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/image1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="Image 1"
+                android:src="@drawable/add" />
+
+
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="Image 2"
+                android:src="@drawable/logo" />
+
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="Image 3"
+                android:src="@drawable/media" />
+        </LinearLayout>
 
     </LinearLayout>
+
 
 </FrameLayout>
