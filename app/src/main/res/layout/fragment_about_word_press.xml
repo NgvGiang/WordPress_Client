@@ -4,10 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/main_background"
-    android:paddingTop="16dp"
     >
 
-    <!-- Toolbar Section with Back Button -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_about_wordpress"
         android:layout_width="match_parent"
@@ -17,18 +15,30 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <!-- WordPress Logo   -->
-    <ImageView
-        android:id="@+id/ic_wordpress"
-        app:tint="#FFFFFF"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="170dp"
-        android:layout_marginEnd="15dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        android:src="@drawable/ic_wordpress" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="19dp"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/ic_wordpress"
+                app:tint="#FFFFFF"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/ic_wordpress" />
 
     <!--  WordPress Logo Text  -->
-    <TextView
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
@@ -36,21 +46,20 @@
         android:textFontWeight="400"
         android:textColor="#FFFFFF"
         android:textSize="32sp"
-        android:layout_marginStart="125dp"
         android:layout_marginTop="10dp"/>
     <!-- Version  -->
-    <!-- Username label -->
-    <TextView
+        <TextView
         android:id="@+id/version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
         android:layout_marginTop="7dp"
-        android:layout_marginBottom="55dp"
         android:fontFamily="@font/roboto"
         android:text="Version 25.2.1"
         android:textColor="@color/gray"
         android:textSize="13sp" />
+
+        </LinearLayout>
+    </LinearLayout>
     <!-- Divider -->
     <View
         android:layout_width="match_parent"
@@ -58,63 +67,121 @@
         android:background="#444444" />
 
         <!--  Rate Us -->
-        <TextView
+    <LinearLayout
+        android:id="@+id/rate_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:textSize="13sp"
-            android:text="Rate Us"
-            android:clickable="true"
-            android:id="@+id/rate_us"
-            android:textStyle="bold"
+            android:orientation="vertical"
             android:layout_marginStart="20dp"
             android:layout_marginTop="18dp"
-            android:layout_marginBottom="25dp"
-            android:textColor="@color/gray"
-/>
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rate Us"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/gray"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
     <!-- Share with Friends -->
 
-        <TextView
-            android:id="@+id/share_wordpress"
+    <LinearLayout
+        android:id="@+id/share_with_friends"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Share with Friends"
-            android:textStyle="bold"
-            android:clickable="true"
-            android:textSize="13dp"
-            android:layout_marginBottom="25dp"
+            android:orientation="vertical"
             android:layout_marginStart="20dp"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/gray" />
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Share with Friends"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/gray"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <!-- Twitter -->
-        <TextView
+    <LinearLayout
+        android:id="@+id/twitter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:text="Twitter"
-            android:clickable="true"
-            android:id="@+id/twitter"
-            android:textSize="13dp"
-            android:textStyle="bold"
-            android:textColor="@color/gray"
-            android:layout_marginBottom="25dp"
-            android:layout_marginStart="20dp"/>
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Twitter"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/gray"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
     <!--  News  -->
-        <TextView
-            android:id="@+id/news"
+    <LinearLayout
+        android:id="@+id/news"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:text="News"
-            android:clickable="true"
-            android:textSize="13dp"
-            android:textStyle="bold"
-            android:textColor="@color/gray"
-            android:layout_marginBottom="18dp"
-            android:layout_marginStart="20dp"/>
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="News"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/gray"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <!-- Divider -->
     <View
@@ -122,37 +189,65 @@
         android:layout_height="1dp"
         android:background="#444444" />
     <!-- Legal and More -->
-        <TextView
+    <LinearLayout
+        android:id="@+id/legal_and_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Legal and More"
-            android:clickable="true"
-            android:id="@+id/legal_and_more"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/gray"
-            android:textSize="13sp"
-            android:textStyle="bold"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="18dp"
-            android:layout_marginBottom="18dp"
-            android:layout_marginStart="20dp"/>
+            android:layout_marginBottom="18dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Legal and More"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/gray"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
     <!-- Divider -->
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:background="#444444" />
     <!-- Contribute  -->
-        <TextView
+    <LinearLayout
+        android:id="@+id/contribute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/contribute"
-            android:clickable="true"
-            android:text="Contribute"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/gray"
-            android:textSize="13sp"
-            android:textStyle="bold"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="18dp"
-            android:layout_marginBottom="19dp"
-            android:layout_marginStart="20dp"/>
+            android:layout_marginBottom="18dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contribute"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/gray"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

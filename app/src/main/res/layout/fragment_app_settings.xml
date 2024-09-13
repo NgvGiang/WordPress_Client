@@ -20,6 +20,7 @@
 
         <!-- Interface Language -->
     <LinearLayout
+        android:id="@+id/interface_language"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -60,6 +61,7 @@
 
         <!-- Appearance -->
     <LinearLayout
+        android:id="@+id/appearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -259,6 +261,7 @@
 
         <!-- Image Quality -->
     <LinearLayout
+        android:id="@+id/image_quality"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
