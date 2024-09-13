@@ -13,32 +13,35 @@
         android:paddingTop="25dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <!-- Profile Section -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingVertical="16dp">
 
-        <!-- Profile Image -->
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp">
         <ImageView
             android:id="@+id/ic_profile_placeholder"
             app:tint="#FFFFFF"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_marginStart="20dp"
             android:layout_marginEnd="15dp"
             android:background="@color/light_gray"
             android:src="@drawable/ic_profile_placeholder" />
 
-        <!-- User Info -->
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
 
-            <!-- User Name -->
+
             <TextView
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
@@ -48,7 +51,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
-            <!-- User Account Name -->
+
             <TextView
                 android:id="@+id/account_name"
                 android:layout_width="wrap_content"
@@ -58,30 +61,35 @@
                 android:textColor="#9E9E9E"
                 android:textSize="12sp" />
         </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
-    <!-- Menu Items -->
+
     <LinearLayout
+        android:id="@+id/my_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- My Profile -->
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp">
         <LinearLayout
-            android:id="@+id/my_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:orientation="horizontal"
-            android:paddingVertical="16dp">
+            android:orientation="horizontal">
 
             <ImageView
                 app:tint="#FFFFFF"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="35dp"
                 android:src="@drawable/ic_profile_placeholder" />
 
             <TextView
@@ -93,14 +101,17 @@
                 android:textColor="#FFFFFF"
                 android:textSize="13sp" />
         </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
-        <!-- Divider -->
+
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Account Settings -->
+
         <LinearLayout
             android:id="@+id/account_settings"
             android:layout_width="match_parent"
@@ -110,12 +121,16 @@
             android:orientation="horizontal"
             android:paddingVertical="16dp">
 
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp">
+
             <ImageView
                 app:tint="#FFFFFF"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="35dp"
                 android:src="@drawable/ic_account_settings" />
 
             <TextView
@@ -127,14 +142,15 @@
                 android:textColor="#FFFFFF"
                 android:textSize="13sp" />
         </LinearLayout>
+        </LinearLayout>
 
-        <!-- Divider -->
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- App Settings -->
+
         <LinearLayout
             android:id="@+id/app_settings"
             android:layout_width="match_parent"
@@ -143,13 +159,15 @@
             android:focusable="true"
             android:orientation="horizontal"
             android:paddingVertical="16dp">
-
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp">
             <ImageView
                 app:tint="#FFFFFF"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="35dp"
                 android:src="@drawable/ic_app_settings" />
 
             <TextView
@@ -161,14 +179,15 @@
                 android:textColor="#FFFFFF"
                 android:textSize="13sp" />
         </LinearLayout>
+        </LinearLayout>
 
-        <!-- Divider -->
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Help -->
+
         <LinearLayout
             android:id="@+id/help"
             android:layout_width="match_parent"
@@ -178,12 +197,16 @@
             android:orientation="horizontal"
             android:paddingVertical="16dp">
 
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp">
+
             <ImageView
                 app:tint="#FFFFFF"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="35dp"
                 android:src="@drawable/ic_help" />
 
             <TextView
@@ -195,14 +218,15 @@
                 android:textColor="#FFFFFF"
                 android:textSize="13sp" />
         </LinearLayout>
+        </LinearLayout>
 
-        <!-- Divider -->
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Share WordPress with a friend -->
+
         <LinearLayout
             android:id="@+id/share_wordpress"
             android:layout_width="match_parent"
@@ -212,12 +236,16 @@
             android:orientation="horizontal"
             android:paddingVertical="16dp">
 
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp">
+
             <ImageView
                 app:tint="#FFFFFF"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="35dp"
                 android:src="@drawable/ic_share_wordpress" />
 
             <TextView
@@ -229,14 +257,15 @@
                 android:textColor="#FFFFFF"
                 android:textSize="13sp" />
         </LinearLayout>
+        </LinearLayout>
 
-        <!-- Divider -->
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- WP Admin -->
+
         <LinearLayout
             android:id="@+id/wp_admin"
             android:layout_width="match_parent"
@@ -246,12 +275,16 @@
             android:orientation="horizontal"
             android:paddingVertical="16dp">
 
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp">
+
             <ImageView
                 app:tint="#FFFFFF"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="35dp"
                 android:src="@drawable/ic_wp_admin" />
 
             <TextView
@@ -263,14 +296,15 @@
                 android:textColor="#FFFFFF"
                 android:textSize="13sp" />
         </LinearLayout>
+        </LinearLayout>
 
-        <!-- Divider -->
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Log out of WordPress.com -->
+
         <LinearLayout
             android:id="@+id/log_out"
             android:layout_width="match_parent"
@@ -280,12 +314,16 @@
             android:orientation="horizontal"
             android:paddingVertical="16dp">
 
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp">
+
             <ImageView
                 app:tint="#FFFFFF"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="35dp"
                 android:src="@drawable/ic_log_out" />
 
             <TextView
@@ -297,58 +335,10 @@
                 android:textColor="#FFFFFF"
                 android:textSize="13sp" />
         </LinearLayout>
-        <!-- Divider -->
+        </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#444444" />
     </LinearLayout>
-
-    <!-- Gravatar Section -->
-    <LinearLayout
-        android:layout_width="320dp"
-        android:layout_height="194dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="22dp"
-        android:background="@drawable/combined_background"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <!-- Gravatar Information -->
-        <TextView
-            android:layout_width="280dp"
-            android:layout_height="49dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/roboto"
-            android:text="Your WordPress.com profile is powered by Gravatar"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:textFontWeight="700"/>
-
-        <TextView
-            android:layout_width="281.76102dp"
-            android:layout_height="57dp"
-            android:fontFamily="@font/roboto"
-            android:text="Updating your avatar, name, and about info here will also update it across all sites that use Gravatar profiles."
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-        <!-- Divider -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#444444" />
-
-        <!-- What is Gravatar? -->
-        <TextView
-            android:layout_width="118.74214dp"
-            android:layout_height="13.31373dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/roboto"
-            android:text="What is Gravatar?"
-            android:textColor="@color/green"
-            android:textSize="12sp" />
-
-    </LinearLayout>
-</LinearLayout>

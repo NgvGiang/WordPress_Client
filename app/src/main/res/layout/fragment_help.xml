@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="@color/main_background">
 
-    <!-- Toolbar -->
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_help"
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 
-    <!-- Community forums -->
+
     <LinearLayout
         android:id="@+id/community_forums"
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Browse our FAQ -->
+
     <LinearLayout
         android:id="@+id/browse_out_faq"
         android:layout_width="match_parent"
@@ -90,7 +90,7 @@
         android:layout_height="1dp"
         android:background="#444444" />
 
-    <!-- Logs -->
+
     <LinearLayout
         android:id="@+id/logs"
         android:layout_width="match_parent"
@@ -120,7 +120,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Version  -->
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -18,7 +18,7 @@
             android:paddingTop="25dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-        <!-- Interface Language -->
+
     <LinearLayout
         android:id="@+id/interface_language"
         android:layout_width="match_parent"
@@ -59,7 +59,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Appearance -->
+
     <LinearLayout
         android:id="@+id/appearance"
         android:layout_width="match_parent"
@@ -97,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#444444" />
-        <!-- Privacy settings -->
+
     <LinearLayout
         android:id="@+id/privacy_settings"
         android:layout_width="match_parent"
@@ -123,7 +123,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Open device settings -->
+
     <LinearLayout
         android:id="@+id/open_device_settings"
         android:layout_width="match_parent"
@@ -144,7 +144,7 @@
             android:layout_marginBottom="19dp"/>
     </LinearLayout>
 
-        <!-- Media section -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -165,7 +165,7 @@
                     android:textSize="13sp"/>
             </LinearLayout>
         </LinearLayout>
-        <!-- Optimize Images Switch -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -218,7 +218,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Maximum Image Size -->
+
     <LinearLayout
         android:id="@+id/maximum_image_size"
         android:layout_width="match_parent"
@@ -259,7 +259,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Image Quality -->
+
     <LinearLayout
         android:id="@+id/image_quality"
         android:layout_width="match_parent"
@@ -298,7 +298,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Remove location from media -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -340,7 +340,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Optimize Videos -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -393,7 +393,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Maximum Video Size -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -431,7 +431,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Video Quality -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -17,7 +17,7 @@
             android:paddingTop="25dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-        <!-- General -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Site Title -->
+
         <LinearLayout
             android:id="@+id/site_title"
             android:layout_width="match_parent"
@@ -82,7 +82,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Tagline -->
+
         <LinearLayout
             android:id="@+id/tagline"
             android:layout_width="match_parent"
@@ -124,7 +124,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Address -->
+
         <LinearLayout
             android:id="@+id/address"
             android:layout_width="match_parent"
@@ -166,7 +166,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Privacy -->
+
         <LinearLayout
             android:id="@+id/privacy"
             android:layout_width="match_parent"
@@ -208,7 +208,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Language -->
+
         <LinearLayout
             android:id="@+id/language"
             android:layout_width="match_parent"
@@ -250,7 +250,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Timezone -->
+
         <LinearLayout
             android:id="@+id/timezone"
             android:layout_width="match_parent"
@@ -287,7 +287,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Homepage -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -310,7 +310,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Homepage Settings -->
+
         <LinearLayout
             android:id="@+id/homepage_settings"
             android:layout_width="match_parent"
@@ -347,7 +347,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Writing -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -370,7 +370,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Default Category -->
+
         <LinearLayout
             android:id="@+id/default_category"
             android:layout_width="match_parent"
@@ -412,7 +412,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Categories -->
+
         <LinearLayout
             android:id="@+id/categories"
             android:layout_width="match_parent"
@@ -444,7 +444,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Tags -->
+
         <LinearLayout
             android:id="@+id/tags"
             android:layout_width="match_parent"
@@ -477,7 +477,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Default Format -->
+
         <LinearLayout
             android:id="@+id/default_format"
             android:layout_width="match_parent"
@@ -519,7 +519,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Date Format -->
+
         <LinearLayout
             android:id="@+id/date_format"
             android:layout_width="match_parent"
@@ -562,7 +562,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Week starts on -->
+
         <LinearLayout
             android:id="@+id/week_starts_on"
             android:layout_width="match_parent"
@@ -604,7 +604,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Posts per page -->
+
         <LinearLayout
             android:id="@+id/posts_per_page"
             android:layout_width="match_parent"
@@ -646,7 +646,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Media -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -669,7 +669,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Spaced Used -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -705,7 +705,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Discussion -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -728,7 +728,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Allow Comments -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -770,7 +770,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Send Pingbacks -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -812,7 +812,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Receive Pingbacks -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -854,7 +854,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- More -->
+
         <LinearLayout
             android:id="@+id/more"
             android:layout_width="match_parent"
@@ -882,7 +882,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Advanced -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -905,7 +905,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Start Over -->
+
         <LinearLayout
             android:id="@+id/start_over"
             android:layout_width="match_parent"
@@ -937,7 +937,6 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Export Content -->
         <LinearLayout
             android:id="@+id/export_content"
             android:layout_width="match_parent"
@@ -969,7 +968,7 @@
             android:layout_height="1dp"
             android:background="#444444" />
 
-        <!-- Delete Site -->
+
         <LinearLayout
             android:id="@+id/delete_site"
             android:layout_width="match_parent"

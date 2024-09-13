@@ -13,7 +13,7 @@
         android:paddingTop="25dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <!-- Username -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
         android:layout_height="1dp"
         android:background="#444444" />
 
-    <!-- Email -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
         android:layout_height="1dp"
         android:background="#444444" />
 
-    <!-- Primary site -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
         android:layout_height="1dp"
         android:background="#444444" />
 
-    <!--  Web Address -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -177,7 +177,7 @@
         android:layout_height="1dp"
         android:background="#444444" />
 
-    <!-- Change Password -->
+
     <LinearLayout
         android:id="@+id/change_password"
         android:layout_width="match_parent"
@@ -210,7 +210,7 @@
         android:layout_height="1dp"
         android:background="#444444" />
 
-    <!-- Close Account -->
+
     <LinearLayout
         android:id="@+id/close_account"
         android:layout_width="match_parent"
