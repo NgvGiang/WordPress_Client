@@ -14,9 +14,6 @@ import vn.edu.usth.wordpressclient.R;
 public class images_Media_Fragment extends Fragment {
 
 
-    public images_Media_Fragment() {
-        // Required empty public constructor
-    }
 
 
     @Override

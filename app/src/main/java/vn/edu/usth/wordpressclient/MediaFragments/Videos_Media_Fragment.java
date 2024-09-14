@@ -13,9 +13,6 @@ import vn.edu.usth.wordpressclient.R;
 
 public class Videos_Media_Fragment extends Fragment {
 
-    public Videos_Media_Fragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
