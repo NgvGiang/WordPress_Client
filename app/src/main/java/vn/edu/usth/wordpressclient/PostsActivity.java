@@ -27,14 +27,14 @@ public class PostsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitle("Posts");
+        toolbar.setTitle(getString(R.string.posts));
         tabLayout = findViewById(R.id.PostsTabLayout);
         viewPager2 = findViewById(R.id.PostviewPager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
-        viewPagerAdapter.addFragment(new PublishedPostFragment(), "PUBLISHED");
-        viewPagerAdapter.addFragment(new DraftPostFragment(), "DRAFTS");
-        viewPagerAdapter.addFragment(new ScheduledPostFragment(), "SCHEDULED");
-        viewPagerAdapter.addFragment(new TrashedPostFragment(), "TRASHED");
+        viewPagerAdapter.addFragment(new PublishedPostFragment(), getString(R.string.published));
+        viewPagerAdapter.addFragment(new DraftPostFragment(), getString(R.string.drafts));
+        viewPagerAdapter.addFragment(new ScheduledPostFragment(), getString(R.string.schedules));
+        viewPagerAdapter.addFragment(new TrashedPostFragment(), getString(R.string.trashed));
         viewPager2.setAdapter(viewPagerAdapter);
         new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
             tab.setText(viewPagerAdapter.getTitle(position));

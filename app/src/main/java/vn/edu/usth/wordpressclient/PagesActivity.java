@@ -29,7 +29,7 @@ public class PagesActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitle("Pages");
+        toolbar.setTitle(getString(R.string.page));
 
         // Enable the Up button (Back button)
         if (getSupportActionBar() != null) {
@@ -39,10 +39,10 @@ public class PagesActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.PagetabLayout);
         viewPager2 = findViewById(R.id.PageviewPager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
-        viewPagerAdapter.addFragment(new PagePublishedFragment(), "PUBLISHED");
-        viewPagerAdapter.addFragment(new PageDraftFragment(), "DRAFTS");
-        viewPagerAdapter.addFragment(new PageScheduledFragment(), "SCHEDULED");
-        viewPagerAdapter.addFragment(new PageTrashedFragment(), "TRASHED");
+        viewPagerAdapter.addFragment(new PagePublishedFragment(), getString(R.string.published));
+        viewPagerAdapter.addFragment(new PageDraftFragment(), getString(R.string.drafts));
+        viewPagerAdapter.addFragment(new PageScheduledFragment(), getString(R.string.schedules));
+        viewPagerAdapter.addFragment(new PageTrashedFragment(), getString(R.string.trashed));
         viewPager2.setAdapter(viewPagerAdapter);
         new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
             tab.setText(viewPagerAdapter.getTitle(position));
