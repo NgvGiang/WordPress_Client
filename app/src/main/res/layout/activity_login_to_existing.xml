@@ -32,7 +32,7 @@
             style="@style/text_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter the address of the WordPress site you'd like to connect."
+            android:text="@string/instruction_login"
             android:textSize="16dp">
 
         </TextView>
@@ -41,7 +41,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Site address"
+            android:text="@string/label_site_address"
             android:layout_below="@id/textView2"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
@@ -69,14 +69,14 @@
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/roboto"
-            android:text="Find your site address"
+            android:text="@string/link_find_site"
             android:textColor="@color/blue" />
 
         <Button
-            android:id="@+id/continue_btn"
+            android:id="@+id/continue_login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Continue"
+            android:text="@string/button_continue_login"
             android:layout_alignParentBottom="true"
             android:backgroundTint="@color/gray"
             app:cornerRadius="8dp"

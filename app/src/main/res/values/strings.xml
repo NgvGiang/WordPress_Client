@@ -1,5 +1,44 @@
 <resources>
     <string name="app_name">WordPressClient</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //First login page
+    <string name="title_wordpress">Write, edit, and publish\nfrom anywhere.</string>
+    <string name="button_login_or_signup">Log in or sign up with WordPress.com</string>
+    <string name="link_enter_existing_site">Enter your existing site address</string>
+
+    //Login to existing page
+    <string name="instruction_login">"Enter the address of the WordPress site you'd like to connect."</string>
+    <string name="label_site_address">Site address</string>
+    <string name="link_find_site">Find your site address</string>
+    <string name="button_continue_login">Continue</string>
+
+    //Sign up page
+    <string name="instruction_sign_up">"Enter your email address to log in or create a WordPress.com account."</string>
+    <string name="hint_email">Email address</string>
+    <string name="notice_terms">By continuing, you agree to our Terms of Service.</string>
+    <string name="button_continue_signup">Continue</string>
+    <string name="button_signup_google">   Continue with Google</string>
+    <string name="terms_and_service">"If you continue with Google and don't already have a WordPress.com account, you are creating an account and you agree to our Terms of Service."</string>
+
+    //User Web Management page
+    <string name="title_user_web">User_Website</string>
+    <string name="link_user_web">website.wordpress.com</string>
+    <string name="label_content">Content</string>tit
+    <string name="title_posts">Posts</string>
+    <string name="title_pages">Pages</string>
+    <string name="title_media">Media</string>
+    <string name="title_comments">Comments</string>
+    <string name="label_manage">Manage</string>
+    <string name="title_me">Me</string>
+    <string name="title_setting">Site Setting</string>
+    <string name="title_admin">WP Admin</string>
+
+    //Choose your web page
+    <string name="title_user_name">User name</string>
+    <string name="label_account_name">Account Name</string>
+    <string name="title_choose_your_site">Choose a site to open</string>
+    <string name="instruction_choose_site">You can switch sites any time.</string>
+    <string name="button_create_site">Create a new site</string>
+
+
 </resources>
