@@ -21,7 +21,7 @@
             android:background="#121212"
             android:paddingTop="25dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:title="Posts" />
+            android:title="@string/posts" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/PostsTabLayout"
@@ -38,22 +38,22 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PUBLISHED" />
+                android:text="@string/published" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DRAFTS" />
+                android:text="@string/drafts" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SCHEDULES" />
+                android:text="@string/schedules" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TRASHED" />
+                android:text="@string/trashed" />
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2

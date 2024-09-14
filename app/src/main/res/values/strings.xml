@@ -1,18 +1,18 @@
 <resources>
     <string name="app_name">WordPressClient</string>
 
-    //First login page
+<!--    //First login page-->
     <string name="title_wordpress">Write, edit, and publish\nfrom anywhere.</string>
     <string name="button_login_or_signup">Log in or sign up with WordPress.com</string>
     <string name="link_enter_existing_site">Enter your existing site address</string>
 
-    //Login to existing page
+<!--    //Login to existing page-->
     <string name="instruction_login">"Enter the address of the WordPress site you'd like to connect."</string>
     <string name="label_site_address">Site address</string>
     <string name="link_find_site">Find your site address</string>
     <string name="button_continue_login">Continue</string>
 
-    //Sign up page
+<!--    //Sign up page-->
     <string name="instruction_sign_up">"Enter your email address to log in or create a WordPress.com account."</string>
     <string name="hint_email">Email address</string>
     <string name="notice_terms">By continuing, you agree to our Terms of Service.</string>
@@ -20,7 +20,7 @@
     <string name="button_signup_google">   Continue with Google</string>
     <string name="terms_and_service">"If you continue with Google and don't already have a WordPress.com account, you are creating an account and you agree to our Terms of Service."</string>
 
-    //User Web Management page
+<!--    //User Web Management page-->
     <string name="title_user_web">User_Website</string>
     <string name="link_user_web">website.wordpress.com</string>
     <string name="label_content">Content</string>tit
@@ -33,12 +33,29 @@
     <string name="title_setting">Site Setting</string>
     <string name="title_admin">WP Admin</string>
 
-    //Choose your web page
+<!--    //Choose your web page-->
     <string name="title_user_name">User name</string>
     <string name="label_account_name">Account Name</string>
     <string name="title_choose_your_site">Choose a site to open</string>
     <string name="instruction_choose_site">You can switch sites any time.</string>
     <string name="button_create_site">Create a new site</string>
+    <string name="create_a_post">Create a post</string>
+    <string name="you_don_t_have_any_draft_post">You don\'t have any draft post</string>
+    <string name="you_don_t_have_any_published_pages">You don\'t have any published pages</string>
+    <string name="create_a_page">Create a page</string>
+    <string name="you_don_t_have_any_trashed_pages">You don\'t have any trashed pages</string>
+    <string name="you_don_t_have_any_published_post">you don\'t have any published post</string>
+    <string name="you_don_t_have_any_scheduled_post">You don\'t have any scheduled post</string>
+    <string name="you_don_t_have_any_draft_page">you don\'t have any draft page</string>
+    <string name="you_don_t_have_any_trashed_post">You don\'t have any trashed post</string>
+    <string name="published">PUBLISHED</string>
+    <string name="drafts">DRAFTS</string>
+    <string name="schedules">SCHEDULES</string>
+    <string name="trashed">TRASHED</string>
+    <string name="posts">posts</string>
+    <string name="page">Page</string>
+
+    <!--    //Phần của Đức-->
 
 
 </resources>
