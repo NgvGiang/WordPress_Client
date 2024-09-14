@@ -1,9 +1,11 @@
 package vn.edu.usth.wordpressclient;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -14,6 +16,8 @@ import androidx.core.content.ContextCompat;
 
 
 public class Login_to_existing extends AppCompatActivity {
+
+    Button continue_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,9 @@ public class Login_to_existing extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> {
             finish();
         });
+
+        continue_login = findViewById(R.id.continue_login_btn);
+        continue_login.setOnClickListener(view -> startActivity(new Intent(this, Choose_your_web.class)));
     }
 
     // info icon

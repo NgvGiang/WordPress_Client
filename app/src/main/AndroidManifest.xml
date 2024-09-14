@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WordPressClient"
         tools:targetApi="31">
+        <activity android:name=".Sign_Up_Page"
+            android:exported="false" />
         <activity
             android:name=".Choose_your_web"
             android:exported="false" />
@@ -22,7 +24,7 @@
             android:name=".Login_to_existing"
             android:exported="false" />
         <activity
-            android:name=".UserWebMangement"
+            android:name=".UserWebManagement"
             android:exported="false" />
         <activity
             android:name=".PagesActivity"

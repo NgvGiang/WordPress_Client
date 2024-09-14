@@ -22,7 +22,7 @@
         android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="User name"
+        android:text="@string/title_user_name"
         style="@style/text_style"
         android:textSize="25dp" />
 
@@ -30,7 +30,7 @@
         android:id="@+id/acc_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Account Name"
+        android:text="@string/label_account_name"
         style="@style/text_style"
         android:alpha="0.5" />
 
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Choose a site to open"
+        android:text="@string/title_choose_your_site"
         android:textSize="14dp" />
 
     <TextView
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:alpha="0.5"
-        android:text="You can switch sites any time."
+        android:text="@string/instruction_choose_site"
         android:textSize="12dp" />
 
 
@@ -103,7 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/border_blue"
-        android:text="Create a new site"
+        android:text="@string/button_create_site"
         android:layout_marginBottom="50dp"/>
 
 </LinearLayout>
