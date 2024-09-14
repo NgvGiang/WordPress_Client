@@ -1,38 +1,35 @@
 package vn.edu.usth.wordpressclient;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
-
-public class Login_to_existing extends AppCompatActivity {
-
-    Button continue_login;
+public class Sign_Up_Page extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login_to_existing);
-        // Set up toolbar
+        setContentView(R.layout.activity_sign_up_page);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        RelativeLayout google_btn = findViewById(R.id.google_button);
+        Button continue_btn = findViewById(R.id.continue_login_btn);
 
-        // Set title
-        getSupportActionBar().setTitle("Log In");
+        // Set the title
+        getSupportActionBar().setTitle("Get started");
         //title color
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
-
         //back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.getNavigationIcon().setTint(ContextCompat.getColor(this, android.R.color.white));
@@ -40,18 +37,19 @@ public class Login_to_existing extends AppCompatActivity {
             finish();
         });
 
-        continue_login = findViewById(R.id.continue_login_btn);
-        continue_login.setOnClickListener(view -> startActivity(new Intent(this, Choose_your_web.class)));
-    }
+        //buttons
+        continue_btn.setOnClickListener(view -> showToast("Intent to Choose your page"));
 
-    // info icon
+        google_btn.setOnClickListener(View -> showToast("Unable to connect to Google"));
+    }
+    //info icon
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar_menu, menu);
+        inflater.inflate(R.menu.toolbar_menu, menu); // Define a menu for the info icon
         return true;
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.info_icon) {
@@ -61,5 +59,7 @@ public class Login_to_existing extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public void showToast(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+    }
 }
-
