@@ -28,16 +28,16 @@ public class WordPress_media extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.Mediatoolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitle("WordPress Media");
+        toolbar.setTitle(getString(R.string.WordPress_Media));
 
 
         MediatabLayout = findViewById(R.id.MediatabLayout);
         MediaviewPager2 = findViewById(R.id.MediaviewPager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
-        viewPagerAdapter.addFragment(new All_Media_Fragment(), "ALL");
-        viewPagerAdapter.addFragment(new images_Media_Fragment(), "IMAGES");
-        viewPagerAdapter.addFragment(new Documents_Media_Fragment(), "DOCUMENTS");
-        viewPagerAdapter.addFragment(new Videos_Media_Fragment(), "VIDEOS");
+        viewPagerAdapter.addFragment(new All_Media_Fragment(), getString(R.string.ALL));
+        viewPagerAdapter.addFragment(new images_Media_Fragment(), getString(R.string.images));
+        viewPagerAdapter.addFragment(new Documents_Media_Fragment(), getString(R.string.documents));
+        viewPagerAdapter.addFragment(new Videos_Media_Fragment(), getString(R.string.videos));
         MediaviewPager2.setAdapter(viewPagerAdapter);
         new TabLayoutMediator(MediatabLayout, MediaviewPager2, (tab, position) -> {
             tab.setText(viewPagerAdapter.getTitle(position));

@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="You don't have any videos"
+            android:text="@string/you_don_t_have_any_videos"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:layout_marginTop="20dp"/>
@@ -32,7 +32,7 @@
             android:id="@+id/uploadMediaButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Upload media"
+            android:text="@string/upload_media"
             android:layout_marginTop="20dp"
             android:textAllCaps="false" />
 

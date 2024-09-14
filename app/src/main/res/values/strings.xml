@@ -54,8 +54,15 @@
     <string name="trashed">TRASHED</string>
     <string name="posts">posts</string>
     <string name="page">Page</string>
-
     <!--    //Phần của Đức-->
+    <string name="you_don_t_have_any_documents">You don\'t have any documents</string>
+    <string name="upload_media">Upload media</string>
+    <string name="you_don_t_have_any_videos">You don\'t have any videos</string>
+    <string name="ALL">All</string>
+    <string name="images">Images</string>
+    <string name="documents">Documents</string>
+    <string name="videos">Videos</string>
+    <string name="WordPress_Media">WordPress Media</string>
 
 
 </resources>

@@ -54,7 +54,15 @@
     <string name="trashed">Đã xóa</string>
     <string name="posts">Bài đăng</string>
     <string name="page">Trang</string>
-    <!--//Phần của Đức-->
+    <!--//Phần của Lưu Đức-->
+    <string name="you_don_t_have_any_documents">Bạn không có tập tin tài liệu nào</string>
+    <string name="upload_media">Tải lên media</string>
+    <string name="you_don_t_have_any_videos">Bạn không có tập tin video nào</string>
+    <string name="ALL">Tất cả</string>
+    <string name="images">Ảnh</string>
+    <string name="documents">Tài liệu</string>
+    <string name="videos">Video</string>
+    <string name="WordPress_Media">Thư viện Media</string>
 
 
 </resources>
