@@ -1,0 +1,89 @@
+<resources>
+    <string name="app_name">WordPressClient</string>
+
+<!--    //First login page-->
+    <string name="title_wordpress">Viết, chỉnh sửa, và xuất bản\ntừ mọi nơi.</string>
+    <string name="button_login_or_signup">Đăng nhập hoặc đăng ký với WordPress.com</string>
+    <string name="link_enter_existing_site">Nhập địa chỉ trang web hiện tại của bạn</string>
+
+<!--    //Login to existing page-->
+    <string name="instruction_login">"Nhập địa chỉ của trang WordPress bạn muốn kết nối."</string>
+    <string name="label_site_address">Địa chỉ trang web</string>
+    <string name="link_find_site">Tìm địa chỉ trang web của bạn</string>
+    <string name="button_continue_login">Tiếp tục</string>
+
+<!--    //Sign up page-->
+    <string name="instruction_sign_up">"Nhập địa chỉ email của bạn để đăng nhập hoặc tạo tài khoản WordPress.com."</string>
+    <string name="hint_email">Địa chỉ Email</string>
+    <string name="notice_terms">Bằng cách tiếp tục, bạn đồng ý với Điều khoản dịch vụ của chúng tôi.</string>
+    <string name="button_continue_signup">Tiếp tục</string>
+    <string name="button_signup_google">   Tiếp tục với Google</string>
+    <string name="terms_and_service">"Nếu bạn tiếp tục với Google và chưa có tài khoản WordPress.com thì bạn đang tạo một tài khoản và đồng ý với Điều khoản dịch vụ của chúng tôi."</string>
+
+<!--    //User Web Management page-->
+    <string name="title_user_web">User_Website</string>
+    <string name="link_user_web">website.wordpress.com</string>
+    <string name="label_content">Nội dung</string>
+    <string name="title_posts">Bài đăng</string>
+    <string name="title_pages">Trang</string>
+    <string name="title_media">Phương tiện</string>
+    <string name="title_comments">Bình luận</string>
+    <string name="label_manage">Quản lý</string>
+    <string name="title_me">Tôi</string>
+    <string name="title_setting">Cài đặt trang</string>
+    <string name="title_admin">WP Admin</string>
+
+<!--    //Choose your web page-->
+    <string name="title_user_name">Tên người dùng</string>
+    <string name="label_account_name">Tên tài khoản</string>
+    <string name="title_choose_your_site">Chọn một trang để mở</string>
+    <string name="instruction_choose_site">Bạn có thể chuyển đổi trang bất kỳ lúc nào.</string>
+    <string name="button_create_site">Tạo một trang mới</string>
+    <string name="create_a_post">Tạo bài viết mới</string>
+    <string name="you_don_t_have_any_draft_post">Bạn không có bài viết nháp nào</string>
+    <string name="you_don_t_have_any_published_pages">Bạn chưa đăng trang nào được xuất baản</string>
+    <string name="create_a_page">Tạo trang mới</string>
+    <string name="you_don_t_have_any_trashed_pages">Bạn không có trang đã xóa nào</string>
+    <string name="you_don_t_have_any_published_post">Bạn chưa có bài đăng nào được xuất bản</string>
+    <string name="you_don_t_have_any_scheduled_post">Bạn chưa có bài đăng nào được lên lịch</string>
+    <string name="you_don_t_have_any_draft_page">Bạn chưa có trang nháp nào</string>
+    <string name="you_don_t_have_any_trashed_post">Bạn không có bài viết đã xóa nào</string>
+    <string name="published">Đã xuất bản</string>
+    <string name="drafts">Bản nháp</string>
+    <string name="schedules">Đã lên lịch</string>
+    <string name="trashed">Đã xóa</string>
+    <string name="posts">Bài đăng</string>
+    <string name="page">Trang</string>
+    <!--//Phần của Lưu Đức-->
+    <string name="you_don_t_have_any_documents">Bạn không có tập tin tài liệu nào</string>
+    <string name="upload_media">Tải lên media</string>
+    <string name="you_don_t_have_any_videos">Bạn không có tập tin video nào</string>
+    <string name="ALL">Tất cả</string>
+    <string name="images">Ảnh</string>
+    <string name="documents">Tài liệu</string>
+    <string name="videos">Video</string>
+    <string name="WordPress_Media">Thư viện Media</string>
+
+    <!--    Phần của Nam-->
+    <string name="comments">Bình luận</string>
+    <string name="pending">Đang chờ</string>
+    <string name="unreplied">Chưa trả lời</string>
+    <string name="approved">Đã duyệt</string>
+    <string name="spam">Thư rác</string>
+    <string name="today">Hôm nay</string>
+    <string name="nikocado_avocado_on_what_s_this">Nikocado Avocado bình luận về what\'s this ??</string>
+    <string name="ishowspeed_on_what_s_this">Ishowspeed bình luận về what\'s this ??</string>
+    <string name="donald_trump_on_what_s_this">Donald Trump bình luận về what\'s this ??</string>
+    <string name="greta_thunberg_on_what_s_this">Greta Thunberg bình luận về what\'s this ??</string>
+    <string name="homalander_on_what_s_this">Homalander bình luận về what\'s this ??</string>
+    <string name="no_approved_comments">Không có comment nào đã duyệt</string>
+    <string name="namnhp_on_what_s_this">Namnhp bình luận về what\'s this ??</string>
+    <string name="ng_vu_huy_khoi_on_what_s_this">Ng Vu Huy Khoi bình luận về what\'s this ??</string>
+    <string name="le_chuck_on_what_s_this">Le chuck bình luận về what\'s this ??</string>
+    <string name="nguyen_minh_duc_on_what_s_this">Nguyen Minh Duc bình luận về what\'s this ??</string>
+    <string name="no_spam_comments">Không có bình luận rác</string>
+    <string name="no_trashed_comments">Không có bình luận đã xoá</string>
+    <string name="ngv_giang_on_what_is_this">Ngv Giang bình luận về what\'s this ??</string>
+    <string name="luu_duc_on_what_s_this">Luu Duc bình luận về what\'s this ??</string>
+
+</resources>
