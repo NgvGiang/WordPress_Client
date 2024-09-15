@@ -30,7 +30,7 @@ public class CommentActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.comment_tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitle("Comments");
+        toolbar.setTitle(getString(R.string.comments));
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -39,12 +39,12 @@ public class CommentActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.comment_tab_mode);
         viewPager2 = findViewById(R.id.comment_view_pager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
-        viewPagerAdapter.addFragment(new AllCommentsFragment(), "ALL");
-        viewPagerAdapter.addFragment(new PendingCommentsFragment(), "PENDING");
-        viewPagerAdapter.addFragment(new UnrepliedCommentsFragment(), "UNREPLIED");
-        viewPagerAdapter.addFragment(new ApprovedCommentsFragment(), "APPROVED");
-        viewPagerAdapter.addFragment(new SpamCommentsFragment(), "SPAM");
-        viewPagerAdapter.addFragment(new TrashedCommentsFragment(), "TRASHED");
+        viewPagerAdapter.addFragment(new AllCommentsFragment(), getString(R.string.ALL));
+        viewPagerAdapter.addFragment(new PendingCommentsFragment(), getString(R.string.pending));
+        viewPagerAdapter.addFragment(new UnrepliedCommentsFragment(), getString(R.string.unreplied));
+        viewPagerAdapter.addFragment(new ApprovedCommentsFragment(), getString(R.string.approved));
+        viewPagerAdapter.addFragment(new SpamCommentsFragment(), getString(R.string.spam));
+        viewPagerAdapter.addFragment(new TrashedCommentsFragment(), getString(R.string.trashed));
         viewPager2.setAdapter(viewPagerAdapter);
         new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
             tab.setText(viewPagerAdapter.getTitle(position));

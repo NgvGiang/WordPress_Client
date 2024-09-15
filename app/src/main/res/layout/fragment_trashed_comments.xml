@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/no_trashed_image"
             android:layout_centerHorizontal="true"
-            android:text="No trashed comments"
+            android:text="@string/no_trashed_comments"
             android:fontFamily="@font/roboto"
             android:textColor="#FFFFFF"/>
     </RelativeLayout>

@@ -20,7 +20,7 @@
             android:background="#121212"
             android:paddingTop="25dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:title="Comments" />
+            android:title="@string/comments" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/comment_tab_mode"
@@ -38,27 +38,27 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ALL"/>
+                android:text="@string/ALL"/>
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PENDING"/>
+                android:text="@string/pending"/>
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="UNREPLIED"/>
+                android:text="@string/unreplied"/>
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="APPROVED"/>
+                android:text="@string/approved"/>
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SPAM"/>
+                android:text="@string/spam"/>
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TRASHED"/>
+                android:text="@string/trashed"/>
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2

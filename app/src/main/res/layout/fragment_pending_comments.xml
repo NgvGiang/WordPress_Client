@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TODAY"
+        android:text="@string/today"
         android:padding="8dp"/>
 
     <ScrollView
@@ -23,7 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingLeft="8dp"
+                android:paddingBottom="8dp">
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -36,12 +37,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Namnhp on what's this ??"
+                        android:text="@string/namnhp_on_what_s_this"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:paddingLeft="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp"/>
+                        android:paddingLeft="8dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -54,7 +53,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingLeft="8dp"
+                android:paddingBottom="8dp">
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -67,12 +67,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ng Vu Huy Khoi on what's this ??"
+                        android:text="@string/ng_vu_huy_khoi_on_what_s_this"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:paddingLeft="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp"/>
+                        android:paddingLeft="8dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -85,7 +83,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingLeft="8dp"
+                android:paddingBottom="8dp">
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -98,12 +97,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Le chuck on what's this ??"
+                        android:text="@string/le_chuck_on_what_s_this"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:paddingLeft="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp"/>
+                        android:paddingLeft="8dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -116,7 +113,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingLeft="8dp"
+                android:paddingBottom="8dp">
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -129,12 +127,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nguyen Minh Duc on what's this ??"
+                        android:text="@string/nguyen_minh_duc_on_what_s_this"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:paddingLeft="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp"/>
+                        android:paddingLeft="8dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -147,7 +143,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:paddingLeft="8dp"
+                android:paddingBottom="8dp">
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -160,12 +157,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Luu Duc on what's this ??"
+                        android:text="@string/luu_duc_on_what_s_this"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:paddingLeft="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp"/>
+                        android:paddingLeft="8dp" />
 
                     <TextView
                         android:layout_width="wrap_content"

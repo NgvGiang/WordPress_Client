@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/no_approved_image"
             android:layout_centerHorizontal="true"
-            android:text="No approved comments"
+            android:text="@string/no_approved_comments"
             android:fontFamily="@font/roboto"
             android:textColor="#FFFFFF"/>
     </RelativeLayout>

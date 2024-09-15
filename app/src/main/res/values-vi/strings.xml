@@ -64,5 +64,26 @@
     <string name="videos">Video</string>
     <string name="WordPress_Media">Thư viện Media</string>
 
+    <!--    Phần của Nam-->
+    <string name="comments">Bình luận</string>
+    <string name="pending">Đang chờ</string>
+    <string name="unreplied">Chưa trả lời</string>
+    <string name="approved">Đã duyệt</string>
+    <string name="spam">Thư rác</string>
+    <string name="today">Hôm nay</string>
+    <string name="nikocado_avocado_on_what_s_this">Nikocado Avocado bình luận về what\'s this ??</string>
+    <string name="ishowspeed_on_what_s_this">Ishowspeed bình luận về what\'s this ??</string>
+    <string name="donald_trump_on_what_s_this">Donald Trump bình luận về what\'s this ??</string>
+    <string name="greta_thunberg_on_what_s_this">Greta Thunberg bình luận về what\'s this ??</string>
+    <string name="homalander_on_what_s_this">Homalander bình luận về what\'s this ??</string>
+    <string name="no_approved_comments">Không có comment nào đã duyệt</string>
+    <string name="namnhp_on_what_s_this">Namnhp bình luận về what\'s this ??</string>
+    <string name="ng_vu_huy_khoi_on_what_s_this">Ng Vu Huy Khoi bình luận về what\'s this ??</string>
+    <string name="le_chuck_on_what_s_this">Le chuck bình luận về what\'s this ??</string>
+    <string name="nguyen_minh_duc_on_what_s_this">Nguyen Minh Duc bình luận về what\'s this ??</string>
+    <string name="no_spam_comments">Không có bình luận rác</string>
+    <string name="no_trashed_comments">Không có bình luận đã xoá</string>
+    <string name="ngv_giang_on_what_is_this">Ngv Giang bình luận về what\'s this ??</string>
+    <string name="luu_duc_on_what_s_this">Luu Duc bình luận về what\'s this ??</string>
 
 </resources>
