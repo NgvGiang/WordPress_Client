@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:allowBackup="true"
@@ -11,29 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.WordPressClient"
-<<<<<<< HEAD
-        tools:targetApi="34" >
-        <activity
-            android:name=".MeWebsiteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PostsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Login_to_existing"
-            android:exported="false" />
-        <activity
-            android:name=".UserWebMangement"
-            android:exported="false" />
-        <activity
-            android:name=".PagesActivity"
-=======
         >
         <activity android:name=".Sign_Up_Page"
             android:exported="false" />
         <activity
             android:name=".Choose_your_web"
->>>>>>> main
             android:exported="false" />
         <activity
             android:name=".PostsActivity"
@@ -49,17 +31,31 @@
             android:exported="false" />
         <activity
             android:name=".FirstLoginActivity"
-<<<<<<< HEAD
-            android:exported="true" >
-=======
             android:exported="false" />
         <activity
             android:name=".WordPress_media"
+            android:exported="false"/>
+        <activity
+            android:name=".MeActivity.MyProfileActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".MeActivity.AccountSettingsActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".MeActivity.AppSettingsActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".MeActivity.HelpActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".MeActivity.UsernameActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".MeActivity.MeWebsiteActivity"
             android:exported="true">
->>>>>>> main
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -1,7 +1,9 @@
-package vn.edu.usth.wordpressclient;
+package vn.edu.usth.wordpressclient.MeActivity;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import vn.edu.usth.wordpressclient.R;
 
 public class AboutWordpressActivity extends AppCompatActivity {
     @Override

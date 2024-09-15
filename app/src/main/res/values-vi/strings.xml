@@ -89,7 +89,7 @@
     <!--    Phần của Minh Đức-->
     <string name="user_name">Tên người dùng</string>
     <string name="account_name">\@Tên tài khoản</string>
-    <string name="my_profile">Trang cá nhân của tôi</string>
+    <string name="my_profile">Hồ sơ của tôi</string>
     <string name="account_settings">Cài đặt tài khoản</string>
     <string name="app_settings">Cài đặt ứng dụng</string>
     <string name="help">Trợ giúp</string>
