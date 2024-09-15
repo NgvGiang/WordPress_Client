@@ -5,26 +5,26 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PostsActivity">
+    tools:context=".WordPress_media">
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/MedialinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/Mediatoolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#121212"
             android:paddingTop="25dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:title="@string/posts" />
+            android:title="WordPress Media" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/PostsTabLayout"
+            android:id="@+id/MediatabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#121212"
@@ -38,34 +38,34 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/published" />
+                android:text="@string/ALL" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/drafts" />
+                android:text="@string/images" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/schedules" />
+                android:text="@string/documents" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/trashed" />
+                android:text="@string/videos" />
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/PostviewPager"
+            android:id="@+id/MediaviewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_anchor="@id/PostsTabLayout"
+            app:layout_anchor="@id/PagetabLayout"
             app:layout_anchorGravity="bottom" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/Mediafab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

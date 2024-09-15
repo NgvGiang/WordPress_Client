@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.WordPressClient"
+<<<<<<< HEAD
         tools:targetApi="34" >
         <activity
             android:name=".MeWebsiteActivity"
@@ -26,6 +27,13 @@
             android:exported="false" />
         <activity
             android:name=".PagesActivity"
+=======
+        >
+        <activity android:name=".Sign_Up_Page"
+            android:exported="false" />
+        <activity
+            android:name=".Choose_your_web"
+>>>>>>> main
             android:exported="false" />
         <activity
             android:name=".PostsActivity"
@@ -34,19 +42,30 @@
             android:name=".Login_to_existing"
             android:exported="false" />
         <activity
-            android:name=".UserWebMangement"
+            android:name=".UserWebManagement"
             android:exported="false" />
         <activity
             android:name=".PagesActivity"
             android:exported="false" />
         <activity
             android:name=".FirstLoginActivity"
+<<<<<<< HEAD
             android:exported="true" >
+=======
+            android:exported="false" />
+        <activity
+            android:name=".WordPress_media"
+            android:exported="true">
+>>>>>>> main
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".CommentActivity"
+            android:exported="false">
         </activity>
     </application>
 

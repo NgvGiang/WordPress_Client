@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserWebMangement"
+    tools:context=".UserWebManagement"
     android:background="@color/main_background">
 
     <LinearLayout
@@ -25,7 +25,11 @@
             android:id="@+id/user_title"
             android:layout_width="match_parent"
             android:layout_height="62dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/button_click"
+            >
 
             <ImageView
                 android:id="@+id/user_pfp"
@@ -48,7 +52,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center|left"
-                    android:text="User_Website"
+                    android:text="@string/title_user_web"
                     android:textSize="23sp"
                     />
 
@@ -60,10 +64,18 @@
                     android:layout_weight="1"
                     android:alpha="0.5"
                     android:gravity="center|left"
-                    android:text="website.wordpress.com"
+                    android:text="@string/link_user_web"
                     android:textSize="16sp"
                     />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="18dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                app:srcCompat="@drawable/collapsable"
+                android:layout_marginRight="10dp"/>
 
 
         </LinearLayout>
@@ -75,7 +87,8 @@
             android:layout_height="40dp"
             android:alpha="0.5"
             android:gravity="center|left"
-            android:text="     Content"
+            android:text="@string/label_content"
+            android:layout_marginLeft="20dp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -110,7 +123,7 @@
                     android:layout_height="48dp"
                     android:layout_toRightOf="@+id/posts_icon"
                     android:gravity="center|left"
-                    android:text="Posts"
+                    android:text="@string/title_posts"
                     android:textStyle="bold"
                     />
             </RelativeLayout>
@@ -139,7 +152,7 @@
                     android:layout_height="48dp"
                     android:layout_toRightOf="@id/pages_icon"
                     android:gravity="center|left"
-                    android:text="Pages"
+                    android:text="@string/title_pages"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -166,7 +179,7 @@
                     android:layout_height="48dp"
                     android:layout_toRightOf="@id/media_icon"
                     android:gravity="center|left"
-                    android:text="Media"
+                    android:text="@string/title_media"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -178,7 +191,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:background="@drawable/button_click">
-                >
+
 
                 <ImageView
                     android:id="@+id/comment_icon"
@@ -194,7 +207,7 @@
                     android:layout_height="48dp"
                     android:layout_toRightOf="@+id/comment_icon"
                     android:gravity="center|left"
-                    android:text="Comments"
+                    android:text="@string/title_comments"
                     android:textStyle="bold" />
             </RelativeLayout>
         </LinearLayout>
@@ -206,7 +219,8 @@
             android:layout_height="40dp"
             android:alpha="0.5"
             android:gravity="center|left"
-            android:text="    Manage"
+            android:text="@string/label_manage"
+            android:layout_marginLeft="20dp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -238,7 +252,7 @@
                     android:layout_height="48dp"
                     android:layout_toRightOf="@+id/me_icon"
                     android:gravity="center|left"
-                    android:text="Me"
+                    android:text="@string/title_me"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -265,7 +279,7 @@
                     android:layout_height="48dp"
                     android:layout_toRightOf="@id/setting_icon"
                     android:gravity="center|left"
-                    android:text="Site Setting"
+                    android:text="@string/title_setting"
                     android:textStyle="bold" />
 
             </RelativeLayout>
@@ -296,12 +310,11 @@
                         android:id="@+id/admin_text"
                         android:layout_width="70dp"
                         android:layout_height="48dp"
-                        android:text="WP Admin"
+                        android:text="@string/title_admin"
                         style="@style/text_style"
                         android:textStyle="bold"
                         android:gravity="center|left"
-                        android:clickable="true"
-                        android:focusable="true"/>
+                        />
 
                     <ImageButton
                         android:id="@+id/openin_btn_icon"

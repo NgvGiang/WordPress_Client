@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -13,11 +12,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.google.android.material.button.MaterialButtonToggleGroup;
 
 public class Sign_Up_Page extends AppCompatActivity {
 
@@ -30,7 +24,7 @@ public class Sign_Up_Page extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         RelativeLayout google_btn = findViewById(R.id.google_button);
-        Button continue_btn = findViewById(R.id.continue_btn);
+        Button continue_btn = findViewById(R.id.continue_login_btn);
 
         // Set the title
         getSupportActionBar().setTitle("Get started");
@@ -42,28 +36,20 @@ public class Sign_Up_Page extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> {
             finish();
         });
-        continue_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Continue button clicked!", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        google_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Google button clicked!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        //buttons
+        continue_btn.setOnClickListener(view -> showToast("Intent to Choose your page"));
+
+        google_btn.setOnClickListener(View -> showToast("Unable to connect to Google"));
     }
-    // Inflate the menu for the info icon
+    //info icon
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu, menu); // Define a menu for the info icon
         return true;
     }
-    // Handle menu item clicks (for the info icon)
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.info_icon) {
@@ -72,5 +58,8 @@ public class Sign_Up_Page extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void showToast(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 }

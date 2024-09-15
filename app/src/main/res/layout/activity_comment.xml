@@ -5,74 +5,67 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PostsActivity">
-
+    tools:context=".CommentActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/linearLayout"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/comment_tool_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#121212"
             android:paddingTop="25dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:title="@string/posts" />
+            android:title="@string/comments" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/PostsTabLayout"
+            android:id="@+id/comment_tab_mode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#121212"
             app:layout_anchor="@id/toolbar"
             app:layout_anchorGravity="bottom"
             app:tabIndicatorColor="@color/blue"
-            app:tabMode="fixed"
+            app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorFullWidth="true"
             app:tabTextColor="#77FFFFFF">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/published" />
-
+                android:text="@string/ALL"/>
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/drafts" />
-
+                android:text="@string/pending"/>
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/schedules" />
-
+                android:text="@string/unreplied"/>
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/trashed" />
+                android:text="@string/approved"/>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/spam"/>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/trashed"/>
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/PostviewPager"
+            android:id="@+id/comment_view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_anchor="@id/PostsTabLayout"
-            app:layout_anchorGravity="bottom" />
+            app:layout_anchorGravity="bottom"
+            app:layout_anchor="@id/comment_tab_mode"/>
     </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="40dp"
-        android:src="@drawable/add"
-        android:backgroundTint="#484444"
-        app:tint="@color/white"/>
-
 </RelativeLayout>
