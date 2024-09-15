@@ -11,6 +11,7 @@
     <string name="label_site_address">Địa chỉ trang web</string>
     <string name="link_find_site">Tìm địa chỉ trang web của bạn</string>
     <string name="button_continue_login">Tiếp tục</string>
+    <string name="title_login">Đăng nhập</string>
 
 <!--    //Sign up page-->
     <string name="instruction_sign_up">"Nhập địa chỉ email của bạn để đăng nhập hoặc tạo tài khoản WordPress.com."</string>

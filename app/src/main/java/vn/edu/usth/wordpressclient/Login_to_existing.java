@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -17,7 +19,8 @@ import androidx.core.content.ContextCompat;
 
 public class Login_to_existing extends AppCompatActivity {
 
-    Button continue_login;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +30,8 @@ public class Login_to_existing extends AppCompatActivity {
         // Set up toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         // Set title
         getSupportActionBar().setTitle("Log In");
-        //title color
-
-
         //back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -40,8 +39,12 @@ public class Login_to_existing extends AppCompatActivity {
             finish();
         });
 
-        continue_login = findViewById(R.id.continue_login_btn);
+        Button continue_login = findViewById(R.id.continue_login_btn);
+        TextView enter_site_address = findViewById(R.id.find_site_btn);
+
+        enter_site_address.setOnClickListener(view -> showToast("Nah, cant find it bro :)"));
         continue_login.setOnClickListener(view -> startActivity(new Intent(this, Choose_your_web.class)));
+
     }
 
     // info icon
@@ -55,11 +58,13 @@ public class Login_to_existing extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.info_icon) {
-            // Handle info icon click
             Toast.makeText(this, "Info clicked!", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void showToast(String mes) {
+        Toast.makeText(this, mes, Toast.LENGTH_SHORT).show();
     }
 }
 

@@ -28,11 +28,9 @@ public class Sign_Up_Page extends AppCompatActivity {
 
         // Set the title
         getSupportActionBar().setTitle("Get started");
-        //title color
-        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
+
         //back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.getNavigationIcon().setTint(ContextCompat.getColor(this, android.R.color.white));
         toolbar.setNavigationOnClickListener(v -> {
             finish();
         });

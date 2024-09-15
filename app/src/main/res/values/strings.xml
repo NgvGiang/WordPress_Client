@@ -11,6 +11,8 @@
     <string name="label_site_address">Site address</string>
     <string name="link_find_site">Find your site address</string>
     <string name="button_continue_login">Continue</string>
+    <string name="title_login">Log in</string>
+
 
 <!--    //Sign up page-->
     <string name="instruction_sign_up">"Enter your email address to log in or create a WordPress.com account."</string>
@@ -54,6 +56,7 @@
     <string name="trashed">TRASHED</string>
     <string name="posts">posts</string>
     <string name="page">Page</string>
+
     <!--    //Phần của Đức-->
     <string name="you_don_t_have_any_documents">You don\'t have any documents</string>
     <string name="upload_media">Upload media</string>

@@ -10,6 +10,7 @@
         <item name="colorSurface">@color/white</item> <!-- Surface color -->
         <item name="colorOnSurface">@color/black</item> <!-- Text color on surface -->
         <item name="android:windowBackground">@color/white</item> <!-- Window background -->
+
     </style>
 
     <!-- Main Theme for WordPressClient -->

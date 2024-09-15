@@ -30,16 +30,10 @@
             android:name=".PagesActivity"
             android:exported="false" />
         <activity
-<<<<<<< Updated upstream
-=======
             android:name=".WordPress_media"
             android:exported="false" />
         <activity
->>>>>>> Stashed changes
             android:name=".FirstLoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".WordPress_media"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

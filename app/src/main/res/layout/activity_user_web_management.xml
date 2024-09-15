@@ -36,7 +36,7 @@
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/logo" />
+                app:srcCompat="@drawable/logo"/>
 
             <LinearLayout
                 android:id="@+id/web_name"
@@ -53,6 +53,7 @@
                     android:layout_weight="1"
                     android:gravity="center|left"
                     android:text="@string/title_user_web"
+                    android:textColor="@color/onBackGround"
                     android:textSize="23sp"
                     />
 
@@ -65,6 +66,7 @@
                     android:alpha="0.5"
                     android:gravity="center|left"
                     android:text="@string/link_user_web"
+                    android:textColor="@color/onBackGround"
                     android:textSize="16sp"
                     />
             </LinearLayout>
@@ -88,6 +90,7 @@
             android:alpha="0.5"
             android:gravity="center|left"
             android:text="@string/label_content"
+            android:textColor="@color/onBackGround"
             android:layout_marginLeft="20dp"
             android:textStyle="bold" />
 
@@ -124,6 +127,7 @@
                     android:layout_toRightOf="@+id/posts_icon"
                     android:gravity="center|left"
                     android:text="@string/title_posts"
+                    android:textColor="@color/onBackGround"
                     android:textStyle="bold"
                     />
             </RelativeLayout>
@@ -153,6 +157,7 @@
                     android:layout_toRightOf="@id/pages_icon"
                     android:gravity="center|left"
                     android:text="@string/title_pages"
+                    android:textColor="@color/onBackGround"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -180,6 +185,7 @@
                     android:layout_toRightOf="@id/media_icon"
                     android:gravity="center|left"
                     android:text="@string/title_media"
+                    android:textColor="@color/onBackGround"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -208,6 +214,7 @@
                     android:layout_toRightOf="@+id/comment_icon"
                     android:gravity="center|left"
                     android:text="@string/title_comments"
+                    android:textColor="@color/onBackGround"
                     android:textStyle="bold" />
             </RelativeLayout>
         </LinearLayout>
@@ -220,6 +227,7 @@
             android:alpha="0.5"
             android:gravity="center|left"
             android:text="@string/label_manage"
+            android:textColor="@color/onBackGround"
             android:layout_marginLeft="20dp"
             android:textStyle="bold" />
 
@@ -253,6 +261,7 @@
                     android:layout_toRightOf="@+id/me_icon"
                     android:gravity="center|left"
                     android:text="@string/title_me"
+                    android:textColor="@color/onBackGround"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -280,6 +289,7 @@
                     android:layout_toRightOf="@id/setting_icon"
                     android:gravity="center|left"
                     android:text="@string/title_setting"
+                    android:textColor="@color/onBackGround"
                     android:textStyle="bold" />
 
             </RelativeLayout>
@@ -311,22 +321,11 @@
                         android:layout_width="70dp"
                         android:layout_height="48dp"
                         android:text="@string/title_admin"
+                        android:textColor="@color/onBackGround"
                         style="@style/text_style"
                         android:textStyle="bold"
                         android:gravity="center|left"
                         />
-
-                    <ImageButton
-                        android:id="@+id/openin_btn_icon"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/admin_text"
-                        android:background="?attr/selectableItemBackground"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/openin">
-
-                    </ImageButton>
 
 
                 </RelativeLayout>

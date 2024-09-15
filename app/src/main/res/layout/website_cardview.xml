@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/transparent">
 
     <View
         android:layout_width="match_parent"
@@ -12,12 +13,13 @@
         android:background="@android:color/darker_gray" />
 
     <androidx.cardview.widget.CardView
+        app:cardElevation="0dp"
         android:id="@+id/web_cardview"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:backgroundTint="@color/transparent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        app:cardBackgroundColor="@android:color/transparent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -36,16 +38,18 @@
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/web_icon"
                 android:orientation="vertical"
+                android:background="@color/transparent"
                 android:paddingLeft="10dp">
 
                 <TextView
                     android:id="@+id/web_title"
-                    style="@style/text_style"
+                    android:fontFamily="@font/roboto"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_gravity="center|left"
                     android:layout_weight="1"
                     android:text="user website"
+                    android:textColor="@color/onBackGround"
                     android:textSize="17dp" />
 
                 <TextView
@@ -56,6 +60,7 @@
                     android:layout_weight="1"
                     android:alpha="0.5"
                     android:text="website.wordpress.com"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13dp" />
 
             </LinearLayout>

@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:text="@string/title_user_name"
         style="@style/text_style"
+        android:textColor="@color/onBackGround"
         android:textSize="25dp" />
 
     <TextView
@@ -31,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/label_account_name"
+        android:textColor="@color/onBackGround"
         style="@style/text_style"
         android:alpha="0.5" />
 
@@ -40,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/title_choose_your_site"
+        android:textColor="@color/onBackGround"
         android:textSize="14dp" />
 
     <TextView
@@ -48,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:alpha="0.5"
+        android:textColor="@color/onBackGround"
         android:text="@string/instruction_choose_site"
         android:textSize="12dp" />
 
@@ -85,7 +89,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:text="OR"
-                android:textColor="@android:color/white"
+
+                android:textColor="@color/onBackGround"
                 android:textSize="14dp" />
 
             <View
@@ -104,6 +109,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/border_blue"
         android:text="@string/button_create_site"
+        android:textColor="@color/onBackGround"
         android:layout_marginBottom="50dp"/>
 
 </LinearLayout>
