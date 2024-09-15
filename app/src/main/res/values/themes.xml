@@ -1,9 +1,33 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.WordPressClient" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Base application theme for WordPressClient in Light Mode -->
+    <style name="Base.Theme.WordPressClient" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/blue</item> <!-- Primary color -->
+        <item name="colorPrimaryVariant">@color/light_blue</item> <!-- Darker variant -->
+        <item name="colorOnPrimary">@color/black</item> <!-- Text color on primary -->
+        <item name="colorSecondary">@color/gray</item> <!-- Secondary color -->
+        <item name="colorOnSecondary">@color/black</item> <!-- Text color on secondary -->
+        <item name="colorSurface">@color/white</item> <!-- Surface color -->
+        <item name="colorOnSurface">@color/black</item> <!-- Text color on surface -->
+        <item name="android:windowBackground">@color/white</item> <!-- Window background -->
     </style>
 
+    <!-- Main Theme for WordPressClient in Light Mode -->
+    <style name="Theme.WordPress" parent="Base.Theme.WordPressClient">
+        <!-- Customize specific attributes for the main theme if needed -->
+    </style>
+
+    <!-- No Action Bar Theme Variant for Light Mode -->
+    <style name="Theme.WordPress.NoActionBar" parent="Base.Theme.WordPressClient">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- App Bar Overlay for WordPressClient in Light Mode -->
+    <style name="Theme.WordPress.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
+
+    <!-- Popup Overlay for WordPressClient in Light Mode -->
+    <style name="Theme.WordPress.PopupOverlay" parent="ThemeOverlay.Material3.Light" />
+
+    <!-- Main Theme for WordPressClient -->
     <style name="Theme.WordPressClient" parent="Base.Theme.WordPressClient" />
 </resources>

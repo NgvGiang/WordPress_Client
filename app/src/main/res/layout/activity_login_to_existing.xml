@@ -13,10 +13,10 @@
         android:id="@+id/toolbar"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:backgroundTint="@color/main_background"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:background="@color/main_background"
+        app:titleTextColor="@color/onBackGround"
+        android:minHeight="?attr/actionBarSize"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
