@@ -33,7 +33,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="First name"
+                android:text="@string/first_name"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/white"
                 android:textSize="13sp"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:textSize="13sp"
-                android:text="@your_first_name"
+                android:text="@string/your_first_name"
                 android:textColor="@color/gray"/>
         </LinearLayout>
 
@@ -75,7 +75,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Last name"
+                android:text="@string/last_name"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/white"
                 android:textSize="13sp"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:textSize="13sp"
-                android:text="@your_last_name"
+                android:text="@string/your_last_name"
                 android:textColor="@color/gray"/>
         </LinearLayout>
 
@@ -117,7 +117,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Public display name"
+                android:text="@string/public_display_name"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/white"
                 android:textSize="13sp"
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:textSize="13sp"
-                android:text="@display_name"
+                android:text="@string/display_name"
                 android:textColor="@color/gray"/>
         </LinearLayout>
 
@@ -159,7 +159,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="About Me"
+                android:text="@string/about_me"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/white"
                 android:textSize="13sp"

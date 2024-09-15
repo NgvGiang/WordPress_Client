@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
-                android:text="User Name"
+                android:text="@string/user_name"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
-                android:text=" @Account name"
+                android:text="@string/account_name"
                 android:textColor="#9E9E9E"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="29dp"
                 android:fontFamily="@font/roboto"
-                android:text="My profile"
+                android:text="@string/my_profile"
                 android:textColor="#FFFFFF"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="29dp"
                 android:fontFamily="@font/roboto"
-                android:text="Account Settings"
+                android:text="@string/account_settings"
                 android:textColor="#FFFFFF"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -175,7 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="29dp"
                 android:fontFamily="@font/roboto"
-                android:text="App Settings"
+                android:text="@string/app_settings"
                 android:textColor="#FFFFFF"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -214,7 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="29dp"
                 android:fontFamily="@font/roboto"
-                android:text="Help"
+                android:text="@string/help"
                 android:textColor="#FFFFFF"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -253,7 +253,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="29dp"
                 android:fontFamily="@font/roboto"
-                android:text="Share WordPress with a friend"
+                android:text="@string/share_wordpress_with_a_friend"
                 android:textColor="#FFFFFF"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -292,7 +292,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="29dp"
                 android:fontFamily="@font/roboto"
-                android:text="WP Admin"
+                android:text="@string/wp_admin"
                 android:textColor="#FFFFFF"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -331,7 +331,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="29dp"
                 android:fontFamily="@font/roboto"
-                android:text="Log out of WordPress.com"
+                android:text="@string/log_out_of_wordpress_com"
                 android:textColor="#FFFFFF"
                 android:textSize="13sp" />
         </LinearLayout>

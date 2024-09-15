@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Community forums"
+            android:text="@string/community_forums"
             android:fontFamily="@font/roboto"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
             android:textSize="13sp"
-            android:text="Get help from our group of volunteers"
+            android:text="@string/get_help_from_our_group_of_volunteers"
             android:textColorHint="@color/gray"
             />
 
@@ -75,7 +75,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Browse our FAQ"
+                android:text="@string/browse_our_faq"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/white"
                 android:textSize="16sp"
@@ -110,7 +110,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Logs"
+                android:text="@string/logs"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/white"
                 android:textSize="16sp"
@@ -134,7 +134,7 @@
         android:layout_marginTop="19dp"
         android:layout_marginBottom="19dp"
         android:textSize="13sp"
-        android:text="Version 25.2.1"
+        android:text="@string/version_25_2_1"
         android:textColorHint="@color/gray"
         />
     </LinearLayout>

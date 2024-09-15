@@ -32,7 +32,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="General"
+                    android:text="@string/general"
                     android:textStyle="bold"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/light_blue"
@@ -59,7 +59,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Site Title"
+                    android:text="@string/site_title"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray"
                     android:fontFamily="@font/roboto"
-                    android:text="user_site_title"
+                    android:text="@string/user_site_title"
                     android:textStyle="bold"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -101,7 +101,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tagline"
+                    android:text="@string/tagline"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -113,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray"
                     android:fontFamily="@font/roboto"
-                    android:text="user_tagline"
+                    android:text="@string/user_tagline"
                     android:textStyle="bold"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -143,7 +143,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Address"
+                    android:text="@string/address"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/gray"
                     android:textSize="13sp"
@@ -156,7 +156,7 @@
                     android:textColor="@color/gray"
                     android:fontFamily="@font/roboto"
                     android:textStyle="bold"
-                    android:text="username.wordpress.com"
+                    android:text="@string/username_wordpress_com"
                     android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
@@ -185,7 +185,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Privacy"
+                    android:text="@string/privacy"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -197,7 +197,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray"
                     android:fontFamily="@font/roboto"
-                    android:text="Hidden"
+                    android:text="@string/hidden"
                     android:textStyle="bold"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -227,7 +227,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Language"
+                    android:text="@string/language"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -240,7 +240,7 @@
                     android:textColor="@color/gray"
                     android:fontFamily="@font/roboto"
                     android:textStyle="bold"
-                    android:text="English(US)"
+                    android:text="@string/english_us"
                     android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
@@ -269,7 +269,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Timezone"
+                    android:text="@string/timezone"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -281,7 +281,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray"
                     android:fontFamily="@font/roboto"
-                    android:text="Vietnam"
+                    android:text="@string/vietnam"
                     android:textStyle="bold"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -302,7 +302,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Homepage"
+                    android:text="@string/homepage"
                     android:textStyle="bold"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/light_blue"
@@ -329,7 +329,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Homepage Settings"
+                    android:text="@string/homepage_settings"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -341,7 +341,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray"
                     android:fontFamily="@font/roboto"
-                    android:text="Classic Blog"
+                    android:text="@string/classic_blog"
                     android:textStyle="bold"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -362,7 +362,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Writing"
+                    android:text="@string/writing"
                     android:textStyle="bold"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/light_blue"
@@ -389,7 +389,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Default Category"
+                    android:text="@string/default_category"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -402,7 +402,7 @@
                     android:textColor="@color/gray"
                     android:fontFamily="@font/roboto"
                     android:textStyle="bold"
-                    android:text="Uncategorized"
+                    android:text="@string/uncategorized"
                     android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
@@ -431,7 +431,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Categories"
+                    android:text="@string/categories"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -463,7 +463,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tags"
+                    android:text="@string/tags"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -496,7 +496,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Default Format"
+                    android:text="@string/default_format"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -508,7 +508,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray"
                     android:fontFamily="@font/roboto"
-                    android:text="Standard"
+                    android:text="@string/standard"
                     android:textStyle="bold"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -538,7 +538,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Date Format"
+                    android:text="@string/date_format"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -551,7 +551,7 @@
                     android:textColor="@color/gray"
                     android:fontFamily="@font/roboto"
                     android:textStyle="bold"
-                    android:text="December 31, 2024"
+                    android:text="@string/december_31_2024"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -581,7 +581,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Week starts on"
+                    android:text="@string/week_starts_on"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -593,7 +593,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/gray"
                     android:fontFamily="@font/roboto"
-                    android:text="Monday"
+                    android:text="@string/monday"
                     android:textStyle="bold"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -623,7 +623,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Posts per page"
+                    android:text="@string/posts_per_page"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -636,7 +636,7 @@
                     android:textColor="@color/gray"
                     android:fontFamily="@font/roboto"
                     android:textStyle="bold"
-                    android:text="10"
+                    android:text="@string/_10"
                     android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
@@ -661,7 +661,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Media"
+                    android:text="@string/media"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/light_blue"
                     android:textStyle="bold"
@@ -687,7 +687,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Spaced Used"
+                    android:text="@string/spaced_used"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/gray"
                     android:textSize="13sp"
@@ -700,7 +700,7 @@
                     android:textColor="@color/gray"
                     android:fontFamily="@font/roboto"
                     android:textStyle="bold"
-                    android:text="0% of 3GB"
+                    android:text="@string/_0_of_3gb"
                     android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
@@ -720,7 +720,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Discussion"
+                    android:text="@string/discussion"
                     android:textStyle="bold"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/light_blue"
@@ -752,7 +752,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Allow Comments"
+                        android:text="@string/allow_comments"
                         android:fontFamily="@font/roboto"
                         android:textStyle="bold"
                         android:textColor="@color/white"
@@ -794,7 +794,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Send Pingbacks"
+                        android:text="@string/send_pingbacks"
                         android:fontFamily="@font/roboto"
                         android:textStyle="bold"
                         android:textColor="@color/white"
@@ -836,7 +836,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Receive Pingbacks"
+                        android:text="@string/receive_pingbacks"
                         android:fontFamily="@font/roboto"
                         android:textStyle="bold"
                         android:textColor="@color/white"
@@ -873,7 +873,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="More"
+                    android:text="@string/more"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -897,7 +897,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Advanced"
+                    android:text="@string/advanced"
                     android:textStyle="bold"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/light_blue"
@@ -924,7 +924,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Start Over"
+                    android:text="@string/start_over"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -955,7 +955,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Export Content"
+                    android:text="@string/export_content"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -987,7 +987,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Delete Site"
+                    android:text="@string/delete_site"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/white"
                     android:textSize="13sp"

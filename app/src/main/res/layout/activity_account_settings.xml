@@ -31,7 +31,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username"
+        android:text="@string/username"
         android:fontFamily="@font/roboto"
         android:textColor="@color/white"
         android:textSize="13sp"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:textSize="13sp"
-        android:text="@your_user_name"
+        android:text="@string/your_user_name"
         android:textColor="@color/gray"/>
 
         </LinearLayout>
@@ -72,7 +72,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email address"
+                android:text="@string/email_address"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/white"
                 android:textSize="13sp"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:textSize="13sp"
-                android:text="@your_address"
+                android:text="@string/your_address"
                 android:textColor="@color/gray"/>
 
         </LinearLayout>
@@ -113,7 +113,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Primary site"
+                android:text="@string/primary_site"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/white"
                 android:textSize="13sp"
@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:textSize="13sp"
-                android:text="@name"
+                android:text="@string/name"
                 android:textColor="@color/gray"/>
 
         </LinearLayout>
@@ -154,7 +154,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Web address"
+                android:text="@string/web_address"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/white"
                 android:textSize="13sp"
@@ -166,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:textSize="13sp"
-                android:text="@Web_address"
+                android:text="@string/web_address_status"
                 android:textColor="@color/gray"/>
 
         </LinearLayout>
@@ -196,7 +196,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Change password"
+                android:text="@string/change_password"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/white"
                 android:textSize="13sp"
@@ -229,7 +229,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Close Account"
+                android:text="@string/close_account"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/red"
                 android:textSize="13sp"

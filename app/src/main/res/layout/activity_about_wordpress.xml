@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
-        android:text="WordPress"
+        android:text="@string/wordpress"
         android:textFontWeight="400"
         android:textColor="#FFFFFF"
         android:textSize="32sp"
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
         android:fontFamily="@font/roboto"
-        android:text="Version 25.2.1"
+        android:text="@string/version_25_2_1"
         android:textColor="@color/gray"
         android:textSize="13sp" />
 
@@ -85,7 +85,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rate Us"
+                android:text="@string/rate_us"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/gray"
                 android:textSize="13sp"
@@ -116,7 +116,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Share with Friends"
+                android:text="@string/share_with_friends"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/gray"
                 android:textSize="13sp"
@@ -145,7 +145,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Twitter"
+                android:text="@string/twitter"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/gray"
                 android:textSize="13sp"
@@ -173,7 +173,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="News"
+                android:text="@string/news"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/gray"
                 android:textSize="13sp"
@@ -207,7 +207,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Legal and More"
+                android:text="@string/legal_and_more"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/gray"
                 android:textSize="13sp"
@@ -240,7 +240,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contribute"
+                android:text="@string/contribute"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/gray"
                 android:textSize="13sp"
