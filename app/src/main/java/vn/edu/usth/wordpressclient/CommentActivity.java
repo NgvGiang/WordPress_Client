@@ -32,12 +32,11 @@ public class CommentActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setTitle(getString(R.string.comments));
-
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> {
             finish();
         });
+
 
         tabLayout = findViewById(R.id.comment_tab_mode);
         viewPager2 = findViewById(R.id.comment_view_pager);
