@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/main_background"
+    >
+
+    <ImageView
+        android:id="@+id/welcomewordpressimage"
+        android:layout_width="198dp"
+        android:layout_height="179dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="16dp"
+        app:srcCompat="@drawable/welcome_wordpress" />
+    <!-- Header text -->
+    <TextView
+        android:id="@+id/WelcomeheaderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_to_wordpress"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"/>
+
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="333dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:gravity="center"
+        android:text="@string/whatever_you_want_to_create_or_share_we_ll_help_you_do_it_right_here"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+
+    <Button
+        android:id="@+id/createBlogButton"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/blue"
+        android:text="@string/create_wordpress_com_site"
+        android:textColor="@color/white"
+        app:cornerRadius="5dp"/>
+
+
+    <Button
+        android:id="@+id/addSelfHostButton"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/blue"
+        android:text="@string/add_self_host_site"
+        android:textColor="@color/white"
+        app:cornerRadius="5dp" />
+
+
+    <Button
+        android:id="@+id/skipButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/not_right_now"
+        android:backgroundTint="@color/transparent"
+        android:textColor="@color/white"
+        android:textSize="14sp"/>
+
+
+
+</LinearLayout>
