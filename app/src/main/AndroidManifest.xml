@@ -10,18 +10,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WordPressClient">
-        <activity
-            android:name=".sign_up_choose_email"
-            android:exported="false" />
-        <activity
-            android:name=".Login_to_existing"
-            android:exported="false" />
-        <activity
-            android:name=".WordPress_media"
-            android:exported="false" />
-        <activity
-            android:name=".Sign_Up_Page"
+        android:theme="@style/Theme.WordPressClient"
+        >
+        <activity android:name=".Sign_Up_Page"
             android:exported="false" />
         <activity
             android:name=".Choose_your_web"
@@ -30,7 +21,7 @@
             android:name=".PostsActivity"
             android:exported="false" />
         <activity
-            android:name=".sign_up_choose_display_name"
+            android:name=".Login_to_existing"
             android:exported="false" />
         <activity
             android:name=".UserWebManagement"
@@ -42,13 +33,35 @@
             android:name=".FirstLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".Welcome_to_WordPress"
+            android:name=".WordPress_media"
+            android:exported="false"/>
+        <activity
+            android:name=".MeActivity.MyProfileActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".MeActivity.AccountSettingsActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".MeActivity.AppSettingsActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".MeActivity.HelpActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".MeActivity.UsernameActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".MeActivity.MeWebsiteActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".CommentActivity"
+            android:exported="false">
         </activity>
     </application>
 

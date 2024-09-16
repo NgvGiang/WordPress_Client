@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
@@ -31,11 +32,11 @@ public class PagesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setTitle(getString(R.string.page));
 
-        // Enable the Up button (Back button)
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
+
         tabLayout = findViewById(R.id.PagetabLayout);
         viewPager2 = findViewById(R.id.PageviewPager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);

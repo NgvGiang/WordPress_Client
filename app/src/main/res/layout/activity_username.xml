@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/main_background">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#121212"
+            android:paddingTop="25dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="true"
+            android:orientation="vertical"
+            android:layout_marginTop="11dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/general"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/light_blue"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/site_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/site_title"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/user_site_title_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/user_site_title"
+                    android:textStyle="bold"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:id="@+id/tagline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tagline"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/user_tagline_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/user_tagline"
+                    android:textStyle="bold"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/address"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/username_domain_address_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/roboto"
+                    android:textStyle="bold"
+                    android:text="@string/username_wordpress_com"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:id="@+id/privacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/privacy"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/privacy_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/hidden"
+                    android:textStyle="bold"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:id="@+id/language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/language"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/language_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/roboto"
+                    android:textStyle="bold"
+                    android:text="@string/english_us"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:id="@+id/timezone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/timezone"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/timezone_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/vietnam"
+                    android:textStyle="bold"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="true"
+            android:orientation="vertical"
+            android:layout_marginTop="11dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/homepage"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/light_blue"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/homepage_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/homepage_settings"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/homepage_settings_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/classic_blog"
+                    android:textStyle="bold"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="true"
+            android:orientation="vertical"
+            android:layout_marginTop="11dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/writing"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/light_blue"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/default_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_category"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/default_category_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/roboto"
+                    android:textStyle="bold"
+                    android:text="@string/uncategorized"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:id="@+id/categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/categories"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:id="@+id/tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tags"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:id="@+id/default_format"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_format"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/default_format_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/standard"
+                    android:textStyle="bold"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:id="@+id/date_format"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/date_format"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/date_format_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/roboto"
+                    android:textStyle="bold"
+                    android:text="@string/december_31_2024"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:id="@+id/week_starts_on"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/week_starts_on"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/week_starts_on_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/monday"
+                    android:textStyle="bold"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:id="@+id/posts_per_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/posts_per_page"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/posts_per_page_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/roboto"
+                    android:textStyle="bold"
+                    android:text="@string/_10"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="true"
+            android:orientation="vertical"
+            android:layout_marginTop="11dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/media"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/light_blue"
+                    android:textStyle="bold"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/spaced_used"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/spaced_used_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/roboto"
+                    android:textStyle="bold"
+                    android:text="@string/_0_of_3gb"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="true"
+            android:orientation="vertical"
+            android:layout_marginTop="11dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/discussion"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/light_blue"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="346dp"
+                android:layout_height="wrap_content"
+                android:clickable="false">
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/allow_comments"
+                        android:fontFamily="@font/roboto"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+            </LinearLayout>
+            <Switch
+                android:id="@+id/switch_allow_comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="346dp"
+                android:layout_height="wrap_content"
+                android:clickable="false">
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/send_pingbacks"
+                        android:fontFamily="@font/roboto"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+            </LinearLayout>
+            <Switch
+                android:id="@+id/switch_send_pingbacks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="346dp"
+                android:layout_height="wrap_content"
+                android:clickable="false">
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/receive_pingbacks"
+                        android:fontFamily="@font/roboto"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+            </LinearLayout>
+            <Switch
+                android:id="@+id/switch_receive_pingbacks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:id="@+id/more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="true"
+            android:orientation="vertical"
+            android:layout_marginTop="11dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/advanced"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/light_blue"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/start_over"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start_over"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+        <LinearLayout
+            android:id="@+id/export_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/export_content"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#444444" />
+
+
+        <LinearLayout
+            android:id="@+id/delete_site"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delete_site"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
