@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
@@ -28,6 +29,11 @@ public class PostsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setTitle(getString(R.string.posts));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
         tabLayout = findViewById(R.id.PostsTabLayout);
         viewPager2 = findViewById(R.id.PostviewPager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);

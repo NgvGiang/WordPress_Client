@@ -30,12 +30,9 @@ public class Login_to_existing extends AppCompatActivity {
 
         // Set title
         getSupportActionBar().setTitle("Log In");
-        //title color
-        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
 
         //back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.getNavigationIcon().setTint(ContextCompat.getColor(this, android.R.color.white));
         toolbar.setNavigationOnClickListener(v -> {
             finish();
         });

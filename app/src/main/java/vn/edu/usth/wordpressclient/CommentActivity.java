@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
@@ -31,11 +32,11 @@ public class CommentActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setTitle(getString(R.string.comments));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
         tabLayout = findViewById(R.id.comment_tab_mode);
         viewPager2 = findViewById(R.id.comment_view_pager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
