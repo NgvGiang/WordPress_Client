@@ -73,6 +73,7 @@
     <string name="create_wordpress_com_site">CREATE WORDPRESS.COM SITE</string>
     <string name="add_self_host_site">ADD SELF-HOST SITE </string>
     <string name="not_right_now">Not right now</string>
+    <string name="display_name_signup">Display name</string>
     <!--    Phần của Nam-->
     <string name="pending">PENDING</string>
     <string name="unreplied">UNREPLIED</string>

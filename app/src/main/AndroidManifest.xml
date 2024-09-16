@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WordPressClient"
         >
+        <activity android:name=".MeActivity.MeWebsiteActivity"
+            android:exported="false"/>
+        <activity android:name=".sign_up_choose_email"
+            android:exported="false"/>
+        <activity android:name=".sign_up_choose_display_name"
+            android:exported="false"/>
         <activity android:name=".Sign_Up_Page"
             android:exported="false" />
         <activity
@@ -52,7 +58,7 @@
             android:exported="false"/>
 
         <activity
-            android:name=".MeActivity.MeWebsiteActivity"
+            android:name=".Welcome_to_WordPress"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

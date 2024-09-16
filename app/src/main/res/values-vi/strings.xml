@@ -63,7 +63,6 @@
     <string name="documents">Tài liệu</string>
     <string name="videos">Video</string>
     <string name="WordPress_Media">Thư viện Media</string>
-    <string name="display_name">Tên hiển thị</string>
     <string name="done">Xong</string>
     <string name="we_ll_use_this_email_address_to_create_your_new_wordpress_com_account">Chúng tôi sẽ sử dụng địa chỉ email này để tạo tài khoản WordPress.com mới cho bạn</string>
     <string name="create_account">Tạo tài khoản</string>
@@ -73,6 +72,7 @@
     <string name="create_wordpress_com_site">TẠO BLOG VỚI WORDPRESS.COM </string>
     <string name="add_self_host_site">THÊM TRANG SELF-HOST </string>
     <string name="not_right_now">ĐỂ SAU</string>
+    <string name="display_name_signup">Tên hiển thị</string>
 
     <!--    Phần của Nam-->
     <string name="comments">Bình luận</string>
