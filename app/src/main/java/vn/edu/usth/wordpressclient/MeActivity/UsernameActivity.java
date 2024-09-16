@@ -19,7 +19,6 @@ public class UsernameActivity extends AppCompatActivity {
         toolbar.setTitle(getString(R.string.user_name));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.getNavigationIcon().setTint(ContextCompat.getColor(this, android.R.color.white));
         toolbar.setNavigationOnClickListener(v -> {
             finish();
         });

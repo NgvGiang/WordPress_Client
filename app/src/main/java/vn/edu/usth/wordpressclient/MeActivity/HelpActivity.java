@@ -19,7 +19,6 @@ public class HelpActivity extends AppCompatActivity {
         toolbar.setTitle(getString(R.string.help));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.getNavigationIcon().setTint(ContextCompat.getColor(this, android.R.color.white));
         toolbar.setNavigationOnClickListener(v -> {
             finish();
         });

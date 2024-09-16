@@ -35,7 +35,6 @@ public class Login_to_existing extends AppCompatActivity {
 
         //back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.getNavigationIcon().setTint(ContextCompat.getColor(this, android.R.color.white));
         toolbar.setNavigationOnClickListener(v -> {
             finish();
         });
