@@ -14,6 +14,7 @@
     <string name="title_login">Đăng nhập</string>
 
 <!--    //Sign up page-->
+    <string name="title_get_started">Bắt đầu</string>
     <string name="instruction_sign_up">"Nhập địa chỉ email của bạn để đăng nhập hoặc tạo tài khoản WordPress.com."</string>
     <string name="hint_email">Địa chỉ Email</string>
     <string name="notice_terms">Bằng cách tiếp tục, bạn đồng ý với Điều khoản dịch vụ của chúng tôi.</string>
@@ -55,6 +56,14 @@
     <string name="trashed">Đã xóa</string>
     <string name="posts">Bài đăng</string>
     <string name="page">Trang</string>
+
+    //Create new page
+    <string name="title_create_new_site">Tạo trang web riêng của bạn</string>
+    <string name="instruction_create_new_site">Nhập miền trang web bạn muốn tạo</string>
+    <string name="button_create_new_site">Xác nhận</string>
+    <string name="terms_create_new_site">Bằng cách tiếp tục, bạn đồng ý với Điều khoản dịch vụ của chúng tôi.</string>
+    <string name="hint_create_new_site">Ví dụ: example1.wordpress.com</string>
+
     <!--//Phần của Lưu Đức-->
     <string name="you_don_t_have_any_documents">Bạn không có tập tin tài liệu nào</string>
     <string name="upload_media">Tải lên media</string>

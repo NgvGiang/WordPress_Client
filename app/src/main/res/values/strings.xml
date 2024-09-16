@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">WordPressClient</string>
 
-<!--    //First login page-->
+    <!--    //First login page-->
     <string name="title_wordpress">Write, edit, and publish\nfrom anywhere.</string>
     <string name="button_login_or_signup">Log in or sign up with WordPress.com</string>
     <string name="link_enter_existing_site">Enter your existing site address</string>
 
-<!--    //Login to existing page-->
+    <!--    //Login to existing page-->
     <string name="instruction_login">"Enter the address of the WordPress site you'd like to connect."</string>
     <string name="label_site_address">Site address</string>
     <string name="link_find_site">Find your site address</string>
@@ -14,7 +14,8 @@
     <string name="title_login">Log in</string>
 
 
-<!--    //Sign up page-->
+    <!--    //Sign up page-->
+    <string name="title_get_started">Get started</string>
     <string name="instruction_sign_up">"Enter your email address to log in or create a WordPress.com account."</string>
     <string name="hint_email">Email address</string>
     <string name="notice_terms">By continuing, you agree to our Terms of Service.</string>
@@ -22,7 +23,7 @@
     <string name="button_signup_google">   Continue with Google</string>
     <string name="terms_and_service">"If you continue with Google and don't already have a WordPress.com account, you are creating an account and you agree to our Terms of Service."</string>
 
-<!--    //User Web Management page-->
+    <!--    //User Web Management page-->
     <string name="title_user_web">User_Website</string>
     <string name="link_user_web">website.wordpress.com</string>
     <string name="label_content">Content</string>tit
@@ -35,7 +36,7 @@
     <string name="title_setting">Site Setting</string>
     <string name="title_admin">WP Admin</string>
 
-<!--    //Choose your web page-->
+    <!--    //Choose your web page-->
     <string name="title_user_name">User name</string>
     <string name="label_account_name">Account Name</string>
     <string name="title_choose_your_site">Choose a site to open</string>
@@ -56,6 +57,13 @@
     <string name="trashed">TRASHED</string>
     <string name="posts">posts</string>
     <string name="page">Page</string>
+
+    //Create new page 
+    <string name="title_create_new_site">Create your own website</string>
+    <string name="instruction_create_new_site">Enter your own website domain</string>
+    <string name="button_create_new_site">Confirm</string>
+    <string name="terms_create_new_site">By continuing, you agree to our Terms of Service.</string>
+    <string name="hint_create_new_site">Example: example1.wordpress.com</string>
 
     <!--    //Phần của Đức-->
     <string name="you_don_t_have_any_documents">You don\'t have any documents</string>

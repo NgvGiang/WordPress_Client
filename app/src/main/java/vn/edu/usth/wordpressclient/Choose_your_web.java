@@ -1,10 +1,12 @@
 package vn.edu.usth.wordpressclient;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,14 +19,10 @@ public class Choose_your_web extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_your_web); // Set your layout
+        EdgeToEdge.enable(this);
 
         Button create_site_btn = findViewById(R.id.create_site_btn);
-        create_site_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Creating site, please wait", Toast.LENGTH_SHORT).show();
-            }
-        });
+        create_site_btn.setOnClickListener(view -> startActivity(new Intent(this, Create_new_site.class)));
 
         //data
         ArrayList<Web_card_model> webModels = new ArrayList<>();

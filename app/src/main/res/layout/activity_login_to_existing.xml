@@ -57,13 +57,13 @@
             android:layout_below="@id/textView2"
             android:layout_marginTop="26dp"
             android:background="@drawable/border_blue"
-            android:ems="10"
             android:inputType="text"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:paddingLeft="20dp"/>
 
         <TextView
             android:id="@+id/find_site_btn"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/input_adress"
             android:layout_marginTop="10dp"

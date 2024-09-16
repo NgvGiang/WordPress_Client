@@ -64,8 +64,10 @@
             android:clickable="true"
             android:focusable="true"
             style="@style/text_style"
+            android:textColor="@color/onBackGround"
             android:text="@string/notice_terms"
             android:layout_centerHorizontal="true"
+            android:gravity="center"
             android:textSize="12dp"
             />
         <Button

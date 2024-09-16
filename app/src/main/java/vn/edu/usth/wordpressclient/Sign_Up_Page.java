@@ -1,5 +1,6 @@
 package vn.edu.usth.wordpressclient;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,7 +28,7 @@ public class Sign_Up_Page extends AppCompatActivity {
         Button continue_btn = findViewById(R.id.continue_login_btn);
 
         // Set the title
-        getSupportActionBar().setTitle("Get started");
+        getSupportActionBar().setTitle(getString(R.string.title_get_started));
 
         //back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -36,10 +37,11 @@ public class Sign_Up_Page extends AppCompatActivity {
         });
 
         //buttons
-        continue_btn.setOnClickListener(view -> showToast("Intent to Choose your page"));
+        continue_btn.setOnClickListener(view -> startActivity(new Intent(this, Choose_your_web.class)));
 
-        google_btn.setOnClickListener(View -> showToast("Unable to connect to Google"));
+        google_btn.setOnClickListener(View -> Toast.makeText(this, "Google button clicked!", Toast.LENGTH_SHORT).show());
     }
+
     //info icon
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,8 +58,5 @@ public class Sign_Up_Page extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-    public void showToast(String message){
-        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 }

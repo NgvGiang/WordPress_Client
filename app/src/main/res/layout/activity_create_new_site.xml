@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    android:padding="20dp"
+    tools:context=".Create_new_site">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="83dp"
+        android:layout_height="81dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19"
+        app:srcCompat="@drawable/logo" />
+
+
+    <TextView
+        android:id="@+id/title_create_web"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/title_create_new_site"
+        android:textColor="@color/onBackGround"
+        android:textSize="20dp"
+        android:textStyle="bold
+"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/instruction_create_web"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:text="@string/instruction_create_new_site"
+        android:textColor="@color/blue"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/user_domain_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/user_domain_input"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="68dp"
+        android:background="@drawable/border_blue"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        android:textSize="14dp"
+        android:hint="@string/hint_create_new_site"
+        android:textColor="@color/onBackGround"
+        app:layout_constraintTop_toBottomOf="@+id/title_create_web"
+        tools:layout_editor_absoluteX="24dp" />
+
+    <Button
+        android:id="@+id/confirm_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/button_create_new_site"
+        android:textColor="@color/main_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/term_create_site"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center|top"
+        android:text="@string/terms_create_new_site"
+        android:textSize="14dp"
+        android:textColor="@color/onBackGround"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_domain_input" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

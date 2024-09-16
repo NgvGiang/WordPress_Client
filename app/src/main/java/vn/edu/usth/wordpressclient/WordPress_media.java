@@ -29,6 +29,10 @@ public class WordPress_media extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setTitle(getString(R.string.WordPress_Media));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
 
 
         MediatabLayout = findViewById(R.id.MediatabLayout);

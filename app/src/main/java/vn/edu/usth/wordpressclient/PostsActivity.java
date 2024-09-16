@@ -28,6 +28,11 @@ public class PostsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setTitle(getString(R.string.posts));
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
         tabLayout = findViewById(R.id.PostsTabLayout);
         viewPager2 = findViewById(R.id.PostviewPager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);

@@ -10,9 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WordPressClient"
-        >
-        <activity android:name=".Sign_Up_Page"
+        android:theme="@style/Theme.WordPressClient">
+        <activity
+            android:name=".Create_new_site"
+            android:exported="false" />
+        <activity
+            android:name=".Sign_Up_Page"
             android:exported="false" />
         <activity
             android:name=".Choose_your_web"
@@ -43,8 +46,7 @@
         </activity>
         <activity
             android:name=".CommentActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
     </application>
 
 </manifest>

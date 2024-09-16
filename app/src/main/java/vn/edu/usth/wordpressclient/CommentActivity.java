@@ -32,10 +32,10 @@ public class CommentActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolbar.setTitle(getString(R.string.comments));
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
         tabLayout = findViewById(R.id.comment_tab_mode);
         viewPager2 = findViewById(R.id.comment_view_pager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);

@@ -31,10 +31,9 @@ public class Login_to_existing extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Set title
-        getSupportActionBar().setTitle("Log In");
+        getSupportActionBar().setTitle(getString(R.string.title_login));
         //back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         toolbar.setNavigationOnClickListener(v -> {
             finish();
         });
@@ -42,7 +41,7 @@ public class Login_to_existing extends AppCompatActivity {
         Button continue_login = findViewById(R.id.continue_login_btn);
         TextView enter_site_address = findViewById(R.id.find_site_btn);
 
-        enter_site_address.setOnClickListener(view -> showToast("Nah, cant find it bro :)"));
+        enter_site_address.setOnClickListener(view -> Toast.makeText(this, "Nah, cant find it bro :)", Toast.LENGTH_SHORT).show());
         continue_login.setOnClickListener(view -> startActivity(new Intent(this, Choose_your_web.class)));
 
     }
@@ -62,9 +61,6 @@ public class Login_to_existing extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-    public void showToast(String mes) {
-        Toast.makeText(this, mes, Toast.LENGTH_SHORT).show();
     }
 }
 
