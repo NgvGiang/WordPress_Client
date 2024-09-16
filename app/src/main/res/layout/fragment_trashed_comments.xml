@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#121212">
+    android:background="@color/main_background">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -11,8 +11,8 @@
         android:layout_centerInParent="true">
         <ImageView
             android:id="@+id/no_trashed_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="179dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/image37" />
 
@@ -24,7 +24,8 @@
             android:layout_centerHorizontal="true"
             android:text="@string/no_trashed_comments"
             android:fontFamily="@font/roboto"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/onBackGround"
+            android:textSize="16dp"/>
     </RelativeLayout>
 
 

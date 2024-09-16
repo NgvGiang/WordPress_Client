@@ -8,6 +8,7 @@
     android:background="@color/main_background"
     >
 
+    <!-- Header text -->
     <ImageView
         android:id="@+id/welcomewordpressimage"
         android:layout_width="198dp"
@@ -16,13 +17,13 @@
         android:layout_marginRight="50dp"
         android:layout_marginBottom="16dp"
         app:srcCompat="@drawable/welcome_wordpress" />
-    <!-- Header text -->
+
     <TextView
         android:id="@+id/WelcomeheaderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome_to_wordpress"
-        android:textColor="@color/white"
+        android:textColor="@color/onBackGround"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="12dp"
@@ -36,7 +37,7 @@
         android:layout_marginBottom="35dp"
         android:gravity="center"
         android:text="@string/whatever_you_want_to_create_or_share_we_ll_help_you_do_it_right_here"
-        android:textColor="@color/white"
+        android:textColor="@color/onBackGround"
         android:textSize="14sp" />
 
 
@@ -47,7 +48,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/blue"
         android:text="@string/create_wordpress_com_site"
-        android:textColor="@color/white"
+        android:textColor="@color/onButton"
         app:cornerRadius="5dp"/>
 
 
@@ -58,7 +59,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/blue"
         android:text="@string/add_self_host_site"
-        android:textColor="@color/white"
+        android:textColor="@color/onButton"
         app:cornerRadius="5dp" />
 
 
@@ -68,7 +69,7 @@
         android:layout_height="wrap_content"
         android:text="@string/not_right_now"
         android:backgroundTint="@color/transparent"
-        android:textColor="@color/white"
+        android:textColor="@color/onBackGround"
         android:textSize="14sp"/>
 
 

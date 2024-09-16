@@ -13,7 +13,7 @@
             android:id="@+id/toolbar_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#121212"
+            android:background="@color/main_background"
             android:paddingTop="25dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
@@ -24,6 +24,7 @@
             android:clickable="false"
             android:focusable="true"
             android:orientation="vertical"
+            android:background="@color/main_background"
             android:layout_marginTop="11dp">
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -61,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/site_title"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -69,7 +70,8 @@
                     android:id="@+id/user_site_title_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:fontFamily="@font/roboto"
                     android:text="@string/user_site_title"
                     android:textStyle="bold"
@@ -103,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tagline"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -111,7 +113,8 @@
                     android:id="@+id/user_tagline_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:fontFamily="@font/roboto"
                     android:text="@string/user_tagline"
                     android:textStyle="bold"
@@ -145,7 +148,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/address"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -153,7 +157,8 @@
                     android:id="@+id/username_domain_address_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:fontFamily="@font/roboto"
                     android:textStyle="bold"
                     android:text="@string/username_wordpress_com"
@@ -187,7 +192,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/privacy"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -195,7 +200,8 @@
                     android:id="@+id/privacy_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:fontFamily="@font/roboto"
                     android:text="@string/hidden"
                     android:textStyle="bold"
@@ -229,7 +235,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/language"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -237,7 +243,8 @@
                     android:id="@+id/language_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:fontFamily="@font/roboto"
                     android:textStyle="bold"
                     android:text="@string/english_us"
@@ -271,7 +278,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/timezone"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -279,7 +286,8 @@
                     android:id="@+id/timezone_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:fontFamily="@font/roboto"
                     android:text="@string/vietnam"
                     android:textStyle="bold"
@@ -331,7 +339,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/homepage_settings"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -339,7 +347,8 @@
                     android:id="@+id/homepage_settings_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:fontFamily="@font/roboto"
                     android:text="@string/classic_blog"
                     android:textStyle="bold"
@@ -391,7 +400,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/default_category"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -399,7 +408,8 @@
                     android:id="@+id/default_category_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:fontFamily="@font/roboto"
                     android:textStyle="bold"
                     android:text="@string/uncategorized"
@@ -433,7 +443,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/categories"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -465,7 +475,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tags"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -498,7 +508,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/default_format"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -506,7 +516,8 @@
                     android:id="@+id/default_format_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:fontFamily="@font/roboto"
                     android:text="@string/standard"
                     android:textStyle="bold"
@@ -540,7 +551,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/date_format"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -548,7 +559,8 @@
                     android:id="@+id/date_format_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:fontFamily="@font/roboto"
                     android:textStyle="bold"
                     android:text="@string/december_31_2024"
@@ -583,7 +595,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/week_starts_on"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -591,7 +603,8 @@
                     android:id="@+id/week_starts_on_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:fontFamily="@font/roboto"
                     android:text="@string/monday"
                     android:textStyle="bold"
@@ -625,7 +638,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/posts_per_page"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -633,7 +646,8 @@
                     android:id="@+id/posts_per_page_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:fontFamily="@font/roboto"
                     android:textStyle="bold"
                     android:text="@string/_10"
@@ -689,7 +703,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/spaced_used"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -697,7 +712,8 @@
                     android:id="@+id/spaced_used_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/onBackGround"
+                    android:alpha="0.5"
                     android:fontFamily="@font/roboto"
                     android:textStyle="bold"
                     android:text="@string/_0_of_3gb"
@@ -755,7 +771,7 @@
                         android:text="@string/allow_comments"
                         android:fontFamily="@font/roboto"
                         android:textStyle="bold"
-                        android:textColor="@color/white"
+                        android:textColor="@color/onBackGround"
                         android:textSize="13sp"/>
                 </LinearLayout>
             </LinearLayout>
@@ -797,7 +813,7 @@
                         android:text="@string/send_pingbacks"
                         android:fontFamily="@font/roboto"
                         android:textStyle="bold"
-                        android:textColor="@color/white"
+                        android:textColor="@color/onBackGround"
                         android:textSize="13sp"/>
                 </LinearLayout>
             </LinearLayout>
@@ -839,7 +855,7 @@
                         android:text="@string/receive_pingbacks"
                         android:fontFamily="@font/roboto"
                         android:textStyle="bold"
-                        android:textColor="@color/white"
+                        android:textColor="@color/onBackGround"
                         android:textSize="13sp"/>
                 </LinearLayout>
             </LinearLayout>
@@ -875,7 +891,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/more"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -926,7 +942,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/start_over"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -957,7 +973,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/export_content"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -989,7 +1005,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/delete_site"
                     android:fontFamily="@font/roboto"
-                    android:textColor="@color/white"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
             </LinearLayout>

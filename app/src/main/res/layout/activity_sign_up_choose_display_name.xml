@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-
-    android:background="@color/main_background"
-    >
+    android:background="@color/main_background">
 
     <ImageView
         android:id="@+id/userImage"
@@ -23,8 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/userImage"
         android:layout_marginBottom="12dp"
-        android:text="Username"
-        android:textColor="@color/white"
+        android:text="@string/user_name"
+        android:textColor="@color/onBackGround"
         android:textSize="25sp"
         />
 
@@ -33,53 +31,57 @@
         android:layout_width="333dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/usernameheaderText"
-        android:text="username@gmail.com"
-        android:textColor="@color/gray"
+        android:layout_marginTop="-15dp"
+        android:alpha="0.5"
+        android:text="@string/username_gmail"
+        android:textColor="@color/onBackGround"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/displayname"
+        style="@style/text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/display_name_signup"
         android:layout_below="@id/useremail"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
-        style="@style/text_style"
-        android:textSize="12dp"
-        android:textColor="@color/gray"/>
+        android:layout_marginTop="20dp"
+        android:text="@string/display_name_signup"
+        android:textColor="@color/blue"
+        android:textSize="12dp" />
 
     <EditText
         android:id="@+id/input_adress"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_below="@id/displayname"
-        android:background="@drawable/border_gray"
+        android:background="@drawable/border_blue"
         android:ems="10"
+        android:paddingStart="20dp"
         android:inputType="text"
-        android:textColor="@color/white"/>
+        android:textColor="@color/onBackGround"/>
 
     <TextView
         android:id="@+id/ten_nguoi_dung"
+        style="@style/text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title_user_name"
         android:layout_below="@id/input_adress"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
-        style="@style/text_style"
-        android:textSize="12dp"
-        android:textColor="@color/gray"/>
+        android:layout_marginTop="21dp"
+        android:text="@string/title_user_name"
+        android:textColor="@color/blue"
+        android:textSize="12dp" />
 
     <EditText
         android:id="@+id/nhaptennguoidung"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_below="@id/ten_nguoi_dung"
-        android:background="@drawable/border_gray"
+        android:background="@drawable/border_blue"
         android:ems="10"
+        android:paddingStart="20dp"
         android:inputType="text"
-        android:textColor="@color/white"/>
+        android:textColor="@color/onBackGround"/>
 
 
     <Button
@@ -92,7 +94,7 @@
         android:layout_marginRight="15dp"
         android:backgroundTint="@color/blue"
         android:text="@string/done"
-        android:textColor="@color/white"
+        android:textColor="@color/onBackGround"
         android:textSize="14sp"
         app:cornerRadius="8dp" />
 

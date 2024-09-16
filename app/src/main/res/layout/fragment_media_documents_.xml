@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/iconMedia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="220dp"
+            android:layout_height="150dp"
             android:src="@drawable/wordpress_media_icon"
             android:contentDescription="icon media" />
 
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/you_don_t_have_any_documents"
-            android:textColor="@color/white"
+            android:textColor="@color/onBackGround"
             android:textSize="16sp"
             android:layout_marginTop="20dp"/>
 
@@ -33,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/upload_media"
+            android:textColor="@color/onButton"
             android:layout_marginTop="20dp"
             android:textAllCaps="false" />
 

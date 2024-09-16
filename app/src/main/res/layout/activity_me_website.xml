@@ -9,7 +9,7 @@
         android:id="@+id/toolbar_activity_me"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#121212"
+        android:background="@color/main_background"
         android:paddingTop="25dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:text="@string/user_name"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/onBackGround"
                 android:textSize="20sp" />
 
 
@@ -60,7 +60,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:text="@string/account_name"
-                android:textColor="#9E9E9E"
+                android:textColor="@color/onBackGround"
+                android:alpha="0.5"
                 android:textSize="12sp" />
         </LinearLayout>
         </LinearLayout>
@@ -93,7 +94,7 @@
 
                 <ImageView
                     android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/profile" />
 
@@ -103,7 +104,7 @@
                     android:layout_marginStart="29dp"
                     android:fontFamily="@font/roboto"
                     android:text="@string/my_profile"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/onBackGround"
                     android:textSize="13sp" />
             </LinearLayout>
         </LinearLayout>
@@ -132,7 +133,7 @@
 
             <ImageView
                 android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_account_settings" />
 
@@ -142,7 +143,7 @@
                 android:layout_marginStart="29dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/account_settings"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/onBackGround"
                 android:textSize="13sp" />
         </LinearLayout>
         </LinearLayout>
@@ -169,7 +170,7 @@
                 android:layout_marginStart="35dp">
             <ImageView
                 android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_app_settings" />
 
@@ -179,7 +180,7 @@
                 android:layout_marginStart="29dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/app_settings"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/onBackGround"
                 android:textSize="13sp" />
         </LinearLayout>
         </LinearLayout>
@@ -208,9 +209,9 @@
 
             <ImageView
                 android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_help" />
+                android:src="@drawable/question" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -218,7 +219,7 @@
                 android:layout_marginStart="29dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/help"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/onBackGround"
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>
@@ -246,7 +247,7 @@
 
             <ImageView
                 android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_share_wordpress" />
 
@@ -256,7 +257,7 @@
                 android:layout_marginStart="29dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/share_wordpress_with_a_friend"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/onBackGround"
                 android:textSize="13sp" />
         </LinearLayout>
         </LinearLayout>
@@ -285,9 +286,9 @@
 
             <ImageView
                 android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_wp_admin" />
+                android:src="@drawable/logo" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -295,7 +296,7 @@
                 android:layout_marginStart="29dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/wp_admin"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/onBackGround"
                 android:textSize="13sp" />
         </LinearLayout>
         </LinearLayout>
@@ -324,7 +325,7 @@
 
             <ImageView
                 android:layout_width="16dp"
-                android:layout_height="16dp"
+                    android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_log_out" />
 
@@ -334,7 +335,7 @@
                 android:layout_marginStart="29dp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/log_out_of_wordpress_com"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/onBackGround"
                 android:textSize="13sp" />
         </LinearLayout>
         </LinearLayout>

@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212"
+    android:background="@color/main_background"
     tools:context=".PagesFragments.PageDraftFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
     <TextView
         android:id="@+id/textView3"
-        style="@style/page_text"
+        android:textSize="16dp"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:text="@string/you_don_t_have_any_published_pages"
@@ -20,21 +20,23 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.605" />
+        app:layout_constraintVertical_bias="0.605"
+        android:textColor="@color/onBackGround"/>
 
     <Button
         android:id="@+id/published_page_button"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_width="144dp"
+        android:layout_height="44dp"
         android:backgroundTint="@color/blue"
         android:text="@string/create_a_page"
+        android:textColor="@color/onButton"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.143" />
+        app:layout_constraintVertical_bias="0.03" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -45,9 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.391"
-        app:layout_constraintHorizontal_bias="0.5"
-        />
+        app:layout_constraintVertical_bias="0.462" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

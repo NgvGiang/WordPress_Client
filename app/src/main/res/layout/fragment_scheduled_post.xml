@@ -4,34 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212"
+    android:background="@color/main_background"
     tools:context=".PostsFragments.ScheduledPostFragment">
 
     <TextView
         android:id="@+id/textView1"
-        style="@style/page_text"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:text="@string/you_don_t_have_any_scheduled_post"
+        android:textColor="@color/onBackGround"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.605" />
+        app:layout_constraintVertical_bias="0.549"
+        android:textSize="16dp"/>
+
     <Button
         android:id="@+id/scheduled_post_button"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:backgroundTint="@color/blue"
         android:text="@string/create_a_post"
+        android:textColor="@color/onButton"
         app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView1"
-        app:layout_constraintVertical_bias="0.143" />
+        app:layout_constraintVertical_bias="0.032" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="173dp"

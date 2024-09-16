@@ -4,11 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#121212">
+    android:background="@color/main_background">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/today"
+        android:textColor="@color/onBackGround"
         android:padding="8dp"/>
     <ScrollView
         android:layout_width="match_parent"
@@ -39,13 +40,15 @@
                         android:layout_height="wrap_content"
                         android:text="@string/ngv_giang_on_what_is_this"
                         android:textStyle="bold"
-                        android:textColor="@color/white"
+                        android:textColor="@color/onBackGround"
                         android:paddingLeft="8dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="hiiii"
+                        android:textColor="@color/onBackGround"
+                        android:alpha="0.5"
                         android:paddingLeft="8dp"/>
                 </LinearLayout>
             </LinearLayout>
@@ -70,13 +73,15 @@
                         android:layout_height="wrap_content"
                         android:text="@string/ngv_giang_on_what_is_this"
                         android:textStyle="bold"
-                        android:textColor="@color/white"
+                        android:textColor="@color/onBackGround"
                         android:paddingLeft="8dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="tuyệt vời quá"
+                        android:textColor="@color/onBackGround"
+                        android:alpha="0.5"
                         android:paddingLeft="8dp"/>
                 </LinearLayout>
             </LinearLayout>
@@ -100,13 +105,15 @@
                         android:layout_height="wrap_content"
                         android:text="@string/ngv_giang_on_what_is_this"
                         android:textStyle="bold"
-                        android:textColor="@color/white"
+                        android:textColor="@color/onBackGround"
                         android:paddingLeft="8dp"
                         />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/onBackGround"
+                        android:alpha="0.5"
                         android:text="okela đấy chứ nhỉ"
                         android:paddingLeft="8dp"/>
                 </LinearLayout>
@@ -131,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/ngv_giang_on_what_is_this"
                         android:textStyle="bold"
-                        android:textColor="@color/white"
+                        android:textColor="@color/onBackGround"
                         android:paddingLeft="8dp"
                         />
 
@@ -139,6 +146,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="hehe"
+                        android:textColor="@color/onBackGround"
+                        android:alpha="0.5"
                         android:paddingLeft="8dp"/>
                 </LinearLayout>
             </LinearLayout>

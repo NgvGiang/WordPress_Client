@@ -14,7 +14,7 @@
             android:id="@+id/toolbar_app_settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#121212"
+            android:background="@color/main_background"
             android:paddingTop="25dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:text="@string/interface_language"
             android:fontFamily="@font/roboto"
-            android:textColor="@color/white"
+            android:textColor="@color/onBackGround"
             android:textSize="13sp"
             android:textStyle="bold"/>
 
@@ -47,7 +47,8 @@
             android:id="@+id/interface_language_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray"
+            android:textColor="@color/onBackGround"
+            android:alpha="0.5"
             android:fontFamily="@font/roboto"
             android:text="@string/your_language"
             android:textSize="13sp"/>
@@ -79,15 +80,17 @@
             android:layout_height="wrap_content"
             android:text="@string/appearance"
             android:fontFamily="@font/roboto"
-            android:textColor="@color/white"
+            android:textColor="@color/onBackGround"
             android:textSize="13sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            />
 
         <TextView
             android:id="@+id/appearance_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray"
+            android:textColor="@color/onBackGround"
+            android:alpha="0.5"
             android:fontFamily="@font/roboto"
             android:text="@string/system_default"
             android:textSize="13sp"/>
@@ -111,7 +114,7 @@
             android:layout_height="wrap_content"
             android:text="@string/privacy_settings"
             android:fontFamily="@font/roboto"
-            android:textColor="@color/white"
+            android:textColor="@color/onBackGround"
             android:textSize="13sp"
             android:textStyle="bold"
             android:layout_marginStart="10dp"
@@ -136,7 +139,7 @@
             android:layout_height="wrap_content"
             android:text="@string/open_device_settings"
             android:fontFamily="@font/roboto"
-            android:textColor="@color/white"
+            android:textColor="@color/onBackGround"
             android:textStyle="bold"
             android:textSize="13sp"
             android:layout_marginStart="10dp"
@@ -192,7 +195,7 @@
                         android:layout_weight="1"
                         android:text="@string/optimize_images"
                         android:fontFamily="@font/roboto"
-                        android:textColor="@color/white"
+                        android:textColor="@color/onBackGround"
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
@@ -201,7 +204,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/onBackGround"
+                        android:alpha="0.5"
                         android:text="@string/enable_to_resize_and_compress_pictures"
                         android:textSize="13sp" />
 
@@ -241,7 +245,7 @@
             android:fontFamily="@font/roboto"
             android:textStyle="bold"
             android:textSize="13sp"
-            android:textColor="@color/white"
+            android:textColor="@color/onBackGround"
             />
 
         <TextView
@@ -250,7 +254,8 @@
             android:layout_height="wrap_content"
             android:text="@string/_2000px"
             android:fontFamily="@font/roboto"
-            android:textColor="@color/gray"
+            android:textColor="@color/onBackGround"
+            android:alpha="0.5"
             android:textSize="13sp"/>
         </LinearLayout>
     </LinearLayout>
@@ -279,7 +284,7 @@
             android:layout_height="wrap_content"
             android:text="@string/image_quality"
             android:fontFamily="@font/roboto"
-            android:textColor="@color/white"
+            android:textColor="@color/onBackGround"
             android:textSize="13sp"
             android:textStyle="bold" />
 
@@ -289,7 +294,8 @@
             android:layout_height="wrap_content"
             android:text="@string/medium"
             android:fontFamily="@font/roboto"
-            android:textColor="@color/gray"
+            android:textColor="@color/onBackGround"
+            android:alpha="0.5"
             android:textSize="13sp"/>
         </LinearLayout>
     </LinearLayout>
@@ -325,7 +331,7 @@
                 android:text="@string/remove_location_from_media"
                 android:fontFamily="@font/roboto"
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:textColor="@color/onBackGround"
                 android:textSize="13sp"/>
             </LinearLayout>
             </LinearLayout>
@@ -366,7 +372,7 @@
                         android:layout_weight="1"
                         android:text="@string/optimize_videos"
                         android:fontFamily="@font/roboto"
-                        android:textColor="@color/white"
+                        android:textColor="@color/onBackGround"
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
@@ -376,7 +382,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/enable_to_resize_and_compress_videos"
                         android:fontFamily="@font/roboto"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/onBackGround"
+                        android:alpha="0.5"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -414,7 +421,8 @@
             android:fontFamily="@font/roboto"
             android:textStyle="bold"
             android:textSize="13sp"
-            android:textColor="@color/gray"/>
+            android:textColor="@color/onBackGround"
+            android:alpha="0.5"/>
 
         <TextView
             android:id="@+id/maximum_video_size_status"
@@ -422,7 +430,8 @@
             android:layout_height="wrap_content"
             android:text="@string/_720p"
             android:fontFamily="@font/roboto"
-            android:textColor="@color/gray"
+            android:textColor="@color/onBackGround"
+            android:alpha="0.5"
             android:textSize="13sp"/>
         </LinearLayout>
     </LinearLayout>
@@ -451,7 +460,8 @@
             android:text="@string/video_quality"
             android:textStyle="bold"
             android:fontFamily="@font/roboto"
-            android:textColor="@color/gray"
+            android:textColor="@color/onBackGround"
+            android:alpha="0.5"
             android:textSize="13sp"
             />
 
@@ -461,7 +471,8 @@
             android:layout_height="wrap_content"
             android:text="@string/high"
             android:fontFamily="@font/roboto"
-            android:textColor="@color/gray"
+            android:textColor="@color/onBackGround"
+            android:alpha="0.5"
             android:textSize="13sp"/>
         </LinearLayout>
     </LinearLayout>

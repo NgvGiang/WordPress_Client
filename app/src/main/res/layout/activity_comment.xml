@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_background"
     tools:context=".CommentActivity">
 
     <LinearLayout
@@ -17,7 +18,7 @@
             android:id="@+id/comment_tool_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#121212"
+            android:background="@color/main_background"
             android:paddingTop="25dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:title="@string/comments" />
@@ -26,14 +27,14 @@
             android:id="@+id/comment_tab_mode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#121212"
+            android:background="@color/main_background"
             app:layout_anchor="@id/toolbar"
             app:layout_anchorGravity="bottom"
             app:tabIndicatorColor="@color/blue"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/white"
+            app:tabSelectedTextColor="@color/onBackGround"
             app:tabIndicatorFullWidth="true"
-            app:tabTextColor="#77FFFFFF">
+            app:tabTextColor="@color/onSecondary">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"

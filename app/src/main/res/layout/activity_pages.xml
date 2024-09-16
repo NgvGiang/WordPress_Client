@@ -5,20 +5,22 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PagesActivity">
+    tools:context=".PagesActivity"
+    android:background="@color/main_background">
 
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/main_background">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#121212"
+            android:background="@color/main_background"
             android:paddingTop="25dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:title="@string/page" />
@@ -27,13 +29,13 @@
             android:id="@+id/PagetabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#121212"
+            android:background="@color/main_background"
             app:layout_anchor="@id/toolbar"
             app:layout_anchorGravity="bottom"
             app:tabIndicatorColor="@color/blue"
             app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="#77FFFFFF">
+            app:tabSelectedTextColor="@color/onBackGround"
+            app:tabTextColor="@color/onSecondary">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"

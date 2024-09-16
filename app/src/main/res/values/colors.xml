@@ -10,5 +10,6 @@
     <color name="gray">#B3B3B3</color>
     <color name="transparent">#00000000</color>
     <color name="onBackGround">#FF000000</color>
-    <color name="onSecondary">#FFFFFF</color>
+    <color name="onSecondary">#878787</color>
+    <color name="onButton">#FFFFFF</color>
 </resources>

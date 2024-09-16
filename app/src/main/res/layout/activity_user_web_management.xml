@@ -92,7 +92,8 @@
             android:text="@string/label_content"
             android:textColor="@color/onBackGround"
             android:layout_marginLeft="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+             />
 
         <LinearLayout
             android:id="@+id/content_box"
@@ -128,7 +129,7 @@
                     android:gravity="center|left"
                     android:text="@string/title_posts"
                     android:textColor="@color/onBackGround"
-                    android:textStyle="bold"
+                    
                     />
             </RelativeLayout>
 
@@ -158,7 +159,7 @@
                     android:gravity="center|left"
                     android:text="@string/title_pages"
                     android:textColor="@color/onBackGround"
-                    android:textStyle="bold" />
+                     />
             </RelativeLayout>
 
             <RelativeLayout
@@ -186,7 +187,7 @@
                     android:gravity="center|left"
                     android:text="@string/title_media"
                     android:textColor="@color/onBackGround"
-                    android:textStyle="bold" />
+                     />
             </RelativeLayout>
 
             <RelativeLayout
@@ -215,7 +216,7 @@
                     android:gravity="center|left"
                     android:text="@string/title_comments"
                     android:textColor="@color/onBackGround"
-                    android:textStyle="bold" />
+                     />
             </RelativeLayout>
         </LinearLayout>
 
@@ -229,7 +230,8 @@
             android:text="@string/label_manage"
             android:textColor="@color/onBackGround"
             android:layout_marginLeft="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+             />
 
         <LinearLayout
             android:id="@+id/manage_box"
@@ -262,7 +264,7 @@
                     android:gravity="center|left"
                     android:text="@string/title_me"
                     android:textColor="@color/onBackGround"
-                    android:textStyle="bold" />
+                     />
             </RelativeLayout>
 
             <RelativeLayout
@@ -290,7 +292,7 @@
                     android:gravity="center|left"
                     android:text="@string/title_setting"
                     android:textColor="@color/onBackGround"
-                    android:textStyle="bold" />
+                     />
 
             </RelativeLayout>
 
@@ -323,7 +325,7 @@
                         android:text="@string/title_admin"
                         android:textColor="@color/onBackGround"
                         style="@style/text_style"
-                        android:textStyle="bold"
+                        
                         android:gravity="center|left"
                         />
 

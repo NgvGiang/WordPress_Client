@@ -144,6 +144,7 @@
     <string name="video_quality">Chất lượng băng hình</string>
     <string name="high">Cao</string>
     <string name="username">Tên tài khoản</string>
+    <string name="username_gmail">username@gmail.com</string>
     <string name="your_user_name">\@tên_tài_khoản_của_bạn</string>
     <string name="email_address">Địa chỉ email</string>
     <string name="your_address">\@địa_chỉ_của_bạn</string>

@@ -47,15 +47,15 @@
     <string name="you_don_t_have_any_published_pages">You don\'t have any published pages</string>
     <string name="create_a_page">Create a page</string>
     <string name="you_don_t_have_any_trashed_pages">You don\'t have any trashed pages</string>
-    <string name="you_don_t_have_any_published_post">you don\'t have any published post</string>
+    <string name="you_don_t_have_any_published_post">You don\'t have any published post</string>
     <string name="you_don_t_have_any_scheduled_post">You don\'t have any scheduled post</string>
-    <string name="you_don_t_have_any_draft_page">you don\'t have any draft page</string>
+    <string name="you_don_t_have_any_draft_page">You don\'t have any draft page</string>
     <string name="you_don_t_have_any_trashed_post">You don\'t have any trashed post</string>
     <string name="published">PUBLISHED</string>
     <string name="drafts">DRAFTS</string>
     <string name="schedules">SCHEDULES</string>
     <string name="trashed">TRASHED</string>
-    <string name="posts">posts</string>
+    <string name="posts">Posts</string>
     <string name="page">Page</string>
 
     //Create new page 
@@ -76,11 +76,11 @@
     <string name="WordPress_Media">WordPress Media</string>
     <string name="comments">Comments</string>
     <string name="done">Done</string>
-    <string name="we_ll_use_this_email_address_to_create_your_new_wordpress_com_account">we\'ll use this email address to create your new wordpress.com account</string>
-    <string name="create_account">create account</string>
+    <string name="we_ll_use_this_email_address_to_create_your_new_wordpress_com_account">We\'ll use this email address to create your new wordpress.com account</string>
+    <string name="create_account">Create account</string>
     <string name="sign_up">Sign up</string>
-    <string name="welcome_to_wordpress">welcome to wordpress</string>
-    <string name="whatever_you_want_to_create_or_share_we_ll_help_you_do_it_right_here">whatever you want to create or share we\'ll help you do it right here</string>
+    <string name="welcome_to_wordpress">Welcome to wordpress</string>
+    <string name="whatever_you_want_to_create_or_share_we_ll_help_you_do_it_right_here">Whatever you want to create or share we\'ll help you do it right here</string>
     <string name="create_wordpress_com_site">CREATE WORDPRESS.COM SITE</string>
     <string name="add_self_host_site">ADD SELF-HOST SITE </string>
     <string name="not_right_now">Not right now</string>
@@ -144,6 +144,7 @@
     <string name="video_quality">Video Quality</string>
     <string name="high">High</string>
     <string name="username">Username</string>
+    <string name="username_gmail">username@gmail.com</string>
     <string name="your_user_name">\@your_user_name</string>
     <string name="email_address">Email address</string>
     <string name="your_address">\@your_address</string>

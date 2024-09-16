@@ -12,7 +12,7 @@
         android:id="@+id/emailtoolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#121212"
+        android:background="@color/main_background"
         android:paddingTop="25dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:title="WordPress Media" />
@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/emailtoolbar"
         android:padding="16dp"
+        android:background="@color/main_background"
         android:gravity="center_vertical">
 
 
@@ -42,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="username@gmail.com"
-            android:textColor="@color/white"
+            android:textColor="@color/onBackGround"
             android:textSize="16sp"/>
     </LinearLayout>
 
@@ -68,6 +69,6 @@
         android:backgroundTint="@color/blue"
         android:text="@string/create_account"
 
-        android:textColor="@color/white"
+        android:textColor="@color/onBackGround"
         app:cornerRadius="5dp" />
 </RelativeLayout>
