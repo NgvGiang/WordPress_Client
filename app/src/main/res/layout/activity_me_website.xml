@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/main_background"
     android:orientation="vertical"
-    android:layout_marginTop="20dp"
+
     >
 
     <androidx.appcompat.widget.Toolbar
@@ -17,7 +17,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:navigationIconTint="@color/onBackGround"
         />
-
+w
 
     <LinearLayout
         android:background="@drawable/button_click"

@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -751,36 +752,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            >
 
             <LinearLayout
-                android:layout_width="346dp"
+                android:layout_width="336dp"
                 android:layout_height="wrap_content"
                 android:clickable="false">
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginStart="17dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/allow_comments"
                         android:fontFamily="@font/roboto"
-                        android:textStyle="bold"
+                        android:text="@string/allow_comments"
                         android:textColor="@color/onBackGround"
-                        android:textSize="13sp"/>
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
             <Switch
                 android:id="@+id/switch_allow_comments"
                 android:layout_width="60dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"/>
+                />
         </LinearLayout>
 
         <View
@@ -796,33 +800,34 @@
             android:gravity="center_vertical">
 
             <LinearLayout
-                android:layout_width="346dp"
+                android:layout_width="336dp"
                 android:layout_height="wrap_content"
                 android:clickable="false">
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginStart="17dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/send_pingbacks"
                         android:fontFamily="@font/roboto"
-                        android:textStyle="bold"
+                        android:text="@string/send_pingbacks"
                         android:textColor="@color/onBackGround"
-                        android:textSize="13sp"/>
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
             <Switch
                 android:id="@+id/switch_send_pingbacks"
                 android:layout_width="60dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"/>
         </LinearLayout>
 
         <View
@@ -838,33 +843,34 @@
             android:gravity="center_vertical">
 
             <LinearLayout
-                android:layout_width="346dp"
+                android:layout_width="336dp"
                 android:layout_height="wrap_content"
                 android:clickable="false">
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginStart="17dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/receive_pingbacks"
                         android:fontFamily="@font/roboto"
-                        android:textStyle="bold"
+                        android:text="@string/receive_pingbacks"
                         android:textColor="@color/onBackGround"
-                        android:textSize="13sp"/>
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
             <Switch
                 android:id="@+id/switch_receive_pingbacks"
                 android:layout_width="60dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"/>
         </LinearLayout>
 
         <View

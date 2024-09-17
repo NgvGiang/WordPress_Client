@@ -6,16 +6,15 @@
     android:orientation="vertical"
     android:background="@color/main_background">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_account_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/main_background"
         android:paddingTop="25dp"
-        app:titleTextColor="@color/onBackGround"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:navigationIconTint="@color/onBackGround"/>
-
+        app:navigationIconTint="@color/onBackGround"
+        app:titleTextColor="@color/onBackGround" />
 
     <LinearLayout
         android:layout_width="match_parent"

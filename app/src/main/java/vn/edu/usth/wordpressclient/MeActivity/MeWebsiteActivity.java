@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import vn.edu.usth.wordpressclient.R;
@@ -14,6 +15,7 @@ public class MeWebsiteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_me_website);
+        EdgeToEdge.enable(this);
 
         LinearLayout username_btn = findViewById(R.id.user_name_btn);
         LinearLayout profile_btn = findViewById(R.id.my_profile);
