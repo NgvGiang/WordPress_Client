@@ -24,6 +24,7 @@
             android:paddingTop="25dp"
             app:titleTextColor="@color/onBackGround"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:navigationIconTint="@color/onBackGround"
             android:title="@string/page" />
 
         <com.google.android.material.tabs.TabLayout
@@ -75,7 +76,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="40dp"
         android:src="@drawable/add"
-        android:backgroundTint="#484444"
-        app:tint="@color/white"/>
+        android:backgroundTint="@color/onBackGround"
+        app:tint="@color/onButton"/>
 
 </RelativeLayout>

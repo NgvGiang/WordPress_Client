@@ -17,6 +17,7 @@
         android:backgroundTint="@color/main_background"
         android:minHeight="?attr/actionBarSize"
         app:titleTextColor="@color/onBackGround"
+        app:navigationIconTint="@color/onBackGround"
         />
 
     <LinearLayout

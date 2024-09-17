@@ -11,6 +11,28 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.WordPressClient">
+
+        <activity
+            android:name=".MeActivity.MyProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MeActivity.HelpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MeActivity.AppSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MeActivity.AccountSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MeActivity.AboutWordpressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MeActivity.MeWebsiteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MeActivity.UsernameActivity"
+            android:exported="false" />
         <activity
             android:name=".Welcome_to_WordPress"
             android:exported="false" />
@@ -55,7 +77,9 @@
         </activity>
         <activity
             android:name=".CommentActivity"
-            android:exported="false"></activity>
+            android:exported="false">
+
+        </activity>
     </application>
 
 </manifest>

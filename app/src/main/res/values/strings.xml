@@ -107,7 +107,7 @@
     <string name="luu_duc_on_what_s_this">Luu Duc on what\'s this ??</string>
 
 <!--    Phần của Minh Đức-->
-    <string name="user_name">User Name</string>
+    <string name="user_name">Site Title</string>
     <string name="account_name">\@Account name</string>
     <string name="my_profile">My profile</string>
     <string name="account_settings">Account Settings</string>

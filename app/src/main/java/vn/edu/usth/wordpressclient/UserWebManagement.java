@@ -9,6 +9,9 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import vn.edu.usth.wordpressclient.MeActivity.MeWebsiteActivity;
+import vn.edu.usth.wordpressclient.MeActivity.UsernameActivity;
+
 public class UserWebManagement extends AppCompatActivity {
 
     @Override
@@ -36,8 +39,8 @@ public class UserWebManagement extends AppCompatActivity {
         mediaRow.setOnClickListener(view -> startActivity(new Intent(this, WordPress_media.class)));
         commentRow.setOnClickListener(view -> startActivity(new Intent(this, CommentActivity.class)));
 
-        meRow.setOnClickListener(view -> Toast.makeText(this, "nah", Toast.LENGTH_SHORT).show());
-        siteSettingRow.setOnClickListener(view -> Toast.makeText(this, "nah", Toast.LENGTH_SHORT).show());
+        meRow.setOnClickListener(view ->  startActivity(new Intent(this, MeWebsiteActivity.class)));
+        siteSettingRow.setOnClickListener(view ->  startActivity(new Intent(this, UsernameActivity.class)));
         adminRow.setOnClickListener(view -> Toast.makeText(this, "nah", Toast.LENGTH_SHORT).show());
     }
 }

@@ -24,7 +24,8 @@
             android:paddingTop="25dp"
             app:titleTextColor="@color/onBackGround"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:title="WordPress Media" />
+            android:title="WordPress Media"
+            app:navigationIconTint="@color/onBackGround"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/MediatabLayout"
@@ -68,14 +69,14 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/Mediafab"
+        android:id="@+id/fab_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="40dp"
         android:src="@drawable/add"
-        android:backgroundTint="#484444"
-        app:tint="@color/white"/>
+        android:backgroundTint="@color/onBackGround"
+        app:tint="@color/onButton"/>
 
 </RelativeLayout>

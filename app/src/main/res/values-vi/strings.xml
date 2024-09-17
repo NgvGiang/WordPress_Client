@@ -36,7 +36,7 @@
     <string name="title_admin">WP Admin</string>
 
 <!--    //Choose your web page-->
-    <string name="title_user_name">Tên người dùng</string>
+    <string name="title_user_name">Tiêu đề trang Web</string>
     <string name="label_account_name">Tên tài khoản</string>
     <string name="title_choose_your_site">Chọn một trang để mở</string>
     <string name="instruction_choose_site">Bạn có thể chuyển đổi trang bất kỳ lúc nào.</string>

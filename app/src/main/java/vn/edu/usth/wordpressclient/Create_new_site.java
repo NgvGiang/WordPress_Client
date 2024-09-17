@@ -20,6 +20,5 @@ public class Create_new_site extends AppCompatActivity {
 
         Button confirm_btn = findViewById(R.id.confirm_btn);
         confirm_btn.setOnClickListener(v -> startActivity(new Intent(this,UserWebManagement.class)));
-
     }
 }

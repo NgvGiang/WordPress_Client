@@ -17,7 +17,7 @@
             android:background="@color/main_background"
             android:paddingTop="25dp"
             app:titleTextColor="@color/onBackGround"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+            app:navigationIconTint="@color/onBackGround"/>
 
 
         <LinearLayout
@@ -39,7 +39,7 @@
                     android:textStyle="bold"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/light_blue"
-                    android:textSize="13sp"/>
+                    android:textSize="16dp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -779,7 +779,7 @@
             </LinearLayout>
             <Switch
                 android:id="@+id/switch_allow_comments"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
@@ -821,7 +821,7 @@
             </LinearLayout>
             <Switch
                 android:id="@+id/switch_send_pingbacks"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
@@ -863,7 +863,7 @@
             </LinearLayout>
             <Switch
                 android:id="@+id/switch_receive_pingbacks"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 

@@ -5,38 +5,39 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserWebManagement"
-    android:background="@color/main_background">
+    android:background="@color/main_background"
+    tools:context=".UserWebManagement">
 
     <LinearLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="30dp"
-        android:layout_marginRight="10dp"
+        android:layout_height="500dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="60dp">
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/fab_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.377">
 
 
         <LinearLayout
             android:id="@+id/user_title"
             android:layout_width="match_parent"
             android:layout_height="62dp"
-            android:orientation="horizontal"
+            android:background="@drawable/button_click"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/button_click"
-            >
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/user_pfp"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/logo"/>
+                app:srcCompat="@drawable/logo" />
 
             <LinearLayout
                 android:id="@+id/web_name"
@@ -54,8 +55,7 @@
                     android:gravity="center|left"
                     android:text="@string/title_user_web"
                     android:textColor="@color/onBackGround"
-                    android:textSize="23sp"
-                    />
+                    android:textSize="23sp" />
 
                 <TextView
                     android:id="@+id/domain"
@@ -67,17 +67,16 @@
                     android:gravity="center|left"
                     android:text="@string/link_user_web"
                     android:textColor="@color/onBackGround"
-                    android:textSize="16sp"
-                    />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="18dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
                 android:layout_weight="0.1"
-                app:srcCompat="@drawable/collapsable"
-                android:layout_marginRight="10dp"/>
+                app:srcCompat="@drawable/collapsable" />
 
 
         </LinearLayout>
@@ -87,13 +86,13 @@
             style="@style/text_style"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:alpha="0.5"
             android:gravity="center|left"
             android:text="@string/label_content"
             android:textColor="@color/onBackGround"
-            android:layout_marginLeft="20dp"
-            android:textStyle="bold"
-             />
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/content_box"
@@ -106,10 +105,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
                 android:background="@drawable/button_click"
-                >
+                android:clickable="true"
+                android:focusable="true">
 
 
                 <ImageView
@@ -129,7 +127,7 @@
                     android:gravity="center|left"
                     android:text="@string/title_posts"
                     android:textColor="@color/onBackGround"
-                    
+
                     />
             </RelativeLayout>
 
@@ -138,17 +136,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:background="@drawable/button_click"
                 android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/button_click">
+                android:focusable="true">
 
 
                 <ImageView
                     android:id="@+id/pages_icon"
                     android:layout_width="62dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/pages"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/pages" />
 
                 <TextView
                     android:id="@+id/pages_text"
@@ -158,8 +156,7 @@
                     android:layout_toRightOf="@id/pages_icon"
                     android:gravity="center|left"
                     android:text="@string/title_pages"
-                    android:textColor="@color/onBackGround"
-                     />
+                    android:textColor="@color/onBackGround" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -167,16 +164,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:background="@drawable/button_click"
                 android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/button_click">
+                android:focusable="true">
 
                 <ImageView
                     android:id="@+id/media_icon"
                     android:layout_width="62dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/media"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/media" />
 
                 <TextView
                     android:id="@+id/media_text"
@@ -186,8 +183,7 @@
                     android:layout_toRightOf="@id/media_icon"
                     android:gravity="center|left"
                     android:text="@string/title_media"
-                    android:textColor="@color/onBackGround"
-                     />
+                    android:textColor="@color/onBackGround" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -195,17 +191,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:background="@drawable/button_click"
                 android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/button_click">
+                android:focusable="true">
 
 
                 <ImageView
                     android:id="@+id/comment_icon"
                     android:layout_width="62dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/comment"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/comment" />
 
                 <TextView
                     android:id="@+id/comments_text"
@@ -215,8 +211,7 @@
                     android:layout_toRightOf="@+id/comment_icon"
                     android:gravity="center|left"
                     android:text="@string/title_comments"
-                    android:textColor="@color/onBackGround"
-                     />
+                    android:textColor="@color/onBackGround" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -225,13 +220,12 @@
             style="@style/text_style"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
             android:alpha="0.5"
             android:gravity="center|left"
             android:text="@string/label_manage"
             android:textColor="@color/onBackGround"
-            android:layout_marginLeft="20dp"
-            android:textStyle="bold"
-             />
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/manage_box"
@@ -244,16 +238,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:background="@drawable/button_click"
                 android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/button_click">
+                android:focusable="true">
 
                 <ImageView
                     android:id="@+id/me_icon"
                     android:layout_width="62dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/profile"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/profile" />
 
                 <TextView
                     android:id="@+id/me_text"
@@ -263,8 +257,7 @@
                     android:layout_toRightOf="@+id/me_icon"
                     android:gravity="center|left"
                     android:text="@string/title_me"
-                    android:textColor="@color/onBackGround"
-                     />
+                    android:textColor="@color/onBackGround" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -272,16 +265,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:background="@drawable/button_click"
                 android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/button_click">
+                android:focusable="true">
 
                 <ImageView
                     android:id="@+id/setting_icon"
                     android:layout_width="62dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/setting"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/setting" />
 
                 <TextView
                     android:id="@+id/setting_text"
@@ -291,8 +284,7 @@
                     android:layout_toRightOf="@id/setting_icon"
                     android:gravity="center|left"
                     android:text="@string/title_setting"
-                    android:textColor="@color/onBackGround"
-                     />
+                    android:textColor="@color/onBackGround" />
 
             </RelativeLayout>
 
@@ -301,17 +293,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
                 android:background="@drawable/button_click"
-                >
+                android:clickable="true"
+                android:focusable="true">
 
                 <ImageView
                     android:id="@+id/Admin_icon"
                     android:layout_width="62dp"
                     android:layout_height="30dp"
-                    app:srcCompat="@drawable/logo"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/logo" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -320,14 +311,12 @@
 
                     <TextView
                         android:id="@+id/admin_text"
+                        style="@style/text_style"
                         android:layout_width="70dp"
                         android:layout_height="48dp"
-                        android:text="@string/title_admin"
-                        android:textColor="@color/onBackGround"
-                        style="@style/text_style"
-                        
                         android:gravity="center|left"
-                        />
+                        android:text="@string/title_admin"
+                        android:textColor="@color/onBackGround" />
 
 
                 </RelativeLayout>
@@ -336,4 +325,19 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="40dp"
+        android:backgroundTint="@color/onBackGround"
+        android:src="@drawable/add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@color/onButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
