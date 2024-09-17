@@ -37,9 +37,9 @@ public class Sign_Up_Page extends AppCompatActivity {
         });
 
         //buttons
-        continue_btn.setOnClickListener(view -> startActivity(new Intent(this, Choose_your_web.class)));
+        continue_btn.setOnClickListener(view -> startActivity(new Intent(this, sign_up_choose_email.class)));
 
-        google_btn.setOnClickListener(View -> Toast.makeText(this, "Google button clicked!", Toast.LENGTH_SHORT).show());
+        google_btn.setOnClickListener(View -> Toast.makeText(this, "Nah, there aint no google", Toast.LENGTH_SHORT).show());
     }
 
     //info icon

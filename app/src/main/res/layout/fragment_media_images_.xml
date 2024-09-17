@@ -60,7 +60,7 @@
                 android:layout_width="0dp"
                 android:layout_height="130dp"
                 android:layout_weight="1"
-                tools:src="@drawable/gojo"
+                android:src="@drawable/gojo"
                 android:layout_margin="1dp"/>
 
             <ImageView

@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:background="@color/main_background"
             android:paddingTop="25dp"
+            app:titleTextColor="@color/onBackGround"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:title="@string/comments" />
 
