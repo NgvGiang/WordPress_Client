@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="40dp"
+        android:layout_margin="50dp"
         android:src="@drawable/add"
         android:backgroundTint="@color/onBackGround"
         app:tint="@color/onButton"/>

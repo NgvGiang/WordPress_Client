@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,23 +70,25 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
+        android:background="@drawable/button_click"
         android:orientation="vertical">
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginStart="10dp"
             android:layout_marginTop="19dp"
             android:layout_marginBottom="19dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/appearance"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/onBackGround"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            />
+
+            <TextView
+                android:id="@+id/appearance_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="@string/appearance"
+                android:textColor="@color/onBackGround"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
         <TextView
             android:id="@+id/appearance_status"
@@ -179,7 +182,7 @@
 
 
             <LinearLayout
-                android:layout_width="346dp"
+                android:layout_width="335dp"
                 android:layout_height="wrap_content"
                 android:clickable="false">
 
@@ -195,8 +198,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/optimize_images"
                         android:fontFamily="@font/roboto"
+                        android:text="@string/optimize_images"
                         android:textColor="@color/onBackGround"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -205,18 +208,20 @@
                         android:id="@+id/optimize_images_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="@color/onBackGround"
                         android:alpha="0.5"
+                        android:fontFamily="@font/roboto"
                         android:text="@string/enable_to_resize_and_compress_pictures"
+                        android:textColor="@color/onBackGround"
                         android:textSize="13sp" />
 
                 </LinearLayout>
             </LinearLayout>
             <Switch
                 android:id="@+id/switch_optimize_images"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"/>
+
         </LinearLayout>
 
         <View
@@ -314,33 +319,35 @@
             android:gravity="center_vertical">
 
             <LinearLayout
-                android:layout_width="346dp"
+                android:layout_width="338dp"
                 android:layout_height="wrap_content"
                 android:clickable="false">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="19dp"
-                android:layout_marginBottom="19dp">
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginBottom="19dp"
+                    android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/remove_location_from_media"
-                android:fontFamily="@font/roboto"
-                android:textStyle="bold"
-                android:textColor="@color/onBackGround"
-                android:textSize="13sp"/>
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/remove_location_from_media"
+                        android:textColor="@color/onBackGround"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
             <Switch
                 android:id="@+id/switch_remove_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"/>
+
         </LinearLayout>
 
         <View
@@ -356,24 +363,24 @@
             android:gravity="center_vertical">
 
             <LinearLayout
-                android:layout_width="346dp"
+                android:layout_width="336dp"
                 android:layout_height="wrap_content"
                 android:clickable="false">
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="19dp"
-                    android:layout_marginBottom="19dp">
+                    android:layout_marginBottom="19dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/optimize_videos"
                         android:fontFamily="@font/roboto"
+                        android:text="@string/optimize_videos"
                         android:textColor="@color/onBackGround"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -382,10 +389,10 @@
                         android:id="@+id/optimize_videos_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/enable_to_resize_and_compress_videos"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="@color/onBackGround"
                         android:alpha="0.5"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/enable_to_resize_and_compress_videos"
+                        android:textColor="@color/onBackGround"
                         android:textSize="13sp" />
 
                 </LinearLayout>
@@ -393,8 +400,10 @@
 
             <Switch
                 android:id="@+id/switch_optimize_videos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"/>
+
         </LinearLayout>
 
         <View
@@ -448,7 +457,9 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:focusable="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="50dp"
+        >
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

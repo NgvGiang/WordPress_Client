@@ -59,7 +59,7 @@
             android:layout_marginTop="26dp"
             android:background="@drawable/border_blue"
             android:inputType="text"
-            android:textColor="@color/white"
+            android:textColor="@color/onBackGround"
             android:paddingLeft="20dp"/>
 
         <TextView

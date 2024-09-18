@@ -9,6 +9,17 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="173dp"
+        android:layout_height="164dp"
+        android:src="@drawable/empty_nothing"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
+
     <TextView
         android:id="@+id/textView1"
 
@@ -21,11 +32,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.588" />
+        app:layout_constraintVertical_bias="0.516" />
 
     <Button
         android:id="@+id/draft_post_button"
-        android:layout_width="135dp"
+        android:layout_width="wrap_content"
         android:layout_height="44dp"
         android:backgroundTint="@color/blue"
         android:text="@string/create_a_post"
@@ -35,17 +46,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView1"
-        app:layout_constraintVertical_bias="0.056" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="173dp"
-        android:layout_height="164dp"
-        android:src="@drawable/empty_nothing"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.44" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

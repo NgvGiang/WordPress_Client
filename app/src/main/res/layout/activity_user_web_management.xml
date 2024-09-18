@@ -332,12 +332,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="40dp"
+        android:layout_margin="50dp"
         android:backgroundTint="@color/onBackGround"
         android:src="@drawable/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:tint="@color/onButton" />
+        app:tint="@color/onButton"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,26 +26,10 @@ public class FirstLoginActivity extends AppCompatActivity {
 
         login_signup = findViewById(R.id.login_signup_btn);
         enter_site_address = findViewById(R.id.enter_site_address_btn);
-        dark_light_btn = findViewById(R.id.dark_light_btn);
+
 
         login_signup.setOnClickListener(view -> startActivity(new Intent(this, Sign_Up_Page.class)));
         enter_site_address.setOnClickListener(view -> startActivity(new Intent(this, Login_to_existing.class)));
-
-        //dark/light button
-        dark_light_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int currentMode = AppCompatDelegate.getDefaultNightMode();
-
-                if (currentMode == AppCompatDelegate.MODE_NIGHT_YES) {
-                    // Light
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                } else {
-                    // Dark
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                }
-            }
-        });
 
     }
 }

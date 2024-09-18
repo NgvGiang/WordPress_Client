@@ -19,7 +19,7 @@ public class PageScheduledFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_page_scheduled, container, false);
-        ScheduledButton = view.findViewById(R.id.scheduled_page_button);
+        ScheduledButton = view.findViewById(R.id.create_page_btn);
         ScheduledButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
