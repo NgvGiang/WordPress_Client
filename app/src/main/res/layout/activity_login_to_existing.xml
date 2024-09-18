@@ -80,10 +80,11 @@
             android:layout_height="wrap_content"
             android:text="@string/button_continue_login"
             android:layout_alignParentBottom="true"
-            android:backgroundTint="@color/gray"
+            android:backgroundTint="@color/blue"
             app:cornerRadius="8dp"
             android:fontFamily="@font/roboto"
             android:textSize="16dp"
+            android:textColor="@color/onButton"
             android:layout_marginBottom="30dp"
             />
 

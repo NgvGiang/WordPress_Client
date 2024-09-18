@@ -9,6 +9,8 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import vn.edu.usth.wordpressclient.MeActivity.MeWebsiteActivity;
 import vn.edu.usth.wordpressclient.MeActivity.UsernameActivity;
 
@@ -30,7 +32,7 @@ public class UserWebManagement extends AppCompatActivity {
         RelativeLayout meRow = findViewById(R.id.me_row);
         RelativeLayout siteSettingRow = findViewById(R.id.site_setting_row);
         RelativeLayout adminRow = findViewById(R.id.admin_row);
-
+        FloatingActionButton fab = findViewById(R.id.fab);
 
         //clicking
         userTitle.setOnClickListener(view -> startActivity(new Intent(this, Choose_your_web.class)));
@@ -41,6 +43,9 @@ public class UserWebManagement extends AppCompatActivity {
 
         meRow.setOnClickListener(view ->  startActivity(new Intent(this, MeWebsiteActivity.class)));
         siteSettingRow.setOnClickListener(view ->  startActivity(new Intent(this, UsernameActivity.class)));
-        adminRow.setOnClickListener(view -> Toast.makeText(this, "nah", Toast.LENGTH_SHORT).show());
+        adminRow.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
+
+        fab.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
+
     }
 }

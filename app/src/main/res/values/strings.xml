@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">WordPressClient</string>
 
+    //fab
+    <string name="under_dev">This feature is under development</string>
+
     <!--    //First login page-->
     <string name="title_wordpress">Write, edit, and publish\nfrom anywhere.</string>
     <string name="button_login_or_signup">Log in or sign up with WordPress.com</string>

@@ -1,12 +1,14 @@
 package vn.edu.usth.wordpressclient;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -25,6 +27,11 @@ public class WordPress_media extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_press_media);
 
+        FloatingActionButton fab = findViewById(R.id.fab);
+
+        fab.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
+
+
         Toolbar toolbar = findViewById(R.id.Mediatoolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -33,8 +40,7 @@ public class WordPress_media extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> {
             finish();
         });
-
-
+        
         MediatabLayout = findViewById(R.id.MediatabLayout);
         MediaviewPager2 = findViewById(R.id.MediaviewPager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);

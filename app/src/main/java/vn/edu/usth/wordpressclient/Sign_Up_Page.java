@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import vn.edu.usth.wordpressclient.MeActivity.HelpActivity;
+
 public class Sign_Up_Page extends AppCompatActivity {
 
     @Override
@@ -39,22 +41,22 @@ public class Sign_Up_Page extends AppCompatActivity {
         //buttons
         continue_btn.setOnClickListener(view -> startActivity(new Intent(this, sign_up_choose_email.class)));
 
-        google_btn.setOnClickListener(View -> Toast.makeText(this, "Nah, there aint no google", Toast.LENGTH_SHORT).show());
+        google_btn.setOnClickListener(View -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
     }
 
     //info icon
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar_menu, menu); // Define a menu for the info icon
+        inflater.inflate(R.menu.toolbar_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.info_icon) {
-            // Handle info icon click
-            Toast.makeText(this, "Info clicked!", Toast.LENGTH_SHORT).show();
+            // Handle click
+            startActivity(new Intent(this, HelpActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

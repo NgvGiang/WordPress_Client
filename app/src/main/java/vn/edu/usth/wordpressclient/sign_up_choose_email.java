@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import vn.edu.usth.wordpressclient.MeActivity.HelpActivity;
 
 public class sign_up_choose_email extends AppCompatActivity {
 
@@ -36,5 +40,14 @@ public class sign_up_choose_email extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu, menu);
         return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.info_icon) {
+            // Handle click
+            startActivity(new Intent(this, HelpActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

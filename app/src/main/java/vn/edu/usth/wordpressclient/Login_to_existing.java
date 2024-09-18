@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import vn.edu.usth.wordpressclient.MeActivity.HelpActivity;
+
 
 public class Login_to_existing extends AppCompatActivity {
 
@@ -57,7 +59,7 @@ public class Login_to_existing extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.info_icon) {
-            Toast.makeText(this, "Info clicked!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, HelpActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

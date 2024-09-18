@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">WordPressClient</string>
 
-<!--    //First login page-->
+    //fab
+    <string name="under_dev">Chức năng này đang được phát triển.</string>
+
+
+    <!--    //First login page-->
     <string name="title_wordpress">Viết, chỉnh sửa, và xuất bản\ntừ mọi nơi.</string>
     <string name="button_login_or_signup">Đăng nhập hoặc đăng ký với WordPress.com</string>
     <string name="link_enter_existing_site">Nhập địa chỉ trang web hiện tại của bạn</string>

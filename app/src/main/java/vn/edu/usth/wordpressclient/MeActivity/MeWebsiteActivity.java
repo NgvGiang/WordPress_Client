@@ -31,9 +31,9 @@ public class MeWebsiteActivity extends AppCompatActivity {
         account_settings_btn.setOnClickListener(view -> startActivity(new Intent(this, AccountSettingsActivity.class)));
         app_settings_btn.setOnClickListener(view -> startActivity(new Intent(this, AppSettingsActivity.class)));
         help_btn.setOnClickListener(view -> startActivity(new Intent(this, HelpActivity.class)));
-        share_wordpress_btn.setOnClickListener(view -> Toast.makeText(this, "This function is under development", Toast.LENGTH_SHORT).show());
-        wp_admin_btn.setOnClickListener(view -> Toast.makeText(this, "This function is under development", Toast.LENGTH_SHORT).show());
-        log_out_btn.setOnClickListener(view -> Toast.makeText(this, "This function is under development", Toast.LENGTH_SHORT).show());
+        share_wordpress_btn.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
+        wp_admin_btn.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
+        log_out_btn.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
 
     }
 

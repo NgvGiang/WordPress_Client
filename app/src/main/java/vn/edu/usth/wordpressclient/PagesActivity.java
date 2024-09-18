@@ -1,6 +1,8 @@
 package vn.edu.usth.wordpressclient;
 
 import android.os.Bundle;
+import android.service.controls.actions.FloatAction;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -9,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -27,6 +30,11 @@ public class PagesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pages);;
         EdgeToEdge.enable(this);
         // Find the Toolbar and set it as the ActionBar
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+
+        fab.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
