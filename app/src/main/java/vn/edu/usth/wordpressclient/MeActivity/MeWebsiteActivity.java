@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import vn.edu.usth.wordpressclient.R;
 
@@ -35,7 +36,14 @@ public class MeWebsiteActivity extends AppCompatActivity {
         wp_admin_btn.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
         log_out_btn.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
 
-    }
+        Toolbar toolbar = findViewById(R.id.toolbar_activity_me);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(getString(R.string.title_me));
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
+    }
 }
 

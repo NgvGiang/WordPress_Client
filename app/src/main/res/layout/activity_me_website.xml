@@ -14,10 +14,9 @@
         android:background="@color/main_background"
         android:paddingTop="25dp"
         app:titleTextColor="@color/onBackGround"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:navigationIconTint="@color/onBackGround"
         />
-w
+
 
     <LinearLayout
         android:background="@drawable/button_click"
