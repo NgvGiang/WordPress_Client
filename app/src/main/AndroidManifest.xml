@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.WordPressClient">
-
+        <activity
+            android:name=".Dont_have_site_activity"
+            android:exported="false" />
         <activity
             android:name=".MeActivity.MyProfileActivity"
             android:exported="false" />
@@ -77,9 +79,7 @@
         </activity>
         <activity
             android:name=".CommentActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
     </application>
 
 </manifest>

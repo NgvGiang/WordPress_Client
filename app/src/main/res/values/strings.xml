@@ -61,7 +61,7 @@
     <string name="posts">Posts</string>
     <string name="page">Page</string>
 
-    //Create new page 
+    //Create new page
     <string name="title_create_new_site">Create your own website</string>
     <string name="instruction_create_new_site">Enter your own website domain</string>
     <string name="button_create_new_site">Confirm</string>
@@ -109,7 +109,7 @@
     <string name="ngv_giang_on_what_is_this">Ngv Giang on what is this ??</string>
     <string name="luu_duc_on_what_s_this">Luu Duc on what\'s this ??</string>
 
-<!--    Phần của Minh Đức-->
+    <!--    Phần của Minh Đức-->
     <string name="user_name">Site Title</string>
     <string name="account_name">\@Account name</string>
     <string name="my_profile">My profile</string>
@@ -129,7 +129,7 @@
     <string name="interface_language">Interface Language</string>
     <string name="your_language">\@your_language</string>
     <string name="appearance">Appearance</string>
-    <string name="system_default">System Default</string>
+    <string name="system_default">Toggle Dark mode</string>
     <string name="privacy_settings">Privacy settings</string>
     <string name="open_device_settings">Open device settings</string>
     <string name="media">Media</string>
@@ -209,5 +209,13 @@
     <string name="start_over">Start Over</string>
     <string name="export_content">Export Content</string>
     <string name="delete_site">Delete Site</string>
+
+    // dont have site page
+    <string name="dont_have_page_title">"You don't have any sites"</string>
+    <string name="dont_have_page_label">Create a new site for your business,\n magazine, or personal blog; or connect an\n existing WordPress installation.</string>
+    <string name="dont_have_page_add_blog_btn">Add new site</string>
+    <string name="dont_have_page_acc_and_setting">Account and Settings</string>
+    <string name="user_email_name">User email name</string>
+
 
 </resources>

@@ -3,6 +3,7 @@ package vn.edu.usth.wordpressclient.MeActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +20,7 @@ public class AppSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_app_settings);
         EdgeToEdge.enable(this);
 
-        LinearLayout dark_light_btn = findViewById(R.id.appearance);
+        Switch darkmode_btn = findViewById(R.id.darkmode_btn);
 
         Toolbar toolbar = findViewById(R.id.toolbar_app_settings);
         setSupportActionBar(toolbar);
@@ -31,18 +32,22 @@ public class AppSettingsActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> {
             finish();
         });
-        dark_light_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int currentMode = AppCompatDelegate.getDefaultNightMode();
 
-                if (currentMode == AppCompatDelegate.MODE_NIGHT_YES) {
-                    // Light
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                } else {
-                    // Dark
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                }
+        int currentMode = AppCompatDelegate.getDefaultNightMode();
+        if (currentMode == AppCompatDelegate.MODE_NIGHT_YES) {
+            darkmode_btn.setChecked(true);  // on if already dark
+        } else {
+            darkmode_btn.setChecked(false);  // not on if light
+        }
+
+        darkmode_btn.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // if on = switch dark
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                // if off = switch light
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
             }
         });
     }

@@ -21,6 +21,6 @@ public class Welcome_to_WordPress extends AppCompatActivity {
 
         create_blog_btn.setOnClickListener(view -> startActivity(new Intent(this, Create_new_site.class)));
         set_host_btn.setOnClickListener(view -> startActivity(new Intent(this, Login_to_existing.class)));
-        skip_btn.setOnClickListener(view -> startActivity(new Intent(this, FirstLoginActivity.class)));
+        skip_btn.setOnClickListener(view -> startActivity(new Intent(this, Dont_have_site_activity.class)));
     }
 }

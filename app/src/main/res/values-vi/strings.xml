@@ -130,7 +130,7 @@
     <string name="interface_language">Ngôn ngữ giao diện</string>
     <string name="your_language">\@ngôn_ngữ_của_bạn</string>
     <string name="appearance">Giao diện</string>
-    <string name="system_default">Mặc định hệ thống</string>
+    <string name="system_default">Chế độ tối</string>
     <string name="privacy_settings">Cài đặt riêng tư</string>
     <string name="open_device_settings">Mở cài đặt thiết bị</string>
     <string name="media">Phương tiện truyền thông</string>
@@ -210,6 +210,13 @@
     <string name="start_over">Bắt đầu lại từ đầu</string>
     <string name="export_content">Xuất nội dung</string>
     <string name="delete_site">Xóa trang</string>
+
+    // dont have site page
+    <string name="dont_have_page_title">Bạn chưa có blog nào</string>
+    <string name="dont_have_page_label">Tạo trang công ty, tạp chí hoặc blog cá nhân \n mới. Hay kết nối với một trang WordPress đã \n tồn tại.</string>
+    <string name="dont_have_page_add_blog_btn">Thêm blog mới</string>
+    <string name="dont_have_page_acc_and_setting">Account and Settings</string>
+    <string name="user_email_name">Tên email người dùng</string>
 
 
 </resources>
