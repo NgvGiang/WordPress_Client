@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background"
     tools:context=".MediaFragments.All_Media_Fragment">
 
 
@@ -25,29 +24,29 @@
                 android:id="@+id/image1"
                 android:layout_width="0dp"
                 android:layout_height="130dp"
+                android:layout_margin="1dp"
                 android:layout_weight="1"
                 android:contentDescription="Image 1"
-                android:src="@drawable/homelander"
-                android:layout_margin="1dp"/>
+                android:src="@drawable/homelander" />
 
 
             <ImageView
                 android:id="@+id/image2"
                 android:layout_width="0dp"
                 android:layout_height="130dp"
+                android:layout_margin="1dp"
                 android:layout_weight="1"
                 android:contentDescription="Image 2"
-                android:src="@drawable/nivocado"
-                android:layout_margin="1dp"/>
+                android:src="@drawable/nivocado" />
 
             <ImageView
                 android:id="@+id/image3"
                 android:layout_width="0dp"
                 android:layout_height="130dp"
+                android:layout_margin="1dp"
                 android:layout_weight="1"
                 android:contentDescription="Image 3"
-                android:src="@drawable/food"
-                android:layout_margin="1dp"/>
+                android:src="@drawable/food" />
         </LinearLayout>
 
         <LinearLayout
@@ -60,24 +59,24 @@
                 android:id="@+id/imageView7"
                 android:layout_width="0dp"
                 android:layout_height="130dp"
+                android:layout_margin="1dp"
                 android:layout_weight="1"
-                android:src="@drawable/gojo"
-                android:layout_margin="1dp"/>
+                android:src="@drawable/gojo" />
 
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="0dp"
                 android:layout_height="130dp"
+                android:layout_margin="1dp"
                 android:layout_weight="1"
-                android:src="@drawable/dog"
-                android:layout_margin="1dp"/>
+                android:src="@drawable/dog" />
 
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="0dp"
                 android:layout_height="130dp"
-                android:layout_weight="1"
-                android:layout_margin="1dp"/>
+                android:layout_margin="1dp"
+                android:layout_weight="1" />
         </LinearLayout>
 
     </LinearLayout>

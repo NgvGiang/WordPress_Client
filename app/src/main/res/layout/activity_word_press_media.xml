@@ -13,14 +13,12 @@
         android:id="@+id/MedialinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_background"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/Mediatoolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/main_background"
             android:paddingTop="25dp"
             app:titleTextColor="@color/onBackGround"
             app:navigationIconTint="@color/onBackGround"/>
@@ -29,7 +27,7 @@
             android:id="@+id/MediatabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/main_background"
+            android:background="@color/transparent"
             app:layout_anchor="@id/toolbar"
             app:layout_anchorGravity="bottom"
             app:tabIndicatorColor="@color/blue"

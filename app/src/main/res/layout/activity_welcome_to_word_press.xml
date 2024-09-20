@@ -63,12 +63,11 @@
         app:cornerRadius="5dp" />
 
 
-    <Button
+    <TextView
         android:id="@+id/skipButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/not_right_now"
-        android:backgroundTint="@color/transparent"
         android:textColor="@color/onBackGround"
         android:textSize="14sp"/>
 

@@ -14,13 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/main_background">
+        >
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/main_background"
             android:paddingTop="25dp"
             app:titleTextColor="@color/onBackGround"
             app:navigationIconTint="@color/onBackGround"
@@ -30,7 +29,7 @@
             android:id="@+id/PagetabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/main_background"
+            android:background="@color/transparent"
             app:layout_anchor="@id/toolbar"
             app:layout_anchorGravity="bottom"
             app:tabIndicatorColor="@color/blue"

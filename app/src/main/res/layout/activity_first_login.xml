@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.694" />
 
-    <Button
+    <TextView
         android:id="@+id/enter_site_address_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,6 +59,8 @@
         android:fontFamily="@font/roboto"
         android:text="@string/link_enter_existing_site"
         android:textSize="14sp"
+        android:clickable="true"
+        android:focusable="true"
         android:textColor="@color/onBackGround"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

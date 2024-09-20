@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import androidx.activity.EdgeToEdge;
@@ -13,9 +14,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 public class FirstLoginActivity extends AppCompatActivity {
 
     Button login_signup;
-    Button enter_site_address;
-    Button dark_light_btn;
-    private boolean isDarkMode = true;
+    TextView enter_site_address;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

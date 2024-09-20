@@ -3,6 +3,7 @@ package vn.edu.usth.wordpressclient;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +18,7 @@ public class Welcome_to_WordPress extends AppCompatActivity {
 
         Button create_blog_btn = findViewById(R.id.createBlogButton);
         Button set_host_btn = findViewById(R.id.addSelfHostButton);
-        Button skip_btn = findViewById(R.id.skipButton);
+        TextView skip_btn = findViewById(R.id.skipButton);
 
         create_blog_btn.setOnClickListener(view -> startActivity(new Intent(this, Create_new_site.class)));
         set_host_btn.setOnClickListener(view -> startActivity(new Intent(this, Login_to_existing.class)));

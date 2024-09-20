@@ -11,7 +11,6 @@
         android:id="@+id/toolbar_account_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/main_background"
         android:paddingTop="25dp"
         app:navigationIconTint="@color/onBackGround"
         app:titleTextColor="@color/onBackGround" />
@@ -20,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/main_background">
+        >
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"

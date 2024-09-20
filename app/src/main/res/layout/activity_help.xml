@@ -12,7 +12,6 @@
         android:id="@+id/toolbar_help"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/main_background"
         android:paddingTop="25dp"
         app:titleTextColor="@color/onBackGround"
         />

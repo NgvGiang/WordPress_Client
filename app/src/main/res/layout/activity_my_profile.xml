@@ -10,7 +10,6 @@
         android:id="@+id/toolbar_my_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/main_background"
         android:paddingTop="25dp"
         app:titleTextColor="@color/onBackGround"
         app:navigationIconTint="@color/onBackGround"/>
@@ -57,7 +56,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#444444" />
+        android:background="@color/gray" />
 
 
     <LinearLayout
@@ -100,7 +99,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#444444" />
+        android:background="@color/gray"  />
 
 
     <LinearLayout
@@ -143,7 +142,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#444444" />
+        android:background="@color/gray"  />
 
 
     <LinearLayout
@@ -177,7 +176,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#444444" />
+        android:background="@color/gray"  />
 
 
 </LinearLayout>

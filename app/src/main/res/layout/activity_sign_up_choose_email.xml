@@ -13,7 +13,6 @@
         android:layout_marginTop="30dp"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
         android:backgroundTint="@color/main_background"
         android:minHeight="?attr/actionBarSize"
         app:titleTextColor="@color/onBackGround"
@@ -27,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/emailtoolbar"
         android:padding="20dp"
-        android:background="@color/main_background"
+
         android:gravity="center_vertical">
 
 
