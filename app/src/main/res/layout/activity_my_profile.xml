@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/main_background">
+    >
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_my_profile"
@@ -12,10 +13,8 @@
         android:layout_height="wrap_content"
         android:background="@color/main_background"
         android:paddingTop="25dp"
-        app:titleTextColor="@color/onBackGround"
-        app:navigationIconTint="@color/onBackGround"/>
-
-
+        app:navigationIconTint="@color/onBackGround"
+        app:titleTextColor="@color/onBackGround" />
 
     <LinearLayout
     android:layout_width="match_parent"

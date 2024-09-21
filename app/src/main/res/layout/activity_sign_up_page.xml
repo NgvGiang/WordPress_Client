@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background"
     tools:context=".Login_to_existing">
 
     <androidx.appcompat.widget.Toolbar
@@ -77,10 +76,10 @@
             android:layout_height="wrap_content"
             android:text="@string/button_continue_signup"
             android:layout_below="@id/term_service_btn"
-            android:backgroundTint="@color/gray"
             app:cornerRadius="8dp"
             android:fontFamily="@font/roboto"
             android:textSize="16dp"
+            android:textColor="@color/onButton"
             android:layout_marginTop="20dp"
             />
 

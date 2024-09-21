@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="30dp"
-    android:background="@color/main_background"
     tools:context=".Dont_have_site_activity">
 
     <ImageView

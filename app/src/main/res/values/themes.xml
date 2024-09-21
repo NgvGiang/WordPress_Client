@@ -8,7 +8,7 @@
         <item name="colorOnSecondary">@color/black</item>            // text on 2nd
         <item name="colorSurface">@color/white</item>                // ex. card bgs, dialogs
         <item name="colorOnSurface">@color/black</item>              // text  on surface
-        <item name="android:windowBackground">@color/white</item>    // window bG
+        <item name="android:windowBackground">@color/main_background</item>    // window bG
 
     </style>
 

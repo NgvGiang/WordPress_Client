@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background"
     tools:context=".Login_to_existing">
 
 
@@ -14,7 +13,6 @@
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:background="@color/main_background"
         android:minHeight="?attr/actionBarSize"
         app:navigationIconTint="@color/onBackGround"
         app:titleTextColor="@color/onBackGround" />
