@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/main_background">
+        >
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_app_settings"
@@ -60,7 +60,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#444444" />
+            android:background="@color/gray" />
 
 
     <LinearLayout
@@ -123,7 +123,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#444444" />
+            android:background="@color/gray" />
 
     <LinearLayout
         android:id="@+id/privacy_settings"
@@ -148,7 +148,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#444444" />
+            android:background="@color/gray" />
 
 
     <LinearLayout
@@ -246,7 +246,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#444444" />
+            android:background="@color/gray" />
 
 
     <LinearLayout
@@ -288,7 +288,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#444444" />
+            android:background="@color/gray" />
 
 
     <LinearLayout
@@ -328,7 +328,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#444444" />
+            android:background="@color/gray" />
 
 
         <LinearLayout
@@ -372,7 +372,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#444444" />
+            android:background="@color/gray" />
 
 
         <LinearLayout
@@ -428,7 +428,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#444444" />
+            android:background="@color/gray" />
 
 
     <LinearLayout
@@ -468,7 +468,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#444444" />
+            android:background="@color/gray" />
 
 
     <LinearLayout

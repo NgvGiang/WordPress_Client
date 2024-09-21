@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background"
     tools:context=".sign_up_choose_email">
 
 
@@ -13,7 +12,6 @@
         android:layout_marginTop="30dp"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/main_background"
         android:minHeight="?attr/actionBarSize"
         app:titleTextColor="@color/onBackGround"
         app:navigationIconTint="@color/onBackGround"

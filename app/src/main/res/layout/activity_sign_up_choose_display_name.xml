@@ -8,7 +8,6 @@
     android:paddingRight="20dp"
     android:paddingTop="50dp"
     android:paddingBottom="50dp"
-    android:background="@color/main_background"
     >
 
     <ImageView

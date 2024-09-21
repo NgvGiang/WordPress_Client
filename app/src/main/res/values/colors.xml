@@ -12,4 +12,5 @@
     <color name="onBackGround">#FF000000</color>
     <color name="onSecondary">#878787</color>
     <color name="onButton">#FFFFFF</color>
+    <color name="first_login_bg">#FFFFFF</color>
 </resources>
