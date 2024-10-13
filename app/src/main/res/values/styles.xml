@@ -17,5 +17,16 @@
 
     </style>
 
+    <style name="ToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:textColorPrimary">@color/onBackGround</item>
+        <item name="actionMenuTextColor">@color/onBackGround</item>
+        <item name="popupMenuBackground">@color/popup_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18dp</item>
+
+
+    </style>
+
+
 
 </resources>

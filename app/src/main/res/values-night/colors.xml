@@ -2,7 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="main_background">#1F1E1E</color>
+    <color name="main_background">#121212</color>
+    <color name="fab_background">#141414</color>
     <color name="blue">#0574C0</color>
     <color name="green">#177C20</color>
     <color name="red">#BB1B1B</color>
@@ -13,5 +14,7 @@
     <color name="onSecondary">#878787</color>
     <color name="onButton">#000000</color>
     <color name="first_login_bg">#2a333a</color>
-
+    <color name="toolbar_color">#000000</color>
+    <color name="icon_color">#FFFFFF</color>
+    <color name="popup_bg">#2C2C2C</color>
 </resources>

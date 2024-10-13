@@ -98,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
+                android:textColor="@color/onBackGround"
                 android:gravity="bottom|left"
                 android:text="@string/user_email_name"
                 android:textSize="20dp" />
@@ -108,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:alpha="0.5"
+                android:textColor="@color/onBackGround"
                 android:text="@string/dont_have_page_acc_and_setting" />
         </LinearLayout>
 

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fab_background"
+    tools:context=".FAB_Button">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/fab_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:paddingTop="30dp"
+        android:background="@color/main_background"
+        app:theme="@style/ToolbarStyle"
+
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/fab_toolbar"
+        android:background="@android:color/darker_gray" />
+
+    <EditText
+        android:layout_below="@+id/fab_toolbar"
+        android:id="@+id/fab_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/title"
+        android:textColorHint="@android:color/darker_gray"
+        android:textColor="@color/onBackGround"
+        android:background="@android:color/transparent"
+        android:textSize="30sp"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="10dp"/>
+
+    <EditText
+        android:layout_below="@+id/fab_title"
+        android:id="@+id/fab_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="@string/content"
+        android:textColorHint="@android:color/darker_gray"
+        android:textColor="@color/onBackGround"
+        android:gravity="top"
+        android:background="@color/transparent"
+        android:inputType="textMultiLine"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"/>
+
+</RelativeLayout>

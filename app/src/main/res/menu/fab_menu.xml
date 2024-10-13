@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/publish_button"
+        android:title="Publish"
+        android:iconTint="@color/onBackGround"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/save_button"
+        android:title="Save"
+        app:showAsAction="never"
+        />
+    <item
+        android:title="Save"
+        app:showAsAction="never"
+        />
+    <item
+        android:title="Save"
+        app:showAsAction="never"
+        />
+    <item
+        android:title="Save"
+        app:showAsAction="never"
+        />
+
+</menu>

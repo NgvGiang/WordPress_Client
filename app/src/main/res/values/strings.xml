@@ -217,5 +217,7 @@
     <string name="dont_have_page_acc_and_setting">Account and Settings</string>
     <string name="user_email_name">User email name</string>
 
-
+    //fab
+    <string name="title">Add title</string>
+    <string name="content">Start writing...</string>
 </resources>

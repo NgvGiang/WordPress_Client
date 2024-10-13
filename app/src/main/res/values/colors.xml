@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="main_background">#FFFFFF</color>
+    <color name="fab_background">#FFFFFF</color>
     <color name="blue">#0574C0</color>
     <color name="green">#177C20</color>
     <color name="red">#BB1B1B</color>
@@ -13,4 +14,7 @@
     <color name="onSecondary">#878787</color>
     <color name="onButton">#FFFFFF</color>
     <color name="first_login_bg">#FFFFFF</color>
+    <color name="toolbar_color">#FFFFFF</color>
+    <color name="icon_color">#000000</color>
+    <color name="popup_bg">#F0F0F0</color>
 </resources>
