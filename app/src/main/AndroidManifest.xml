@@ -70,7 +70,7 @@
             android:name=".WordPress_media"
             android:exported="false" />
         <activity
-            android:name=".FirstLoginActivity"
+            android:name=".CommentActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -84,7 +84,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CommentActivity"
+            android:name=".FirstLoginActivity"
             android:exported="false">
 
         </activity>

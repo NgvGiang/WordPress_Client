@@ -48,5 +48,4 @@ public class SessionManagement {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // Start a new task
         context.startActivity(intent);
     }
-
 }
