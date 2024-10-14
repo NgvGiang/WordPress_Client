@@ -109,6 +109,7 @@
     <string name="no_trashed_comments">Không có bình luận đã xoá</string>
     <string name="ngv_giang_on_what_is_this">Ngv Giang bình luận về what\'s this ??</string>
     <string name="luu_duc_on_what_s_this">Luu Duc bình luận về what\'s this ??</string>
+    <string name="yesterday">Hôm qua</string>
 
     <!--    Phần của Minh Đức-->
     <string name="user_name">Tên người dùng</string>
