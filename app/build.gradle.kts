@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "vn.edu.usth.wordpressclient"
-        minSdk = 29
+        minSdk = 34
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -42,4 +42,5 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     //volley
     implementation("com.android.volley:volley:1.2.1")
+
 }
