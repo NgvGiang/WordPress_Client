@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fab_background"
-    tools:context=".FAB_Button">
+    tools:context=".TextEditor">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -27,17 +27,19 @@
         android:background="@android:color/darker_gray" />
 
     <EditText
-        android:layout_below="@+id/fab_toolbar"
         android:id="@+id/fab_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/title"
-        android:textColorHint="@android:color/darker_gray"
-        android:textColor="@color/onBackGround"
-        android:background="@android:color/transparent"
-        android:textSize="30sp"
+        android:layout_below="@+id/fab_toolbar"
         android:layout_marginTop="30dp"
-        android:paddingLeft="10dp"/>
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/droid_serif"
+        android:hint="@string/title"
+        android:paddingLeft="10dp"
+
+        android:textColor="@color/onBackGround"
+        android:textColorHint="@android:color/darker_gray"
+        android:textSize="30sp" />
 
     <EditText
         android:layout_below="@+id/fab_title"
@@ -45,14 +47,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:hint="@string/content"
+        android:fontFamily="@font/droid_serif"
         android:textColorHint="@android:color/darker_gray"
         android:textColor="@color/onBackGround"
         android:gravity="top"
         android:background="@color/transparent"
         android:inputType="textMultiLine"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"/>
+        android:padding="10dp"/>
 
 </RelativeLayout>

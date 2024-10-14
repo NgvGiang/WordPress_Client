@@ -13,10 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WordPressClient">
         <activity
-            android:name=".FAB_Button"
+            android:name=".Dont_have_site_activity"
             android:exported="false" />
         <activity
-            android:name=".FirstLoginActivity"
+            android:name=".TextEditor"
             android:exported="false" />
         <activity
             android:name=".MeActivity.MyProfileActivity"
@@ -73,7 +73,7 @@
             android:name=".WordPress_media"
             android:exported="false" />
         <activity
-            android:name=".Dont_have_site_activity"
+            android:name=".FirstLoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -91,6 +91,10 @@
             android:exported="false">
 
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

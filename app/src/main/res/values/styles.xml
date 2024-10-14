@@ -20,12 +20,24 @@
     <style name="ToolbarStyle" parent="Widget.AppCompat.Toolbar">
         <item name="android:textColorPrimary">@color/onBackGround</item>
         <item name="actionMenuTextColor">@color/onBackGround</item>
-        <item name="popupMenuBackground">@color/popup_bg</item>
+        <item name="popupMenuBackground">@drawable/overflow_menu_bg</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">18dp</item>
-
-
+        <item name="android:textSize">20dp</item>
     </style>
+
+
+    <style name="CustomDatePicker" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/popup_bg</item>
+        <item name="backgroundColor">@color/popup_bg</item>
+        <item name="dialogCornerRadius">10dp</item>
+    </style>
+
+    <style name="CustomTimePicker" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/popup_bg</item>
+        <item name="backgroundColor">@color/popup_bg</item>
+        <item name="dialogCornerRadius">10dp</item>
+    </style>
+
 
 
 
