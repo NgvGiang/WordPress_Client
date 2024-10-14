@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -27,78 +29,113 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import vn.edu.usth.wordpressclient.CommentRecyclerViewAdapter;
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.models.Comment;
+import vn.edu.usth.wordpressclient.models.CommentAPIServices;
+import vn.edu.usth.wordpressclient.models.CommentsCallback;
 
 public class AllCommentsFragment extends Fragment {
-    private String userDomain;
+    String userDomain;
+    List<Comment> comments;
+    RecyclerView recyclerView;
+    CommentRecyclerViewAdapter commentRecyclerViewAdapter;
+    private static final int PER_PAGE = 5;
+    private int currentPage = 1;
+    private boolean isLastPage = false;
+    private boolean isLoading = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_comments, container, false);
 
-//        String url = "https://public-api.wordpress.com/wp/v2/sites/" + userDomain + "/comments";
-        String url = "https://public-api.wordpress.com/wp/v2/sites/peppermint777.wordpress.com/comments";
-
-        final Handler handler = new Handler(Looper.getMainLooper()) {
+        if (savedInstanceState == null) {
+            comments = new ArrayList<>();
+        } else {
+            comments = savedInstanceState.getParcelableArrayList("comments");
+        }
+        recyclerView = view.findViewById(R.id.fragment_all_comments_rec_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void handleMessage(@NonNull Message msg) {
-                super.handleMessage(msg);
-                List<Comment> comments = (List<Comment>) msg.obj;
-//                comments.stream().forEach(comment -> {
-//                        Toast.makeText(getActivity(), comment.getContent(), Toast.LENGTH_SHORT).show();
-//                });
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                int size = response.length();
-                                List<Comment> comments = new ArrayList<>();
-                                IntStream.range(0, size).forEach(index -> {
-                                    try {
-                                        long commentId = response.getJSONObject(index).getLong("id");
-                                        long postId = response.getJSONObject(index).getLong("post");
-                                        long parentId = response.getJSONObject(index).getLong("parent");
-                                        long authorId = response.getJSONObject(index).getLong("author");
-                                        String authorName = response.getJSONObject(index).getString("author_name");
-                                        String authorUrl = response.getJSONObject(index).getString("author_url");
-                                        String date = response.getJSONObject(index).getString("date");
-                                        String content = response.getJSONObject(index).getJSONObject("content").getString("rendered");
-                                        String link = response.getJSONObject(index).getString("link");
-                                        String status = response.getJSONObject(index).getString("status");
-                                        String authorAvatar = response.getJSONObject(index).getJSONObject("author_avatar_urls").getString("48");
-                                        Comment comment = new Comment(commentId, postId, parentId, authorId, authorName, authorUrl, date, content, link, status, authorAvatar);
-                                        comments.add(comment);
-                                    } catch (JSONException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                });
-                                Message msg = handler.obtainMessage();
-                                msg.obj = comments;
-                                handler.sendMessage(msg);
-                            }
-                        }).start();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (linearLayoutManager != null && linearLayoutManager.findLastVisibleItemPosition() == comments.size() - 1) {
+                    if (!isLoading && !isLastPage) {
+                        loadMoreComments();
                     }
                 }
-        );
-        requestQueue.add(jsonArrayRequest);
+            }
+        });
+        commentRecyclerViewAdapter = new CommentRecyclerViewAdapter(comments, getContext());
+        recyclerView.setAdapter(commentRecyclerViewAdapter);
+        if (savedInstanceState != null) {
+            comments = savedInstanceState.getParcelableArrayList("comments");
+            currentPage = savedInstanceState.getInt("currentPage");
+            isLastPage = savedInstanceState.getBoolean("isLastPage");
+            commentRecyclerViewAdapter.notifyDataSetChanged();
+        } else {
+            // Load comments only if not restored
+            loadInitialComments();
+        }
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // Save current state
+//        if (isLastPage) {
+//
+//        }
+        outState.putParcelableArrayList("comments", new ArrayList<>(comments));
+        outState.putInt("currentPage", currentPage);
+        outState.putBoolean("isLastPage", isLastPage);
+    }
+
+    private void loadMoreComments() {
+        isLoading = true;
+        CommentAPIServices.getAllCommentsFromUser(getContext(), "peppermint777.wordpress.com", PER_PAGE, currentPage, new CommentsCallback() {
+            @Override
+            public void onSuccess(List<Comment> newComments) {
+                comments.addAll(newComments);
+                commentRecyclerViewAdapter.notifyDataSetChanged();
+                isLoading = false;
+                if (newComments.size() < 5) {
+                    isLastPage = true;
+                } else {
+                    currentPage++;
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                isLoading = false;
+            }
+        });
+    }
+
+    private void loadInitialComments() {
+        isLoading = true;
+        CommentAPIServices.getAllCommentsFromUser(getContext(), "peppermint777.wordpress.com", PER_PAGE, currentPage, new CommentsCallback() {
+            @Override
+            public void onSuccess(List<Comment> newComments) {
+                comments.addAll(newComments);
+                commentRecyclerViewAdapter.notifyDataSetChanged();
+                isLoading = false;
+                if (newComments.size() < 5) {
+                    isLastPage = true;
+                } else {
+                    currentPage++;
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                isLoading = false;
+            }
+        });
     }
 }
