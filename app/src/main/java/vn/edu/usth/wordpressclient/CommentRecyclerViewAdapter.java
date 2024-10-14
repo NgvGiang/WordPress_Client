@@ -1,2 +1,79 @@
-package vn.edu.usth.wordpressclient;public class CommentRecyclerViewAdapter {
+package vn.edu.usth.wordpressclient;
+
+import android.content.Context;
+import android.content.Intent;
+import android.text.Html;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import vn.edu.usth.wordpressclient.models.Comment;
+
+public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentViewHolder> {
+    private List<Comment> comments;
+    private Context context;
+
+    public CommentRecyclerViewAdapter(List<Comment> comments, Context context) {
+        this.comments = comments;
+        this.context = context;
+    }
+
+    @NonNull
+    @Override
+    public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.comment_recycler_view_item, parent, false);
+        return new CommentViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
+        LocalDateTime date = LocalDateTime.parse(comments.get(position).getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+        Long dateInSeconds = Duration.between(date, LocalDateTime.now()).getSeconds();
+        if (dateInSeconds <= 86400) {
+            holder.date.setText(R.string.today);
+        } else if (86400 < dateInSeconds && dateInSeconds <= 172800) {
+            holder.date.setText(R.string.yesterday);
+        } else {
+            holder.date.setText(date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        }
+        holder.authorNameAndPostName.setText(comments.get(position).getAuthorName() + " on Saturday, 12 October 2024");
+        holder.content.setText(Html.fromHtml(comments.get(position).getContent(), Html.FROM_HTML_MODE_LEGACY).toString());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, CommentDetails.class);
+                intent.putExtra("comment", comments.get(holder.getAdapterPosition()));
+                context.startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return comments.size();
+    }
+}
+
+class CommentViewHolder extends RecyclerView.ViewHolder{
+    TextView authorNameAndPostName, content, date;
+    LinearLayout cardView;
+
+    public CommentViewHolder(@NonNull View itemView) {
+        super(itemView);
+        authorNameAndPostName = itemView.findViewById(R.id.author_name_comment_and_post_name);
+        content = itemView.findViewById(R.id.comment_content);
+        date = itemView.findViewById(R.id.comment_date);
+        cardView = itemView.findViewById(R.id.cmt_rec_card);
+    }
 }
