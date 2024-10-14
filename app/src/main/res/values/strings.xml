@@ -68,6 +68,7 @@
     <string name="terms_create_new_site">By continuing, you agree to our Terms of Service.</string>
     <string name="hint_create_new_site">Example: example1.wordpress.com</string>
 
+
     <!--    //Phần của Đức-->
     <string name="you_don_t_have_any_documents">You don\'t have any documents</string>
     <string name="upload_media">Upload media</string>
@@ -217,5 +218,7 @@
     <string name="dont_have_page_acc_and_setting">Account and Settings</string>
     <string name="user_email_name">User email name</string>
 
-
+    //fab
+    <string name="title">Add title</string>
+    <string name="content">Start writing...</string>
 </resources>

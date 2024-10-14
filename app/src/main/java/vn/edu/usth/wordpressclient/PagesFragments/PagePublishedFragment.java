@@ -1,5 +1,6 @@
 package vn.edu.usth.wordpressclient.PagesFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,7 +24,9 @@ public class PagePublishedFragment extends Fragment {
         PublishedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "This should create a page to publish", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "This should create a page to publish", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), FAB_Button.class);
+                startActivity(intent);
             }
         });
         return view;
