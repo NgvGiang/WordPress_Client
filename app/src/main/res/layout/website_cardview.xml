@@ -29,9 +29,10 @@
                 android:id="@+id/web_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/round_gray_bg"
+
                 android:padding="6dp"
-                app:srcCompat="@drawable/compass" />
+                android:scaleType="centerCrop"
+                 />
 
             <LinearLayout
                 android:layout_width="match_parent"

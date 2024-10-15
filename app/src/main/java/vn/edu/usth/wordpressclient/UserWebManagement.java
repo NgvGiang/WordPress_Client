@@ -2,6 +2,7 @@ package vn.edu.usth.wordpressclient;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -22,6 +23,10 @@ public class UserWebManagement extends AppCompatActivity {
         setContentView(R.layout.activity_user_web_management);
         EdgeToEdge.enable(this);
 
+        Intent intent = getIntent();
+        String domain = intent.getStringExtra("domain");
+        Log.i("Domain: ", domain);
+        //call api from domain
         //mapping
         LinearLayout userTitle = findViewById(R.id.user_title);
         RelativeLayout postsRow = findViewById(R.id.posts_row);
@@ -35,6 +40,7 @@ public class UserWebManagement extends AppCompatActivity {
 
 
         //clicking
+        // need to putExtra the domain to the next activity
         userTitle.setOnClickListener(view -> startActivity(new Intent(this, Choose_your_web.class)));
         postsRow.setOnClickListener(view -> startActivity(new Intent(this, PostsActivity.class)));
         pagesRow.setOnClickListener(view -> startActivity(new Intent(this, PagesActivity.class)));

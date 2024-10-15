@@ -24,6 +24,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import vn.edu.usth.wordpressclient.models.MySingleton;
+
 public class FirstLoginActivity extends AppCompatActivity {
 
     Button login_signup;
@@ -33,15 +35,8 @@ public class FirstLoginActivity extends AppCompatActivity {
         super.onStart();
         SessionManagement session = new SessionManagement(this);
         if (session.isLoggedIn()) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    moveToMainActivity();
-                    finish();
-                }
-            }).start();
-
-
+            moveToMainActivity();
+            finish();
         }
     }
 
@@ -84,7 +79,8 @@ public class FirstLoginActivity extends AppCompatActivity {
                 return headers;
             }
         };
-        Volley.newRequestQueue(this).add(getSiteRequest);
+        MySingleton.getInstance(this).addToRequestQueue(getSiteRequest);
+//        Volley.newRequestQueue(this).add(getSiteRequest);
     }
 
     @Override
@@ -143,7 +139,8 @@ public class FirstLoginActivity extends AppCompatActivity {
                 return params;
             }
         };
-            Volley.newRequestQueue(this).add(tokenRequest);
+//            Volley.newRequestQueue(this).add(tokenRequest);
+            MySingleton.getInstance(this).addToRequestQueue(tokenRequest);
     };//end getAccessTokenByAuthorizationCode
 
     private void onLoginSuccess(String accessToken) {

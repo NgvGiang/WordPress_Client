@@ -1,9 +1,8 @@
 package vn.edu.usth.wordpressclient;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class Web_domain_adapter extends RecyclerView.Adapter<Web_domain_adapter.MyViewHolder> {
@@ -40,7 +42,12 @@ public class Web_domain_adapter extends RecyclerView.Adapter<Web_domain_adapter.
         Web_card_model currentWebModel = webModels.get(position);
         holder.WebTitle.setText(currentWebModel.getWeb_title());
         holder.WebDomain.setText(currentWebModel.getWeb_domain());
-        holder.WebIcon.setImageResource(currentWebModel.getWeb_icon());
+//        holder.WebIcon.setImageResource(currentWebModel.getWeb_icon_url());
+        Picasso.get()
+                .load(currentWebModel.getWeb_icon_url())   // URL của ảnh
+                .placeholder(R.drawable.compass)  // Hình ảnh hiển thị khi đang tải
+                .error(R.drawable.compass)              // Hình ảnh hiển thị nếu có lỗi
+                .into(holder.WebIcon);
     }
 
     @Override
@@ -50,7 +57,7 @@ public class Web_domain_adapter extends RecyclerView.Adapter<Web_domain_adapter.
     }
 
     // ViewHolder class
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView WebIcon;
         TextView WebTitle, WebDomain;
 
@@ -73,6 +80,9 @@ public class Web_domain_adapter extends RecyclerView.Adapter<Web_domain_adapter.
                         Web_card_model clickedWebsite = webModels.get(position);
 
                         Intent intent = new Intent(context, UserWebManagement.class);
+                        String tempDomain = clickedWebsite.getWeb_domain();
+                        String domain = tempDomain.replace("https://", "");
+                        intent.putExtra("domain", domain);
                         context.startActivity(intent);
 
                     }
