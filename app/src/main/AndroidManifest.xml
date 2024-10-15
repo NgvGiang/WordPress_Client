@@ -16,6 +16,9 @@
             android:name=".Dont_have_site_activity"
             android:exported="false" />
         <activity
+            android:name=".TextEditor"
+            android:exported="false" />
+        <activity
             android:name=".MeActivity.MyProfileActivity"
             android:exported="false" />
         <activity
@@ -88,6 +91,10 @@
             android:exported="false">
 
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

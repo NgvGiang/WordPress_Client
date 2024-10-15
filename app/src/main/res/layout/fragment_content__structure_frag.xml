@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    app:layout_constraintCircleRadius="15dp"
+    android:background="@color/main_background">
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content structure"
+        android:textSize="20sp"
+        android:textColor="@color/onBackGround"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/blocksText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Blocks: 0"
+        android:textSize="16sp"
+        android:textColor="@color/onBackGround" />
+
+    <TextView
+        android:id="@+id/wordsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Words: 0"
+        android:textSize="16sp"
+        android:textColor="@color/onBackGround" />
+
+    <TextView
+        android:id="@+id/charactersText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Characters: 0"
+        android:textSize="16sp"
+        android:textColor="@color/onBackGround" />
+
+</LinearLayout>

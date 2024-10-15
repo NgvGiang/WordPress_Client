@@ -1,14 +1,12 @@
 package vn.edu.usth.wordpressclient;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.service.controls.actions.FloatAction;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,7 +31,7 @@ public class PagesActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        fab.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
+        fab.setOnClickListener(view -> startActivity(new Intent(this, TextEditor.class)));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

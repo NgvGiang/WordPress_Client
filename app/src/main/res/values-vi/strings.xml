@@ -218,5 +218,9 @@
     <string name="dont_have_page_acc_and_setting">Account and Settings</string>
     <string name="user_email_name">Tên email người dùng</string>
 
+    //fab
+    <string name="title">Thêm tiêu đề</string>
+    <string name="content">Bắt đầu viết... </string>
+
 
 </resources>
