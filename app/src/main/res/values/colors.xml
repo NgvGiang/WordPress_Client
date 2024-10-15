@@ -17,4 +17,5 @@
     <color name="toolbar_color">#FFFFFF</color>
     <color name="icon_color">#000000</color>
     <color name="popup_bg">#F0F0F0</color>
+    <color name="datepicker">#2C2C2C</color>
 </resources>
