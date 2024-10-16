@@ -83,7 +83,10 @@ public class Web_domain_adapter extends RecyclerView.Adapter<Web_domain_adapter.
                         String tempDomain = clickedWebsite.getWeb_domain();
                         String domain = tempDomain.replace("https://", "");
                         intent.putExtra("domain", domain);
+                        intent.putExtra("title", clickedWebsite.getWeb_title());
+                        intent.putExtra("imgUrl",clickedWebsite.getWeb_icon_url());
                         context.startActivity(intent);
+
 
                     }
                 }
