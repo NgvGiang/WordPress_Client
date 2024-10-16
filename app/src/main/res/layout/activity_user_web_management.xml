@@ -24,12 +24,15 @@
             android:background="@drawable/button_click"
             android:orientation="horizontal">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_pfp"
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="9dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/logo" />
+                android:clickable="true"
+                android:focusable="true"
+                />
 
             <LinearLayout
                 android:id="@+id/web_name"
@@ -46,6 +49,8 @@
                     android:layout_weight="1"
                     android:gravity="center|left"
                     android:text="@string/title_user_web"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:textColor="@color/onBackGround"
                     android:textSize="23sp" />
 
@@ -58,6 +63,8 @@
                     android:alpha="0.5"
                     android:gravity="center|left"
                     android:text="@string/link_user_web"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:textColor="@color/onBackGround"
                     android:textSize="16sp" />
             </LinearLayout>
