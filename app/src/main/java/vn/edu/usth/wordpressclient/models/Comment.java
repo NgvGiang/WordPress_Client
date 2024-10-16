@@ -5,7 +5,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-public class Comment implements Parcelable {
+import java.io.Serializable;
+
+public class Comment implements Parcelable, Serializable {
     private Long id;
     private Long post;
     private Long parent;
