@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,11 +19,26 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TextEditor extends AppCompatActivity {
 
-    private EditText fabContent;
+    private EditText editTextTitle;
+    private EditText editTextContent;
+    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +46,9 @@ public class TextEditor extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_text_editor);
 
-        fabContent = findViewById(R.id.fab_content);
-
+        editTextContent = findViewById(R.id.fab_content);
+        editTextTitle = findViewById(R.id.fab_title);
+        queue = Volley.newRequestQueue(this);
 
         Toolbar toolbar = findViewById(R.id.fab_toolbar);
         setSupportActionBar(toolbar);
@@ -56,7 +73,15 @@ public class TextEditor extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.publish_button) {
-            Toast.makeText(this, "Published", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Published", Toast.LENGTH_SHORT).show();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    createPageByAPI();
+                }
+            }).start();
+            Intent intent = new Intent(this, PagesActivity.class);
+            startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.save_btn) {
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
@@ -77,7 +102,7 @@ public class TextEditor extends AppCompatActivity {
 
     private void showStructureDialog() {
         // Get (fab_content)
-        String content = fabContent.getText().toString();
+        String content = editTextContent.getText().toString();
 
         int blockCount = content.isEmpty() ? 0 : content.split("\n").length;  // Count blocks by newline
         int wordCount = content.isEmpty() ? 0 : content.split("\\s+").length;  // Count words by spaces
@@ -160,6 +185,64 @@ public class TextEditor extends AppCompatActivity {
 
     private String formatForAPI(int year, int month, int day, int hour, int minute) {
         return String.format("%d-%02d-%02dT%02d:%02d", year, month + 1, day, hour, minute);
+    }
+
+    public void createPageByAPI(){
+        String Url = "https://public-api.wordpress.com/wp/v2/sites/darkhent.wordpress.com/pages";
+
+        // Chuyển nội dung người dùng nhập thành chuỗi
+        String title = editTextTitle.getText().toString();
+        String content = editTextContent.getText().toString();
+
+        // Lấy acess token của người dùng
+        SessionManagement session = new SessionManagement(TextEditor.this);
+        String accessToken = session.getAccessToken();
+
+        JSONObject pageData = new JSONObject();
+        try {
+            pageData.put("title", title);
+            pageData.put("content", content);
+            pageData.put("status", "publish");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        StringRequest pageRequest = new StringRequest(
+                Request.Method.POST,
+                Url,
+                response -> {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        String date = jsonResponse.getString("date");
+                        Log.i("page created at:", date);
+                        Log.i("Creating a page", "success");
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                error -> {
+                    VolleyLog.d("volley", "Error: " + error.getMessage());
+                    error.printStackTrace();
+                }
+        ){
+            @Override
+            public Map<String,String> getHeaders(){
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+
+            @Override
+            public String getBodyContentType(){
+                return "application/json; charset=UTF-8";
+            }
+            @Override
+            public byte[] getBody() {
+                return pageData.toString().getBytes(StandardCharsets.UTF_8);
+            }
+        };
+
+        queue.add(pageRequest);
     }
 }
 
