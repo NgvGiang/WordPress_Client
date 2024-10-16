@@ -43,7 +43,7 @@
                     android:textSize="14dp"
                     android:text="content"
                     android:maxLines="2"
-                    android:ellipsize="end" />
+                    android:ellipsize="end"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
