@@ -1,5 +1,6 @@
 package vn.edu.usth.wordpressclient;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -21,10 +22,14 @@ public class WordPress_media extends AppCompatActivity {
 
     private TabLayout MediatabLayout;
     private ViewPager2 MediaviewPager2;
+    String domain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        domain = intent.getStringExtra("domain");
         setContentView(R.layout.activity_word_press_media);
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -43,7 +48,7 @@ public class WordPress_media extends AppCompatActivity {
         
         MediatabLayout = findViewById(R.id.MediatabLayout);
         MediaviewPager2 = findViewById(R.id.MediaviewPager);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, domain);
         viewPagerAdapter.addFragment(new All_Media_Fragment(), getString(R.string.ALL));
         viewPagerAdapter.addFragment(new images_Media_Fragment(), getString(R.string.images));
         viewPagerAdapter.addFragment(new Documents_Media_Fragment(), getString(R.string.documents));

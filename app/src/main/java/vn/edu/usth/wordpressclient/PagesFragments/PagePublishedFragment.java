@@ -16,15 +16,21 @@ import vn.edu.usth.wordpressclient.TextEditor;
 
 public class PagePublishedFragment extends Fragment {
     Button PublishedButton;
+    private String domain;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page_published, container, false);
+        domain = getArguments().getString("domain");
+
         PublishedButton = view.findViewById(R.id.published_page_button);
         PublishedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), TextEditor.class);
+                intent.putExtra("domain",domain);
+
                 startActivity(intent);
             }
         });

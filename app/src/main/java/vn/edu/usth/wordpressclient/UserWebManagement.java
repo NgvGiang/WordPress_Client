@@ -53,13 +53,13 @@ public class UserWebManagement extends AppCompatActivity {
         });
         postsRow.setOnClickListener(v -> {
             Intent intentPost = new Intent(UserWebManagement.this, PostsActivity.class);
-            intent.putExtra("domain",domain);
+            intentPost.putExtra("domain",domain);
             startActivity(intentPost);
         });
 
         pagesRow.setOnClickListener(v -> {
             Intent intentPage = new Intent(UserWebManagement.this, PagesActivity.class);
-            intent.putExtra("domain",domain);
+            intentPage.putExtra("domain",domain);
             startActivity(intentPage);
         });
 
@@ -67,25 +67,25 @@ public class UserWebManagement extends AppCompatActivity {
 
         mediaRow.setOnClickListener(v -> {
             Intent intentMedia = new Intent(UserWebManagement.this, WordPress_media.class);
-            intent.putExtra("domain",domain);
+            intentMedia.putExtra("domain",domain);
             startActivity(intentMedia);
         });
 
 
         commentRow.setOnClickListener(v -> {
             Intent intentComment = new Intent(UserWebManagement.this, CommentActivity.class);
-            intent.putExtra("domain",domain);
+            intentComment.putExtra("domain",domain);
             startActivity(intentComment);
         });
 
         meRow.setOnClickListener(v -> {
             Intent intentMe = new Intent(UserWebManagement.this, MeWebsiteActivity.class);
-            intent.putExtra("domain",domain);
+            intentMe.putExtra("domain",domain);
             startActivity(intentMe);
         });
         siteSettingRow.setOnClickListener(v -> {
             Intent intentSetting = new Intent(UserWebManagement.this, UsernameActivity.class);
-            intent.putExtra("domain",domain);
+            intentSetting.putExtra("domain",domain);
             startActivity(intentSetting);
         });
 

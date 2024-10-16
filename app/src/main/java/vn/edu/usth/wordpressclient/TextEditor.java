@@ -34,11 +34,14 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import vn.edu.usth.wordpressclient.models.MySingleton;
+
 public class TextEditor extends AppCompatActivity {
 
     private EditText editTextTitle;
     private EditText editTextContent;
-    private RequestQueue queue;
+    private String domain;
+    private String Date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +49,17 @@ public class TextEditor extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_text_editor);
 
+        Intent intentdomain = getIntent();
+        domain = intentdomain.getStringExtra("domain");
+        if (domain != null) {
+            Log.i("domain", domain);
+        } else {
+            Log.i("domain", "Domain is null");
+        }
+
+
         editTextContent = findViewById(R.id.fab_content);
         editTextTitle = findViewById(R.id.fab_title);
-        queue = Volley.newRequestQueue(this);
 
         Toolbar toolbar = findViewById(R.id.fab_toolbar);
         setSupportActionBar(toolbar);
@@ -74,13 +85,9 @@ public class TextEditor extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.publish_button) {
 //            Toast.makeText(this, "Published", Toast.LENGTH_SHORT).show();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    createPageByAPI();
-                }
-            }).start();
+            createPageByAPI();
             Intent intent = new Intent(this, PagesActivity.class);
+            intent.putExtra("domain", domain);
             startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.save_btn) {
@@ -171,8 +178,9 @@ public class TextEditor extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
 
-                        String datetoAPI = String.format("%d-%02d-%02dT%02d:%02d", year, month + 1, day, selectedHour, selectedMinute);
-                        Log.i("To API",datetoAPI);
+                        Date = String.format("%d-%02d-%02dT%02d:%02d", year, month + 1, day, selectedHour, selectedMinute);
+
+
                         String dateTime = String.format("Scheduled for %d-%02d-%02d %02d:%02d", year, month + 1, day, selectedHour, selectedMinute);
 
                         Toast.makeText(TextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
@@ -188,11 +196,15 @@ public class TextEditor extends AppCompatActivity {
     }
 
     public void createPageByAPI(){
-        String Url = "https://public-api.wordpress.com/wp/v2/sites/darkhent.wordpress.com/pages";
+        String Url = "https://public-api.wordpress.com/wp/v2/sites/"+domain+"/pages";
 
         // Chuyển nội dung người dùng nhập thành chuỗi
         String title = editTextTitle.getText().toString();
         String content = editTextContent.getText().toString();
+
+        if (title == null || title.trim().isEmpty()) {
+            title = "Untitled";
+        }
 
         // Lấy acess token của người dùng
         SessionManagement session = new SessionManagement(TextEditor.this);
@@ -203,6 +215,24 @@ public class TextEditor extends AppCompatActivity {
             pageData.put("title", title);
             pageData.put("content", content);
             pageData.put("status", "publish");
+            if (Date != null && !Date.isEmpty()) {
+                Log.i("Date",Date);
+                pageData.put("date", Date+":00");  // Sử dụng giá trị từ Date
+            } else {
+                // Nếu người dùng không chọn giá trị cho date, sử dụng thời gian hiện tại
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int minute = calendar.get(Calendar.MINUTE);
+                int second = calendar.get(Calendar.SECOND);
+
+                // Chuyển đổi sang định dạng ISO 8601
+                Date = String.format("%d-%02d-%02dT%02d:%02d:%02d", year, month + 1, day, hour, minute, second);
+                Log.i("To API",Date+":00");
+                pageData.put("date",Date);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -242,7 +272,7 @@ public class TextEditor extends AppCompatActivity {
             }
         };
 
-        queue.add(pageRequest);
+        MySingleton.getInstance(this).addToRequestQueue(pageRequest);
     }
 }
 
