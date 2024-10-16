@@ -1,5 +1,6 @@
 package vn.edu.usth.wordpressclient;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 
@@ -20,12 +21,15 @@ import vn.edu.usth.wordpressclient.commentgroupfragments.UnrepliedCommentsFragme
 public class CommentActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
+    String domain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);;
         EdgeToEdge.enable(this);
+        Intent intent = getIntent();
+        domain = intent.getStringExtra("domain");
 
         Toolbar toolbar = findViewById(R.id.comment_tool_bar);
         setSupportActionBar(toolbar);
@@ -38,7 +42,7 @@ public class CommentActivity extends AppCompatActivity {
         });
         tabLayout = findViewById(R.id.comment_tab_mode);
         viewPager2 = findViewById(R.id.comment_view_pager);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this,domain);
         viewPagerAdapter.addFragment(new AllCommentsFragment(), getString(R.string.ALL));
         viewPagerAdapter.addFragment(new PendingCommentsFragment(), getString(R.string.pending));
         viewPagerAdapter.addFragment(new UnrepliedCommentsFragment(), getString(R.string.unreplied));

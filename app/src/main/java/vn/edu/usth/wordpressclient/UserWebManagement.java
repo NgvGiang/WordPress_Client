@@ -3,6 +3,7 @@ package vn.edu.usth.wordpressclient;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -79,7 +80,6 @@ public class UserWebManagement extends AppCompatActivity {
         adminRow = findViewById(R.id.admin_row);
         chooseSites = findViewById(R.id.collapse_icon);
 
-
         //clicking
         // need to putExtra the domain to the next activity
         chooseSites.setOnClickListener(v -> {
@@ -90,13 +90,13 @@ public class UserWebManagement extends AppCompatActivity {
         });
         postsRow.setOnClickListener(v -> {
             Intent intentPost = new Intent(UserWebManagement.this, PostsActivity.class);
-            intent.putExtra("domain",domainString);
+            intentPost.putExtra("domain",domainString);
             startActivity(intentPost);
         });
 
         pagesRow.setOnClickListener(v -> {
             Intent intentPage = new Intent(UserWebManagement.this, PagesActivity.class);
-            intent.putExtra("domain",domainString);
+            intentPage.putExtra("domain",domainString);
             startActivity(intentPage);
         });
 
@@ -104,25 +104,25 @@ public class UserWebManagement extends AppCompatActivity {
 
         mediaRow.setOnClickListener(v -> {
             Intent intentMedia = new Intent(UserWebManagement.this, WordPress_media.class);
-            intent.putExtra("domain",domainString);
+            intentMedia.putExtra("domain",domainString);
             startActivity(intentMedia);
         });
 
 
         commentRow.setOnClickListener(v -> {
             Intent intentComment = new Intent(UserWebManagement.this, CommentActivity.class);
-            intent.putExtra("domain",domainString);
+            intentComment.putExtra("domain",domainString);
             startActivity(intentComment);
         });
 
         meRow.setOnClickListener(v -> {
             Intent intentMe = new Intent(UserWebManagement.this, MeWebsiteActivity.class);
-            intent.putExtra("domain",domainString);
+            intentMe.putExtra("domain",domainString);
             startActivity(intentMe);
         });
         siteSettingRow.setOnClickListener(v -> {
             Intent intentSetting = new Intent(UserWebManagement.this, UsernameActivity.class);
-            intent.putExtra("domain",domainString);
+            intentSetting.putExtra("domain",domainString);
             startActivity(intentSetting);
         });
 
