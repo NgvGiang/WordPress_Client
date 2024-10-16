@@ -13,10 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WordPressClient">
         <activity
-            android:name=".CommentDetails"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="false" />
-        <activity
             android:name=".Dont_have_site_activity"
             android:exported="false" />
         <activity
@@ -95,5 +91,8 @@
             android:name=".CommentActivity"
             android:exported="false"></activity>
     </application>
-
+    <activity
+        android:name=".CommentDetails"
+        android:windowSoftInputMode="adjustPan"
+        android:exported="false" />
 </manifest>
