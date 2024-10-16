@@ -29,13 +29,10 @@ public class PagesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pages);;
         EdgeToEdge.enable(this);
         // Find the Toolbar and set it as the ActionBar
+
         Intent intent = getIntent();
         String domain = intent.getStringExtra("domain");
-        if (domain != null) {
-            Log.i("domain", domain);
-        } else {
-            Log.i("domain", "Domain is null");
-        }
+
         FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(view -> startActivity(new Intent(this, TextEditor.class)));

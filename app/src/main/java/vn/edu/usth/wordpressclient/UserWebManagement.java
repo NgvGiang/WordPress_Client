@@ -127,7 +127,7 @@ public class UserWebManagement extends AppCompatActivity {
         });
 
         adminRow.setOnClickListener(view ->{
-            String authUrl = "https://"+domain+"/wp-admin/";
+            String authUrl = "https://"+domainString+"/wp-admin/";
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(authUrl));
             startActivity(browserIntent);
         });
