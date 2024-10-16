@@ -1,20 +1,27 @@
 package vn.edu.usth.wordpressclient;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.widget.LinearLayout;
+import android.util.Log;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import vn.edu.usth.wordpressclient.MeActivity.MeWebsiteActivity;
 import vn.edu.usth.wordpressclient.MeActivity.UsernameActivity;
 
 public class UserWebManagement extends AppCompatActivity {
+    RelativeLayout postsRow;
+    RelativeLayout pagesRow;
+    RelativeLayout mediaRow;
+    RelativeLayout commentRow;
+    RelativeLayout meRow;
+    RelativeLayout siteSettingRow;
+    RelativeLayout adminRow;
+    ImageView chooseSites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,30 +29,72 @@ public class UserWebManagement extends AppCompatActivity {
         setContentView(R.layout.activity_user_web_management);
         EdgeToEdge.enable(this);
 
+        Intent intent = getIntent();
+        String domain = intent.getStringExtra("domain");
+        Log.i("Domain: ", domain);
+        //call api from domain
         //mapping
-        LinearLayout userTitle = findViewById(R.id.user_title);
-        RelativeLayout postsRow = findViewById(R.id.posts_row);
-        RelativeLayout pagesRow = findViewById(R.id.pages_row);
-        RelativeLayout mediaRow = findViewById(R.id.media_row);
-        RelativeLayout commentRow = findViewById(R.id.comment_row);
-
-        RelativeLayout meRow = findViewById(R.id.me_row);
-        RelativeLayout siteSettingRow = findViewById(R.id.site_setting_row);
-        RelativeLayout adminRow = findViewById(R.id.admin_row);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        postsRow = findViewById(R.id.posts_row);
+        pagesRow = findViewById(R.id.pages_row);
+        mediaRow = findViewById(R.id.media_row);
+        commentRow = findViewById(R.id.comment_row);
+        meRow = findViewById(R.id.me_row);
+        siteSettingRow = findViewById(R.id.site_setting_row);
+        adminRow = findViewById(R.id.admin_row);
+        chooseSites = findViewById(R.id.collapse_icon);
 
         //clicking
-        userTitle.setOnClickListener(view -> startActivity(new Intent(this, Choose_your_web.class)));
-        postsRow.setOnClickListener(view -> startActivity(new Intent(this, PostsActivity.class)));
-        pagesRow.setOnClickListener(view -> startActivity(new Intent(this, PagesActivity.class)));
-        mediaRow.setOnClickListener(view -> startActivity(new Intent(this, WordPress_media.class)));
-        commentRow.setOnClickListener(view -> startActivity(new Intent(this, CommentActivity.class)));
+        // need to putExtra the domain to the next activity
+        chooseSites.setOnClickListener(v -> {
+            //need to create new destination, not Choose_your_web.class
+            Intent intentChooseWeb = new Intent(UserWebManagement.this, Choose_your_web.class);
 
-        meRow.setOnClickListener(view ->  startActivity(new Intent(this, MeWebsiteActivity.class)));
-        siteSettingRow.setOnClickListener(view ->  startActivity(new Intent(this, UsernameActivity.class)));
-        adminRow.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
+            startActivity(intentChooseWeb);
+        });
+        postsRow.setOnClickListener(v -> {
+            Intent intentPost = new Intent(UserWebManagement.this, PostsActivity.class);
+            intent.putExtra("domain",domain);
+            startActivity(intentPost);
+        });
 
-        fab.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
+        pagesRow.setOnClickListener(v -> {
+            Intent intentPage = new Intent(UserWebManagement.this, PagesActivity.class);
+            intent.putExtra("domain",domain);
+            startActivity(intentPage);
+        });
+
+
+
+        mediaRow.setOnClickListener(v -> {
+            Intent intentMedia = new Intent(UserWebManagement.this, WordPress_media.class);
+            intent.putExtra("domain",domain);
+            startActivity(intentMedia);
+        });
+
+
+        commentRow.setOnClickListener(v -> {
+            Intent intentComment = new Intent(UserWebManagement.this, CommentActivity.class);
+            intent.putExtra("domain",domain);
+            startActivity(intentComment);
+        });
+
+        meRow.setOnClickListener(v -> {
+            Intent intentMe = new Intent(UserWebManagement.this, MeWebsiteActivity.class);
+            intent.putExtra("domain",domain);
+            startActivity(intentMe);
+        });
+        siteSettingRow.setOnClickListener(v -> {
+            Intent intentSetting = new Intent(UserWebManagement.this, UsernameActivity.class);
+            intent.putExtra("domain",domain);
+            startActivity(intentSetting);
+        });
+
+        adminRow.setOnClickListener(view ->{
+            String authUrl = "https://"+domain+"/wp-admin/";
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(authUrl));
+            startActivity(browserIntent);
+        });
+
 
     }
 }

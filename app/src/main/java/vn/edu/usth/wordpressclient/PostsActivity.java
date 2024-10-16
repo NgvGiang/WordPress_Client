@@ -1,7 +1,7 @@
 package vn.edu.usth.wordpressclient;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +28,7 @@ public class PostsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_posts);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
+        fab.setOnClickListener(view -> startActivity(new Intent(this, TextEditor.class)));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

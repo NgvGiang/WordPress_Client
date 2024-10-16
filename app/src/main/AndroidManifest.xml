@@ -16,6 +16,9 @@
             android:name=".Dont_have_site_activity"
             android:exported="false" />
         <activity
+            android:name=".TextEditor"
+            android:exported="false" />
+        <activity
             android:name=".MeActivity.MyProfileActivity"
             android:exported="false" />
         <activity
@@ -74,21 +77,24 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data
-                    android:host="oauth2redirect"
-                    android:scheme="myapp" />
+                    android:scheme="myapp"
+                    android:host="oauth2redirect" />
             </intent-filter>
         </activity>
         <activity
             android:name=".CommentActivity"
-            android:exported="false"></activity>
+            android:exported="false">
+
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
+
 </manifest>

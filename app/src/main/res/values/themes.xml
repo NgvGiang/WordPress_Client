@@ -9,7 +9,7 @@
         <item name="colorSurface">@color/white</item>                // ex. card bgs, dialogs
         <item name="colorOnSurface">@color/black</item>              // text  on surface
         <item name="android:windowBackground">@color/main_background</item>    // window bG
-
+        <item name="colorControlNormal">@color/onBackGround</item>
     </style>
 
     // No action bar and title
@@ -26,6 +26,7 @@
 
     // Main Theme for WordPressClient
     <style name="Theme.WordPressClient" parent="Base.Theme.WordPressClient" />
+
 
 
 </resources>
