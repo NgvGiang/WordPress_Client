@@ -90,9 +90,9 @@
         <activity
             android:name=".CommentActivity"
             android:exported="false"></activity>
+        <activity
+            android:name=".CommentDetails"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false" />
     </application>
-    <activity
-        android:name=".CommentDetails"
-        android:windowSoftInputMode="adjustPan"
-        android:exported="false" />
 </manifest>
