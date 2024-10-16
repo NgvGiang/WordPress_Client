@@ -1,4 +1,4 @@
-package vn.edu.usth.wordpressclient.models;
+package vn.edu.usth.wordpressclient;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -8,10 +8,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-import vn.edu.usth.wordpressclient.SessionManagement;
+import vn.edu.usth.wordpressclient.models.Comment;
+import vn.edu.usth.wordpressclient.models.CommentsCallback;
 
 public class CommentAPIServices {
     public static void getAllCommentsFromUser(Context context, String domain, int perPage, int currentPage, CommentsCallback callback) {
@@ -321,5 +324,35 @@ public class CommentAPIServices {
             }
         };;
         requestQueue.add(jsonArrayRequest);
+    }
+
+    public static void updateCommentStatus(Context context, String domain, String status, String id) {
+        SessionManagement sessionManagement = new SessionManagement(context);
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments/" + id;
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("status", status);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        )
     }
 }

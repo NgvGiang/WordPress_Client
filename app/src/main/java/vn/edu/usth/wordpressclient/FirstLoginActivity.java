@@ -65,7 +65,7 @@ public class FirstLoginActivity extends AppCompatActivity {
                         }else{
                             Log.i("FirstLoginActivity.this", "Num site: " + numberOfSites);
                             Intent intent = new Intent(FirstLoginActivity.this, Choose_your_web.class);
-                            startActivity(intent);
+                                startActivity(intent);
                         }
 
                     } catch (JSONException e) {
