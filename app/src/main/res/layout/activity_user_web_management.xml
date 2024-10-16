@@ -22,8 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="62dp"
             android:background="@drawable/button_click"
-            android:clickable="true"
-            android:focusable="true"
             android:orientation="horizontal">
 
             <ImageView
@@ -65,12 +63,14 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/collapse_icon"
                 android:layout_width="18dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="0.1"
-                app:srcCompat="@drawable/collapsable" />
+                app:srcCompat="@drawable/collapsable"
+                android:clickable="true"
+                android:focusable="true"/>
 
 
         </LinearLayout>

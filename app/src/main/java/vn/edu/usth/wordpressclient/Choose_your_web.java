@@ -1,5 +1,6 @@
 package vn.edu.usth.wordpressclient;
 
+import android.app.UiModeManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,7 +43,7 @@ public class Choose_your_web extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_your_web); // Set your layout
+        setContentView(R.layout.activity_choose_your_web);
         EdgeToEdge.enable(this);
         SessionManagement session = new SessionManagement(this);
         String accessToken = session.getAccessToken();
@@ -128,11 +129,19 @@ public class Choose_your_web extends AppCompatActivity {
                             String urlIcon;
                             Log.i("Name: ",siteTitle);
                             Log.i("Domain: ",siteDomain);
+                            UiModeManager modeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
                             if (sitesArrayJSONObject.has("icon")){
                                 urlIcon = sitesArrayJSONObject.getJSONObject("icon").getString("img");
-                            }else{
-                                urlIcon = "https://img.icons8.com/?size=100&id=53372&format=png&color=000000";
+
+                            }else {
+                                if(modeManager.getNightMode() == UiModeManager.MODE_NIGHT_YES){
+                                    //night mode on
+                                    urlIcon = "https://img.icons8.com/?size=100&id=53372&format=png&color=ffffff";
+                                }else{
+                                    urlIcon = "https://img.icons8.com/?size=100&id=53372&format=png&color=000000";
+                                }
                             }
+
                             webModels.add(new Web_card_model(urlIcon, siteDomain, siteTitle));
 
                             adapter.notifyDataSetChanged();
