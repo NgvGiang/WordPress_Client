@@ -17,7 +17,7 @@ import java.util.List;
 import vn.edu.usth.wordpressclient.CommentRecyclerViewAdapter;
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.models.Comment;
-import vn.edu.usth.wordpressclient.models.CommentAPIServices;
+import vn.edu.usth.wordpressclient.CommentAPIServices;
 import vn.edu.usth.wordpressclient.models.CommentsCallback;
 
 public class UnrepliedCommentsFragment extends Fragment {
