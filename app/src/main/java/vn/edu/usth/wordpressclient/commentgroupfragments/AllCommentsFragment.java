@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ import vn.edu.usth.wordpressclient.CommentRecyclerViewAdapter;
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.models.Comment;
 import vn.edu.usth.wordpressclient.CommentAPIServices;
-import vn.edu.usth.wordpressclient.models.CommentsCallback;
+import vn.edu.usth.wordpressclient.models.GetCommentsCallback;
 
 public class AllCommentsFragment extends Fragment {
     String userDomain;
@@ -30,6 +29,15 @@ public class AllCommentsFragment extends Fragment {
     private int currentPage = 1;
     private boolean isLastPage = false;
     private boolean isLoading = false;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            userDomain = getArguments().getString("domain");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,7 +62,7 @@ public class AllCommentsFragment extends Fragment {
                 }
             }
         });
-        commentRecyclerViewAdapter = new CommentRecyclerViewAdapter(comments, getContext());
+        commentRecyclerViewAdapter = new CommentRecyclerViewAdapter(comments, getContext(), userDomain);
         recyclerView.setAdapter(commentRecyclerViewAdapter);
         if (savedInstanceState != null) {
             comments = savedInstanceState.getParcelableArrayList("comments");
@@ -62,7 +70,6 @@ public class AllCommentsFragment extends Fragment {
             isLastPage = savedInstanceState.getBoolean("isLastPage");
             commentRecyclerViewAdapter.notifyDataSetChanged();
         } else {
-            // Load comments only if not restored
             loadInitialComments();
         }
         return view;
@@ -71,10 +78,7 @@ public class AllCommentsFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        // Save current state
-//        if (isLastPage) {
-//
-//        }
+
         outState.putParcelableArrayList("comments", new ArrayList<>(comments));
         outState.putInt("currentPage", currentPage);
         outState.putBoolean("isLastPage", isLastPage);
@@ -82,7 +86,7 @@ public class AllCommentsFragment extends Fragment {
 
     private void loadMoreComments() {
         isLoading = true;
-        CommentAPIServices.getAllCommentsFromUser(getContext(), "peppermint777.wordpress.com", PER_PAGE, currentPage, new CommentsCallback() {
+        CommentAPIServices.getAllCommentsFromUser(getContext(), userDomain, PER_PAGE, currentPage, new GetCommentsCallback() {
             @Override
             public void onSuccess(List<Comment> newComments) {
                 comments.addAll(newComments);
@@ -104,7 +108,7 @@ public class AllCommentsFragment extends Fragment {
 
     private void loadInitialComments() {
         isLoading = true;
-        CommentAPIServices.getAllCommentsFromUser(getContext(), "peppermint777.wordpress.com", PER_PAGE, currentPage, new CommentsCallback() {
+        CommentAPIServices.getAllCommentsFromUser(getContext(), userDomain, PER_PAGE, currentPage, new GetCommentsCallback() {
             @Override
             public void onSuccess(List<Comment> newComments) {
                 comments.addAll(newComments);

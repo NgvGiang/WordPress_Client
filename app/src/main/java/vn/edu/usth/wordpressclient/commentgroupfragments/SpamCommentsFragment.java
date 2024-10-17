@@ -18,7 +18,7 @@ import vn.edu.usth.wordpressclient.CommentRecyclerViewAdapter;
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.models.Comment;
 import vn.edu.usth.wordpressclient.CommentAPIServices;
-import vn.edu.usth.wordpressclient.models.CommentsCallback;
+import vn.edu.usth.wordpressclient.models.GetCommentsCallback;
 
 public class SpamCommentsFragment extends Fragment {
     String userDomain;
@@ -34,6 +34,9 @@ public class SpamCommentsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_spam_comments, container, false);
+        if (getArguments() != null) {
+            userDomain = getArguments().getString("domain");
+        }
 
         if (savedInstanceState == null) {
             comments = new ArrayList<>();
@@ -54,7 +57,7 @@ public class SpamCommentsFragment extends Fragment {
                 }
             }
         });
-        commentRecyclerViewAdapter = new CommentRecyclerViewAdapter(comments, getContext());
+        commentRecyclerViewAdapter = new CommentRecyclerViewAdapter(comments, getContext(), userDomain);
         recyclerView.setAdapter(commentRecyclerViewAdapter);
         if (savedInstanceState != null) {
             comments = savedInstanceState.getParcelableArrayList("comments");
@@ -77,7 +80,7 @@ public class SpamCommentsFragment extends Fragment {
 
     private void loadMoreComments() {
         isLoading = true;
-        CommentAPIServices.getSpamCommentFromUser(getContext(), "peppermint777.wordpress.com", PER_PAGE, currentPage, new CommentsCallback() {
+        CommentAPIServices.getSpamCommentFromUser(getContext(), userDomain, PER_PAGE, currentPage, new GetCommentsCallback() {
             @Override
             public void onSuccess(List<Comment> newComments) {
                 comments.addAll(newComments);
@@ -99,7 +102,7 @@ public class SpamCommentsFragment extends Fragment {
 
     private void loadInitialComments() {
         isLoading = true;
-        CommentAPIServices.getSpamCommentFromUser(getContext(), "peppermint777.wordpress.com", PER_PAGE, currentPage, new CommentsCallback() {
+        CommentAPIServices.getSpamCommentFromUser(getContext(), userDomain, PER_PAGE, currentPage, new GetCommentsCallback() {
             @Override
             public void onSuccess(List<Comment> newComments) {
                 comments.addAll(newComments);
@@ -117,5 +120,22 @@ public class SpamCommentsFragment extends Fragment {
                 isLoading = false;
             }
         });
+    }
+
+    public void removeCommentAtPosition(int position) {
+        if (position >= 0 && position < comments.size()) {
+            comments.remove(position);
+            commentRecyclerViewAdapter.notifyItemRemoved(position);
+        }
+    }
+
+    public void addComment(Comment comment) {
+        comment.setStatus("spam");
+        comments.add(comment);
+        commentRecyclerViewAdapter.notifyItemInserted(comments.size() - 1);
+    }
+
+    public List<Comment> getComments() {
+        return this.comments;
     }
 }
