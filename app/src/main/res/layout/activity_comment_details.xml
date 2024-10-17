@@ -82,13 +82,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="16dp">
+                android:orientation="horizontal">
 
                 <RelativeLayout
                     android:id="@+id/mark_approve_comment"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:layout_weight="1"
                     android:gravity="center">
 
@@ -100,6 +99,7 @@
                         android:layout_centerHorizontal="true"/>
 
                     <TextView
+                        android:id="@+id/done_text_comment_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Approve"
@@ -110,7 +110,7 @@
                 <RelativeLayout
                     android:id="@+id/mark_spam_comment"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:layout_weight="1"
                     android:gravity="center">
 
@@ -122,6 +122,7 @@
                         android:layout_centerHorizontal="true"/>
 
                     <TextView
+                        android:id="@+id/report_text_comment_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Spam"
@@ -132,7 +133,7 @@
                 <RelativeLayout
                     android:id="@+id/like_comment"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:layout_weight="1"
                     android:gravity="center">
 
@@ -154,7 +155,7 @@
                 <RelativeLayout
                     android:id="@+id/more_action_on_comment"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:layout_weight="1"
                     android:gravity="center">
 
