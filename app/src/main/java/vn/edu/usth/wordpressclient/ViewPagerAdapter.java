@@ -1,5 +1,7 @@
 package vn.edu.usth.wordpressclient;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -10,15 +12,20 @@ import java.util.ArrayList;
 public class ViewPagerAdapter extends FragmentStateAdapter {
     ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
     ArrayList<String> titleArrayList =  new ArrayList<>();
-
-    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
+    String domain;
+    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, String domain) {
         super(fragmentActivity);
+        this.domain = domain;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return fragmentArrayList.get(position);
+        Fragment fragment = fragmentArrayList.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("domain", domain);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
 

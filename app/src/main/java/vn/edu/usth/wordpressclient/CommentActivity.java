@@ -76,7 +76,7 @@ public class CommentActivity extends AppCompatActivity {
         });
         tabLayout = findViewById(R.id.comment_tab_mode);
         viewPager2 = findViewById(R.id.comment_view_pager);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, domain);
         viewPagerAdapter.addFragment(allCommentsFragment, getString(R.string.ALL));
         viewPagerAdapter.addFragment(pendingCommentsFragment, getString(R.string.pending));
         viewPagerAdapter.addFragment(unrepliedCommentsFragment, getString(R.string.unreplied));

@@ -20,12 +20,16 @@ import vn.edu.usth.wordpressclient.PostsFragments.TrashedPostFragment;
 public class PostsActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
+    String domain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_posts);
+
+        Intent intent = getIntent();
+        domain = intent.getStringExtra("domain");
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> startActivity(new Intent(this, TextEditor.class)));
@@ -41,7 +45,7 @@ public class PostsActivity extends AppCompatActivity {
         });
         tabLayout = findViewById(R.id.PostsTabLayout);
         viewPager2 = findViewById(R.id.PostviewPager);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this,domain);
         viewPagerAdapter.addFragment(new PublishedPostFragment(), getString(R.string.published));
         viewPagerAdapter.addFragment(new DraftPostFragment(), getString(R.string.drafts));
         viewPagerAdapter.addFragment(new ScheduledPostFragment(), getString(R.string.schedules));

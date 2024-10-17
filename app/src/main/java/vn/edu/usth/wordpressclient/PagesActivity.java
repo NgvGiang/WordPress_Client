@@ -2,6 +2,7 @@ package vn.edu.usth.wordpressclient;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -21,13 +22,16 @@ import vn.edu.usth.wordpressclient.PagesFragments.PageTrashedFragment;
 public class PagesActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
-
+//    private String domain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pages);;
         EdgeToEdge.enable(this);
         // Find the Toolbar and set it as the ActionBar
+
+        Intent intent = getIntent();
+        String domain = intent.getStringExtra("domain");
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
@@ -45,7 +49,8 @@ public class PagesActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.PagetabLayout);
         viewPager2 = findViewById(R.id.PageviewPager);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, domain);
         viewPagerAdapter.addFragment(new PagePublishedFragment(), getString(R.string.published));
         viewPagerAdapter.addFragment(new PageDraftFragment(), getString(R.string.drafts));
         viewPagerAdapter.addFragment(new PageScheduledFragment(), getString(R.string.schedules));
