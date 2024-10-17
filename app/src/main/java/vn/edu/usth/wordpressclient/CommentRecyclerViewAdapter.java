@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,10 +35,12 @@ import vn.edu.usth.wordpressclient.models.Comment;
 public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentViewHolder> {
     private List<Comment> comments;
     private Context context;
+    private String domain;
 
-    public CommentRecyclerViewAdapter(List<Comment> comments, Context context) {
+    public CommentRecyclerViewAdapter(List<Comment> comments, Context context, String domain) {
         this.comments = comments;
         this.context = context;
+        this.domain = domain;
     }
 
     @NonNull
@@ -95,7 +98,9 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentView
             public void onClick(View v) {
                 Intent intent = new Intent(context, CommentDetails.class);
                 intent.putExtra("comment", (Serializable) comments.get(holder.getAdapterPosition()));
-                context.startActivity(intent);
+                intent.putExtra("domain", domain);
+                intent.putExtra("position", holder.getAdapterPosition());
+                ((CommentActivity) context).commentDetailLauncher.launch(intent);
             }
         });
     }
