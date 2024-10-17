@@ -74,7 +74,7 @@ public class UserWebManagement extends AppCompatActivity {
 
         commentRow.setOnClickListener(v -> {
             Intent intentComment = new Intent(UserWebManagement.this, CommentActivity.class);
-            intent.putExtra("domain",domain);
+            intentComment.putExtra("domain",domain);
             startActivity(intentComment);
         });
 
