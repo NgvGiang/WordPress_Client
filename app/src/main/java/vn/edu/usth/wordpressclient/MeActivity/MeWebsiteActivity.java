@@ -14,12 +14,14 @@ import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.SessionManagement;
 
 public class MeWebsiteActivity extends AppCompatActivity {
+    SessionManagement session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_me_website);
         EdgeToEdge.enable(this);
-        SessionManagement sessionManagement = new SessionManagement(this);
+//        SessionManagement sessionManagement = new SessionManagement(this);
+        session = SessionManagement.getInstance(this);
         LinearLayout username_btn = findViewById(R.id.user_name_btn);
         LinearLayout profile_btn = findViewById(R.id.my_profile);
         LinearLayout account_settings_btn = findViewById(R.id.account_settings);
@@ -41,7 +43,7 @@ public class MeWebsiteActivity extends AppCompatActivity {
         log_out_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sessionManagement.logoutUser();
+                session.logoutUser();
             }
         });//done
 

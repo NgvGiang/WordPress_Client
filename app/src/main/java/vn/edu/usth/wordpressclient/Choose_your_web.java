@@ -39,13 +39,15 @@ public class Choose_your_web extends AppCompatActivity {
     ArrayList<Web_card_model> webModels = new ArrayList<>();
     Web_domain_adapter adapter;
     RecyclerView recyclerView;
+    private SessionManagement session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        session = SessionManagement.getInstance(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_your_web);
         EdgeToEdge.enable(this);
-        SessionManagement session = new SessionManagement(this);
+//        SessionManagement session = new SessionManagement(this);
         String accessToken = session.getAccessToken();
         Button create_site_btn = findViewById(R.id.create_site_btn);
         create_site_btn.setOnClickListener(view -> startActivity(new Intent(this, Create_new_site.class)));

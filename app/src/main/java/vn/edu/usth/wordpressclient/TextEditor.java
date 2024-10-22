@@ -42,7 +42,7 @@ public class TextEditor extends AppCompatActivity {
     private EditText editTextContent;
     private String domain;
     private String Date;
-
+    private SessionManagement session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -207,7 +207,8 @@ public class TextEditor extends AppCompatActivity {
         }
 
         // Lấy acess token của người dùng
-        SessionManagement session = new SessionManagement(TextEditor.this);
+//        SessionManagement session = new SessionManagement(TextEditor.this);
+        session = SessionManagement.getInstance(this);
         String accessToken = session.getAccessToken();
 
         JSONObject pageData = new JSONObject();

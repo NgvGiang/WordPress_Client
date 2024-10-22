@@ -27,13 +27,16 @@ import java.util.Map;
 import vn.edu.usth.wordpressclient.models.MySingleton;
 
 public class FirstLoginActivity extends AppCompatActivity {
-
     Button login_signup;
     TextView enter_site_address;
+    private SessionManagement session;
+
     @Override
     protected void onStart(){
         super.onStart();
-        SessionManagement session = new SessionManagement(this);
+        session = SessionManagement.getInstance(this);
+//        SessionManagement session = new SessionManagement(this);
+//        SessionManagement session = SessionManagement.getInstance(this);
         if (session.isLoggedIn()) {
             moveToMainActivity();
             finish();
@@ -41,7 +44,8 @@ public class FirstLoginActivity extends AppCompatActivity {
     }
 
     private void moveToMainActivity() {
-        SessionManagement session = new SessionManagement(this);
+//        SessionManagement session = new SessionManagement(this);
+//        SessionManagement session = SessionManagement.getInstance(this);
         String accessToken = session.getAccessToken();
         String url = "https://public-api.wordpress.com/rest/v1.1/me/sites";
         StringRequest getSiteRequest = new StringRequest(
@@ -144,7 +148,7 @@ public class FirstLoginActivity extends AppCompatActivity {
     };//end getAccessTokenByAuthorizationCode
 
     private void onLoginSuccess(String accessToken) {
-        SessionManagement session = new SessionManagement(this);
+//        SessionManagement session = new SessionManagement(this);
         session.createLoginSession(accessToken);
         moveToMainActivity();
         finish();
