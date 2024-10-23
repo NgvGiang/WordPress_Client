@@ -42,6 +42,7 @@ public class TextEditor extends AppCompatActivity {
     private EditText editTextContent;
     private String domain;
     private String Date;
+    private String status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,14 +85,20 @@ public class TextEditor extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.publish_button) {
+            status = "publish";
 //            Toast.makeText(this, "Published", Toast.LENGTH_SHORT).show();
-            createPageByAPI();
+            createPageByAPI(status);
             Intent intent = new Intent(this, PagesActivity.class);
             intent.putExtra("domain", domain);
             startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.save_btn) {
-            Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+            status = "draft";
+            createPageByAPI(status);
+            Intent intent = new Intent(this, PagesActivity.class);
+            intent.putExtra("domain", domain);
+            startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.structure_btn) {
             showStructureDialog();
@@ -195,7 +202,7 @@ public class TextEditor extends AppCompatActivity {
         return String.format("%d-%02d-%02dT%02d:%02d", year, month + 1, day, hour, minute);
     }
 
-    public void createPageByAPI(){
+    public void createPageByAPI(String status){
         String Url = "https://public-api.wordpress.com/wp/v2/sites/"+domain+"/pages";
 
         // Chuyển nội dung người dùng nhập thành chuỗi
@@ -214,7 +221,7 @@ public class TextEditor extends AppCompatActivity {
         try {
             pageData.put("title", title);
             pageData.put("content", content);
-            pageData.put("status", "publish");
+            pageData.put("status", status);
             if (Date != null && !Date.isEmpty()) {
                 Log.i("Date",Date);
                 pageData.put("date", Date+":00");  // Sử dụng giá trị từ Date
