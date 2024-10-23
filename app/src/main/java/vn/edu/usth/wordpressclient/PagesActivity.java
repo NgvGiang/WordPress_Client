@@ -22,6 +22,7 @@ import vn.edu.usth.wordpressclient.PagesFragments.PageTrashedFragment;
 public class PagesActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
+    String domain;
 //    private String domain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,9 @@ public class PagesActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         // Find the Toolbar and set it as the ActionBar
 
-        Intent intent = getIntent();
-        String domain = intent.getStringExtra("domain");
+//        Intent intent = getIntent();
+//        domain = intent.getStringExtra("domain");
+        domain = DomainManager.getInstance().getSelectedDomain();
 
         FloatingActionButton fab = findViewById(R.id.fab);
 

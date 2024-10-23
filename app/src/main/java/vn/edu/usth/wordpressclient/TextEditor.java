@@ -86,17 +86,13 @@ public class TextEditor extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.publish_button) {
             status = "publish";
-//            Toast.makeText(this, "Published", Toast.LENGTH_SHORT).show();
             createPageByAPI(status);
             finish();
             return true;
         } else if (item.getItemId() == R.id.save_btn) {
-//            Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
             status = "draft";
             createPageByAPI(status);
-            Intent intent = new Intent(this, PagesActivity.class);
-            intent.putExtra("domain", domain);
-            startActivity(intent);
+            finish();
             return true;
         } else if (item.getItemId() == R.id.structure_btn) {
             showStructureDialog();
