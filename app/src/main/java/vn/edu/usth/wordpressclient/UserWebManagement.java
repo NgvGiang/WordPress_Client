@@ -29,6 +29,7 @@ public class UserWebManagement extends AppCompatActivity {
     ImageView chooseSites;
     TextView title,domain;
     ImageView siteImage;
+    DomainManager domainManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +37,10 @@ public class UserWebManagement extends AppCompatActivity {
         EdgeToEdge.enable(this);
 
         Intent intent = getIntent();
-        String domainString = intent.getStringExtra("domain");
+//        String domainString = intent.getStringExtra("domain");
+        domainManager = DomainManager.getInstance();
+        String domainString = domainManager.getSelectedDomain();
+        Log.i("Domain:",domainString);
         String titleString = intent.getStringExtra("title");
         String imgUrl = intent.getStringExtra("imgUrl");
         title = findViewById(R.id.title);

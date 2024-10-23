@@ -47,8 +47,10 @@ public class TextEditor extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_text_editor);
 
-        Intent intentdomain = getIntent();
-        domain = intentdomain.getStringExtra("domain");
+//        Intent intentdomain = getIntent();
+//        domain = intentdomain.getStringExtra("domain");
+        domain = DomainManager.getInstance().getSelectedDomain();
+
         if (domain != null) {
             Log.i("domain", domain);
         } else {
@@ -84,9 +86,10 @@ public class TextEditor extends AppCompatActivity {
         if (item.getItemId() == R.id.publish_button) {
 //            Toast.makeText(this, "Published", Toast.LENGTH_SHORT).show();
             createPageByAPI();
-            Intent intent = new Intent(this, PagesActivity.class);
-            intent.putExtra("domain", domain);
-            startActivity(intent);
+//            Intent intent = new Intent(this, PagesActivity.class);
+//            intent.putExtra("domain", domain);
+//            startActivity(intent);
+            finish();
             return true;
         } else if (item.getItemId() == R.id.save_btn) {
             Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
