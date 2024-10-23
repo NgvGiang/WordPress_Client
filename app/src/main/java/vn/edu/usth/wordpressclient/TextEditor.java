@@ -21,10 +21,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,6 +40,7 @@ public class TextEditor extends AppCompatActivity {
     private EditText editTextContent;
     private String domain;
     private String Date;
+    private SessionManager session;
     private String status;
 
     @Override
@@ -50,8 +49,9 @@ public class TextEditor extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_text_editor);
 
-        Intent intentdomain = getIntent();
-        domain = intentdomain.getStringExtra("domain");
+//        Intent intentdomain = getIntent();
+//        domain = intentdomain.getStringExtra("domain");
+        domain = DomainManager.getInstance().getSelectedDomain();
         if (domain != null) {
             Log.i("domain", domain);
         } else {
@@ -88,9 +88,7 @@ public class TextEditor extends AppCompatActivity {
             status = "publish";
 //            Toast.makeText(this, "Published", Toast.LENGTH_SHORT).show();
             createPageByAPI(status);
-            Intent intent = new Intent(this, PagesActivity.class);
-            intent.putExtra("domain", domain);
-            startActivity(intent);
+            finish();
             return true;
         } else if (item.getItemId() == R.id.save_btn) {
 //            Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
@@ -214,7 +212,8 @@ public class TextEditor extends AppCompatActivity {
         }
 
         // Lấy acess token của người dùng
-        SessionManagement session = new SessionManagement(TextEditor.this);
+//        SessionManager session = new SessionManager(TextEditor.this);
+        session = SessionManager.getInstance(this);
         String accessToken = session.getAccessToken();
 
         JSONObject pageData = new JSONObject();
