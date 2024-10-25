@@ -26,17 +26,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import vn.edu.usth.wordpressclient.R;
+
 import vn.edu.usth.wordpressclient.SessionManager;
 
 import vn.edu.usth.wordpressclient.SessionManager;
 import vn.edu.usth.wordpressclient.models.QueueManager;
 
+
 public class MeWebsiteActivity extends AppCompatActivity {
     LinearLayout username_btn, profile_btn, account_settings_btn, app_settings_btn,
             help_btn, share_wordpress_btn, wp_admin_btn, log_out_btn;
+
     TextView displayName, accountName;
     ImageView avatar;
     private SessionManager session;
+
 
 
     @Override
@@ -44,6 +48,7 @@ public class MeWebsiteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_me_website);
         EdgeToEdge.enable(this);
+
 
         session = SessionManager.getInstance(this);
         LinearLayout username_btn = findViewById(R.id.user_name_btn);
@@ -58,6 +63,7 @@ public class MeWebsiteActivity extends AppCompatActivity {
         session = SessionManager.getInstance(this);
         String accessToken = session.getAccessToken();
 
+
         profile_btn = findViewById(R.id.my_profile);
         account_settings_btn = findViewById(R.id.account_settings);
         app_settings_btn = findViewById(R.id.app_settings);
@@ -68,13 +74,14 @@ public class MeWebsiteActivity extends AppCompatActivity {
 
         displayName = findViewById(R.id.user_name);
         accountName = findViewById(R.id.account_name);
+
         avatar = findViewById(R.id.ic_profile_placeholder);
 
         profile_btn.setOnClickListener(view -> {
             Intent myProfileIntent = new Intent(MeWebsiteActivity.this, MyProfileActivity.class);
             startActivity(myProfileIntent);
         });
-        //startActivity(new Intent(this, MyProfileActivity.class)));
+
         account_settings_btn.setOnClickListener(view -> startActivity(new Intent(this, AccountSettingsActivity.class)));
         app_settings_btn.setOnClickListener(view -> startActivity(new Intent(this, AppSettingsActivity.class)));
         help_btn.setOnClickListener(view -> startActivity(new Intent(this, HelpActivity.class)));
@@ -134,6 +141,8 @@ public class MeWebsiteActivity extends AppCompatActivity {
                 return headers;
             }
         };
+
         QueueManager.getInstance(this).addToRequestQueue(fetchUserInfoRequest);
+
     }
 }
