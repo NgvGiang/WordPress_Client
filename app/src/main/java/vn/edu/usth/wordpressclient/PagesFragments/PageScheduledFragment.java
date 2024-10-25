@@ -9,10 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import vn.edu.usth.wordpressclient.R;
-import vn.edu.usth.wordpressclient.TextEditor;
+import vn.edu.usth.wordpressclient.PagesTextEditor;
 
 public class PageScheduledFragment extends Fragment {
     Button ScheduledButton;
@@ -24,7 +23,7 @@ public class PageScheduledFragment extends Fragment {
         ScheduledButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TextEditor.class);
+                Intent intent = new Intent(getContext(), PagesTextEditor.class);
                 startActivity(intent);
             }
         });

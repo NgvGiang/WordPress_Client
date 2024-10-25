@@ -16,7 +16,7 @@
             android:name=".Dont_have_site_activity"
             android:exported="false" />
         <activity
-            android:name=".TextEditor"
+            android:name=".PagesTextEditor"
             android:exported="false" />
         <activity
             android:name=".MeActivity.MyProfileActivity"

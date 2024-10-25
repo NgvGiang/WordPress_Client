@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import vn.edu.usth.wordpressclient.models.MySingleton;
+import vn.edu.usth.wordpressclient.models.QueueManager;
 
 public class Choose_your_web extends AppCompatActivity {
     TextView displayName,acc_name;
@@ -107,7 +107,7 @@ public class Choose_your_web extends AppCompatActivity {
                 return headers;
             }
         };
-        MySingleton.getInstance(this).addToRequestQueue(fetchSitesRequest);
+        QueueManager.getInstance(this).addToRequestQueue(fetchSitesRequest);
     }
     private void fetchSites(String accessToken){
         String url = "https://public-api.wordpress.com/rest/v1.1/me/sites";
@@ -160,7 +160,7 @@ public class Choose_your_web extends AppCompatActivity {
                 return headers;
             }
         };
-        MySingleton.getInstance(this).addToRequestQueue(fetchSitesRequest);
+        QueueManager.getInstance(this).addToRequestQueue(fetchSitesRequest);
 
     }
 }

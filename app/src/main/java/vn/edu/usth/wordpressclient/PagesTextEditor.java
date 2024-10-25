@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -32,9 +31,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import vn.edu.usth.wordpressclient.models.MySingleton;
+import vn.edu.usth.wordpressclient.models.QueueManager;
 
-public class TextEditor extends AppCompatActivity {
+public class PagesTextEditor extends AppCompatActivity {
 
     private EditText editTextTitle;
     private EditText editTextContent;
@@ -46,9 +45,6 @@ public class TextEditor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_text_editor);
-
-//        Intent intentdomain = getIntent();
-//        domain = intentdomain.getStringExtra("domain");
         domain = DomainManager.getInstance().getSelectedDomain();
 
         if (domain != null) {
@@ -84,15 +80,12 @@ public class TextEditor extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.publish_button) {
-//            Toast.makeText(this, "Published", Toast.LENGTH_SHORT).show();
-            createPageByAPI();
-//            Intent intent = new Intent(this, PagesActivity.class);
-//            intent.putExtra("domain", domain);
-//            startActivity(intent);
+            createPageByAPI("publish");
             finish();
             return true;
         } else if (item.getItemId() == R.id.save_btn) {
-            Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+            createPageByAPI("draft");
+            finish();
             return true;
         } else if (item.getItemId() == R.id.structure_btn) {
             showStructureDialog();
@@ -157,7 +150,7 @@ public class TextEditor extends AppCompatActivity {
                 //Take right now
                 String dateTime = String.format("Scheduled for %d-%02d-%02d %02d:%02d", year, month + 1, day, hour, minute);
 
-                Toast.makeText(TextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
+                Toast.makeText(PagesTextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -184,7 +177,7 @@ public class TextEditor extends AppCompatActivity {
 
                         String dateTime = String.format("Scheduled for %d-%02d-%02d %02d:%02d", year, month + 1, day, selectedHour, selectedMinute);
 
-                        Toast.makeText(TextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PagesTextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
 
                     }
                 }, hour, minute, true);
@@ -196,9 +189,8 @@ public class TextEditor extends AppCompatActivity {
         return String.format("%d-%02d-%02dT%02d:%02d", year, month + 1, day, hour, minute);
     }
 
-    public void createPageByAPI(){
+    public void createPageByAPI(String status){
         String Url = "https://public-api.wordpress.com/wp/v2/sites/"+domain+"/pages";
-
         // Chuyển nội dung người dùng nhập thành chuỗi
         String title = editTextTitle.getText().toString();
         String content = editTextContent.getText().toString();
@@ -208,7 +200,7 @@ public class TextEditor extends AppCompatActivity {
         }
 
         // Lấy acess token của người dùng
-//        SessionManager session = new SessionManager(TextEditor.this);
+//        SessionManager session = new SessionManager(PagesTextEditor.this);
         session = SessionManager.getInstance(this);
         String accessToken = session.getAccessToken();
 
@@ -216,7 +208,7 @@ public class TextEditor extends AppCompatActivity {
         try {
             pageData.put("title", title);
             pageData.put("content", content);
-            pageData.put("status", "publish");
+            pageData.put("status", status);
             if (Date != null && !Date.isEmpty()) {
                 Log.i("Date",Date);
                 pageData.put("date", Date+":00");  // Sử dụng giá trị từ Date
@@ -274,7 +266,7 @@ public class TextEditor extends AppCompatActivity {
             }
         };
 
-        MySingleton.getInstance(this).addToRequestQueue(pageRequest);
+        QueueManager.getInstance(this).addToRequestQueue(pageRequest);
     }
 }
 
