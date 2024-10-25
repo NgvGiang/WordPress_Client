@@ -7,12 +7,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import vn.edu.usth.wordpressclient.CommentRecyclerViewAdapter;
 import vn.edu.usth.wordpressclient.R;
@@ -25,10 +29,16 @@ public class SpamCommentsFragment extends Fragment {
     List<Comment> comments;
     RecyclerView recyclerView;
     CommentRecyclerViewAdapter commentRecyclerViewAdapter;
-    private static final int PER_PAGE = 5;
+    private static final int PER_PAGE = 20;
     private int currentPage = 1;
-    private boolean isLastPage = false;
+    private boolean isLastPageOfSpamComment = false;
     private boolean isLoading = false;
+
+    FragmentListener fragmentListener;
+
+    public interface FragmentListener {
+        void onFragmentStarted();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +53,7 @@ public class SpamCommentsFragment extends Fragment {
         } else {
             comments = savedInstanceState.getParcelableArrayList("comments");
         }
+
         recyclerView = view.findViewById(R.id.fragment_spam_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -51,18 +62,18 @@ public class SpamCommentsFragment extends Fragment {
                 super.onScrolled(recyclerView, dx, dy);
                 LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (linearLayoutManager != null && linearLayoutManager.findLastVisibleItemPosition() == comments.size() - 1) {
-                    if (!isLoading && !isLastPage) {
+                    if (!isLoading && !isLastPageOfSpamComment) {
                         loadMoreComments();
                     }
                 }
             }
         });
-        commentRecyclerViewAdapter = new CommentRecyclerViewAdapter(comments, getContext(), userDomain);
+        commentRecyclerViewAdapter = new CommentRecyclerViewAdapter(comments, getContext(), userDomain, this);
         recyclerView.setAdapter(commentRecyclerViewAdapter);
         if (savedInstanceState != null) {
             comments = savedInstanceState.getParcelableArrayList("comments");
             currentPage = savedInstanceState.getInt("currentPage");
-            isLastPage = savedInstanceState.getBoolean("isLastPage");
+            isLastPageOfSpamComment = savedInstanceState.getBoolean("isLastPage");
             commentRecyclerViewAdapter.notifyDataSetChanged();
         } else {
             loadInitialComments();
@@ -75,7 +86,7 @@ public class SpamCommentsFragment extends Fragment {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList("comments", new ArrayList<>(comments));
         outState.putInt("currentPage", currentPage);
-        outState.putBoolean("isLastPage", isLastPage);
+        outState.putBoolean("isLastPage", isLastPageOfSpamComment);
     }
 
     private void loadMoreComments() {
@@ -87,7 +98,7 @@ public class SpamCommentsFragment extends Fragment {
                 commentRecyclerViewAdapter.notifyDataSetChanged();
                 isLoading = false;
                 if (newComments.size() < 5) {
-                    isLastPage = true;
+                    isLastPageOfSpamComment = true;
                 } else {
                     currentPage++;
                 }
@@ -109,7 +120,7 @@ public class SpamCommentsFragment extends Fragment {
                 commentRecyclerViewAdapter.notifyDataSetChanged();
                 isLoading = false;
                 if (newComments.size() < 5) {
-                    isLastPage = true;
+                    isLastPageOfSpamComment = true;
                 } else {
                     currentPage++;
                 }
@@ -123,19 +134,34 @@ public class SpamCommentsFragment extends Fragment {
     }
 
     public void removeCommentAtPosition(int position) {
-        if (position >= 0 && position < comments.size()) {
-            comments.remove(position);
-            commentRecyclerViewAdapter.notifyItemRemoved(position);
-        }
+        Log.i("bonjour", "remove");
+        comments.remove(position);
+        commentRecyclerViewAdapter.notifyItemRemoved(position);
+    }
+
+    public void removeCommentBaseOnId(long id) {
+        int index = IntStream.range(0, comments.size()).filter(i -> comments.get(i).getId() == id).findFirst().getAsInt();
+        comments.remove(index);
+        Log.i("commentRecyclerViewAdapter.getItemCount()", "" + commentRecyclerViewAdapter.getItemCount());
+        commentRecyclerViewAdapter.notifyItemRemoved(index);
+
     }
 
     public void addComment(Comment comment) {
+        Log.i("spam cmt size", "" + comments.size());
         comment.setStatus("spam");
         comments.add(comment);
-        commentRecyclerViewAdapter.notifyItemInserted(comments.size() - 1);
+        comments.sort(((o1, o2) -> {
+            LocalDateTime d1 = LocalDateTime.parse(o1.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+            LocalDateTime d2 = LocalDateTime.parse(o2.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+            return d2.compareTo(d1);
+        }));
+        commentRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     public List<Comment> getComments() {
         return this.comments;
     }
+
+
 }

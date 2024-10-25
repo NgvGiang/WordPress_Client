@@ -19,6 +19,7 @@ public class Comment implements Parcelable, Serializable {
     private String link;
     private String status;
     private String authorAvatar;
+    private Boolean isUnreplied;
 
     public Comment() {
     }
@@ -35,6 +36,22 @@ public class Comment implements Parcelable, Serializable {
         this.link = link;
         this.status = status;
         this.authorAvatar = authorAvatar;
+    }
+
+    public String getAuthorUrl() {
+        return authorUrl;
+    }
+
+    public void setAuthorUrl(String authorUrl) {
+        this.authorUrl = authorUrl;
+    }
+
+    public Boolean getUnreplied() {
+        return isUnreplied;
+    }
+
+    public void setUnreplied(Boolean unreplied) {
+        isUnreplied = unreplied;
     }
 
     public Long getId() {

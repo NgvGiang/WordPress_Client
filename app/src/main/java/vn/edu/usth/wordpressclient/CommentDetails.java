@@ -1,18 +1,27 @@
 package vn.edu.usth.wordpressclient;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Shader;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Html;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,13 +40,17 @@ import java.util.List;
 
 import vn.edu.usth.wordpressclient.models.Comment;
 import vn.edu.usth.wordpressclient.models.CommentDetailCallback;
+import vn.edu.usth.wordpressclient.models.GetCommentsCallback;
 
 public class CommentDetails extends AppCompatActivity {
     TextView authorName, title, content;
+    EditText editText;
     RelativeLayout approve, spam, like, more;
     String userDomain;
     Comment comment;
     int position;
+    String fragment;
+    Comment repliedComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +60,15 @@ public class CommentDetails extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.comment_detail_tool_bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.comments));
 
         comment = (Comment) getIntent().getSerializableExtra("comment");
         userDomain = getIntent().getStringExtra("domain");
         position = getIntent().getIntExtra("position", -1);
+        fragment = getIntent().getStringExtra("fragment");
+        Log.i("Fragment from comment detail", fragment);
         Picasso.get().load(comment.getAuthorAvatar())
                 .error(R.drawable.blank_avatar)
                 .transform(new Transformation() {
@@ -100,6 +116,9 @@ public class CommentDetails extends AppCompatActivity {
         like = findViewById(R.id.like_comment);
         more = findViewById(R.id.more_action_on_comment);
 
+        ImageView uploadReply = findViewById(R.id.upload_reply);
+        editText = findViewById(R.id.input_reply);
+
         if (comment.getStatus().equals("approved")) {
             approvedIcon.setImageResource(R.drawable.baseline_done_24);
             approvedText.setTextColor(Color.parseColor("#26A41A"));
@@ -108,6 +127,29 @@ public class CommentDetails extends AppCompatActivity {
         if (comment.getStatus().equals("spam")) {
             spamText.setText("Not Spam");
         }
+
+        if (comment.getStatus().equals("trash")) {
+            approvedIcon.setImageResource(R.drawable.baseline_restore_24);
+            approvedText.setText("Restore");
+        }
+
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!comment.getStatus().equals("trash")) {
+                    showPopupMenu(v);
+                } else {
+                    showTrashPopupMenu(v);
+                }
+            }
+        });
+
+        uploadReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replyComment();
+            }
+        });
 
         approve.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,12 +163,20 @@ public class CommentDetails extends AppCompatActivity {
                     approveComment("approve");
                     resultIntent.putExtra("updatedCommentId", position);
                     resultIntent.putExtra("status", "approve");
+                    if (comment.getStatus().equals("hold")) {
+                        resultIntent.putExtra("ChangeFrom", "ApproveHold");
+                    } else if (comment.getStatus().equals("spam")) {
+                        resultIntent.putExtra("ChangeFrom", "SpamToApprove");
+                    }
+                    resultIntent.putExtra("fragment", fragment);
                 } else {
                     Log.i("Status approve", comment.getStatus());
                     Log.i("position", "" + position);
                     pendingComment("hold");
                     resultIntent.putExtra("updatedCommentId", position);
                     resultIntent.putExtra("status", "hold");
+                    resultIntent.putExtra("ChangeFrom", "ApproveHold");
+                    resultIntent.putExtra("fragment", fragment);
                 }
                 setResult(Activity.RESULT_OK, resultIntent);
                 finish();
@@ -136,25 +186,200 @@ public class CommentDetails extends AppCompatActivity {
         spam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent();
                 if (!comment.getStatus().equals("spam")) {
+                    Log.i("Status spam", comment.getStatus());
+                    Log.i("position", "" + position);
                     spamComment("spam");
+                    intent.putExtra("updatedCommentId", position);
+                    intent.putExtra("status", "spam");
+                    if (comment.getStatus().equals("approved")) {
+                        intent.putExtra("ChangeFrom", "ApproveSpam");
+                    }
+                    if (comment.getStatus().equals("hold")){
+                        intent.putExtra("ChangeFrom", "SpamHold");
+                    }
+                    intent.putExtra("fragment", fragment);
                 } else {
+                    Log.i("Status approved", comment.getStatus());
+                    Log.i("position", "" + position);
                     approveComment("approve");
+                    intent.putExtra("updatedCommentId", position);
+                    intent.putExtra("status", "approve");
+                    intent.putExtra("ChangeFrom", "ApproveSpam");
+                    intent.putExtra("fragment", fragment);
                 }
+                setResult(Activity.RESULT_OK, intent);
                 finish();
             }
         });
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
+
+
     public void approveComment(String status) {
-        CommentAPIServices.updateCommentStatus(this, userDomain, comment.getId(), status);
+        CommentAPIServices.updateCommentStatus(this, userDomain, comment.getId(), status, new CommentDetailCallback() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 
     public void spamComment(String status) {
-        CommentAPIServices.updateCommentStatus(this, userDomain, comment.getId(), status);
+        CommentAPIServices.updateCommentStatus(this, userDomain, comment.getId(), status, new CommentDetailCallback() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 
     public void pendingComment(String status) {
-        CommentAPIServices.updateCommentStatus(this, userDomain, comment.getId(), status);
+        CommentAPIServices.updateCommentStatus(this, userDomain, comment.getId(), status, new CommentDetailCallback() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+    }
+
+    public void replyComment() {
+        String reply = editText.getText().toString();
+        CommentAPIServices.replyComment(this, userDomain, reply, comment.getId(), comment.getPost(), new GetCommentsCallback() {
+            @Override
+            public void onSuccess(List<Comment> newComments) {
+                repliedComment = newComments.get(0);
+                Log.i("Reply comment log cat in function", repliedComment.getContent());
+                Toast.makeText(CommentDetails.this, "Reply published", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.putExtra("replyComment", (Parcelable) repliedComment);
+                setResult(Activity.RESULT_OK, intent);
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+
+    }
+
+    private void showPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu.getMenuInflater().inflate(R.menu.comment_detail_menu, popupMenu.getMenu());
+
+        // Handle menu item clicks
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent = new Intent();
+                if (item.getItemId() == R.id.move_to_trash) {
+                    moveCommentToTrash("trash");
+                    intent.putExtra("updatedCommentId", position);
+                    intent.putExtra("status", "trash");
+                    intent.putExtra("fragment", fragment);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.edit_comment) {
+                    Intent intent1 = new Intent(CommentDetails.this, EditCommentActivity.class);
+                    intent1.putExtra("author", comment.getAuthor());
+                    intent1.putExtra("content", comment.getContent());
+                    intent1.putExtra("authorName", comment.getAuthorName());
+                    intent1.putExtra("authorUrl", comment.getAuthorUrl());
+                    intent1.putExtra("domain", userDomain);
+                    intent1.putExtra("commentId", comment.getId());
+                    CommentDetails.this.startActivity(intent1);
+                    return true;
+                } else if (item.getItemId() == R.id.copy_address) {
+                    Toast.makeText(CommentDetails.this, "copy address", Toast.LENGTH_SHORT).show();
+                    return true;
+                } else {
+                    return true;
+                }
+            }
+        });
+        popupMenu.show();
+    }
+
+    private void showTrashPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu.getMenuInflater().inflate(R.menu.trash_comment_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent = new Intent();
+                if (item.getItemId() == R.id.delete_forever) {
+                    deleteComment();
+                    intent.putExtra("updatedCommentId", position);
+                    intent.putExtra("status", "delete");
+                    intent.putExtra("fragment", fragment);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.trash_edit_comment) {
+                    Intent intent1 = new Intent(CommentDetails.this, EditCommentActivity.class);
+                    intent1.putExtra("author", comment.getAuthor());
+                    intent1.putExtra("content", comment.getContent());
+                    intent1.putExtra("domain", userDomain);
+                    intent1.putExtra("commentId", comment.getId());
+                    CommentDetails.this.startActivity(intent1);
+                    return true;
+                } else {
+                    return true;
+                }
+            }
+        });
+        popupMenu.show();
+    }
+
+    public void deleteComment() {
+        CommentAPIServices.deleteComment(this, userDomain, comment.getId(), new GetCommentsCallback() {
+            @Override
+            public void onSuccess(List<Comment> newComments) {
+                Toast.makeText(CommentDetails.this, "Deleted", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+    }
+
+    public void moveCommentToTrash(String status) {
+        CommentAPIServices.updateCommentStatus(this, userDomain, comment.getId(), status, new CommentDetailCallback() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(CommentDetails.this, "Move to trash", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 }

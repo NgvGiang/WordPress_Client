@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 import android.os.Parcelable;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -36,11 +38,13 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentView
     private List<Comment> comments;
     private Context context;
     private String domain;
+    private Fragment fragment;
 
-    public CommentRecyclerViewAdapter(List<Comment> comments, Context context, String domain) {
+    public CommentRecyclerViewAdapter(List<Comment> comments, Context context, String domain, Fragment fragment) {
         this.comments = comments;
         this.context = context;
         this.domain = domain;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -93,6 +97,7 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentView
                 return "circle";
             }
         }).into(holder.authorAvatar);
+        Log.i("Binding comment", "ID: " + comments.get(position).getId());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +105,7 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentView
                 intent.putExtra("comment", (Serializable) comments.get(holder.getAdapterPosition()));
                 intent.putExtra("domain", domain);
                 intent.putExtra("position", holder.getAdapterPosition());
+                intent.putExtra("fragment", fragment.getClass().getSimpleName());
                 ((CommentActivity) context).commentDetailLauncher.launch(intent);
             }
         });

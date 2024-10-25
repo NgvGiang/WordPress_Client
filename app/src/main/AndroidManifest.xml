@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,6 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.WordPressClient">
+        <activity
+            android:name=".EditCommentActivity"
+            android:exported="false" />
         <activity
             android:name=".Dont_have_site_activity"
             android:exported="false" />
@@ -79,26 +84,26 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
-                    android:scheme="myapp"
-                    android:host="oauth2redirect" />
+                    android:host="oauth2redirect"
+                    android:scheme="myapp" />
             </intent-filter>
         </activity>
         <activity
             android:name=".CommentActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".CommentDetails"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

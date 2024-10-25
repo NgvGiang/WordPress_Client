@@ -7,12 +7,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import vn.edu.usth.wordpressclient.CommentRecyclerViewAdapter;
 import vn.edu.usth.wordpressclient.R;
@@ -57,7 +61,7 @@ public class TrashedCommentsFragment extends Fragment {
                 }
             }
         });
-        commentRecyclerViewAdapter = new CommentRecyclerViewAdapter(comments, getContext(), userDomain);
+        commentRecyclerViewAdapter = new CommentRecyclerViewAdapter(comments, getContext(), userDomain, this);
         recyclerView.setAdapter(commentRecyclerViewAdapter);
         if (savedInstanceState != null) {
             comments = savedInstanceState.getParcelableArrayList("comments");
@@ -120,5 +124,31 @@ public class TrashedCommentsFragment extends Fragment {
                 isLoading = false;
             }
         });
+    }
+
+    public void removeCommentAtPosition(int position) {
+        Log.i("cmt size", "" + comments.size());
+        comments.remove(position);
+        commentRecyclerViewAdapter.notifyItemRemoved(position);
+
+    }
+    public void removeCommentBaseOnId(long id) {
+        int index = IntStream.range(0, comments.size()).filter(i -> comments.get(i).getId() == id).findFirst().getAsInt();
+        comments.remove(index);
+        commentRecyclerViewAdapter.notifyItemRemoved(index);
+    }
+    public void addComment(Comment comment) {
+        comment.setStatus("trash");
+        comments.add(comment);
+        comments.sort(((o1, o2) -> {
+            LocalDateTime d1 = LocalDateTime.parse(o1.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+            LocalDateTime d2 = LocalDateTime.parse(o2.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+            return d2.compareTo(d1);
+        }));
+        commentRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    public List<Comment> getComments() {
+        return this.comments;
     }
 }

@@ -7,12 +7,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import vn.edu.usth.wordpressclient.CommentRecyclerViewAdapter;
 import vn.edu.usth.wordpressclient.R;
@@ -25,9 +29,9 @@ public class AllCommentsFragment extends Fragment {
     List<Comment> comments;
     RecyclerView recyclerView;
     CommentRecyclerViewAdapter commentRecyclerViewAdapter;
-    private static final int PER_PAGE = 5;
+    private static final int PER_PAGE = 100;
     private int currentPage = 1;
-    private boolean isLastPage = false;
+    private boolean isLastPageOfAllFragment = false;
     private boolean isLoading = false;
 
     @Override
@@ -56,18 +60,23 @@ public class AllCommentsFragment extends Fragment {
                 super.onScrolled(recyclerView, dx, dy);
                 LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (linearLayoutManager != null && linearLayoutManager.findLastVisibleItemPosition() == comments.size() - 1) {
-                    if (!isLoading && !isLastPage) {
+                    Log.i("outer if", "outer if");
+                    Log.i("isLoading", String.valueOf(isLoading));
+                    Log.i("isLastPage", String.valueOf(isLastPageOfAllFragment));
+
+                    if (!isLoading && !isLastPageOfAllFragment) {
+                        Log.i("inner if", "inner if");
                         loadMoreComments();
                     }
                 }
             }
         });
-        commentRecyclerViewAdapter = new CommentRecyclerViewAdapter(comments, getContext(), userDomain);
+        commentRecyclerViewAdapter = new CommentRecyclerViewAdapter(comments, getContext(), userDomain, this);
         recyclerView.setAdapter(commentRecyclerViewAdapter);
         if (savedInstanceState != null) {
             comments = savedInstanceState.getParcelableArrayList("comments");
             currentPage = savedInstanceState.getInt("currentPage");
-            isLastPage = savedInstanceState.getBoolean("isLastPage");
+            isLastPageOfAllFragment = savedInstanceState.getBoolean("isLastPage");
             commentRecyclerViewAdapter.notifyDataSetChanged();
         } else {
             loadInitialComments();
@@ -81,21 +90,28 @@ public class AllCommentsFragment extends Fragment {
 
         outState.putParcelableArrayList("comments", new ArrayList<>(comments));
         outState.putInt("currentPage", currentPage);
-        outState.putBoolean("isLastPage", isLastPage);
+        outState.putBoolean("isLastPage", isLastPageOfAllFragment);
     }
 
     private void loadMoreComments() {
         isLoading = true;
-        CommentAPIServices.getAllCommentsFromUser(getContext(), userDomain, PER_PAGE, currentPage, new GetCommentsCallback() {
+        List<Comment> commentList = new ArrayList<>();
+        CommentAPIServices.getAllCommentsFromUser(getContext(), userDomain, PER_PAGE, currentPage, commentList, new GetCommentsCallback() {
             @Override
             public void onSuccess(List<Comment> newComments) {
                 comments.addAll(newComments);
+                comments.sort(((o1, o2) -> {
+                    LocalDateTime d1 = LocalDateTime.parse(o1.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+                    LocalDateTime d2 = LocalDateTime.parse(o2.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+                    return d2.compareTo(d1);
+                }));
                 commentRecyclerViewAdapter.notifyDataSetChanged();
                 isLoading = false;
-                if (newComments.size() < 5) {
-                    isLastPage = true;
+                if (newComments.size() < 100) {
+                    isLastPageOfAllFragment = true;
                 } else {
                     currentPage++;
+                    isLastPageOfAllFragment = false;
                 }
             }
 
@@ -108,16 +124,26 @@ public class AllCommentsFragment extends Fragment {
 
     private void loadInitialComments() {
         isLoading = true;
-        CommentAPIServices.getAllCommentsFromUser(getContext(), userDomain, PER_PAGE, currentPage, new GetCommentsCallback() {
+        List<Comment> commentList = new ArrayList<>();
+        CommentAPIServices.getAllCommentsFromUser(getContext(), userDomain, PER_PAGE, currentPage, commentList, new GetCommentsCallback() {
             @Override
             public void onSuccess(List<Comment> newComments) {
+                Log.i("cmt list size", "" + newComments.size());
                 comments.addAll(newComments);
+                comments.sort(((o1, o2) -> {
+                    LocalDateTime d1 = LocalDateTime.parse(o1.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+                    LocalDateTime d2 = LocalDateTime.parse(o2.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+                    return d2.compareTo(d1);
+                }));
                 commentRecyclerViewAdapter.notifyDataSetChanged();
                 isLoading = false;
-                if (newComments.size() < 5) {
-                    isLastPage = true;
+                if (newComments.size() < 100) {
+                    Log.i("check last page", "last page confirm!");
+                    isLastPageOfAllFragment = true;
                 } else {
+                    Log.i("check", "checked");
                     currentPage++;
+                    isLastPageOfAllFragment = false;
                 }
             }
 
@@ -126,5 +152,37 @@ public class AllCommentsFragment extends Fragment {
                 isLoading = false;
             }
         });
+    }
+
+    public List<Comment> getComments() {
+        return this.comments;
+    }
+
+    public void removeCommentAtPosition(int position) {
+        comments.remove(position);
+        commentRecyclerViewAdapter.notifyItemRemoved(position);
+
+    }
+
+    public void removeCommentBaseOnId(long id) {
+        int index = IntStream.range(0, comments.size()).filter(i -> comments.get(i).getId() == id).findFirst().getAsInt();
+        comments.remove(index);
+        commentRecyclerViewAdapter.notifyItemRemoved(index);
+    }
+
+    public void addComment(Comment comment) {
+        comment.setStatus("approved");
+        comments.add(comment);
+        comments.sort(((o1, o2) -> {
+            LocalDateTime d1 = LocalDateTime.parse(o1.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+            LocalDateTime d2 = LocalDateTime.parse(o2.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+            return d2.compareTo(d1);
+        }));
+        commentRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    public void changeStatus(Comment comment, int position) {
+        comments.set(position, comment);
+        commentRecyclerViewAdapter.notifyItemChanged(position);
     }
 }
