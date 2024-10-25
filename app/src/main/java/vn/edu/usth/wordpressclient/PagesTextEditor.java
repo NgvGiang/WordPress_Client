@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
@@ -34,7 +37,7 @@ import java.util.Map;
 import vn.edu.usth.wordpressclient.models.QueueManager;
 
 public class PagesTextEditor extends AppCompatActivity {
-
+    private ProgressBar toolbarProgressBar;
     private EditText editTextTitle;
     private EditText editTextContent;
     private String domain;
@@ -53,7 +56,7 @@ public class PagesTextEditor extends AppCompatActivity {
             Log.i("domain", "Domain is null");
         }
 
-
+        toolbarProgressBar = findViewById(R.id.toolbar_progress_bar);
         editTextContent = findViewById(R.id.fab_content);
         editTextTitle = findViewById(R.id.fab_title);
 
@@ -81,11 +84,11 @@ public class PagesTextEditor extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.publish_button) {
             createPageByAPI("publish");
-            finish();
+//            finish();
             return true;
         } else if (item.getItemId() == R.id.save_btn) {
             createPageByAPI("draft");
-            finish();
+//            finish();
             return true;
         } else if (item.getItemId() == R.id.structure_btn) {
             showStructureDialog();
@@ -190,6 +193,7 @@ public class PagesTextEditor extends AppCompatActivity {
     }
 
     public void createPageByAPI(String status){
+        toolbarProgressBar.setVisibility(View.VISIBLE);
         String Url = "https://public-api.wordpress.com/wp/v2/sites/"+domain+"/pages";
         // Chuyển nội dung người dùng nhập thành chuỗi
         String title = editTextTitle.getText().toString();
@@ -240,6 +244,8 @@ public class PagesTextEditor extends AppCompatActivity {
                         String date = jsonResponse.getString("date");
                         Log.i("page created at:", date);
                         Log.i("Creating a page", "success");
+                        toolbarProgressBar.setVisibility(View.GONE);
+                        finish();
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
@@ -247,6 +253,7 @@ public class PagesTextEditor extends AppCompatActivity {
                 error -> {
                     VolleyLog.d("volley", "Error: " + error.getMessage());
                     error.printStackTrace();
+                    toolbarProgressBar.setVisibility(View.GONE);
                 }
         ){
             @Override
@@ -264,8 +271,14 @@ public class PagesTextEditor extends AppCompatActivity {
             public byte[] getBody() {
                 return pageData.toString().getBytes(StandardCharsets.UTF_8);
             }
-        };
 
+        };
+        pageRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+//                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                0,  // No retries
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
         QueueManager.getInstance(this).addToRequestQueue(pageRequest);
     }
 }
