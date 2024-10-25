@@ -9,28 +9,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import vn.edu.usth.wordpressclient.R;
-import vn.edu.usth.wordpressclient.TextEditor;
+import vn.edu.usth.wordpressclient.PagesTextEditor;
 
 public class PagePublishedFragment extends Fragment {
     Button PublishedButton;
-    private String domain;
+//    private String domain;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page_published, container, false);
-        domain = getArguments().getString("domain");
-
         PublishedButton = view.findViewById(R.id.published_page_button);
         PublishedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TextEditor.class);
-                intent.putExtra("domain",domain);
-
+                Intent intent = new Intent(getContext(), PagesTextEditor.class);
                 startActivity(intent);
             }
         });

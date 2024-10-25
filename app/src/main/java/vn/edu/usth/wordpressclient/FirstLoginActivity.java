@@ -15,7 +15,6 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,16 +23,19 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import vn.edu.usth.wordpressclient.models.MySingleton;
+import vn.edu.usth.wordpressclient.models.QueueManager;
 
 public class FirstLoginActivity extends AppCompatActivity {
-
     Button login_signup;
     TextView enter_site_address;
+    private SessionManager session;
+
     @Override
     protected void onStart(){
         super.onStart();
-        SessionManagement session = new SessionManagement(this);
+        session = SessionManager.getInstance(this);
+//        SessionManager session = new SessionManager(this);
+//        SessionManager session = SessionManager.getInstance(this);
         if (session.isLoggedIn()) {
             moveToMainActivity();
             finish();
@@ -41,7 +43,6 @@ public class FirstLoginActivity extends AppCompatActivity {
     }
 
     private void moveToMainActivity() {
-        SessionManagement session = new SessionManagement(this);
         String accessToken = session.getAccessToken();
         String url = "https://public-api.wordpress.com/rest/v1.1/me/sites";
         StringRequest getSiteRequest = new StringRequest(
@@ -79,14 +80,21 @@ public class FirstLoginActivity extends AppCompatActivity {
                 return headers;
             }
         };
-        MySingleton.getInstance(this).addToRequestQueue(getSiteRequest);
+        QueueManager.getInstance(this).addToRequestQueue(getSiteRequest);
 //        Volley.newRequestQueue(this).add(getSiteRequest);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+//        //
+//        if (!session.isLoggedIn() || session.getAccessToken() == null) {
+//            Intent intent = new Intent(FirstLoginActivity.this, FirstLoginActivity.class);
+//            startActivity(intent);
+//            finish();
+//            return;
+//        }
+//        //
         Uri uri = getIntent().getData();
         if (uri != null && uri.toString().startsWith("myapp://oauth2redirect")) {
             Log.d("SignUpActivity", "onResume called with URI: " + uri);
@@ -95,6 +103,7 @@ public class FirstLoginActivity extends AppCompatActivity {
 
             if (authorizationCode != null) {
                 getAccessTokenByAuthorizationCode(authorizationCode);
+                getIntent().setData(null);
                 Log.i("SignUpActivity", "Authorization Code: " + authorizationCode);
             } else {
                 Log.e("SignUpActivity", "Authorization code is null");
@@ -139,12 +148,10 @@ public class FirstLoginActivity extends AppCompatActivity {
                 return params;
             }
         };
-//            Volley.newRequestQueue(this).add(tokenRequest);
-            MySingleton.getInstance(this).addToRequestQueue(tokenRequest);
+            QueueManager.getInstance(this).addToRequestQueue(tokenRequest);
     };//end getAccessTokenByAuthorizationCode
 
     private void onLoginSuccess(String accessToken) {
-        SessionManagement session = new SessionManagement(this);
         session.createLoginSession(accessToken);
         moveToMainActivity();
         finish();

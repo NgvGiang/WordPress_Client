@@ -4,7 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-public class SessionManagement {
+public class SessionManager {
+    private static SessionManager instance;
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
     private Context context;
@@ -15,12 +16,17 @@ public class SessionManagement {
     private static final String KEY_ACCESS_TOKEN = "access_token";
 
     // Constructor
-    public SessionManagement(Context context) {
+    private SessionManager(Context context) {
         this.context = context;
         prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         editor = prefs.edit();
     }
-
+    public static synchronized SessionManager getInstance(Context context) {
+        if (instance == null) {
+            instance = new SessionManager(context);
+        }
+        return instance;
+    }
     // Create login session
     public void createLoginSession(String accessToken) {
         editor.putBoolean(IS_LOGGED_IN, true);

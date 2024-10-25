@@ -4,14 +4,15 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -20,11 +21,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,30 +34,29 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import vn.edu.usth.wordpressclient.models.MySingleton;
+import vn.edu.usth.wordpressclient.models.QueueManager;
 
-public class TextEditor extends AppCompatActivity {
-
+public class PagesTextEditor extends AppCompatActivity {
+    private ProgressBar toolbarProgressBar;
     private EditText editTextTitle;
     private EditText editTextContent;
     private String domain;
     private String Date;
-
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_text_editor);
+        domain = DomainManager.getInstance().getSelectedDomain();
 
-        Intent intentdomain = getIntent();
-        domain = intentdomain.getStringExtra("domain");
         if (domain != null) {
             Log.i("domain", domain);
         } else {
             Log.i("domain", "Domain is null");
         }
 
-
+        toolbarProgressBar = findViewById(R.id.toolbar_progress_bar);
         editTextContent = findViewById(R.id.fab_content);
         editTextTitle = findViewById(R.id.fab_title);
 
@@ -84,14 +83,12 @@ public class TextEditor extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.publish_button) {
-//            Toast.makeText(this, "Published", Toast.LENGTH_SHORT).show();
-            createPageByAPI();
-            Intent intent = new Intent(this, PagesActivity.class);
-            intent.putExtra("domain", domain);
-            startActivity(intent);
+            createPageByAPI("publish");
+//            finish();
             return true;
         } else if (item.getItemId() == R.id.save_btn) {
-            Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+            createPageByAPI("draft");
+//            finish();
             return true;
         } else if (item.getItemId() == R.id.structure_btn) {
             showStructureDialog();
@@ -156,7 +153,7 @@ public class TextEditor extends AppCompatActivity {
                 //Take right now
                 String dateTime = String.format("Scheduled for %d-%02d-%02d %02d:%02d", year, month + 1, day, hour, minute);
 
-                Toast.makeText(TextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
+                Toast.makeText(PagesTextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -183,7 +180,7 @@ public class TextEditor extends AppCompatActivity {
 
                         String dateTime = String.format("Scheduled for %d-%02d-%02d %02d:%02d", year, month + 1, day, selectedHour, selectedMinute);
 
-                        Toast.makeText(TextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PagesTextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
 
                     }
                 }, hour, minute, true);
@@ -195,9 +192,9 @@ public class TextEditor extends AppCompatActivity {
         return String.format("%d-%02d-%02dT%02d:%02d", year, month + 1, day, hour, minute);
     }
 
-    public void createPageByAPI(){
+    public void createPageByAPI(String status){
+        toolbarProgressBar.setVisibility(View.VISIBLE);
         String Url = "https://public-api.wordpress.com/wp/v2/sites/"+domain+"/pages";
-
         // Chuyển nội dung người dùng nhập thành chuỗi
         String title = editTextTitle.getText().toString();
         String content = editTextContent.getText().toString();
@@ -207,14 +204,15 @@ public class TextEditor extends AppCompatActivity {
         }
 
         // Lấy acess token của người dùng
-        SessionManagement session = new SessionManagement(TextEditor.this);
+//        SessionManager session = new SessionManager(PagesTextEditor.this);
+        session = SessionManager.getInstance(this);
         String accessToken = session.getAccessToken();
 
         JSONObject pageData = new JSONObject();
         try {
             pageData.put("title", title);
             pageData.put("content", content);
-            pageData.put("status", "publish");
+            pageData.put("status", status);
             if (Date != null && !Date.isEmpty()) {
                 Log.i("Date",Date);
                 pageData.put("date", Date+":00");  // Sử dụng giá trị từ Date
@@ -246,6 +244,8 @@ public class TextEditor extends AppCompatActivity {
                         String date = jsonResponse.getString("date");
                         Log.i("page created at:", date);
                         Log.i("Creating a page", "success");
+                        toolbarProgressBar.setVisibility(View.GONE);
+                        finish();
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
@@ -253,6 +253,7 @@ public class TextEditor extends AppCompatActivity {
                 error -> {
                     VolleyLog.d("volley", "Error: " + error.getMessage());
                     error.printStackTrace();
+                    toolbarProgressBar.setVisibility(View.GONE);
                 }
         ){
             @Override
@@ -270,9 +271,15 @@ public class TextEditor extends AppCompatActivity {
             public byte[] getBody() {
                 return pageData.toString().getBytes(StandardCharsets.UTF_8);
             }
-        };
 
-        MySingleton.getInstance(this).addToRequestQueue(pageRequest);
+        };
+        pageRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+//                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                0,  // No retries
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        QueueManager.getInstance(this).addToRequestQueue(pageRequest);
     }
 }
 

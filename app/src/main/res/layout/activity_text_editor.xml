@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fab_background"
-    tools:context=".TextEditor">
+    tools:context=".PagesTextEditor">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -16,9 +16,16 @@
         android:minHeight="?attr/actionBarSize"
         android:paddingTop="30dp"
         android:background="@color/main_background"
-        app:theme="@style/ToolbarStyle"
-
-        />
+        app:theme="@style/ToolbarStyle">
+        <ProgressBar
+            android:id="@+id/toolbar_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:visibility="gone"
+            android:indeterminateTint= "@color/onBackGround"
+            />
+    </androidx.appcompat.widget.Toolbar>
 
     <View
         android:layout_width="match_parent"

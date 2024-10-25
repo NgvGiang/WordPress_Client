@@ -4,11 +4,9 @@ import android.app.UiModeManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,11 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -31,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import vn.edu.usth.wordpressclient.models.MySingleton;
+import vn.edu.usth.wordpressclient.models.QueueManager;
 
 public class Choose_your_web extends AppCompatActivity {
     TextView displayName,acc_name;
@@ -39,13 +34,15 @@ public class Choose_your_web extends AppCompatActivity {
     ArrayList<Web_card_model> webModels = new ArrayList<>();
     Web_domain_adapter adapter;
     RecyclerView recyclerView;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        session = SessionManager.getInstance(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_your_web);
         EdgeToEdge.enable(this);
-        SessionManagement session = new SessionManagement(this);
+//        SessionManager session = new SessionManager(this);
         String accessToken = session.getAccessToken();
         Button create_site_btn = findViewById(R.id.create_site_btn);
         create_site_btn.setOnClickListener(view -> startActivity(new Intent(this, Create_new_site.class)));
@@ -110,7 +107,7 @@ public class Choose_your_web extends AppCompatActivity {
                 return headers;
             }
         };
-        MySingleton.getInstance(this).addToRequestQueue(fetchSitesRequest);
+        QueueManager.getInstance(this).addToRequestQueue(fetchSitesRequest);
     }
     private void fetchSites(String accessToken){
         String url = "https://public-api.wordpress.com/rest/v1.1/me/sites";
@@ -163,7 +160,7 @@ public class Choose_your_web extends AppCompatActivity {
                 return headers;
             }
         };
-        MySingleton.getInstance(this).addToRequestQueue(fetchSitesRequest);
+        QueueManager.getInstance(this).addToRequestQueue(fetchSitesRequest);
 
     }
 }

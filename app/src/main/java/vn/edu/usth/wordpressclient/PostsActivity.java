@@ -32,7 +32,7 @@ public class PostsActivity extends AppCompatActivity {
         domain = intent.getStringExtra("domain");
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> startActivity(new Intent(this, TextEditor.class)));
+        fab.setOnClickListener(view -> startActivity(new Intent(this, PagesTextEditor.class)));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
