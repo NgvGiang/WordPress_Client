@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/transparent">
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    >
 
     <LinearLayout
         android:id="@+id/content_cardview"
@@ -47,7 +48,7 @@
             android:id="@+id/item_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title of the post"
+            android:text="Title"
             android:textColor="@color/onBackGround"
             android:textSize="18sp"
             android:layout_marginBottom="5dp"
@@ -57,8 +58,7 @@
             android:id="@+id/item_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="In the beginning was the Word, and the Word was with God, and the Word was God. 2He was with God in the beginning. 3Through him all things were made; without him nothing was made that has been made. 4In him was life, and that life was the light of all mankind. 5The light shines in the darkness, and the darkness has not overcome it.
-6There was a man sent from God whose name was John. 7He came as a witness to testify concerning that light, so that through him all might believe. 8He himself was not the light; he came only as a witness to the light."
+            android:text="content"
             android:textSize="14sp"
             android:textColor="@color/onBackGround"
             android:layout_marginRight="30dp"

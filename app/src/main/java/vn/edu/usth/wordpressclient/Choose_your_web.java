@@ -68,9 +68,6 @@ public class Choose_your_web extends AppCompatActivity {
 //        webModels.add(new Web_card_model("https://img.icons8.com/?size=100&id=53372&format=png&color=000000", "Example Site 7", "www.example7.com"));
 //        webModels.add(new Web_card_model("https://img.icons8.com/?size=100&id=53372&format=png&color=000000", "Example Site 8", "www.example8.com"));
 
-
-
-
     }
 
     private void getUserInfo(String accessToken){
