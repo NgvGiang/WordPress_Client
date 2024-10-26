@@ -22,8 +22,11 @@ public class Web_domain_adapter extends RecyclerView.Adapter<Web_domain_adapter.
     private ArrayList<Web_card_model> webModels;
 
     // Adapter constructor
-    public Web_domain_adapter(Context context, ArrayList<Web_card_model> webModels) {
+    public Web_domain_adapter(Context context) {
         this.context = context;
+        this.webModels = new ArrayList<>();
+    }
+    public void setWebModels(ArrayList<Web_card_model> webModels) {
         this.webModels = webModels;
     }
 
