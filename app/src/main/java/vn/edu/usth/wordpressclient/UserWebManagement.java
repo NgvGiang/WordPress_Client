@@ -108,7 +108,7 @@ public class UserWebManagement extends AppCompatActivity {
 
 
         mediaRow.setOnClickListener(v -> {
-            Intent intentMedia = new Intent(UserWebManagement.this, WordPress_media.class);
+            Intent intentMedia = new Intent(UserWebManagement.this, MediaActivity.class);
 
             startActivity(intentMedia);
         });

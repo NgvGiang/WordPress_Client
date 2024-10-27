@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -25,24 +23,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.snackbar.Snackbar;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
-import vn.edu.usth.wordpressclient.models.QueueManager;
 import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 
-public class PagesTextEditor extends AppCompatActivity {
+public class ContentTextEditor extends AppCompatActivity {
     private ProgressBar toolbarProgressBar;
     private EditText editTextTitle;
     private EditText editTextContent;
@@ -103,10 +90,10 @@ public class PagesTextEditor extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.publish_button) {
-            createPageByAPI("publish");
+            createContentByAPI("publish", getIntent().getStringExtra("endpoint"));
             return true;
         } else if (item.getItemId() == R.id.save_btn) {
-            createPageByAPI("draft");
+            createContentByAPI("draft", getIntent().getStringExtra("endpoint"));
             return true;
         } else if (item.getItemId() == R.id.structure_btn) {
             showStructureDialog();
@@ -171,7 +158,7 @@ public class PagesTextEditor extends AppCompatActivity {
                 //Take right now
                 String dateTime = String.format("Scheduled for %d-%02d-%02d %02d:%02d", year, month + 1, day, hour, minute);
 
-                Toast.makeText(PagesTextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ContentTextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -196,7 +183,7 @@ public class PagesTextEditor extends AppCompatActivity {
 
                     String dateTime = String.format("Scheduled for %d-%02d-%02d %02d:%02d", year, month + 1, day, selectedHour, selectedMinute);
 
-                    Toast.makeText(PagesTextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ContentTextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
 
                 }, hour, minute, true);
 
@@ -207,24 +194,14 @@ public class PagesTextEditor extends AppCompatActivity {
         return String.format("%d-%02d-%02dT%02d:%02d", year, month + 1, day, hour, minute);
     }
 
-    public void createPageByAPI(String status) {
+    public void createContentByAPI(String status, String endpoint){
         toolbarProgressBar.setVisibility(View.VISIBLE);
         String title = editTextTitle.getText().toString();
         String content = editTextContent.getText().toString();
         if (title.trim().isEmpty()) {
             title = "Untitled";
         }
-        contentViewModel.createContent("pages", domain, title, content, status, Date);
-    }
-    //create post, call in option menu
-    public void createPostByAPI(String status){
-        toolbarProgressBar.setVisibility(View.VISIBLE);
-        String title = editTextTitle.getText().toString();
-        String content = editTextContent.getText().toString();
-        if (title.trim().isEmpty()) {
-            title = "Untitled";
-        }
-        contentViewModel.createContent("posts", domain, title, content, status, Date);
+        contentViewModel.createContent(endpoint, domain, title, content, status, Date);
     }
 }
 
