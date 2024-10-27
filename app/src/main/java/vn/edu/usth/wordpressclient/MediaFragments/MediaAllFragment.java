@@ -11,13 +11,14 @@ import android.view.ViewGroup;
 import vn.edu.usth.wordpressclient.R;
 
 
-public class Videos_Media_Fragment extends Fragment {
+public class MediaAllFragment extends Fragment {
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_media_videos_, container, false);
+        return inflater.inflate(R.layout.fragment_media_all, container, false);
     }
 }

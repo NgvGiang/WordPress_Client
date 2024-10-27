@@ -13,12 +13,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import vn.edu.usth.wordpressclient.MediaFragments.All_Media_Fragment;
-import vn.edu.usth.wordpressclient.MediaFragments.Documents_Media_Fragment;
-import vn.edu.usth.wordpressclient.MediaFragments.Videos_Media_Fragment;
-import vn.edu.usth.wordpressclient.MediaFragments.images_Media_Fragment;
+import vn.edu.usth.wordpressclient.MediaFragments.MediaAllFragment;
+import vn.edu.usth.wordpressclient.MediaFragments.MediaDocumentsFragment;
+import vn.edu.usth.wordpressclient.MediaFragments.MediaVideosFragment;
+import vn.edu.usth.wordpressclient.MediaFragments.MediaImagesFragment;
 
-public class WordPress_media extends AppCompatActivity {
+public class MediaActivity extends AppCompatActivity {
 
     private TabLayout MediatabLayout;
     private ViewPager2 MediaviewPager2;
@@ -30,7 +30,7 @@ public class WordPress_media extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         domain = intent.getStringExtra("domain");
-        setContentView(R.layout.activity_word_press_media);
+        setContentView(R.layout.activity_media);
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
@@ -49,10 +49,10 @@ public class WordPress_media extends AppCompatActivity {
         MediatabLayout = findViewById(R.id.MediatabLayout);
         MediaviewPager2 = findViewById(R.id.MediaviewPager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, domain);
-        viewPagerAdapter.addFragment(new All_Media_Fragment(), getString(R.string.ALL));
-        viewPagerAdapter.addFragment(new images_Media_Fragment(), getString(R.string.images));
-        viewPagerAdapter.addFragment(new Documents_Media_Fragment(), getString(R.string.documents));
-        viewPagerAdapter.addFragment(new Videos_Media_Fragment(), getString(R.string.videos));
+        viewPagerAdapter.addFragment(new MediaAllFragment(), getString(R.string.ALL));
+        viewPagerAdapter.addFragment(new MediaImagesFragment(), getString(R.string.images));
+        viewPagerAdapter.addFragment(new MediaDocumentsFragment(), getString(R.string.documents));
+        viewPagerAdapter.addFragment(new MediaVideosFragment(), getString(R.string.videos));
         MediaviewPager2.setAdapter(viewPagerAdapter);
         new TabLayoutMediator(MediatabLayout, MediaviewPager2, (tab, position) -> {
             tab.setText(viewPagerAdapter.getTitle(position));

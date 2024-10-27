@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import vn.edu.usth.wordpressclient.R;
-import vn.edu.usth.wordpressclient.PagesTextEditor;
+import vn.edu.usth.wordpressclient.ContentTextEditor;
 
 public class PagePublishedFragment extends Fragment {
     Button PublishedButton;
@@ -25,7 +25,7 @@ public class PagePublishedFragment extends Fragment {
         PublishedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), PagesTextEditor.class);
+                Intent intent = new Intent(getContext(), ContentTextEditor.class);
                 startActivity(intent);
             }
         });
