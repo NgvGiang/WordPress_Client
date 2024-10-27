@@ -2,6 +2,7 @@ package vn.edu.usth.wordpressclient;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -34,7 +35,14 @@ public class PagesActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        fab.setOnClickListener(view -> startActivity(new Intent(this, PagesTextEditor.class)));
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PagesActivity.this, ContentTextEditor.class);
+                intent.putExtra("endpoint", "pages");
+                startActivity(intent);
+            }
+        });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

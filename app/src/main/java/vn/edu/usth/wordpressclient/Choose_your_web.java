@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import vn.edu.usth.wordpressclient.models.QueueManager;
+import vn.edu.usth.wordpressclient.viewmodel.WebViewModel;
 
 public class Choose_your_web extends AppCompatActivity {
     TextView displayName,acc_name;
@@ -35,7 +37,7 @@ public class Choose_your_web extends AppCompatActivity {
     Web_domain_adapter adapter;
     RecyclerView recyclerView;
     private SessionManager session;
-
+    private WebViewModel webViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         session = SessionManager.getInstance(this);
@@ -49,12 +51,21 @@ public class Choose_your_web extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.web_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new Web_domain_adapter(this, webModels);
+//        adapter = new Web_domain_adapter(this, webModels);
+        adapter = new Web_domain_adapter(this);
         recyclerView.setAdapter(adapter);
         displayName = findViewById(R.id.display_name);
         acc_name = findViewById(R.id.acc_name);
         avatar=findViewById(R.id.profile_pic);
-        fetchSites(accessToken);
+        webViewModel = new ViewModelProvider(this).get(WebViewModel.class);
+        webViewModel.getWebModelsLiveData().observe(this,webModels->{
+            adapter.setWebModels(webModels);
+            adapter.notifyDataSetChanged();
+        });
+        webViewModel.fetchSites(accessToken);
+
+
+//        fetchSites(accessToken);
         getUserInfo(accessToken);
 
 //        Web_domain_adapter adapter = new Web_domain_adapter(this, webModels);
@@ -67,8 +78,6 @@ public class Choose_your_web extends AppCompatActivity {
 //        webModels.add(new Web_card_model("https://img.icons8.com/?size=100&id=53372&format=png&color=000000", "Example Site 6", "www.example6.com"));
 //        webModels.add(new Web_card_model("https://img.icons8.com/?size=100&id=53372&format=png&color=000000", "Example Site 7", "www.example7.com"));
 //        webModels.add(new Web_card_model("https://img.icons8.com/?size=100&id=53372&format=png&color=000000", "Example Site 8", "www.example8.com"));
-
-
 
 
     }
@@ -109,58 +118,5 @@ public class Choose_your_web extends AppCompatActivity {
         };
         QueueManager.getInstance(this).addToRequestQueue(fetchSitesRequest);
     }
-    private void fetchSites(String accessToken){
-        String url = "https://public-api.wordpress.com/rest/v1.1/me/sites";
-        StringRequest fetchSitesRequest = new StringRequest(
-                Request.Method.GET,
-                url,
-                response -> {
-                    try {
-                        JSONObject jsonResponse = new JSONObject(response);
-                        JSONArray sitesArray = jsonResponse.getJSONArray("sites");
-                        // Handle the JSON response here
-                        for (int i =0;i<sitesArray.length();i++){
-                            JSONObject sitesArrayJSONObject = sitesArray.getJSONObject(i);
-                            String siteTitle = sitesArrayJSONObject.getString("name");
-                            String siteDomain = sitesArrayJSONObject.getString("URL");
-                            String urlIcon;
-                            Log.i("Name: ",siteTitle);
-                            Log.i("Domain: ",siteDomain);
-                            UiModeManager modeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
-                            if (sitesArrayJSONObject.has("icon")){
-                                urlIcon = sitesArrayJSONObject.getJSONObject("icon").getString("img");
 
-                            }else {
-                                if(modeManager.getNightMode() == UiModeManager.MODE_NIGHT_YES){
-                                    //night mode on
-                                    urlIcon = "https://img.icons8.com/?size=100&id=53372&format=png&color=ffffff";
-                                }else{
-                                    urlIcon = "https://img.icons8.com/?size=100&id=53372&format=png&color=000000";
-                                }
-                            }
-
-                            webModels.add(new Web_card_model(urlIcon, siteDomain, siteTitle));
-
-                            adapter.notifyDataSetChanged();
-                        }
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                },
-                error -> {
-                    VolleyLog.d("volley", "Error: " + error.getMessage());
-                    error.printStackTrace();
-                }
-        ){
-            @Override
-            public Map<String,String> getHeaders(){
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer " + accessToken);
-//                headers.put("Authorization", "Bearer " + "cDkEb*pBTQI#Vg3dXv9C&6mkvKxOEUyIkLgEgrKxWxc*s#0OfJP&r$ll1neX$K#5");
-                return headers;
-            }
-        };
-        QueueManager.getInstance(this).addToRequestQueue(fetchSitesRequest);
-
-    }
 }

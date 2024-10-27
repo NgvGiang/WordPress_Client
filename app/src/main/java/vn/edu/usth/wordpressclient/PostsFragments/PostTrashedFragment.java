@@ -1,4 +1,4 @@
-package vn.edu.usth.wordpressclient.MediaFragments;
+package vn.edu.usth.wordpressclient.PostsFragments;
 
 import android.os.Bundle;
 
@@ -10,17 +10,13 @@ import android.view.ViewGroup;
 
 import vn.edu.usth.wordpressclient.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Documents_Media_Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Documents_Media_Fragment extends Fragment {
+
+public class PostTrashedFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_media_documents_, container, false);
+        return inflater.inflate(R.layout.fragment_post_trashed, container, false);
     }
 }

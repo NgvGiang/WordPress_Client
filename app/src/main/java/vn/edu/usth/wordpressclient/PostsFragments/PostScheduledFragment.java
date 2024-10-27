@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 
 import vn.edu.usth.wordpressclient.R;
 
-public class DraftPostFragment extends Fragment {
+
+public class PostScheduledFragment extends Fragment {
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_draft_post, container, false);
+        return inflater.inflate(R.layout.fragment_post_scheduled, container, false);
     }
 }

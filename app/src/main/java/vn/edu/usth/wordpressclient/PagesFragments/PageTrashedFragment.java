@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import vn.edu.usth.wordpressclient.PagesTextEditor;
+import vn.edu.usth.wordpressclient.ContentTextEditor;
 import vn.edu.usth.wordpressclient.R;
 
 public class PageTrashedFragment extends Fragment {
@@ -23,7 +23,7 @@ public class PageTrashedFragment extends Fragment {
         TrashedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), PagesTextEditor.class);
+                Intent intent = new Intent(getContext(), ContentTextEditor.class);
                 startActivity(intent);
             }
         });
