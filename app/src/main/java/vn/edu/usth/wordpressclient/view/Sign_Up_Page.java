@@ -7,7 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,7 +41,7 @@ public class Sign_Up_Page extends AppCompatActivity {
         //buttons
         continue_btn.setOnClickListener(view -> startActivity(new Intent(this, sign_up_choose_email.class)));
 
-        google_btn.setOnClickListener(View -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
+        google_btn.setOnClickListener(View -> Snackbar.make(findViewById(android.R.id.content),getString(R.string.under_dev), Snackbar.LENGTH_SHORT).show());
     }
 
     //info icon

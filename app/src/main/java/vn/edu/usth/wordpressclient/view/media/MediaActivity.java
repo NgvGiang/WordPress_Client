@@ -2,7 +2,7 @@ package vn.edu.usth.wordpressclient.view.media;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +32,7 @@ public class MediaActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        fab.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
+        fab.setOnClickListener(view -> Snackbar.make(findViewById(android.R.id.content), getString(R.string.under_dev), Snackbar.LENGTH_SHORT).show());
 
 
         Toolbar toolbar = findViewById(R.id.Mediatoolbar);
