@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Choose_your_web"
+    tools:context=".view.Choose_your_web"
     android:paddingTop="35dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp">

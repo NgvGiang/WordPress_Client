@@ -10,20 +10,16 @@ import com.android.volley.Request;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import vn.edu.usth.wordpressclient.SessionManager;
-import vn.edu.usth.wordpressclient.models.Content;
-import vn.edu.usth.wordpressclient.models.QueueManager;
+import vn.edu.usth.wordpressclient.utils.SessionManager;
+import vn.edu.usth.wordpressclient.utils.QueueManager;
 
 public class ContentRepository {
     private static ContentRepository instance;

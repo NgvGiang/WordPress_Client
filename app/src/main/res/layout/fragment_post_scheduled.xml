@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".PostsFragments.PostScheduledFragment">
+    tools:context=".view.posts.PostScheduledFragment">
 
     <ImageView
         android:id="@+id/imageView"

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="30dp"
-    tools:context=".Dont_have_site_activity">
+    tools:context=".view.Dont_have_site_activity">
 
     <ImageView
         android:id="@+id/imageView8"

@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import vn.edu.usth.wordpressclient.R;
-import vn.edu.usth.wordpressclient.SessionManager;
+import vn.edu.usth.wordpressclient.utils.SessionManager;
 
 public class MeWebsiteActivity extends AppCompatActivity {
     SessionManager session;

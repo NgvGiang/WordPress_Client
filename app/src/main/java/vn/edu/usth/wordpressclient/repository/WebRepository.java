@@ -1,7 +1,6 @@
 package vn.edu.usth.wordpressclient.repository;
 
 import android.app.UiModeManager;
-import static androidx.core.content.ContextCompat.getSystemService;
 
 import android.content.Context;
 import android.util.Log;
@@ -18,11 +17,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import vn.edu.usth.wordpressclient.Web_card_model;
-import vn.edu.usth.wordpressclient.models.QueueManager;
+import vn.edu.usth.wordpressclient.model.Web_card_model;
+import vn.edu.usth.wordpressclient.utils.QueueManager;
 
 public class WebRepository {
     private static WebRepository instance;

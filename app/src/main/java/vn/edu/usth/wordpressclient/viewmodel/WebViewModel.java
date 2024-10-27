@@ -8,9 +8,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import vn.edu.usth.wordpressclient.Web_card_model;
+import vn.edu.usth.wordpressclient.model.Web_card_model;
 import vn.edu.usth.wordpressclient.repository.WebRepository;
 
 public class WebViewModel extends AndroidViewModel {
