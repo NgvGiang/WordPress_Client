@@ -23,7 +23,7 @@ import java.util.stream.IntStream;
 import vn.edu.usth.wordpressclient.models.Comment;
 import vn.edu.usth.wordpressclient.models.CommentDetailCallback;
 import vn.edu.usth.wordpressclient.models.GetCommentsCallback;
-import vn.edu.usth.wordpressclient.models.MySingleton;
+import vn.edu.usth.wordpressclient.models.QueueManager;
 
 public class CommentAPIServices {
     public static void getAllCommentsFromUser(Context context, String domain, int perPage, int currentPage, List<Comment> commentList, GetCommentsCallback callback) {
@@ -109,11 +109,11 @@ public class CommentAPIServices {
                     }
                 }
         );
-        MySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+        QueueManager.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
 
     public static void getApprovedCommentFromMe(Context context, String domain, int perPage, int currentPage, Long myId, GetCommentsCallback callback) {
-        SessionManagement sessionManagement = new SessionManagement(context);
+        SessionManager sessionManagement = SessionManager.getInstance(context);
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&page=" + currentPage + "&status=approve" + "&author=" + myId;
         Log.i("my url", url);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
@@ -162,11 +162,11 @@ public class CommentAPIServices {
                 return headers;
             }
         };;
-        MySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+        QueueManager.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
 
     public static void getPendingCommentFromMe(Context context, String domain, int perPage, int currentPage, Long myId, GetCommentsCallback callback) {
-        SessionManagement sessionManagement = new SessionManagement(context);
+        SessionManager sessionManagement = SessionManager.getInstance(context);
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&page=" + currentPage + "&status=approve" + "&author=" + myId + "&status=hold";
         Log.i("my url", url);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
@@ -215,11 +215,11 @@ public class CommentAPIServices {
                 return headers;
             }
         };;
-        MySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+        QueueManager.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
 
     public static void getSpamCommentFromUser(Context context, String domain, int perPage, int currentPage, GetCommentsCallback callback) {
-        SessionManagement sessionManagement = new SessionManagement(context);
+        SessionManager sessionManagement = SessionManager.getInstance(context);
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&page=" + currentPage + "&status=spam";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -267,11 +267,11 @@ public class CommentAPIServices {
                 return headers;
             }
         };;
-        MySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+        QueueManager.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
 
     public static void getPendingCommentFromUser(Context context, String domain, int perPage, int currentPage, GetCommentsCallback callback) {
-        SessionManagement sessionManagement = new SessionManagement(context);
+        SessionManager sessionManagement = SessionManager.getInstance(context);
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&page=" + currentPage + "&status=hold";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -319,11 +319,11 @@ public class CommentAPIServices {
                 return headers;
             }
         };;
-        MySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+        QueueManager.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
 
     public static void getTrashedCommentFromUser(Context context, String domain, int perPage, int currentPage, GetCommentsCallback callback) {
-        SessionManagement sessionManagement = new SessionManagement(context);
+        SessionManager sessionManagement = SessionManager.getInstance(context);
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&page=" + currentPage + "&status=trash";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -371,10 +371,10 @@ public class CommentAPIServices {
                 return headers;
             }
         };;
-        MySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+        QueueManager.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
     public static void getApprovedCommentFromUser(Context context, String domain, int perPage, int currentPage, Long author, GetCommentsCallback callback) {
-        SessionManagement sessionManagement = new SessionManagement(context);
+        SessionManager sessionManagement = SessionManager.getInstance(context);
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&page=" + currentPage + "&author_exclude=" + author;
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -422,11 +422,11 @@ public class CommentAPIServices {
                 return headers;
             }
         };
-        MySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+        QueueManager.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
 
     public static void getPendingCommentFromUser(Context context, String domain, int perPage, int currentPage, Long author, GetCommentsCallback callback) {
-        SessionManagement sessionManagement = new SessionManagement(context);
+        SessionManager sessionManagement = SessionManager.getInstance(context);
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&page=" + currentPage + "&author_exclude=" + author + "&status=hold";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -474,11 +474,11 @@ public class CommentAPIServices {
                 return headers;
             }
         };
-        MySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+        QueueManager.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
 
     public static void updateCommentStatus(Context context, String domain, Long id, String status, CommentDetailCallback callback) {
-        SessionManagement sessionManagement = new SessionManagement(context);
+        SessionManager sessionManagement = SessionManager.getInstance(context);
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments/" + id;
         Log.i("url", url);
         JSONObject jsonBody = new JSONObject();
@@ -516,11 +516,11 @@ public class CommentAPIServices {
                 return headers;
             }
         };
-        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        QueueManager.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
     public static void replyComment(Context context, String domain, String content, Long parent, Long post, GetCommentsCallback callback) {
-        SessionManagement sessionManagement = new SessionManagement(context);
+        SessionManager sessionManagement = SessionManager.getInstance(context);
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments/";
         Log.i("url", url);
         JSONObject jsonBody = new JSONObject();
@@ -573,11 +573,11 @@ public class CommentAPIServices {
                 return headers;
             }
         };
-        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        QueueManager.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
     public static void deleteComment(Context context, String userdomain, Long commentId, GetCommentsCallback callback) {
-        SessionManagement sessionManagement = new SessionManagement(context);
+        SessionManager sessionManagement = SessionManager.getInstance(context);
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + userdomain + "/comments/" + commentId +"?force=true";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
@@ -604,11 +604,11 @@ public class CommentAPIServices {
                 return headers;
             }
         };
-        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        QueueManager.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
     public static void editComment(Context context, String domain, Long id, String content, CommentDetailCallback callback) {
-        SessionManagement sessionManagement = new SessionManagement(context);
+        SessionManager sessionManagement = SessionManager.getInstance(context);
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments/" + id;
         Log.i("url", url);
         JSONObject jsonBody = new JSONObject();
@@ -646,6 +646,6 @@ public class CommentAPIServices {
                 return headers;
             }
         };
-        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+        QueueManager.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 }
