@@ -7,7 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.google.android.material.snackbar.Snackbar;
 
 
 import androidx.activity.EdgeToEdge;
@@ -42,7 +42,7 @@ public class Login_to_existing extends AppCompatActivity {
         Button continue_login = findViewById(R.id.continue_login_btn);
         TextView enter_site_address = findViewById(R.id.find_site_btn);
 
-        enter_site_address.setOnClickListener(view -> Toast.makeText(this, "Nah, cant find it bro :)", Toast.LENGTH_SHORT).show());
+        enter_site_address.setOnClickListener(view -> Snackbar.make(findViewById(android.R.id.content), "Can't find it bro :)", Snackbar.LENGTH_SHORT).show());
         continue_login.setOnClickListener(view -> startActivity(new Intent(this, Choose_your_web.class)));
 
     }

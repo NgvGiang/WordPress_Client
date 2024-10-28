@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -62,13 +62,13 @@ public class UserWebManagement extends AppCompatActivity {
         siteImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(UserWebManagement.this, "This function should be for changing the site picture", Toast.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(android.R.id.content), "This function should be for changing the site picture", Snackbar.LENGTH_SHORT).show();
             }
         });
         title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(UserWebManagement.this, "This function should be for changing the title", Toast.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(android.R.id.content),"This function should be for changing the title", Snackbar.LENGTH_SHORT).show();
             }
         });
         domain.setOnClickListener(v -> { //done
