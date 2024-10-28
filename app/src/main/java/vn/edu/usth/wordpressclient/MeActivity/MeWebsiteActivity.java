@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,8 +36,8 @@ public class MeWebsiteActivity extends AppCompatActivity {
         account_settings_btn.setOnClickListener(view -> startActivity(new Intent(this, AccountSettingsActivity.class)));
         app_settings_btn.setOnClickListener(view -> startActivity(new Intent(this, AppSettingsActivity.class)));
         help_btn.setOnClickListener(view -> startActivity(new Intent(this, HelpActivity.class)));
-        share_wordpress_btn.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
-        wp_admin_btn.setOnClickListener(view -> Toast.makeText(this, getString(R.string.under_dev), Toast.LENGTH_SHORT).show());
+        share_wordpress_btn.setOnClickListener(view -> Snackbar.make(findViewById(android.R.id.content), getString(R.string.under_dev), Snackbar.LENGTH_SHORT).show());
+        wp_admin_btn.setOnClickListener(view -> Snackbar.make(findViewById(android.R.id.content), getString(R.string.under_dev), Snackbar.LENGTH_SHORT).show());
 
         //done logout
         log_out_btn.setOnClickListener(new View.OnClickListener() {

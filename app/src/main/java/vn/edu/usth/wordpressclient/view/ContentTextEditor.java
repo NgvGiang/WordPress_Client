@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -102,7 +102,7 @@ public class ContentTextEditor extends AppCompatActivity {
             showStructureDialog();
             return true;
         } else if (item.getItemId() == R.id.help_btn) {
-            Toast.makeText(this, "Helped", Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(android.R.id.content), "Helped", Snackbar.LENGTH_SHORT).show();
             return true;
         } else if (item.getItemId() == R.id.publish_date_btn) {
             showDateTimePicker();
@@ -161,7 +161,7 @@ public class ContentTextEditor extends AppCompatActivity {
                 //Take right now
                 String dateTime = String.format("Scheduled for %d-%02d-%02d %02d:%02d", year, month + 1, day, hour, minute);
 
-                Toast.makeText(ContentTextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(android.R.id.content), dateTime, Snackbar.LENGTH_SHORT).show();
 
             }
         });
@@ -186,7 +186,7 @@ public class ContentTextEditor extends AppCompatActivity {
 
                     String dateTime = String.format("Scheduled for %d-%02d-%02d %02d:%02d", year, month + 1, day, selectedHour, selectedMinute);
 
-                    Toast.makeText(ContentTextEditor.this, dateTime, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content), dateTime, Snackbar.LENGTH_SHORT).show();
 
                 }, hour, minute, true);
 
