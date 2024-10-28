@@ -93,8 +93,8 @@ public class UserWebManagement extends AppCompatActivity {
         //clicking
 
         chooseSites.setOnClickListener(v -> {
-            //need to create new destination, not Choose_your_web.class
-//            Intent intentChooseWeb = new Intent(UserWebManagement.this, Choose_your_web.class);
+            //need to create new destination, not ChooseYourWeb.class
+//            Intent intentChooseWeb = new Intent(UserWebManagement.this, ChooseYourWeb.class);
 //
 //            startActivity(intentChooseWeb);
             finish();

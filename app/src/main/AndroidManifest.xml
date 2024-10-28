@@ -57,7 +57,7 @@
             android:name=".view.Sign_Up_Page"
             android:exported="false" />
         <activity
-            android:name=".view.Choose_your_web"
+            android:name=".view.ChooseYourWeb"
             android:exported="false" />
         <activity
             android:name=".view.posts.PostsActivity"

@@ -43,7 +43,7 @@ public class Login_to_existing extends AppCompatActivity {
         TextView enter_site_address = findViewById(R.id.find_site_btn);
 
         enter_site_address.setOnClickListener(view -> Toast.makeText(this, "Nah, cant find it bro :)", Toast.LENGTH_SHORT).show());
-        continue_login.setOnClickListener(view -> startActivity(new Intent(this, Choose_your_web.class)));
+        continue_login.setOnClickListener(view -> startActivity(new Intent(this, ChooseYourWeb.class)));
 
     }
 

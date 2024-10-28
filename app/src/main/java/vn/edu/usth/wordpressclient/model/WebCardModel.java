@@ -1,11 +1,11 @@
 package vn.edu.usth.wordpressclient.model;
 
-public class Web_card_model {
+public class WebCardModel {
     String web_title;
     String web_domain;
     String web_icon_url;
 
-    public Web_card_model(String web_icon_url, String web_domain, String web_title) {
+    public WebCardModel(String web_icon_url, String web_domain, String web_title) {
         this.web_icon_url = web_icon_url;
         this.web_domain = web_domain;
         this.web_title = web_title;

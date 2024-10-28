@@ -23,11 +23,11 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import vn.edu.usth.wordpressclient.view.ChooseYourWeb;
 import vn.edu.usth.wordpressclient.view.Dont_have_site_activity;
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.utils.QueueManager;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
-import vn.edu.usth.wordpressclient.view.Choose_your_web;
 
 public class FirstLoginActivity extends AppCompatActivity {
     Button login_signup;
@@ -64,7 +64,7 @@ public class FirstLoginActivity extends AppCompatActivity {
                             Log.i("FirstLoginActivity.this","DONT HAVE ANY SITE");
                         }else{
                             Log.i("FirstLoginActivity.this", "Num site: " + numberOfSites);
-                            Intent intent = new Intent(FirstLoginActivity.this, Choose_your_web.class);
+                            Intent intent = new Intent(FirstLoginActivity.this, ChooseYourWeb.class);
                             startActivity(intent);
                         }
 

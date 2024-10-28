@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import vn.edu.usth.wordpressclient.model.Web_card_model;
+import vn.edu.usth.wordpressclient.model.WebCardModel;
 import vn.edu.usth.wordpressclient.utils.QueueManager;
 
 public class WebRepository {
@@ -36,14 +36,14 @@ public class WebRepository {
         return instance;
     }
     //this is the function declaration, which is call from WebViewModel
-    public void fetchSites(String accessToken, MutableLiveData<ArrayList<Web_card_model>> webModelsLiveData) {
+    public void fetchSites(String accessToken, MutableLiveData<ArrayList<WebCardModel>> webModelsLiveData) {
         String url = "https://public-api.wordpress.com/rest/v1.1/me/sites";
         StringRequest fetchSitesRequest = new StringRequest(
                 Request.Method.GET,
                 url,
                 response -> {
                     try {
-                        ArrayList<Web_card_model> webModels = new ArrayList<>();
+                        ArrayList<WebCardModel> webModels = new ArrayList<>();
                         JSONObject jsonResponse = new JSONObject(response);
                         JSONArray sitesArray = jsonResponse.getJSONArray("sites");
                         // Handle the JSON response here
@@ -68,7 +68,7 @@ public class WebRepository {
                                 }
                             }
 
-                            webModels.add(new Web_card_model(urlIcon, siteDomain, siteTitle));
+                            webModels.add(new WebCardModel(urlIcon, siteDomain, siteTitle));
 //                            adapter.notifyDataSetChanged();
 
                         }

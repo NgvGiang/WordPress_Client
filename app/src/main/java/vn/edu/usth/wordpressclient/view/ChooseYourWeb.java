@@ -26,16 +26,16 @@ import java.util.Map;
 
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
-import vn.edu.usth.wordpressclient.model.Web_card_model;
-import vn.edu.usth.wordpressclient.view.adapter.Web_domain_adapter;
+import vn.edu.usth.wordpressclient.model.WebCardModel;
+import vn.edu.usth.wordpressclient.view.adapter.WebDomainAdapter;
 import vn.edu.usth.wordpressclient.utils.QueueManager;
 import vn.edu.usth.wordpressclient.viewmodel.WebViewModel;
 
-public class Choose_your_web extends AppCompatActivity {
+public class ChooseYourWeb extends AppCompatActivity {
     TextView displayName,acc_name;
     ImageView avatar;
-    ArrayList<Web_card_model> webModels = new ArrayList<>();
-    Web_domain_adapter adapter;
+    ArrayList<WebCardModel> webModels = new ArrayList<>();
+    WebDomainAdapter adapter;
     RecyclerView recyclerView;
     private SessionManager session;
     private WebViewModel webViewModel;
@@ -52,8 +52,8 @@ public class Choose_your_web extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.web_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        adapter = new Web_domain_adapter(this, webModels);
-        adapter = new Web_domain_adapter(this);
+//        adapter = new WebDomainAdapter(this, webModels);
+        adapter = new WebDomainAdapter(this);
         recyclerView.setAdapter(adapter);
         displayName = findViewById(R.id.display_name);
         acc_name = findViewById(R.id.acc_name);
@@ -69,16 +69,16 @@ public class Choose_your_web extends AppCompatActivity {
 //        fetchSites(accessToken);
         getUserInfo(accessToken);
 
-//        Web_domain_adapter adapter = new Web_domain_adapter(this, webModels);
+//        WebDomainAdapter adapter = new WebDomainAdapter(this, webModels);
 //        recyclerView.setAdapter(adapter);
-//        webModels.add(new Web_card_model(R.drawable.compass, "Example Site 1", "www.example1.com"));
-//        webModels.add(new Web_card_model(R.drawable.compass, "Example Site 2", "www.example2.com"));
-//        webModels.add(new Web_card_model(R.drawable.compass, "Example Site 3", "www.example3.com"));
-//        webModels.add(new Web_card_model(R.drawable.compass, "Example Site 4", "www.example4.com"));
-//        webModels.add(new Web_card_model("https://img.icons8.com/?size=100&id=53372&format=png&color=000000", "Example Site 5", "www.example5.com"));
-//        webModels.add(new Web_card_model("https://img.icons8.com/?size=100&id=53372&format=png&color=000000", "Example Site 6", "www.example6.com"));
-//        webModels.add(new Web_card_model("https://img.icons8.com/?size=100&id=53372&format=png&color=000000", "Example Site 7", "www.example7.com"));
-//        webModels.add(new Web_card_model("https://img.icons8.com/?size=100&id=53372&format=png&color=000000", "Example Site 8", "www.example8.com"));
+//        webModels.add(new WebCardModel(R.drawable.compass, "Example Site 1", "www.example1.com"));
+//        webModels.add(new WebCardModel(R.drawable.compass, "Example Site 2", "www.example2.com"));
+//        webModels.add(new WebCardModel(R.drawable.compass, "Example Site 3", "www.example3.com"));
+//        webModels.add(new WebCardModel(R.drawable.compass, "Example Site 4", "www.example4.com"));
+//        webModels.add(new WebCardModel("https://img.icons8.com/?size=100&id=53372&format=png&color=000000", "Example Site 5", "www.example5.com"));
+//        webModels.add(new WebCardModel("https://img.icons8.com/?size=100&id=53372&format=png&color=000000", "Example Site 6", "www.example6.com"));
+//        webModels.add(new WebCardModel("https://img.icons8.com/?size=100&id=53372&format=png&color=000000", "Example Site 7", "www.example7.com"));
+//        webModels.add(new WebCardModel("https://img.icons8.com/?size=100&id=53372&format=png&color=000000", "Example Site 8", "www.example8.com"));
 
 
     }

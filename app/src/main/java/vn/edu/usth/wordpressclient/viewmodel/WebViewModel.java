@@ -9,20 +9,20 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
 
-import vn.edu.usth.wordpressclient.model.Web_card_model;
+import vn.edu.usth.wordpressclient.model.WebCardModel;
 import vn.edu.usth.wordpressclient.repository.WebRepository;
 
 public class WebViewModel extends AndroidViewModel {
     //init repository
     //init live data
     private final WebRepository webRepository ;
-    private final MutableLiveData<ArrayList<Web_card_model>> webModelsLiveData;
+    private final MutableLiveData<ArrayList<WebCardModel>> webModelsLiveData;
     public WebViewModel(@NonNull Application application) {
         super(application);
         webRepository = WebRepository.getInstance(application);
         webModelsLiveData = new MutableLiveData<>();
     }
-    public LiveData<ArrayList<Web_card_model>> getWebModelsLiveData() {
+    public LiveData<ArrayList<WebCardModel>> getWebModelsLiveData() {
         return webModelsLiveData;
     }
     public void fetchSites(String accessToken) {
