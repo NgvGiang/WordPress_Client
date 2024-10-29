@@ -1,5 +1,6 @@
 package vn.edu.usth.wordpressclient;
 
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,8 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import vn.edu.usth.wordpressclient.MeActivity.MeWebsiteActivity;
 import vn.edu.usth.wordpressclient.MeActivity.UsernameActivity;
+import vn.edu.usth.wordpressclient.models.GetUserIdCallback;
 
 public class UserWebManagement extends AppCompatActivity {
     RelativeLayout postsRow;
@@ -40,7 +44,7 @@ public class UserWebManagement extends AppCompatActivity {
 //        String domainString = intent.getStringExtra("domain");
         domainManager = DomainManager.getInstance();
         String domainString = domainManager.getSelectedDomain();
-        Log.i("Domain:",domainString);
+//        Log.i("Domain:",domainString);
         String titleString = intent.getStringExtra("title");
         String imgUrl = intent.getStringExtra("imgUrl");
         title = findViewById(R.id.title);
@@ -115,9 +119,20 @@ public class UserWebManagement extends AppCompatActivity {
 
 
         commentRow.setOnClickListener(v -> {
-            Intent intentComment = new Intent(UserWebManagement.this, CommentActivity.class);
+//            Intent intentComment = new Intent(UserWebManagement.this, CommentActivity.class);
+            UserIdManager.getInstance().setUserId(this, domainString, new GetUserIdCallback() {
+                @Override
+                public void onSuccess(List<Integer> longs) {
+                    Intent intent = new Intent(UserWebManagement.this, CommentActivity.class);
+                    startActivity(intent);
+                }
 
-            startActivity(intentComment);
+                @Override
+                public void onError(String error) {
+                }
+            });
+
+//            startActivity(intentComment);
         });
 
         meRow.setOnClickListener(v -> {
