@@ -23,6 +23,7 @@ import java.util.stream.IntStream;
 import vn.edu.usth.wordpressclient.models.Comment;
 import vn.edu.usth.wordpressclient.models.CommentDetailCallback;
 import vn.edu.usth.wordpressclient.models.GetCommentsCallback;
+import vn.edu.usth.wordpressclient.models.GetUserIdCallback;
 import vn.edu.usth.wordpressclient.models.QueueManager;
 
 public class CommentAPIServices {
@@ -648,5 +649,95 @@ public class CommentAPIServices {
             }
         };
         QueueManager.getInstance(context).addToRequestQueue(jsonObjectRequest);
+    }
+
+//    public static void getUserName(Context context, String domain, GetUserNameCallback callback) {
+//        SessionManager sessionManagement = SessionManager.getInstance(context);
+//        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/users";
+//        Log.i("url get userid", url);
+//
+//        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+//                Request.Method.GET,
+//                url,
+//                null,
+//                new Response.Listener<JSONArray>() {
+//                    @Override
+//                    public void onResponse(JSONArray response) {
+//
+//                        Log.i("Response size", "Received " + response.length() + " items");
+//
+//                        int size = response.length();
+//                        List<String> integers = new ArrayList<>();
+//                        IntStream.range(0, size).forEach(index -> {
+//                            try {
+//                                JSONObject username = response.getJSONObject(index);
+//                                integers.add(username.toString());
+//                            } catch (JSONException e) {
+//                                throw new RuntimeException(e);
+//                            }
+//                        });
+//                        callback.onSuccess(integers);
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//        ) {
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("Authorization", "Bearer " + sessionManagement.getAccessToken());
+//                return headers;
+//            }
+//        };
+//        QueueManager.getInstance(context).addToRequestQueue(jsonArrayRequest);
+//    }
+
+    public static void getUserId(Context context, String domain, GetUserIdCallback callback) {
+        SessionManager sessionManagement = SessionManager.getInstance(context);
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/users";
+        Log.i("url get userid", url);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+                        Log.i("Response size", "Received " + response.length() + " items");
+
+                        int size = response.length();
+                        List<Integer> integers = new ArrayList<>();
+                        IntStream.range(0, size).forEach(index -> {
+                            try {
+                                int userId = response.getJSONObject(index).getInt("id");
+                                integers.add(userId);
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+                        callback.onSuccess(integers);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + sessionManagement.getAccessToken());
+                return headers;
+            }
+        };
+        QueueManager.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
 }
