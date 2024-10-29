@@ -16,6 +16,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.Collectors;
@@ -28,11 +29,12 @@ import vn.edu.usth.wordpressclient.commentgroupfragments.SpamCommentsFragment;
 import vn.edu.usth.wordpressclient.commentgroupfragments.TrashedCommentsFragment;
 import vn.edu.usth.wordpressclient.commentgroupfragments.UnrepliedCommentsFragment;
 import vn.edu.usth.wordpressclient.models.Comment;
+import vn.edu.usth.wordpressclient.models.GetUserIdCallback;
 
 public class CommentActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
-    String domain;
+    String userDomain;
     ActivityResultLauncher<Intent> commentDetailLauncher;
     AllCommentsFragment allCommentsFragment;
     PendingCommentsFragment pendingCommentsFragment;
@@ -40,6 +42,7 @@ public class CommentActivity extends AppCompatActivity {
     ApprovedCommentsFragment approvedCommentsFragment;
     SpamCommentsFragment spamCommentsFragment;
     TrashedCommentsFragment trashedCommentsFragment;
+    Long userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +51,9 @@ public class CommentActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
 
         Intent intent = getIntent();
-        domain = intent.getStringExtra("domain");
+
         Bundle bundle = new Bundle();
-        bundle.putString("domain", domain);
+        userDomain = DomainManager.getInstance().getSelectedDomain();
 
         allCommentsFragment = new AllCommentsFragment();
         allCommentsFragment.setArguments(bundle);
@@ -81,7 +84,7 @@ public class CommentActivity extends AppCompatActivity {
         });
         tabLayout = findViewById(R.id.comment_tab_mode);
         viewPager2 = findViewById(R.id.comment_view_pager);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, domain);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, userDomain);
         viewPagerAdapter.addFragment(allCommentsFragment, getString(R.string.ALL));
         viewPagerAdapter.addFragment(pendingCommentsFragment, getString(R.string.pending));
         viewPagerAdapter.addFragment(unrepliedCommentsFragment, getString(R.string.unreplied));
@@ -93,6 +96,9 @@ public class CommentActivity extends AppCompatActivity {
         new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> {
             tab.setText(viewPagerAdapter.getTitle(position));
         }).attach();
+
+        userId = UserIdManager.getInstance().getUserId();
+        Log.i("userId in commentActivity", "" + userId);
 
         commentDetailLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -106,7 +112,6 @@ public class CommentActivity extends AppCompatActivity {
                             Comment repliedComment = data.getParcelableExtra("replyComment", Comment.class);
                             String updateContent = data.getStringExtra("content");
 
-                            Log.i("edited Content in comment activity", updateContent);
                             if (position != -1) {
                                 updateCommentAtPosition(position, newStatus, updateContent, fragment);
                             }
@@ -161,7 +166,7 @@ public class CommentActivity extends AppCompatActivity {
                     if (unrepliedCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
                         unrepliedCommentsFragment.removeCommentBaseOnId(comment.getId());
                     }
-                    if (comment.getAuthor() == 255839981 && comment.getParent() != 0 && comment.getParent() != 255839981) {
+                    if (comment.getAuthor() == (long) userId && comment.getParent() != 0 && comment.getParent() != (long) userId) {
                         Comment unrepliedComment = allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getParent()).findFirst().get();
                         unrepliedCommentsFragment.addComment(unrepliedComment);
                     }
@@ -178,7 +183,7 @@ public class CommentActivity extends AppCompatActivity {
                     if (unrepliedCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
                         unrepliedCommentsFragment.removeCommentBaseOnId(comment.getId());
                     }
-                    if (comment.getAuthor() == 255839981 && comment.getParent() != 0 && comment.getParent() != 255839981) {
+                    if (comment.getAuthor() == (long) userId && comment.getParent() != 0 && comment.getParent() != (long) userId) {
                         Comment unrepliedComment = allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getParent()).findFirst().get();
                         unrepliedCommentsFragment.addComment(unrepliedComment);
                     }
@@ -196,202 +201,281 @@ public class CommentActivity extends AppCompatActivity {
                     cmt.setContent(content);
                     approvedCommentsFragment.changeStatus(cmt, approvedIndex.getAsInt());
                 }
+
+                OptionalInt pendingIndex = IntStream.range(0, pendingCommentsFragment.getComments().size()).filter(i -> pendingCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
+                if (pendingIndex.isPresent()) {
+                    Comment cmt = pendingCommentsFragment.getComments().get(pendingIndex.getAsInt());
+                    cmt.setContent(content);
+                    pendingCommentsFragment.changeStatus(cmt, pendingIndex.getAsInt());
+                }
+
+                OptionalInt unrepliedIndex = IntStream.range(0, unrepliedCommentsFragment.getComments().size()).filter(i -> unrepliedCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
+                if (unrepliedIndex.isPresent()) {
+                    Comment cmt = unrepliedCommentsFragment.getComments().get(unrepliedIndex.getAsInt());
+                    cmt.setContent(content);
+                    unrepliedCommentsFragment.changeStatus(cmt, unrepliedIndex.getAsInt());
+                }
             }
         } else if (fragment.equals("ApprovedCommentsFragment")) {
-            if (newStatus.equals("hold")) {
+            if (newStatus != null) {
+                if (newStatus.equals("hold")) {
+                    Comment comment = approvedCommentsFragment.getComments().get(position);
+                    approvedCommentsFragment.removeCommentAtPosition(position);
+                    pendingCommentsFragment.addComment(comment);
+                    OptionalInt index = IntStream.range(0, allCommentsFragment.getComments().size()).filter(i -> allCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
+                    if (index.isPresent()) {
+                        int positionInAllFragment = index.getAsInt();
+                        allCommentsFragment.changeStatus(comment, positionInAllFragment);
+                    }
+                } else if (newStatus.equals("spam")) {
+                    Comment comment = approvedCommentsFragment.getComments().get(position);
+                    approvedCommentsFragment.removeCommentAtPosition(position);
+                    spamCommentsFragment.addComment(comment);
+
+                    if (allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
+                        allCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    }
+
+                    if (unrepliedCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
+                        unrepliedCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    }
+                    if (comment.getAuthor() == (long) userId && comment.getParent() != 0 && comment.getParent() != (long) userId) {
+                        Comment unrepliedComment = allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getParent()).findFirst().get();
+                        unrepliedCommentsFragment.addComment(unrepliedComment);
+                    }
+                } else if (newStatus.equals("trash")) {
+                    Comment comment = approvedCommentsFragment.getComments().get(position);
+                    approvedCommentsFragment.removeCommentAtPosition(position);
+                    if (allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
+                        allCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    }
+                    if (unrepliedCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
+                        unrepliedCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    }
+
+                    if (comment.getAuthor() == (long) userId && comment.getParent() != 0 && comment.getParent() != (long) userId) {
+                        Comment unrepliedComment = allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getParent()).findFirst().get();
+                        unrepliedCommentsFragment.addComment(unrepliedComment);
+                    }
+
+                    trashedCommentsFragment.addComment(comment);
+                }
+            }
+            if (content != null) {
                 Comment comment = approvedCommentsFragment.getComments().get(position);
-                approvedCommentsFragment.removeCommentAtPosition(position);
-                pendingCommentsFragment.addComment(comment);
-                OptionalInt index = IntStream.range(0, allCommentsFragment.getComments().size()).filter(i -> allCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
-                if (index.isPresent()) {
-                    int positionInAllFragment = index.getAsInt();
-                    allCommentsFragment.changeStatus(comment, positionInAllFragment);
-                }
-            } else if (newStatus.equals("spam")) {
-                Comment comment = approvedCommentsFragment.getComments().get(position);
-                approvedCommentsFragment.removeCommentAtPosition(position);
-                spamCommentsFragment.addComment(comment);
+                comment.setContent(content);
+                approvedCommentsFragment.changeStatus(comment, position);
 
-                if (allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
-                    allCommentsFragment.removeCommentBaseOnId(comment.getId());
+                OptionalInt unrepliedIndex = IntStream.range(0, unrepliedCommentsFragment.getComments().size()).filter(i -> unrepliedCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
+                if (unrepliedIndex.isPresent()) {
+                    Comment cmt = unrepliedCommentsFragment.getComments().get(unrepliedIndex.getAsInt());
+                    cmt.setContent(content);
+                    unrepliedCommentsFragment.changeStatus(cmt, unrepliedIndex.getAsInt());
                 }
 
-                if (unrepliedCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
-                    unrepliedCommentsFragment.removeCommentBaseOnId(comment.getId());
+                OptionalInt allIndex = IntStream.range(0, allCommentsFragment.getComments().size()).filter(i -> allCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
+                if (allIndex.isPresent()) {
+                    Comment cmt = allCommentsFragment.getComments().get(allIndex.getAsInt());
+                    cmt.setContent(content);
+                    allCommentsFragment.changeStatus(cmt, allIndex.getAsInt());
                 }
-                if (comment.getAuthor() == 255839981 && comment.getParent() != 0 && comment.getParent() != 255839981) {
-                    Comment unrepliedComment = allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getParent()).findFirst().get();
-                    unrepliedCommentsFragment.addComment(unrepliedComment);
-                }
-
-//                if (comment.getAuthor() != 255839981) {
-//                    if (unrepliedCommentsFragment.getComments().stream().filter(comment1 -> (comment1.getParent() == comment.getId() && comment1.getId() == comment.getId())).collect(Collectors.toList()).size() == 0) {
-//                        unrepliedCommentsFragment.removeCommentBaseOnId(comment.getId());
-//                    }
-//                }
-            } else if (newStatus.equals("trash")) {
-                Comment comment = approvedCommentsFragment.getComments().get(position);
-                approvedCommentsFragment.removeCommentAtPosition(position);
-                if (allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
-                    allCommentsFragment.removeCommentBaseOnId(comment.getId());
-                }
-                if (unrepliedCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
-                    unrepliedCommentsFragment.removeCommentBaseOnId(comment.getId());
-                }
-
-                if (comment.getAuthor() == 255839981 && comment.getParent() != 0 && comment.getParent() != 255839981) {
-                    Comment unrepliedComment = allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getParent()).findFirst().get();
-                    unrepliedCommentsFragment.addComment(unrepliedComment);
-                }
-
-//                if (comment.getAuthor() != 255839981) {
-//                    if (unrepliedCommentsFragment.getComments().stream().filter(comment1 -> (comment1.getParent() == comment.getId() && comment1.getId() == comment.getId())).collect(Collectors.toList()).size() == 0) {
-//                        unrepliedCommentsFragment.removeCommentBaseOnId(comment.getId());
-//                    }
-//                }
-                trashedCommentsFragment.addComment(comment);
             }
         } else if (fragment.equals("PendingCommentsFragment")) {
-            if (newStatus.equals("approve")) {
-                Comment comment = pendingCommentsFragment.getComments().get(position);
-                pendingCommentsFragment.removeCommentAtPosition(position);
-                approvedCommentsFragment.addComment(comment);
+            if (newStatus != null) {
+                if (newStatus.equals("approve")) {
+                    Comment comment = pendingCommentsFragment.getComments().get(position);
+                    pendingCommentsFragment.removeCommentAtPosition(position);
+                    approvedCommentsFragment.addComment(comment);
 
-                OptionalInt index = IntStream.range(0, allCommentsFragment.getComments().size()).filter(i -> allCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
-                if (index.isPresent()) {
-                    int positionInAllFragment = index.getAsInt();
-                    allCommentsFragment.changeStatus(comment, positionInAllFragment);
-                }
-            } else if (newStatus.equals("spam")) {
-                Comment comment = pendingCommentsFragment.getComments().get(position);
-                pendingCommentsFragment.removeCommentAtPosition(position);
-                spamCommentsFragment.addComment(comment);
+                    OptionalInt index = IntStream.range(0, allCommentsFragment.getComments().size()).filter(i -> allCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
+                    if (index.isPresent()) {
+                        int positionInAllFragment = index.getAsInt();
+                        allCommentsFragment.changeStatus(comment, positionInAllFragment);
+                    }
+                } else if (newStatus.equals("spam")) {
+                    Comment comment = pendingCommentsFragment.getComments().get(position);
+                    pendingCommentsFragment.removeCommentAtPosition(position);
+                    spamCommentsFragment.addComment(comment);
 
-                if (allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
-                    allCommentsFragment.removeCommentBaseOnId(comment.getId());
-                }
+                    if (allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
+                        allCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    }
 
-                if (unrepliedCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
-                    unrepliedCommentsFragment.removeCommentBaseOnId(comment.getId());
-                }
+                    if (unrepliedCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
+                        unrepliedCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    }
 
-                if (comment.getAuthor() == 255839981 && comment.getParent() != 0 && comment.getParent() != 255839981) {
-                    Comment unrepliedComment = allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getParent()).findFirst().get();
-                    unrepliedCommentsFragment.addComment(unrepliedComment);
-                }
+                    if (comment.getAuthor() == (long) userId && comment.getParent() != 0 && comment.getParent() != (long) userId) {
+                        Comment unrepliedComment = allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getParent()).findFirst().get();
+                        unrepliedCommentsFragment.addComment(unrepliedComment);
+                    }
 
-//                if (comment.getAuthor() != 255839981) {
-//                    if (unrepliedCommentsFragment.getComments().stream().filter(comment1 -> (comment1.getParent() == comment.getId() && comment1.getId() == comment.getId())).collect(Collectors.toList()).size() == 0) {
-//                        unrepliedCommentsFragment.removeCommentBaseOnId(comment.getId());
-//                    }
-//                }
-            } else if (newStatus.equals("trash")) {
-                Comment comment = pendingCommentsFragment.getComments().get(position);
-                pendingCommentsFragment.removeCommentAtPosition(position);
+                } else if (newStatus.equals("trash")) {
+                    Comment comment = pendingCommentsFragment.getComments().get(position);
+                    pendingCommentsFragment.removeCommentAtPosition(position);
 
-                if (allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
-                    allCommentsFragment.removeCommentBaseOnId(comment.getId());
-                }
-                if (unrepliedCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
-                    unrepliedCommentsFragment.removeCommentBaseOnId(comment.getId());
-                }
-                if (comment.getAuthor() == 255839981 && comment.getParent() != 0 && comment.getParent() != 255839981) {
-                    Comment unrepliedComment = allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getParent()).findFirst().get();
-                    unrepliedCommentsFragment.addComment(unrepliedComment);
-                }
+                    if (allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
+                        allCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    }
+                    if (unrepliedCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
+                        unrepliedCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    }
+                    if (comment.getAuthor() == (long) userId && comment.getParent() != 0 && comment.getParent() != (long) userId) {
+                        Comment unrepliedComment = allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getParent()).findFirst().get();
+                        unrepliedCommentsFragment.addComment(unrepliedComment);
+                    }
 
-//                if (comment.getAuthor() != 255839981) {
-//                    if (unrepliedCommentsFragment.getComments().stream().filter(comment1 -> (comment1.getParent() == comment.getId() && comment1.getId() == comment.getId())).collect(Collectors.toList()).size() == 0) {
-//                        unrepliedCommentsFragment.removeCommentBaseOnId(comment.getId());
-//                    }
-//                }
-                trashedCommentsFragment.addComment(comment);
+                    trashedCommentsFragment.addComment(comment);
+                }
+                if (content != null) {
+                    Comment comment = pendingCommentsFragment.getComments().get(position);
+                    comment.setContent(content);
+                    pendingCommentsFragment.changeStatus(comment, position);
+
+                    OptionalInt unrepliedIndex = IntStream.range(0, unrepliedCommentsFragment.getComments().size()).filter(i -> unrepliedCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
+                    if (unrepliedIndex.isPresent()) {
+                        Comment cmt = unrepliedCommentsFragment.getComments().get(unrepliedIndex.getAsInt());
+                        cmt.setContent(content);
+                        unrepliedCommentsFragment.changeStatus(cmt, unrepliedIndex.getAsInt());
+                    }
+
+                    OptionalInt allIndex = IntStream.range(0, allCommentsFragment.getComments().size()).filter(i -> allCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
+                    if (allIndex.isPresent()) {
+                        Comment cmt = allCommentsFragment.getComments().get(allIndex.getAsInt());
+                        cmt.setContent(content);
+                        allCommentsFragment.changeStatus(cmt, allIndex.getAsInt());
+                    }
+                }
             }
         } else if (fragment.equals("SpamCommentsFragment")) {
-            if (newStatus.equals("approve")) {
-                Comment comment = spamCommentsFragment.getComments().get(position);
-                spamCommentsFragment.removeCommentAtPosition(position);
-                approvedCommentsFragment.addComment(comment);
-                allCommentsFragment.addComment(comment);
-                if (comment.getAuthor() != 255839981) {
-                    if (allCommentsFragment.getComments().stream().filter(comment1 -> (comment1.getParent() == comment.getId() && comment1.getId() != comment.getId())).collect(Collectors.toList()).size() == 0) {
-                        unrepliedCommentsFragment.addComment(comment);
+            if (newStatus != null) {
+                if (newStatus.equals("approve")) {
+                    Comment comment = spamCommentsFragment.getComments().get(position);
+                    spamCommentsFragment.removeCommentAtPosition(position);
+                    approvedCommentsFragment.addComment(comment);
+                    allCommentsFragment.addComment(comment);
+                    Log.i("AuthorId", "" + comment.getAuthor());
+                    if (comment.getAuthor() != (long) userId) {
+                        Log.i("Check first if", "checked");
+                        if (allCommentsFragment.getComments().stream().filter(comment1 -> (comment1.getParent() == comment.getId() && comment1.getId() != comment.getId())).collect(Collectors.toList()).size() == 0) {
+                            unrepliedCommentsFragment.addComment(comment);
+                        }
                     }
+                    if (comment.getAuthor() == (long) userId && comment.getParent() != 0 && comment.getParent() != (long) userId) {
+                        Comment unrepliedComment = allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getParent()).findFirst().get();
+                        unrepliedCommentsFragment.removeCommentBaseOnId(unrepliedComment.getId());
+                    }
+                } else if (newStatus.equals("trash")) {
+                    Comment comment = spamCommentsFragment.getComments().get(position);
+                    spamCommentsFragment.removeCommentAtPosition(position);
+                    trashedCommentsFragment.addComment(comment);
                 }
-                if (comment.getAuthor() == 255839981 && comment.getParent() != 0 && comment.getParent() != 255839981) {
-                    Comment unrepliedComment = allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getParent()).findFirst().get();
-                    unrepliedCommentsFragment.removeCommentBaseOnId(unrepliedComment.getId());
-                }
-            } else if (newStatus.equals("trash")) {
+            }
+            if (content != null) {
                 Comment comment = spamCommentsFragment.getComments().get(position);
-                spamCommentsFragment.removeCommentAtPosition(position);
-                trashedCommentsFragment.addComment(comment);
+                comment.setContent(content);
+                spamCommentsFragment.changeStatus(comment, position);
             }
         } else if (fragment.equals("TrashedCommentsFragment")) {
-            if (newStatus.equals("approve")) {
-                Comment comment = trashedCommentsFragment.getComments().get(position);
-                trashedCommentsFragment.removeCommentAtPosition(position);
-                approvedCommentsFragment.addComment(comment);
-                allCommentsFragment.addComment(comment);
-                if (comment.getAuthor() != 255839981) {
-                    if (allCommentsFragment.getComments().stream().filter(comment1 -> (comment1.getParent() == comment.getId() && comment1.getId() != comment.getId())).collect(Collectors.toList()).size() == 0) {
-                        unrepliedCommentsFragment.addComment(comment);
+            if (newStatus != null) {
+                if (newStatus.equals("approve")) {
+                    Comment comment = trashedCommentsFragment.getComments().get(position);
+                    trashedCommentsFragment.removeCommentAtPosition(position);
+                    approvedCommentsFragment.addComment(comment);
+                    allCommentsFragment.addComment(comment);
+                    if (comment.getAuthor() != (long) userId) {
+                        if (allCommentsFragment.getComments().stream().filter(comment1 -> (comment1.getParent() == comment.getId() && comment1.getId() != comment.getId())).collect(Collectors.toList()).size() == 0) {
+                            unrepliedCommentsFragment.addComment(comment);
+                        }
                     }
+                    if (comment.getAuthor() == (long) userId && comment.getParent() != 0 && comment.getParent() != (long) userId) {
+                        Comment unrepliedComment = allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getParent()).findFirst().get();
+                        unrepliedCommentsFragment.removeCommentBaseOnId(unrepliedComment.getId());
+                    }
+                } else if (newStatus.equals("delete")) {
+                    trashedCommentsFragment.removeCommentAtPosition(position);
                 }
-                if (comment.getAuthor() == 255839981 && comment.getParent() != 0 && comment.getParent() != 255839981) {
-                    Comment unrepliedComment = allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getParent()).findFirst().get();
-                    unrepliedCommentsFragment.removeCommentBaseOnId(unrepliedComment.getId());
-                }
-            } else if (newStatus.equals("delete")) {
-                trashedCommentsFragment.removeCommentAtPosition(position);
+            }
+            if (content != null) {
+                Comment comment = trashedCommentsFragment.getComments().get(position);
+                comment.setContent(content);
+                trashedCommentsFragment.changeStatus(comment, position);
             }
         } else if (fragment.equals("UnrepliedCommentsFragment")) {
-            if (newStatus.equals("approve")) {
-                Comment comment = unrepliedCommentsFragment.getComments().get(position);
-                approvedCommentsFragment.addComment(comment);
-                pendingCommentsFragment.removeCommentBaseOnId(comment.getId());
-
-                OptionalInt index = IntStream.range(0, allCommentsFragment.getComments().size()).filter(i -> allCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
-                if (index.isPresent()) {
-                    int positionInAllFragment = index.getAsInt();
-                    allCommentsFragment.changeStatus(comment, positionInAllFragment);
-                }
-            } else if (newStatus.equals("pending")) {
-                Comment comment = unrepliedCommentsFragment.getComments().get(position);
-                pendingCommentsFragment.addComment(comment);
-                approvedCommentsFragment.removeCommentBaseOnId(comment.getId());
-
-                OptionalInt index = IntStream.range(0, allCommentsFragment.getComments().size()).filter(i -> allCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
-                if (index.isPresent()) {
-                    int positionInAllFragment = index.getAsInt();
-                    allCommentsFragment.changeStatus(comment, positionInAllFragment);
-                }
-            } else if (newStatus.equals("spam")) {
-                Comment comment = unrepliedCommentsFragment.getComments().get(position);
-                spamCommentsFragment.addComment(comment);
-                unrepliedCommentsFragment.removeCommentAtPosition(position);
-                if (comment.getStatus().equals("hold")) {
+            if (newStatus != null) {
+                if (newStatus.equals("approve")) {
+                    Comment comment = unrepliedCommentsFragment.getComments().get(position);
+                    approvedCommentsFragment.addComment(comment);
                     pendingCommentsFragment.removeCommentBaseOnId(comment.getId());
-                } else if (comment.getStatus().equals("approved")) {
-                    approvedCommentsFragment.removeCommentBaseOnId(comment.getId());
-                }
 
-                if (allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
-                    allCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    OptionalInt index = IntStream.range(0, allCommentsFragment.getComments().size()).filter(i -> allCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
+                    if (index.isPresent()) {
+                        int positionInAllFragment = index.getAsInt();
+                        allCommentsFragment.changeStatus(comment, positionInAllFragment);
+                    }
+                } else if (newStatus.equals("pending")) {
+                    Comment comment = unrepliedCommentsFragment.getComments().get(position);
+                    pendingCommentsFragment.addComment(comment);
+                    approvedCommentsFragment.removeCommentBaseOnId(comment.getId());
+
+                    OptionalInt index = IntStream.range(0, allCommentsFragment.getComments().size()).filter(i -> allCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
+                    if (index.isPresent()) {
+                        int positionInAllFragment = index.getAsInt();
+                        allCommentsFragment.changeStatus(comment, positionInAllFragment);
+                    }
+                } else if (newStatus.equals("spam")) {
+                    Comment comment = unrepliedCommentsFragment.getComments().get(position);
+                    spamCommentsFragment.addComment(comment);
+                    unrepliedCommentsFragment.removeCommentAtPosition(position);
+                    if (comment.getStatus().equals("hold")) {
+                        pendingCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    } else if (comment.getStatus().equals("approved")) {
+                        approvedCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    }
+
+                    if (allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
+                        allCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    }
+                } else if (newStatus.equals("trash")) {
+                    Comment comment = unrepliedCommentsFragment.getComments().get(position);
+                    unrepliedCommentsFragment.removeCommentAtPosition(position);
+                    if (comment.getStatus().equals("hold")) {
+                        pendingCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    } else if (comment.getStatus().equals("approved")) {
+                        approvedCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    }
+
+                    if (allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
+                        allCommentsFragment.removeCommentBaseOnId(comment.getId());
+                    }
+                    trashedCommentsFragment.addComment(comment);
                 }
-            } else if (newStatus.equals("trash")) {
+            }
+            if (content != null) {
                 Comment comment = unrepliedCommentsFragment.getComments().get(position);
-                unrepliedCommentsFragment.removeCommentAtPosition(position);
-                if (comment.getStatus().equals("hold")) {
-                    pendingCommentsFragment.removeCommentBaseOnId(comment.getId());
-                } else if (comment.getStatus().equals("approved")) {
-                    approvedCommentsFragment.removeCommentBaseOnId(comment.getId());
+                comment.setContent(content);
+                unrepliedCommentsFragment.changeStatus(comment, position);
+
+                OptionalInt allIndex = IntStream.range(0, allCommentsFragment.getComments().size()).filter(i -> allCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
+                if (allIndex.isPresent()) {
+                    Comment cmt = allCommentsFragment.getComments().get(allIndex.getAsInt());
+                    cmt.setContent(content);
+                    allCommentsFragment.changeStatus(cmt, allIndex.getAsInt());
                 }
 
-                if (allCommentsFragment.getComments().stream().filter(comment1 -> comment1.getId() == comment.getId()).collect(Collectors.toList()).size() != 0) {
-                    allCommentsFragment.removeCommentBaseOnId(comment.getId());
+                OptionalInt approvedIndex = IntStream.range(0, approvedCommentsFragment.getComments().size()).filter(i -> approvedCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
+                if (approvedIndex.isPresent()) {
+                    Comment cmt = approvedCommentsFragment.getComments().get(approvedIndex.getAsInt());
+                    cmt.setContent(content);
+                    approvedCommentsFragment.changeStatus(cmt, approvedIndex.getAsInt());
                 }
-                trashedCommentsFragment.addComment(comment);
+
+                OptionalInt pendingIndex = IntStream.range(0, pendingCommentsFragment.getComments().size()).filter(i -> pendingCommentsFragment.getComments().get(i).getId() == comment.getId()).findFirst();
+                if (pendingIndex.isPresent()) {
+                    Comment cmt = pendingCommentsFragment.getComments().get(pendingIndex.getAsInt());
+                    cmt.setContent(content);
+                    pendingCommentsFragment.changeStatus(cmt, pendingIndex.getAsInt());
+                }
             }
         }
     }

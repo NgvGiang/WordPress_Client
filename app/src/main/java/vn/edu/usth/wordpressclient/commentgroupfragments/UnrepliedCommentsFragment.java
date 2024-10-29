@@ -1,6 +1,5 @@
 package vn.edu.usth.wordpressclient.commentgroupfragments;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,10 +22,11 @@ import java.util.stream.IntStream;
 import vn.edu.usth.wordpressclient.CommentRecyclerViewAdapter;
 import vn.edu.usth.wordpressclient.DomainManager;
 import vn.edu.usth.wordpressclient.R;
+import vn.edu.usth.wordpressclient.UserIdManager;
 import vn.edu.usth.wordpressclient.models.Comment;
 import vn.edu.usth.wordpressclient.CommentAPIServices;
-import vn.edu.usth.wordpressclient.models.CommentDetailCallback;
 import vn.edu.usth.wordpressclient.models.GetCommentsCallback;
+import vn.edu.usth.wordpressclient.models.GetUserIdCallback;
 
 public class UnrepliedCommentsFragment extends Fragment {
     String userDomain;
@@ -38,6 +38,7 @@ public class UnrepliedCommentsFragment extends Fragment {
     private int currentPage = 1;
     private boolean isLastPage = false;
     private boolean isLoading = false;
+    Long userId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +53,9 @@ public class UnrepliedCommentsFragment extends Fragment {
             comments = savedInstanceState.getParcelableArrayList("comments", Comment.class);
             myComment = savedInstanceState.getParcelableArrayList("myComments", Comment.class);
         }
+
+        userId = UserIdManager.getInstance().getUserId();
+        Log.i("userId", "" + userId);
 
         recyclerView = view.findViewById(R.id.fragment_unreplied_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -90,14 +94,14 @@ public class UnrepliedCommentsFragment extends Fragment {
     }
 
     private void loadMoreComments() {
-        CommentAPIServices.getApprovedCommentFromMe(getContext(), userDomain, PER_PAGE, currentPage, (long) 255839981, new GetCommentsCallback() {
+        CommentAPIServices.getApprovedCommentFromMe(getContext(), userDomain, PER_PAGE, currentPage, userId, new GetCommentsCallback() {
             @Override
             public void onSuccess(List<Comment> newComments) {
                 Log.i("my cmt sz 1", "" + newComments.size());
                 myComment.addAll(newComments);
 
                 // Now that the first API call is successful, make the second API call
-                CommentAPIServices.getApprovedCommentFromUser(getContext(), userDomain, PER_PAGE, currentPage, (long) 255839981, new GetCommentsCallback() {
+                CommentAPIServices.getApprovedCommentFromUser(getContext(), userDomain, PER_PAGE, currentPage, userId, new GetCommentsCallback() {
                     @Override
                     public void onSuccess(List<Comment> userComments) {
                         Log.i("new cmt sz", "" + userComments.size());
@@ -139,201 +143,20 @@ public class UnrepliedCommentsFragment extends Fragment {
         });
     }
 
-//    private void loadApprovedCommentsFromMe(Context context, String userDomain, int perPage, long authorId, CommentDetailCallback callback) {
-//        currentPage = 1;
-//        isLastPage = false;
-//
-//        loadApprovedCommentsFromMePage(context, userDomain, perPage, authorId, callback);
-//    }
-//
-//    private void loadApprovedCommentsFromMePage(Context context, String userDomain, int perPage, long authorId, CommentDetailCallback callback) {
-//        if (isLastPage) {
-//            Log.i("isLastPageBreak", "No more pages to load.");
-//            callback.onSuccess();
-//            return;
-//        }
-//
-//        Log.i("loadCommentsPage", "Loading page: " + currentPage);
-//
-//        CommentAPIServices.getApprovedCommentFromMe(context, userDomain, perPage, currentPage, authorId, new GetCommentsCallback() {
-//            @Override
-//            public void onSuccess(List<Comment> newComments) {
-//                myComment.addAll(newComments);
-//                Log.i("newComments.size", "" + newComments.size());
-//
-//                if (newComments.size() < perPage) {
-//                    isLastPage = true;
-//                } else {
-//                    currentPage++;
-//                    loadApprovedCommentsFromMePage(context, userDomain, perPage, authorId, callback);
-//                }
-//            }
-//
-//            @Override
-//            public void onError(String error) {
-//                // Handle error here
-//                Log.e("loadCommentsPage", "Error loading comments: " + error);
-//                isLastPage = true; // Stop further loading in case of error
-//                callback.onError();
-//            }
-//        });
-//    }
-//
-//    private void loadPendingCommentsFromMe(Context context, String userDomain, int perPage, long authorId, CommentDetailCallback callback) {
-//        currentPage = 1;
-//        isLastPage = false;
-//
-//        loadPendingCommentsFromMePage(context, userDomain, perPage, authorId, callback);
-//    }
-//
-//    private void loadPendingCommentsFromMePage(Context context, String userDomain, int perPage, long authorId, CommentDetailCallback callback) {
-//        if (isLastPage) {
-//            Log.i("isLastPageBreak", "No more pages to load.");
-//            callback.onSuccess();
-//            return;
-//        }
-//
-//        Log.i("loadCommentsPage", "Loading page: " + currentPage);
-//
-//        CommentAPIServices.getPendingCommentFromMe(context, userDomain, perPage, currentPage, authorId, new GetCommentsCallback() {
-//            @Override
-//            public void onSuccess(List<Comment> newComments) {
-//                myComment.addAll(newComments);
-//                Log.i("newComments.size", "" + newComments.size());
-//
-//                if (newComments.size() < perPage) {
-//                    isLastPage = true;
-//                } else {
-//                    currentPage++;
-//                    loadPendingCommentsFromMePage(context, userDomain, perPage, authorId, callback);
-//                }
-//            }
-//
-//            @Override
-//            public void onError(String error) {
-//                // Handle error here
-//                Log.e("loadCommentsPage", "Error loading comments: " + error);
-//                isLastPage = true; // Stop further loading in case of error
-//                callback.onError();
-//            }
-//        });
-//    }
-//
-//    private void loadApprovedCommentFromUser(Context context, String userDomain, int perPage, long authorId, CommentDetailCallback callback) {
-//        currentPage = 1;
-//        isLastPage = false;
-//
-//        loadApprovedCommentsFromUserPage(context, userDomain, perPage, authorId, callback);
-//    }
-//
-//    private void loadApprovedCommentsFromUserPage(Context context, String userDomain, int perPage, long authorId, CommentDetailCallback callback) {
-//        if (isLastPage) {
-//            Log.i("isLastPageBreak", "No more pages to load.");
-//            callback.onSuccess();
-//            return;
-//        }
-//
-//        CommentAPIServices.getApprovedCommentFromUser(context, userDomain, perPage, currentPage, authorId, new GetCommentsCallback() {
-//            @Override
-//            public void onSuccess(List<Comment> newComments) {
-//                // Filter out comments that are already in myComment
-//                Iterator<Comment> iterator = newComments.iterator();
-//                while (iterator.hasNext()) {
-//                    Comment userCmt = iterator.next();
-//                    for (Comment myCmt : myComment) {
-//                        if (myCmt.getParent() == userCmt.getId()) {
-//                            iterator.remove();
-//                            break; // Move to the next comment after removal
-//                        }
-//                    }
-//                }
-//
-//                // Add remaining newComments to the comments list
-//                comments.addAll(newComments);
-//
-//                // If the response contains fewer comments than perPage, we've reached the last page
-//                if (newComments.size() < perPage) {
-//                    isLastPage = true;
-//                } else {
-//                    currentPage++;
-//                    loadApprovedCommentsFromUserPage(context, userDomain, perPage, authorId, callback);
-//                }
-//            }
-//
-//            @Override
-//            public void onError(String error) {
-//                // Handle error
-//                Log.e("loadCommentsPage", "Error loading comments: " + error);
-//                isLastPage = true;
-//                callback.onError();
-//            }
-//        });
-//    }
-//
-//    private void loadPendingCommentFromUser(Context context, String userDomain, int perPage, long authorId, CommentDetailCallback callback) {
-//        currentPage = 1;
-//        isLastPage = false;
-//
-//        loadPendingCommentsFromUserPage(context, userDomain, perPage, authorId, callback);
-//    }
-//
-//    private void loadPendingCommentsFromUserPage(Context context, String userDomain, int perPage, long authorId, CommentDetailCallback callback) {
-//        if (isLastPage) {
-//            Log.i("isLastPageBreak", "No more pages to load.");
-//            callback.onSuccess();
-//            return;
-//        }
-//
-//        CommentAPIServices.getPendingCommentFromUser(context, userDomain, perPage, currentPage, authorId, new GetCommentsCallback() {
-//            @Override
-//            public void onSuccess(List<Comment> newComments) {
-//                // Filter out comments that are already in myComment
-//                Iterator<Comment> iterator = newComments.iterator();
-//                while (iterator.hasNext()) {
-//                    Comment userCmt = iterator.next();
-//                    for (Comment myCmt : myComment) {
-//                        if (myCmt.getParent() == userCmt.getId()) {
-//                            iterator.remove();
-//                            break; // Move to the next comment after removal
-//                        }
-//                    }
-//                }
-//
-//                // Add remaining newComments to the comments list
-//                comments.addAll(newComments);
-//
-//                // If the response contains fewer comments than perPage, we've reached the last page
-//                if (newComments.size() < perPage) {
-//                    isLastPage = true;
-//                } else {
-//                    currentPage++;
-//                    loadPendingCommentsFromUserPage(context, userDomain, perPage, authorId, callback);
-//                }
-//            }
-//
-//            @Override
-//            public void onError(String error) {
-//                // Handle error
-//                Log.e("loadCommentsPage", "Error loading comments: " + error);
-//                isLastPage = true;
-//                callback.onError();
-//            }
-//        });
-//    }
-
     private void loadInitialComments() {
-        CommentAPIServices.getApprovedCommentFromMe(getContext(), userDomain, PER_PAGE, currentPage, (long) 255839981, new GetCommentsCallback() {
+        Log.i("userId in loadInitialComments", "" + userId);
+        CommentAPIServices.getApprovedCommentFromMe(getContext(), userDomain, PER_PAGE, currentPage, userId, new GetCommentsCallback() {
             @Override
             public void onSuccess(List<Comment> newComments) {
                 Log.i("my cmt sz 1", "" + newComments.size());
                 myComment.addAll(newComments);
 
-                CommentAPIServices.getPendingCommentFromMe(getContext(), userDomain, PER_PAGE, currentPage, (long) 255839981, new GetCommentsCallback() {
+                CommentAPIServices.getPendingCommentFromMe(getContext(), userDomain, PER_PAGE, currentPage, userId, new GetCommentsCallback() {
                     @Override
                     public void onSuccess(List<Comment> newComments) {
                         myComment.addAll(newComments);
 
-                        CommentAPIServices.getApprovedCommentFromUser(getContext(), userDomain, PER_PAGE, currentPage, (long) 255839981, new GetCommentsCallback() {
+                        CommentAPIServices.getApprovedCommentFromUser(getContext(), userDomain, PER_PAGE, currentPage, userId, new GetCommentsCallback() {
                             @Override
                             public void onSuccess(List<Comment> userComments) {
                                 Log.i("new cmt sz", "" + userComments.size());
@@ -350,7 +173,7 @@ public class UnrepliedCommentsFragment extends Fragment {
 
                                 Log.i("final cmt sz", "" + userComments.size());
                                 comments.addAll(userComments);
-                                CommentAPIServices.getPendingCommentFromUser(getContext(), userDomain, PER_PAGE, currentPage, (long) 255839981, new GetCommentsCallback() {
+                                CommentAPIServices.getPendingCommentFromUser(getContext(), userDomain, PER_PAGE, currentPage, userId, new GetCommentsCallback() {
                                     @Override
                                     public void onSuccess(List<Comment> newComments) {
                                         Log.i("new cmt sz", "" + newComments.size());
@@ -430,5 +253,9 @@ public class UnrepliedCommentsFragment extends Fragment {
 
     public List<Comment> getComments() {
         return this.comments;
+    }
+    public void changeStatus(Comment comment, int position) {
+        comments.set(position, comment);
+        commentRecyclerViewAdapter.notifyItemChanged(position);
     }
 }

@@ -159,4 +159,8 @@ public class PendingCommentsFragment extends Fragment {
         return this.comments;
     }
 
+    public void changeStatus(Comment comment, int position) {
+        comments.set(position, comment);
+        commentRecyclerViewAdapter.notifyItemChanged(position);
+    }
 }
