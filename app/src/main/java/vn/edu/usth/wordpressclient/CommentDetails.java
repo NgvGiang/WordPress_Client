@@ -1,6 +1,8 @@
 package vn.edu.usth.wordpressclient;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,19 +16,27 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Html;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
@@ -43,14 +53,17 @@ import vn.edu.usth.wordpressclient.models.CommentDetailCallback;
 import vn.edu.usth.wordpressclient.models.GetCommentsCallback;
 
 public class CommentDetails extends AppCompatActivity {
-    TextView authorName, title, content;
+    TextView authorName, title, content, spanEditText;
     EditText editText;
+    LinearLayout replyCommentField;
     RelativeLayout approve, spam, like, more;
-    String userDomain;
+    String userDomain, editedContent;
     Comment comment;
     int position;
     String fragment;
     Comment repliedComment;
+    ActivityResultLauncher<Intent> editCommentLauncher;
+    private AlertDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +77,7 @@ public class CommentDetails extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getString(R.string.comments));
 
-        comment = (Comment) getIntent().getSerializableExtra("comment");
+        comment = getIntent().getParcelableExtra("comment", Comment.class);
         userDomain = getIntent().getStringExtra("domain");
         position = getIntent().getIntExtra("position", -1);
         fragment = getIntent().getStringExtra("fragment");
@@ -118,6 +131,21 @@ public class CommentDetails extends AppCompatActivity {
 
         ImageView uploadReply = findViewById(R.id.upload_reply);
         editText = findViewById(R.id.input_reply);
+        replyCommentField = findViewById(R.id.reply_cmt_field);
+
+        editCommentLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        if (data != null) {
+                            editedContent = data.getStringExtra("content");
+                            Log.i("editedContent", editedContent);
+                        }
+                        updateCommentOnContentTextView(editedContent);
+                    }
+                }
+        );
 
         if (comment.getStatus().equals("approved")) {
             approvedIcon.setImageResource(R.drawable.baseline_done_24);
@@ -133,6 +161,30 @@ public class CommentDetails extends AppCompatActivity {
             approvedText.setText("Restore");
         }
 
+//        float dpOffset = -300f;
+//        float pixelOffset = TypedValue.applyDimension(
+//                TypedValue.COMPLEX_UNIT_DIP,
+//                dpOffset,
+//                getResources().getDisplayMetrics()
+//        );
+//        editText.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                replyCommentField.setTranslationY(pixelOffset);
+//                return false;
+//            }
+//        });
+//        editText.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_CHANNEL_DOWN) {
+//                    // Handle the dropdown action
+//                    replyCommentField.setTranslationY(0);
+//                    return true; // Consume the event
+//                }
+//                return false;
+//            }
+//        });
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -217,11 +269,14 @@ public class CommentDetails extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
+        Intent intent = new Intent();
+        intent.putExtra("updatedCommentId", position);
+        intent.putExtra("fragment", fragment);
+        intent.putExtra("content", editedContent);
+        setResult(Activity.RESULT_OK, intent);
         finish();
         return true;
     }
-
-
 
     public void approveComment(String status) {
         CommentAPIServices.updateCommentStatus(this, userDomain, comment.getId(), status, new CommentDetailCallback() {
@@ -265,8 +320,17 @@ public class CommentDetails extends AppCompatActivity {
         });
     }
 
+    private void showLoadingDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(new ProgressBar(this));
+        builder.setCancelable(false);
+        progressDialog = builder.create();
+        progressDialog.show();
+    }
+
     public void replyComment() {
         String reply = editText.getText().toString();
+        showLoadingDialog();
         CommentAPIServices.replyComment(this, userDomain, reply, comment.getId(), comment.getPost(), new GetCommentsCallback() {
             @Override
             public void onSuccess(List<Comment> newComments) {
@@ -276,6 +340,7 @@ public class CommentDetails extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putExtra("replyComment", (Parcelable) repliedComment);
                 setResult(Activity.RESULT_OK, intent);
+                progressDialog.dismiss();
             }
 
             @Override
@@ -290,12 +355,11 @@ public class CommentDetails extends AppCompatActivity {
         PopupMenu popupMenu = new PopupMenu(this, view);
         popupMenu.getMenuInflater().inflate(R.menu.comment_detail_menu, popupMenu.getMenu());
 
-        // Handle menu item clicks
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Intent intent = new Intent();
                 if (item.getItemId() == R.id.move_to_trash) {
+                    Intent intent = new Intent();
                     moveCommentToTrash("trash");
                     intent.putExtra("updatedCommentId", position);
                     intent.putExtra("status", "trash");
@@ -311,7 +375,7 @@ public class CommentDetails extends AppCompatActivity {
                     intent1.putExtra("authorUrl", comment.getAuthorUrl());
                     intent1.putExtra("domain", userDomain);
                     intent1.putExtra("commentId", comment.getId());
-                    CommentDetails.this.startActivity(intent1);
+                    CommentDetails.this.editCommentLauncher.launch(intent1);
                     return true;
                 } else if (item.getItemId() == R.id.copy_address) {
                     Toast.makeText(CommentDetails.this, "copy address", Toast.LENGTH_SHORT).show();
@@ -345,7 +409,7 @@ public class CommentDetails extends AppCompatActivity {
                     intent1.putExtra("content", comment.getContent());
                     intent1.putExtra("domain", userDomain);
                     intent1.putExtra("commentId", comment.getId());
-                    CommentDetails.this.startActivity(intent1);
+                    CommentDetails.this.editCommentLauncher.launch(intent1);
                     return true;
                 } else {
                     return true;
@@ -381,5 +445,9 @@ public class CommentDetails extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void updateCommentOnContentTextView(String updateContent) {
+        content.setText(Html.fromHtml(updateContent, Html.FROM_HTML_MODE_LEGACY).toString());
     }
 }

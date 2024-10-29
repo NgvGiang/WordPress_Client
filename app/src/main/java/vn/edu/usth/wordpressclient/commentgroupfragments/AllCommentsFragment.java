@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import vn.edu.usth.wordpressclient.CommentRecyclerViewAdapter;
+import vn.edu.usth.wordpressclient.DomainManager;
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.models.Comment;
 import vn.edu.usth.wordpressclient.CommentAPIServices;
@@ -38,9 +39,7 @@ public class AllCommentsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            userDomain = getArguments().getString("domain");
-        }
+        userDomain = DomainManager.getInstance().getSelectedDomain();
     }
 
     @Override
@@ -50,7 +49,7 @@ public class AllCommentsFragment extends Fragment {
         if (savedInstanceState == null) {
             comments = new ArrayList<>();
         } else {
-            comments = savedInstanceState.getParcelableArrayList("comments");
+            comments = savedInstanceState.getParcelableArrayList("comments", Comment.class);
         }
         recyclerView = view.findViewById(R.id.fragment_all_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -74,7 +73,7 @@ public class AllCommentsFragment extends Fragment {
         commentRecyclerViewAdapter = new CommentRecyclerViewAdapter(comments, getContext(), userDomain, this);
         recyclerView.setAdapter(commentRecyclerViewAdapter);
         if (savedInstanceState != null) {
-            comments = savedInstanceState.getParcelableArrayList("comments");
+            comments = savedInstanceState.getParcelableArrayList("comments", Comment.class);
             currentPage = savedInstanceState.getInt("currentPage");
             isLastPageOfAllFragment = savedInstanceState.getBoolean("isLastPage");
             commentRecyclerViewAdapter.notifyDataSetChanged();

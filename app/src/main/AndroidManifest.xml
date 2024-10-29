@@ -15,9 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WordPressClient">
         <activity
-            android:name=".EditCommentActivity"
-            android:exported="false" />
-        <activity
             android:name=".Dont_have_site_activity"
             android:exported="false" />
         <activity
@@ -98,6 +95,9 @@
             android:name=".CommentDetails"
             android:exported="false"
             android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".EditCommentActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

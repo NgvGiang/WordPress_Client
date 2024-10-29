@@ -614,6 +614,7 @@ public class CommentAPIServices {
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("content", content);
+            Log.i("content", content);
         } catch (JSONException e) {
             e.printStackTrace();
         }

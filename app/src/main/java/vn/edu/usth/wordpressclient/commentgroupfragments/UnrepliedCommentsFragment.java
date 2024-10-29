@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import vn.edu.usth.wordpressclient.CommentRecyclerViewAdapter;
+import vn.edu.usth.wordpressclient.DomainManager;
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.models.Comment;
 import vn.edu.usth.wordpressclient.CommentAPIServices;
@@ -42,17 +43,16 @@ public class UnrepliedCommentsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_unreplied_comments, container, false);
-        if (getArguments() != null) {
-            userDomain = getArguments().getString("domain");
-        }
+        userDomain = DomainManager.getInstance().getSelectedDomain();
 
         if (savedInstanceState == null) {
             comments = new ArrayList<>();
             myComment = new ArrayList<>();
         } else {
-            comments = savedInstanceState.getParcelableArrayList("comments");
-            myComment = savedInstanceState.getParcelableArrayList("myComments");
+            comments = savedInstanceState.getParcelableArrayList("comments", Comment.class);
+            myComment = savedInstanceState.getParcelableArrayList("myComments", Comment.class);
         }
+
         recyclerView = view.findViewById(R.id.fragment_unreplied_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -70,8 +70,8 @@ public class UnrepliedCommentsFragment extends Fragment {
         commentRecyclerViewAdapter = new CommentRecyclerViewAdapter(comments, getContext(), userDomain, this);
         recyclerView.setAdapter(commentRecyclerViewAdapter);
         if (savedInstanceState != null) {
-            comments = savedInstanceState.getParcelableArrayList("comments");
-            myComment = savedInstanceState.getParcelableArrayList("myComments");
+            comments = savedInstanceState.getParcelableArrayList("comments", Comment.class);
+            myComment = savedInstanceState.getParcelableArrayList("myComments", Comment.class);
             currentPage = savedInstanceState.getInt("currentPage");
             isLastPage = savedInstanceState.getBoolean("isLastPage");
             commentRecyclerViewAdapter.notifyDataSetChanged();
