@@ -11,14 +11,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
-import vn.edu.usth.wordpressclient.Pose_page_adapter;
+import vn.edu.usth.wordpressclient.Post_page_adapter;
 import vn.edu.usth.wordpressclient.Post_page_card_model;
 import vn.edu.usth.wordpressclient.R;
 
 public class DraftPostFragment extends Fragment {
     private RecyclerView recyclerView;
     private ConstraintLayout noPostsMessage;
-    private Pose_page_adapter adapter;
+    private Post_page_adapter adapter;
     private ArrayList<Post_page_card_model> postList;
 
     @Nullable
@@ -43,7 +43,7 @@ public class DraftPostFragment extends Fragment {
         postList.add(new Post_page_card_model("Oct 22", "French Midterm", "Je suis un chien"));
         postList.add(new Post_page_card_model("Oct 23", "Happy Bday Chuck", "HAPPYY BIRTHDAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"));
 
-        adapter = new Pose_page_adapter(getContext(), postList);
+        adapter = new Post_page_adapter(getContext(), postList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 

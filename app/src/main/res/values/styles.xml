@@ -25,12 +25,17 @@
         <item name="android:textSize">20dp</item>
     </style>
 
-    <style name="popupBackground" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">@color/black</item>
-        <item name="popupMenuBackground">@drawable/overflow_menu_bg</item>
-        <item name="android:popupBackground">@drawable/overflow_menu_bg</item>
+<!--    <style name="popupBackground" parent="Widget.AppCompat.PopupMenu">-->
+<!--        <item name="colorAccent">@color/black</item>-->
+<!--        <item name="popupMenuBackground">@drawable/overflow_menu_bg</item>-->
+<!--        <item name="android:popupBackground">@drawable/overflow_menu_bg</item>-->
+<!--        <item name="android:textSize">16dp</item>-->
+<!--        <item name="dialogCornerRadius">10dp</item>-->
+<!--    </style>-->
 
-        <item name="dialogCornerRadius">10dp</item>
+    <style name="popupBackground" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/overflow_menu_bg</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="CustomDatePicker" parent="Theme.AppCompat.Light.Dialog">
