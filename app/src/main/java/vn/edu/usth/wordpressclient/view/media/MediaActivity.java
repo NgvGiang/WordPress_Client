@@ -2,6 +2,8 @@ package vn.edu.usth.wordpressclient.view.media;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.activity.EdgeToEdge;
@@ -13,7 +15,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.util.ArrayList;
+import java.util.logging.Handler;
+
+
 import vn.edu.usth.wordpressclient.R;
+import vn.edu.usth.wordpressclient.model.MediaCardModel;
+import vn.edu.usth.wordpressclient.view.adapter.MediaAdapter;
 import vn.edu.usth.wordpressclient.view.adapter.ViewPagerAdapter;
 
 public class MediaActivity extends AppCompatActivity {
@@ -43,9 +51,11 @@ public class MediaActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> {
             finish();
         });
-        
+
+
+
         MediatabLayout = findViewById(R.id.MediatabLayout);
-        MediaviewPager2 = findViewById(R.id.MediaviewPager);
+        MediaviewPager2 = findViewById(R.id.MediaViewPager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, domain);
         viewPagerAdapter.addFragment(new MediaAllFragment(), getString(R.string.ALL));
         viewPagerAdapter.addFragment(new MediaImagesFragment(), getString(R.string.images));
@@ -55,5 +65,6 @@ public class MediaActivity extends AppCompatActivity {
         new TabLayoutMediator(MediatabLayout, MediaviewPager2, (tab, position) -> {
             tab.setText(viewPagerAdapter.getTitle(position));
         }).attach();
+
     }
 }

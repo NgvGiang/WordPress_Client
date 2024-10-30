@@ -56,11 +56,15 @@
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/MediaviewPager"
+            android:id="@+id/MediaViewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_anchor="@id/PagetabLayout"
-            app:layout_anchorGravity="bottom" />
+            android:contentDescription="hello"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/MediatabLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
