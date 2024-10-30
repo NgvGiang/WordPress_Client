@@ -15,11 +15,11 @@ import vn.edu.usth.wordpressclient.repository.WebRepository;
 public class WebViewModel extends AndroidViewModel {
     //init repository
     //init live data
-    private final WebRepository webRepository ;
+    private final WebRepository webRepository = WebRepository.getInstance(getApplication());;
     private final MutableLiveData<ArrayList<WebCardModel>> webModelsLiveData;
+
     public WebViewModel(@NonNull Application application) {
         super(application);
-        webRepository = WebRepository.getInstance(application);
         webModelsLiveData = new MutableLiveData<>();
     }
     public LiveData<ArrayList<WebCardModel>> getWebModelsLiveData() {

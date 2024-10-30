@@ -72,7 +72,7 @@ public class WebRepository {
 //                            adapter.notifyDataSetChanged();
 
                         }
-                        webModelsLiveData.postValue(webModels);
+                        webModelsLiveData.setValue(webModels);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }

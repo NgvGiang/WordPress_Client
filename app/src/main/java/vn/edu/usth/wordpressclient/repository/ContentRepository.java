@@ -116,16 +116,7 @@ public class ContentRepository {
 //                    try {
 //                        JSONArray responseArray = new JSONArray(response);
 //                        // Handle the response and update the LiveData
-//                        List<Content> contentList = new ArrayList<>();
-//                        for (int i = 0; i < responseArray.length(); i++) {
-//                            JSONObject contentObject = responseArray.getJSONObject(i);
-//                            Content content = new Content(
-//                                    contentObject.getString("title"),
-//                                    contentObject.getString("content"),
-//                                    contentObject.getString("date")
-//                            );
-//                            contentList.add(content);
-//                        }
+//
 //                        contentLiveData.postValue(contentList);
 //
 //                    } catch (JSONException e) {

@@ -4,24 +4,23 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
 import vn.edu.usth.wordpressclient.repository.ContentRepository;
 
 public class ContentViewModel extends AndroidViewModel {
-    private final ContentRepository contentRepository;
-    private final MutableLiveData<Boolean> successLiveData;
-//    private final MutableLiveData<List<Object>> contentLiveData;
+    private final ContentRepository contentRepository = ContentRepository.getInstance(getApplication());
+    private final MutableLiveData<Boolean> successLiveData= new MutableLiveData<>();
+//    private final MutableLiveData<JSONObject> contentLiveData = new MutableLiveData<>();
     public ContentViewModel(@NonNull Application application) {
         super(application);
-        contentRepository = ContentRepository.getInstance(application);
-        successLiveData = new MutableLiveData<>();
     }
-    //return Mutable để UI như activity cũng có thể sửa được dữ liệu.
-    //nếu chỉ muốn UI đọc, sử dụng LiveData
-    public MutableLiveData<Boolean> getSuccessLiveData() {
+    public LiveData<Boolean> getSuccessLiveData() {
         return successLiveData;
     }
     //function use cross page to post, use to create page or post base on endpoint
@@ -30,7 +29,7 @@ public class ContentViewModel extends AndroidViewModel {
         contentRepository.createContent(endpoint, domain, title, content, status, date, successLiveData);
     }
     public void fetchContent( String domain,String endpoint,String status) {
-//        contentRepository.fetchContent(domain,endpoint,status);
+//        contentRepository.fetchContent(domain,endpoint,status,contentLiveData);
     }
 
 }
