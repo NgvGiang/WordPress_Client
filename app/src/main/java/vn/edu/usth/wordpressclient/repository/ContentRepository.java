@@ -10,14 +10,17 @@ import com.android.volley.Request;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import vn.edu.usth.wordpressclient.model.MediaCardModel;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
 import vn.edu.usth.wordpressclient.utils.QueueManager;
 
@@ -103,6 +106,40 @@ public class ContentRepository {
         ));
 
         QueueManager.getInstance(context).addToRequestQueue(contentRequest);
+    }
+
+    public void fetchMediaUrls(String accessToken, String domain, MutableLiveData<ArrayList<MediaCardModel>> mediaModelsLiveData){
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain +"/media";
+        StringRequest fetchMediaUrlsRequest = new StringRequest(
+            Request.Method.GET,
+            url,
+            response -> {
+                try{
+                    ArrayList<MediaCardModel> mediaModels = new ArrayList<>();
+                    JSONArray mediaArray = new JSONArray(response);
+                    for (int i=0;i<mediaArray.length(); i++) {
+                        JSONObject mediaUrlsArrayJSONObject = mediaArray.getJSONObject(i);
+                        String sourceUrl = mediaUrlsArrayJSONObject.getString("source_url");
+                        mediaModels.add(new MediaCardModel(sourceUrl));
+                    }
+                    mediaModelsLiveData.setValue(mediaModels);
+                } catch (JSONException e){
+                    throw new RuntimeException(e);
+                }
+            },
+            error -> {
+                VolleyLog.d("volley", "Error: " + error.getMessage());
+                error.printStackTrace();
+            }
+        ){
+            @Override
+            public Map<String,String> getHeaders(){
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+        };
+        QueueManager.getInstance(context).addToRequestQueue(fetchMediaUrlsRequest);
     }
 
 //    public void fetchContent(String domain,String endpoint,String status) {
