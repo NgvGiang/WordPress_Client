@@ -38,7 +38,7 @@ public class WebRepository {
         return instance;
     }
     //this is the function declaration, which is call from WebViewModel
-    public void fetchSites(String accessToken, MutableLiveData<ArrayList<WebCardModel>> webModelsLiveData) {
+    public void fetchSites(String accessToken, MutableLiveData<ArrayList<WebCardModel>> webModelsLiveData,MutableLiveData<Integer> siteNumber) {
         String url = "https://public-api.wordpress.com/rest/v1.1/me/sites";
         StringRequest fetchSitesRequest = new StringRequest(
                 Request.Method.GET,
@@ -48,8 +48,10 @@ public class WebRepository {
                         ArrayList<WebCardModel> webModels = new ArrayList<>();
                         JSONObject jsonResponse = new JSONObject(response);
                         JSONArray sitesArray = jsonResponse.getJSONArray("sites");
+                        int sitesArrayLength = sitesArray.length();
+                        siteNumber.setValue(sitesArrayLength);
                         // Handle the JSON response here
-                        for (int i =0;i<sitesArray.length();i++){
+                        for (int i =0;i<sitesArrayLength;i++){
                             JSONObject sitesArrayJSONObject = sitesArray.getJSONObject(i);
                             String siteTitle = sitesArrayJSONObject.getString("name");
                             String siteDomain = sitesArrayJSONObject.getString("URL");

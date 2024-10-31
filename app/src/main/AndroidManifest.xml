@@ -45,9 +45,6 @@
             android:name=".view.Welcome_to_WordPress"
             android:exported="false" />
         <activity
-            android:name=".view.Create_new_site"
-            android:exported="false" />
-        <activity
             android:name=".view.sign_up_choose_display_name"
             android:exported="false" />
         <activity
@@ -76,6 +73,7 @@
             android:exported="false" />
         <activity
             android:name=".view.auth.FirstLoginActivity"
+            android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
