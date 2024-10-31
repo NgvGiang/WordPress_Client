@@ -22,6 +22,7 @@ public class MediaImagesAdapter extends RecyclerView.Adapter<MediaImagesAdapter.
         this.mediaUrls = new ArrayList<>();
     }
     public void setMediaUrls(ArrayList<MediaCardModel> mediaImagesUrls){
+        this.mediaUrls.clear();
         //filter đầu vào, nếu là url của ảnh thì mới cho vào ArrayList để cho vào ImageView
         for (MediaCardModel model : mediaImagesUrls) {
             if (isImageUrl(model.getPicture_url())) {
