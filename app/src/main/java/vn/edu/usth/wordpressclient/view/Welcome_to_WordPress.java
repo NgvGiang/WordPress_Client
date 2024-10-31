@@ -22,7 +22,6 @@ public class Welcome_to_WordPress extends AppCompatActivity {
         Button set_host_btn = findViewById(R.id.addSelfHostButton);
         TextView skip_btn = findViewById(R.id.skipButton);
 
-        create_blog_btn.setOnClickListener(view -> startActivity(new Intent(this, Create_new_site.class)));
         set_host_btn.setOnClickListener(view -> startActivity(new Intent(this, Login_to_existing.class)));
         skip_btn.setOnClickListener(view -> startActivity(new Intent(this, Dont_have_site_activity.class)));
     }

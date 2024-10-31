@@ -4,17 +4,24 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.squareup.picasso.Picasso;
 
+import vn.edu.usth.wordpressclient.utils.SessionManager;
 import vn.edu.usth.wordpressclient.view.comment.CommentActivity;
 import vn.edu.usth.wordpressclient.utils.DomainManager;
 import vn.edu.usth.wordpressclient.MeActivity.MeWebsiteActivity;
@@ -23,42 +30,49 @@ import vn.edu.usth.wordpressclient.view.media.MediaActivity;
 import vn.edu.usth.wordpressclient.view.pages.PagesActivity;
 import vn.edu.usth.wordpressclient.view.posts.PostsActivity;
 import vn.edu.usth.wordpressclient.R;
+import vn.edu.usth.wordpressclient.viewmodel.WebViewModel;
 
 public class UserWebManagement extends AppCompatActivity {
-    RelativeLayout postsRow;
-    RelativeLayout pagesRow;
-    RelativeLayout mediaRow;
-    RelativeLayout commentRow;
-    RelativeLayout meRow;
-    RelativeLayout siteSettingRow;
-    RelativeLayout adminRow;
-    ImageView chooseSites;
-    TextView title,domain;
-    ImageView siteImage;
+    RelativeLayout postsRow,pagesRow,mediaRow,commentRow,meRow,siteSettingRow,adminRow;
+    ImageView chooseSites,siteImage,me_icon;
+    TextView title,domain,dialogTitle,dialogMessage;
     DomainManager domainManager;
+    private WebViewModel webViewModel;
+    String accessToken,domainString;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_web_management);
         EdgeToEdge.enable(this);
-
+        webViewModel = new ViewModelProvider(this).get(WebViewModel.class);
         Intent intent = getIntent();
-//        String domainString = intent.getStringExtra("domain");
         domainManager = DomainManager.getInstance();
+        accessToken = SessionManager.getInstance(this).getAccessToken();
+        domainString = DomainManager.getInstance().getSelectedDomain();
         String domainString = domainManager.getSelectedDomain();
-        Log.i("Domain:",domainString);
+
         String titleString = intent.getStringExtra("title");
         String imgUrl = intent.getStringExtra("imgUrl");
+
         title = findViewById(R.id.title);
         domain = findViewById(R.id.domain);
         siteImage = findViewById(R.id.user_pfp);
         title.setText(titleString);
         domain.setText(domainString);
+        me_icon=findViewById(R.id.me_icon);
+
         Picasso.get()
                 .load(imgUrl)
                 .placeholder(R.drawable.compass)
                 .error(R.drawable.compass)
                 .into(siteImage);
+        Picasso.get()
+                .load(imgUrl)
+                .placeholder(R.drawable.compass)
+                .error(R.drawable.compass)
+                .into(me_icon);
         siteImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +82,8 @@ public class UserWebManagement extends AppCompatActivity {
         title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(findViewById(android.R.id.content),"This function should be for changing the title", Snackbar.LENGTH_SHORT).show();
+                showChangeTitleDialog();
+//                Snackbar.make(findViewById(android.R.id.content),"This function should be for changing the title", Snackbar.LENGTH_SHORT).show();
             }
         });
         domain.setOnClickListener(v -> { //done
@@ -76,7 +91,6 @@ public class UserWebManagement extends AppCompatActivity {
             Intent domainIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(domainIntent);
         });
-
 
         //content zone
         //call api from domain
@@ -93,10 +107,6 @@ public class UserWebManagement extends AppCompatActivity {
         //clicking
 
         chooseSites.setOnClickListener(v -> {
-            //need to create new destination, not ChooseYourWeb.class
-//            Intent intentChooseWeb = new Intent(UserWebManagement.this, ChooseYourWeb.class);
-//
-//            startActivity(intentChooseWeb);
             finish();
         });
         postsRow.setOnClickListener(v -> {
@@ -145,4 +155,33 @@ public class UserWebManagement extends AppCompatActivity {
 
 
     }
+
+    private void showChangeTitleDialog() {
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog, null);
+        EditText input = dialogView.findViewById(R.id.dialog_input);
+        dialogTitle = dialogView.findViewById(R.id.dialog_title);
+        dialogMessage = dialogView.findViewById(R.id.dialog_message);
+        dialogTitle.setText("Change Title");
+        input.setText(title.getText().toString());
+        AlertDialog.Builder builder = new AlertDialog.Builder(UserWebManagement.this);
+        builder.setView(dialogView)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    if (!title.getText().toString().equals(input.getText().toString())){
+                        webViewModel.updateSiteTitle(accessToken,domainString,input.getText().toString());
+                        title.setText(input.getText().toString());
+                        Snackbar.make(findViewById(android.R.id.content), "Title updated", Snackbar.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("CANCEL", (dialog, which) -> {
+                    dialog.dismiss();
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(UserWebManagement.this, R.drawable.overflow_menu_bg));
+        alertDialog.show();
+    }
+
+
 }

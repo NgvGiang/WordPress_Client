@@ -16,16 +16,17 @@ public class WebViewModel extends AndroidViewModel {
     //init repository
     //init live data
     private final WebRepository webRepository = WebRepository.getInstance(getApplication());;
-    private final MutableLiveData<ArrayList<WebCardModel>> webModelsLiveData;
-
+    private final MutableLiveData<ArrayList<WebCardModel>> webModelsLiveData=new MutableLiveData<>();
     public WebViewModel(@NonNull Application application) {
         super(application);
-        webModelsLiveData = new MutableLiveData<>();
     }
     public LiveData<ArrayList<WebCardModel>> getWebModelsLiveData() {
         return webModelsLiveData;
     }
     public void fetchSites(String accessToken) {
         webRepository.fetchSites(accessToken, webModelsLiveData);
+    }
+    public void updateSiteTitle(String accessToken, String domain, String newTitle){
+        webRepository.updateSiteTitle(accessToken, domain, newTitle);
     }
 }
