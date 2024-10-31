@@ -2,8 +2,10 @@ package vn.edu.usth.wordpressclient.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -11,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -27,39 +31,69 @@ public class ChooseYourWeb extends AppCompatActivity {
     ImageView avatar;
     WebDomainAdapter adapter;
     RecyclerView recyclerView;
-    private SessionManager session;
+    private final SessionManager session= SessionManager.getInstance(this);;
     private WebViewModel webViewModel;
     private UserViewModel userViewModel;
+    SwipeRefreshLayout swipeRefreshLayout ;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        session = SessionManager.getInstance(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_your_web);
         EdgeToEdge.enable(this);
-//        SessionManager session = new SessionManager(this);
+
         String accessToken = session.getAccessToken();
         Button create_site_btn = findViewById(R.id.create_site_btn);
-        create_site_btn.setOnClickListener(view -> startActivity(new Intent(this, Create_new_site.class)));
+        create_site_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(findViewById(android.R.id.content), "Try JetPack app", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+//        progressBar = findViewById(R.id.progress_bar);
 
         recyclerView = findViewById(R.id.web_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        adapter = new WebDomainAdapter(this, webModels);
+
         adapter = new WebDomainAdapter(this);
         recyclerView.setAdapter(adapter);
         displayName = findViewById(R.id.display_name);
         acc_name = findViewById(R.id.acc_name);
         avatar=findViewById(R.id.profile_pic);
         webViewModel = new ViewModelProvider(this).get(WebViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        fetchAndObserveData(accessToken);
 
-        webViewModel.getWebModelsLiveData().observe(this,webModels->{
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchAndObserveData(accessToken);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String accessToken = session.getAccessToken();
+        fetchAndObserveData(accessToken);
+    }
+
+
+    private void fetchAndObserveData(String accessToken) {
+        webViewModel.getWebModelsLiveData().observe(this, webModels -> {
             adapter.setWebModels(webModels);
             adapter.notifyDataSetChanged();
         });
         webViewModel.fetchSites(accessToken);
 
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.getUserInfo(accessToken);
-        userViewModel.getUserInfoLiveData().observe(this,JSONLiveData->{
+        userViewModel.getUserInfoLiveData().observe(this, JSONLiveData -> {
             try {
                 displayName.setText(JSONLiveData.getString("display_name"));
                 acc_name.setText(JSONLiveData.getString("username"));
@@ -73,12 +107,11 @@ public class ChooseYourWeb extends AppCompatActivity {
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
-
         });
-
-
-
-
     }
+
+
+
+
 
 }

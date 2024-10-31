@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:visibility="gone"
-            android:indeterminateTint= "@color/onBackGround"
+            android:indeterminateTint= "@color/blue"
             />
     </androidx.appcompat.widget.Toolbar>
 

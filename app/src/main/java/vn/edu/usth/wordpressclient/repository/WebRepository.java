@@ -7,6 +7,7 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
@@ -19,13 +20,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.model.WebCardModel;
 import vn.edu.usth.wordpressclient.utils.QueueManager;
 
 public class WebRepository {
     private static WebRepository instance;
     private final Context context;
-
+    private final MutableLiveData<Boolean> updateTitleStatus = new MutableLiveData<>();
     private WebRepository(Context context) {
         this.context = context.getApplicationContext();
     }
@@ -52,9 +54,6 @@ public class WebRepository {
                             String siteTitle = sitesArrayJSONObject.getString("name");
                             String siteDomain = sitesArrayJSONObject.getString("URL");
                             String urlIcon;
-                            Log.i("Name: ",siteTitle);
-                            Log.i("Domain: ",siteDomain);
-//                            UiModeManager modeManager = (UiModeManager)getSystemService(Context.UI_MODE_SERVICE);
                             UiModeManager modeManager = (UiModeManager) context.getSystemService(Context.UI_MODE_SERVICE);
                             if (sitesArrayJSONObject.has("icon")){
                                 urlIcon = sitesArrayJSONObject.getJSONObject("icon").getString("img");
@@ -69,7 +68,6 @@ public class WebRepository {
                             }
 
                             webModels.add(new WebCardModel(urlIcon, siteDomain, siteTitle));
-//                            adapter.notifyDataSetChanged();
 
                         }
                         webModelsLiveData.setValue(webModels);
@@ -93,4 +91,35 @@ public class WebRepository {
 
     }
 
+    public void updateSiteTitle(String accessToken, String domain, String newTitle){
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" +domain + "/settings";
+        StringRequest updateTitleRequest = new StringRequest(
+                Request.Method.POST,
+                url,
+                response -> {
+                },
+                error -> {
+                    VolleyLog.d("volley", "Error: " + error.getMessage());
+                    error.printStackTrace();
+                }
+        ){
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+            @Override
+            public String getBodyContentType(){
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+            @Override
+            protected Map<String,String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("title", newTitle);
+                return params;
+            }
+        };
+        QueueManager.getInstance(context).addToRequestQueue(updateTitleRequest);
+    }
 }
