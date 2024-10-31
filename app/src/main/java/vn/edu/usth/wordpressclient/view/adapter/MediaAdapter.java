@@ -1,5 +1,6 @@
 package vn.edu.usth.wordpressclient.view.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.chrisbanes.photoview.PhotoView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -48,9 +50,12 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaCardVie
         for (int i = 0; i < imageViews.length; i++) {
             if (i < images.size()) {
                 imageViews[i].setVisibility(View.VISIBLE);
+                String imageUrl = images.get(i).getPicture_url();
                 Picasso.get()
                         .load(images.get(i).getPicture_url())
                         .into(imageViews[i]);
+
+                imageViews[i].setOnClickListener(v -> showFullScreenImageDialog(imageUrl));
             } else {
                 imageViews[i].setVisibility(View.INVISIBLE);
             }
@@ -72,6 +77,20 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaCardVie
             picture3 = itemView.findViewById(R.id.imageView3);
             picture4 = itemView.findViewById(R.id.imageView4);
         }
+    }
+
+    private void showFullScreenImageDialog(String imageUrl) {
+        // Create a full-screen dialog
+        Dialog dialog = new Dialog(context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        dialog.setContentView(R.layout.dialog_fullscreen_image);
+
+        PhotoView photoView = dialog.findViewById(R.id.fullScreenImageView);
+        Picasso.get().load(imageUrl).into(photoView);
+
+        // Close the dialog when the user taps on the image
+        photoView.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
     }
 }
 

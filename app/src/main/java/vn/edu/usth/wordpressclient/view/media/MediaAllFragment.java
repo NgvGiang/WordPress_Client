@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +32,11 @@ public class MediaAllFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_media_all, container, false);
+        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         String accessToken = SessionManager.getInstance(getContext()).getAccessToken();
         String domain = DomainManager.getInstance().getSelectedDomain();;
+
+
 
         RecyclerView = view.findViewById(R.id.MediaAllRecyclerView);
         RecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -44,6 +48,15 @@ public class MediaAllFragment extends Fragment {
             adapter.notifyDataSetChanged();
         });
         mediaViewModel.fetchMediaUrls(accessToken, domain);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mediaViewModel.fetchMediaUrls(accessToken, domain);
+                adapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
 
 //        mediaUrls = new ArrayList<MediaCardModel>();
 //        mediaUrls.add(new MediaCardModel("https://darkhent.wordpress.com/wp-content/uploads/2024/10/verybigimage.jpg"));
@@ -55,11 +68,6 @@ public class MediaAllFragment extends Fragment {
 //
 
 //        adapter.setMediaUrls(mediaUrls);
-
-
-
-
-
         return view;
     }
 }
