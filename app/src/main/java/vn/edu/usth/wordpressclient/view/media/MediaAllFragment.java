@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -12,21 +11,20 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
-import java.util.ArrayList;
+import com.google.android.material.snackbar.Snackbar;
 
 import vn.edu.usth.wordpressclient.R;
-import vn.edu.usth.wordpressclient.model.MediaCardModel;
 import vn.edu.usth.wordpressclient.utils.DomainManager;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
-import vn.edu.usth.wordpressclient.view.adapter.MediaAdapter;
+import vn.edu.usth.wordpressclient.view.adapter.MediaAllAdapter;
 import vn.edu.usth.wordpressclient.viewmodel.MediaViewModel;
 
 
 public class MediaAllFragment extends Fragment {
     private RecyclerView RecyclerView;
     private MediaViewModel mediaViewModel;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,11 +34,9 @@ public class MediaAllFragment extends Fragment {
         String accessToken = SessionManager.getInstance(getContext()).getAccessToken();
         String domain = DomainManager.getInstance().getSelectedDomain();;
 
-
-
         RecyclerView = view.findViewById(R.id.MediaAllRecyclerView);
         RecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        MediaAdapter adapter = new MediaAdapter(getContext());
+        MediaAllAdapter adapter = new MediaAllAdapter(getContext());
         RecyclerView.setAdapter(adapter);
         mediaViewModel = new ViewModelProvider(this).get(MediaViewModel.class);
         mediaViewModel.getMediaModelsLiveData().observe(getViewLifecycleOwner(), mediaModels -> {

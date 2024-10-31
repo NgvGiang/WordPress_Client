@@ -2,7 +2,10 @@ package vn.edu.usth.wordpressclient.view.media;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.widget.ProgressBar;
+import android.view.View;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -15,20 +18,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.ArrayList;
-import java.util.logging.Handler;
-
-
 import vn.edu.usth.wordpressclient.R;
-import vn.edu.usth.wordpressclient.model.MediaCardModel;
-import vn.edu.usth.wordpressclient.view.adapter.MediaAdapter;
 import vn.edu.usth.wordpressclient.view.adapter.ViewPagerAdapter;
 
 public class MediaActivity extends AppCompatActivity {
 
     private TabLayout MediatabLayout;
     private ViewPager2 MediaviewPager2;
-    String domain;
+    private String domain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
