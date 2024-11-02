@@ -66,6 +66,12 @@ public class CommentAllAdapter extends RecyclerView.Adapter<CommentAllAdapter.Co
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CommentDetailActivity.class);
+                intent.putExtra("commentId", commentCardModels.get(holder.getAdapterPosition()).getId());
+                intent.putExtra("authorName", commentCardModels.get(holder.getAdapterPosition()).getAuthorName());
+                intent.putExtra("authorAvatar", commentCardModels.get(holder.getAdapterPosition()).getAuthorAvatar());
+                intent.putExtra("title", commentCardModels.get(holder.getAdapterPosition()).getPost());
+                intent.putExtra("content", commentCardModels.get(holder.getAdapterPosition()).getContent());
+                intent.putExtra("status", commentCardModels.get(holder.getAdapterPosition()).getStatus());
                 context.startActivity(intent);
             }
         });
