@@ -39,11 +39,11 @@ public class AllCommentsFragment extends Fragment {
             adapter.setCommentCardModels(commentModels);
             adapter.notifyDataSetChanged();
         });
-        commentViewModel.getComments(accessToken, domain);
+        commentViewModel.getComments(accessToken, domain, "all");
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                commentViewModel.getComments(accessToken, domain);
+                commentViewModel.getComments(accessToken, domain, "all");
                 adapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
