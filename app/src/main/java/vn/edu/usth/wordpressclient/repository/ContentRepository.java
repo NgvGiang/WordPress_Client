@@ -185,4 +185,38 @@ public class ContentRepository {
         };
         QueueManager.getInstance(context).addToRequestQueue(fetchContentRequest);
     }
+
+    public void deleteContent(String endpoint, String domain, int id, MutableLiveData<Boolean> successLiveData){
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + id;
+        String accessToken = SessionManager.getInstance(context).getAccessToken();
+
+        StringRequest deleteRequest = new StringRequest(
+                Request.Method.DELETE,
+                url,
+                response -> {
+                    successLiveData.postValue(true);
+                    Log.i("ContentRepository", "Content deleted successfully");
+                },
+                error -> {
+                    VolleyLog.d("volley", "Error: " + error.getMessage());
+                    error.printStackTrace();
+                    successLiveData.postValue(false);
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+        };
+
+        deleteRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
+        QueueManager.getInstance(context).addToRequestQueue(deleteRequest);
+    }
 }
