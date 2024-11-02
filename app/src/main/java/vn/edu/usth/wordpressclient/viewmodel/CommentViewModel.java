@@ -23,7 +23,7 @@ public class CommentViewModel extends AndroidViewModel {
     public LiveData<ArrayList<CommentCardModel>> getCommentModelsLiveData() {
         return commentModelsLiveData;
     }
-    public void getComments(String accessToken, String domain) {
-        commentRepository.getComments(accessToken, domain, 100, "all", commentModelsLiveData);
+    public void getComments(String accessToken, String domain, String status) {
+        commentRepository.getComments(accessToken, domain, 100, status, commentModelsLiveData);
     }
 }
