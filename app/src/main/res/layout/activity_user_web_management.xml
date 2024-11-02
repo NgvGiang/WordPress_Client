@@ -65,7 +65,7 @@
                     android:text="@string/link_user_web"
                     android:clickable="true"
                     android:focusable="true"
-                    android:textColor="@color/onBackGround"
+                    android:textColor="@color/blue"
                     android:textSize="16sp" />
             </LinearLayout>
 

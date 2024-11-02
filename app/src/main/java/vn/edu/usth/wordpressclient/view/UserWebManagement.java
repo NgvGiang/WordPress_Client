@@ -83,7 +83,6 @@ public class UserWebManagement extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showChangeTitleDialog();
-//                Snackbar.make(findViewById(android.R.id.content),"This function should be for changing the title", Snackbar.LENGTH_SHORT).show();
             }
         });
         domain.setOnClickListener(v -> { //done
@@ -164,6 +163,7 @@ public class UserWebManagement extends AppCompatActivity {
         dialogTitle = dialogView.findViewById(R.id.dialog_title);
         dialogMessage = dialogView.findViewById(R.id.dialog_message);
         dialogTitle.setText("Change Title");
+
         input.setText(title.getText().toString());
         AlertDialog.Builder builder = new AlertDialog.Builder(UserWebManagement.this);
         builder.setView(dialogView)
