@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,12 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.util.ArrayList;
-
-import vn.edu.usth.wordpressclient.Post_page_card_model;
-import vn.edu.usth.wordpressclient.PostsPublishedAdapter;
+import vn.edu.usth.wordpressclient.utils.DomainManager;
+import vn.edu.usth.wordpressclient.view.adapter.PostsPublishedAdapter;
 import vn.edu.usth.wordpressclient.R;
+import vn.edu.usth.wordpressclient.model.ContentCardModel;
 import vn.edu.usth.wordpressclient.view.ContentTextEditor;
+import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 
 
 public class PostPublishedFragment extends Fragment {
@@ -26,7 +27,7 @@ public class PostPublishedFragment extends Fragment {
     private RecyclerView recyclerView;
     private ConstraintLayout noPostsMessage;
     private PostsPublishedAdapter adapter;
-    private ArrayList<Post_page_card_model> postList;
+    private ContentViewModel contentViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,18 +37,28 @@ public class PostPublishedFragment extends Fragment {
         recyclerView = view.findViewById(R.id.post_published_recycler_view);
         noPostsMessage = view.findViewById(R.id.no_post_screen_published);
 
+        String domain = DomainManager.getInstance().getSelectedDomain();
 
-        postList = new ArrayList<>();
-        //Uncomment below to add sample post data
-        postList.add(new Post_page_card_model("Oct 31", "French training", "Putain ma vie "));
-        postList.add(new Post_page_card_model("Oct 30", "Notes", "In Android, we know multiple networking libraries like Retrofit, Volley. We use these libraries specifically for making networking requests like performing actions on API. But Besides that"));
-
-
-        adapter = new PostsPublishedAdapter(getContext(), postList);
+        adapter = new PostsPublishedAdapter(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        toggleNoPostsMessage();
+        contentViewModel = new ViewModelProvider(this).get(ContentViewModel.class);
+        contentViewModel.getPublishPostsArrayLiveData().observe(getViewLifecycleOwner(), publishedPostModel -> {
+                    adapter.setPublishedPost(publishedPostModel);
+                    if (publishedPostModel.isEmpty()) {
+
+                        noPostsMessage.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
+                    } else {
+
+                        noPostsMessage.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    }
+            adapter.notifyDataSetChanged();
+        });
+
+        contentViewModel.fetchContent(domain,"posts","publish");
 
         CreateButton = view.findViewById(R.id.published_post_button);
         CreateButton.setOnClickListener(new View.OnClickListener() {
@@ -59,16 +70,6 @@ public class PostPublishedFragment extends Fragment {
             }
         });
         return view;
-    }
-    private void toggleNoPostsMessage() {
-        if (postList.isEmpty()) {
 
-            noPostsMessage.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-        } else {
-
-            noPostsMessage.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-        }
     }
 }

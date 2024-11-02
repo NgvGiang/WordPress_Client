@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,10 +16,12 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
-import vn.edu.usth.wordpressclient.Post_page_card_model;
-import vn.edu.usth.wordpressclient.PostsTrashedAdapter;
+import vn.edu.usth.wordpressclient.utils.DomainManager;
+import vn.edu.usth.wordpressclient.view.adapter.PostsTrashedAdapter;
 import vn.edu.usth.wordpressclient.R;
+import vn.edu.usth.wordpressclient.model.ContentCardModel;
 import vn.edu.usth.wordpressclient.view.ContentTextEditor;
+import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 
 
 public class PostTrashedFragment extends Fragment {
@@ -26,7 +29,7 @@ public class PostTrashedFragment extends Fragment {
     private RecyclerView recyclerView;
     private ConstraintLayout noPostsMessage;
     private PostsTrashedAdapter adapter;
-    private ArrayList<Post_page_card_model> postList;
+    private ContentViewModel contentViewModel;
 
 
     @Override
@@ -37,18 +40,30 @@ public class PostTrashedFragment extends Fragment {
         recyclerView = view.findViewById(R.id.post_trashed_recycler_view);
         noPostsMessage = view.findViewById(R.id.no_post_screen_trashed);
 
-        postList = new ArrayList<>();
-        //Uncomment below to add sample post data
-        postList.add(new Post_page_card_model("Nov 11", "no11", "trashed"));
-        postList.add(new Post_page_card_model("Nov 23", "bruh", "brug"));
+        String domain = DomainManager.getInstance().getSelectedDomain();
 
-        adapter = new PostsTrashedAdapter(getContext(), postList);
+        adapter = new PostsTrashedAdapter(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        toggleNoPostsMessage();
+        contentViewModel = new ViewModelProvider(this).get(ContentViewModel.class);
+        contentViewModel.getTrashedPostsArrayLiveData().observe(getViewLifecycleOwner(), trashPostModel -> {
+            adapter.setTrashPost(trashPostModel);
+            if (trashPostModel.isEmpty()) {
 
-        CreateButton = view.findViewById(R.id.trashed_post_button);
+                noPostsMessage.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+            } else {
+
+                noPostsMessage.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+            }
+                adapter.notifyDataSetChanged();
+            });
+
+            contentViewModel.fetchContent(domain,"posts","trash");
+
+            CreateButton = view.findViewById(R.id.trashed_post_button);
         CreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,16 +73,5 @@ public class PostTrashedFragment extends Fragment {
             }
         });
         return view;
-    }
-    private void toggleNoPostsMessage() {
-        if (postList.isEmpty()) {
-
-            noPostsMessage.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-        } else {
-
-            noPostsMessage.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-        }
     }
 }

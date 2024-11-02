@@ -1,4 +1,4 @@
-package vn.edu.usth.wordpressclient;
+package vn.edu.usth.wordpressclient.view.adapter;
 
 import android.content.Context;
 
@@ -20,37 +20,39 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAdapter.MyViewHolder> {
+import vn.edu.usth.wordpressclient.R;
+import vn.edu.usth.wordpressclient.model.ContentCardModel;
+
+public class PostsTrashedAdapter extends RecyclerView.Adapter<PostsTrashedAdapter.MyViewHolder>{
     private Context context;
-    private ArrayList<Post_page_card_model> postList;
-    private PostsPublishedAdapter.OnMenuClickListener popupClickListener;
+    private ArrayList<ContentCardModel> postList;
+    private PostsTrashedAdapter.OnMenuClickListener popupClickListener;
 
     // Adapter constructor
-    public PostsPublishedAdapter(Context context, ArrayList<Post_page_card_model> postList) {
+    public PostsTrashedAdapter(Context context) {
         this.context = context;
-        this.postList = postList;
-        this.popupClickListener = popupClickListener;
+        this.postList = new ArrayList<>();
     }
 
     @NonNull
     @Override
-    public PostsPublishedAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PostsTrashedAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the layout for each row
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.page_post_cardview, parent, false);
-        return new PostsPublishedAdapter.MyViewHolder(view);
+        return new PostsTrashedAdapter.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PostsPublishedAdapter.MyViewHolder holder, int position) {
-        Post_page_card_model currentPost = postList.get(position);
+    public void onBindViewHolder(@NonNull PostsTrashedAdapter.MyViewHolder holder, int position) {
+        ContentCardModel currentPost = postList.get(position);
 
-        holder.Date.setText(currentPost.getPost_date());
-        holder.Title.setText(currentPost.getPost_title());
-        holder.Content.setText(currentPost.getPost_content());
+        holder.Date.setText(currentPost.getDate());
+        holder.Title.setText(currentPost.getTitle());
+        holder.Content.setText(currentPost.getContent());
         holder.Setting.setOnClickListener(v -> {
             // Inflate the custom popup layout
-            View popupView = LayoutInflater.from(context).inflate(R.layout.post_published_popupmenu, null);
+            View popupView = LayoutInflater.from(context).inflate(R.layout.post_trashed_popupmenu, null);
 
             // Create the PopupWindow with desired width and height
             final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -63,33 +65,13 @@ public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAd
             // Show the popup directly below the button that was clicked
             popupWindow.showAsDropDown(v, 0, 0);
 
-            // Set click listeners for each menu item
-            popupView.findViewById(R.id.published_view_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Viewed", Toast.LENGTH_SHORT).show();
-                popupWindow.dismiss();
-            });
-
-            popupView.findViewById(R.id.published_move_to_draft_item).setOnClickListener(view -> {
+            popupView.findViewById(R.id.trashed_move_to_draft_item).setOnClickListener(view -> {
                 Toast.makeText(context, "Moved to draft", Toast.LENGTH_SHORT).show();
                 popupWindow.dismiss();
             });
 
-            popupView.findViewById(R.id.published_duplicate_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Duplicated", Toast.LENGTH_SHORT).show();
-                popupWindow.dismiss();
-            });
 
-            popupView.findViewById(R.id.published_share_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Shared", Toast.LENGTH_SHORT).show();
-                popupWindow.dismiss();
-            });
-
-            popupView.findViewById(R.id.published_comment_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Commented", Toast.LENGTH_SHORT).show();
-                popupWindow.dismiss();
-            });
-
-            popupView.findViewById(R.id.published_trash_item).setOnClickListener(view -> {
+            popupView.findViewById(R.id.trashed_trash_item).setOnClickListener(view -> {
                 Toast.makeText(context, "Trashed", Toast.LENGTH_SHORT).show();
                 popupWindow.dismiss();
             });
@@ -119,5 +101,8 @@ public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAd
             Content = itemView.findViewById(R.id.item_content);
             Setting = itemView.findViewById(R.id.content_setting_btn);
         }
+    }
+    public void setTrashPost(ArrayList<ContentCardModel> trashPost){
+        this.postList = trashPost;
     }
 }

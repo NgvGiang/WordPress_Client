@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,17 +16,19 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
-import vn.edu.usth.wordpressclient.Post_page_card_model;
-import vn.edu.usth.wordpressclient.PostsScheduledAdapter;
+import vn.edu.usth.wordpressclient.utils.DomainManager;
+import vn.edu.usth.wordpressclient.view.adapter.PostsScheduledAdapter;
 import vn.edu.usth.wordpressclient.R;
+import vn.edu.usth.wordpressclient.model.ContentCardModel;
 import vn.edu.usth.wordpressclient.view.ContentTextEditor;
+import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 
 
 public class PostScheduledFragment extends Fragment {
     private RecyclerView recyclerView;
     private ConstraintLayout noPostsMessage;
     private PostsScheduledAdapter adapter;
-    private ArrayList<Post_page_card_model> postList;
+    private ContentViewModel contentViewModel;
     Button CreateButton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,17 +38,26 @@ public class PostScheduledFragment extends Fragment {
         recyclerView = view.findViewById(R.id.post_scheduled_recycler_view);
         noPostsMessage = view.findViewById(R.id.no_post_screen_scheduled);
 
-        postList = new ArrayList<>();
-        //Uncomment below to add sample post data
-        postList.add(new Post_page_card_model("Nov 5", "Gunpowder Treason", "Remember remember the 5th of November..."));
-        postList.add(new Post_page_card_model("Nov 9", "Not 9/11", "its actually Sep 11th"));
+        String domain = DomainManager.getInstance().getSelectedDomain();
 
-        adapter = new PostsScheduledAdapter(getContext(), postList);
+        adapter = new PostsScheduledAdapter(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        toggleNoPostsMessage();
+        contentViewModel = new ViewModelProvider(this).get(ContentViewModel.class);
+        contentViewModel.getScheduledPostsArrayLiveData().observe(getViewLifecycleOwner(), schedulePostModel -> {
+                    adapter.setSchedulePost(schedulePostModel);
+                    if (schedulePostModel.isEmpty()) {
+                        noPostsMessage.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
+                    } else {
+                        noPostsMessage.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    }
+            adapter.notifyDataSetChanged();
+        });
 
+        contentViewModel.fetchContent(domain,"posts","schedule");
 
         CreateButton = view.findViewById(R.id.scheduled_post_button);
         CreateButton.setOnClickListener(new View.OnClickListener() {
@@ -57,16 +69,5 @@ public class PostScheduledFragment extends Fragment {
             }
         });
         return view;
-    }
-    private void toggleNoPostsMessage() {
-        if (postList.isEmpty()) {
-
-            noPostsMessage.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-        } else {
-
-            noPostsMessage.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-        }
     }
 }

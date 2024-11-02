@@ -5,27 +5,30 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.util.ArrayList;
-
-import vn.edu.usth.wordpressclient.Post_page_card_model;
-import vn.edu.usth.wordpressclient.PostsDraftAdapter;
+import vn.edu.usth.wordpressclient.view.adapter.PostsDraftAdapter;
 import vn.edu.usth.wordpressclient.R;
+import vn.edu.usth.wordpressclient.utils.DomainManager;
+import vn.edu.usth.wordpressclient.utils.SessionManager;
 import vn.edu.usth.wordpressclient.view.ContentTextEditor;
+import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 
 public class PostDraftFragment extends Fragment {
     Button CreateButton;
     private RecyclerView recyclerView;
     private ConstraintLayout noPostsMessage;
     private PostsDraftAdapter adapter;
-    private ArrayList<Post_page_card_model> postList;
+    private ContentViewModel contentViewModel;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,21 +37,37 @@ public class PostDraftFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.post_recycler_view);
         noPostsMessage = view.findViewById(R.id.no_post_screen);
+        SwipeRefreshLayout refresh = view.findViewById(R.id.draft_refresh);
 
+        String domain = DomainManager.getInstance().getSelectedDomain();
 
-        postList = new ArrayList<>();
-        //Uncomment below to add sample post data
-        postList.add(new Post_page_card_model("Oct 13", "Sample Title 1", "Sample Content 1"));
-        postList.add(new Post_page_card_model("Oct 14", "Diary", "im gay"));
-        postList.add(new Post_page_card_model("Oct 15", "Why slaves should be free", "i made a mistake ..."));
-        postList.add(new Post_page_card_model("Oct 22", "French Midterm", "Je suis un chien"));
-        postList.add(new Post_page_card_model("Oct 23", "Happy Bday Chuck", "HAPPYY BIRTHDAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"));
-
-        adapter = new PostsDraftAdapter(getContext(), postList);
+        adapter = new PostsDraftAdapter(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        toggleNoPostsMessage();
+        contentViewModel = new ViewModelProvider(this).get(ContentViewModel.class);
+        contentViewModel.getDraftPostsArrayLiveData().observe(getViewLifecycleOwner(), draftPostModel -> {
+            adapter.setDraftPost(draftPostModel);
+            if (draftPostModel.isEmpty()) {
+                noPostsMessage.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+            } else {
+                noPostsMessage.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+            }
+            adapter.notifyDataSetChanged();
+        });
+
+        contentViewModel.fetchContent(domain,"posts","draft");
+
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                contentViewModel.fetchContent(domain,"posts","draft");
+                adapter.notifyDataSetChanged();
+                refresh.setRefreshing(false);
+            }
+        });
 
         CreateButton = view.findViewById(R.id.draft_post_button);
         CreateButton.setOnClickListener(new View.OnClickListener() {
@@ -59,17 +78,10 @@ public class PostDraftFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+
         return view;
     }
-    private void toggleNoPostsMessage() {
-        if (postList.isEmpty()) {
 
-            noPostsMessage.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-        } else {
 
-            noPostsMessage.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-        }
-    }
 }

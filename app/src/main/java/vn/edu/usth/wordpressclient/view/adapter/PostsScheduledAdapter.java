@@ -1,4 +1,4 @@
-package vn.edu.usth.wordpressclient;
+package vn.edu.usth.wordpressclient.view.adapter;
 
 import android.content.Context;
 
@@ -20,16 +20,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import vn.edu.usth.wordpressclient.R;
+import vn.edu.usth.wordpressclient.model.ContentCardModel;
+
 public class PostsScheduledAdapter extends RecyclerView.Adapter<PostsScheduledAdapter.MyViewHolder> {
     private Context context;
-    private ArrayList<Post_page_card_model> postList;
+    private ArrayList<ContentCardModel> postList;
     private PostsScheduledAdapter.OnMenuClickListener popupClickListener;
 
     // Adapter constructor
-    public PostsScheduledAdapter(Context context, ArrayList<Post_page_card_model> postList) {
+    public PostsScheduledAdapter(Context context) {
         this.context = context;
-        this.postList = postList;
-        this.popupClickListener = popupClickListener;
+        this.postList = new ArrayList<>();
     }
 
     @NonNull
@@ -43,11 +45,11 @@ public class PostsScheduledAdapter extends RecyclerView.Adapter<PostsScheduledAd
 
     @Override
     public void onBindViewHolder(@NonNull PostsScheduledAdapter.MyViewHolder holder, int position) {
-        Post_page_card_model currentPost = postList.get(position);
+        ContentCardModel currentPost = postList.get(position);
 
-        holder.Date.setText(currentPost.getPost_date());
-        holder.Title.setText(currentPost.getPost_title());
-        holder.Content.setText(currentPost.getPost_content());
+        holder.Date.setText(currentPost.getDate());
+        holder.Title.setText(currentPost.getTitle());
+        holder.Content.setText(currentPost.getContent());
         holder.Setting.setOnClickListener(v -> {
             // Inflate the custom popup layout
             View popupView = LayoutInflater.from(context).inflate(R.layout.post_scheduled_popupmenu, null);
@@ -106,5 +108,8 @@ public class PostsScheduledAdapter extends RecyclerView.Adapter<PostsScheduledAd
             Content = itemView.findViewById(R.id.item_content);
             Setting = itemView.findViewById(R.id.content_setting_btn);
         }
+    }
+    public void setSchedulePost(ArrayList<ContentCardModel> schedulePost){
+        this.postList = schedulePost;
     }
 }
