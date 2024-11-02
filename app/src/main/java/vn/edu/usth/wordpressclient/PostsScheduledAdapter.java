@@ -20,13 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class Post_page_adapter extends RecyclerView.Adapter<Post_page_adapter.MyViewHolder> {
+public class PostsScheduledAdapter extends RecyclerView.Adapter<PostsScheduledAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<Post_page_card_model> postList;
-    private OnMenuClickListener popupClickListener;
+    private PostsScheduledAdapter.OnMenuClickListener popupClickListener;
 
     // Adapter constructor
-    public Post_page_adapter(Context context, ArrayList<Post_page_card_model> postList) {
+    public PostsScheduledAdapter(Context context, ArrayList<Post_page_card_model> postList) {
         this.context = context;
         this.postList = postList;
         this.popupClickListener = popupClickListener;
@@ -34,15 +34,15 @@ public class Post_page_adapter extends RecyclerView.Adapter<Post_page_adapter.My
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PostsScheduledAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the layout for each row
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.content_cardview, parent, false);
-        return new MyViewHolder(view);
+        View view = inflater.inflate(R.layout.page_post_cardview, parent, false);
+        return new PostsScheduledAdapter.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PostsScheduledAdapter.MyViewHolder holder, int position) {
         Post_page_card_model currentPost = postList.get(position);
 
         holder.Date.setText(currentPost.getPost_date());
@@ -50,7 +50,7 @@ public class Post_page_adapter extends RecyclerView.Adapter<Post_page_adapter.My
         holder.Content.setText(currentPost.getPost_content());
         holder.Setting.setOnClickListener(v -> {
             // Inflate the custom popup layout
-            View popupView = LayoutInflater.from(context).inflate(R.layout.post_draft_popupmenu, null);
+            View popupView = LayoutInflater.from(context).inflate(R.layout.post_scheduled_popupmenu, null);
 
             // Create the PopupWindow with desired width and height
             final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -64,27 +64,19 @@ public class Post_page_adapter extends RecyclerView.Adapter<Post_page_adapter.My
             popupWindow.showAsDropDown(v, 0, 0);
 
             // Set click listeners for each menu item
-            popupView.findViewById(R.id.view_item).setOnClickListener(view -> {
+            popupView.findViewById(R.id.schedule_view_item).setOnClickListener(view -> {
                 Toast.makeText(context, "Viewed", Toast.LENGTH_SHORT).show();
                 popupWindow.dismiss();
             });
 
-            popupView.findViewById(R.id.publish_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Published", Toast.LENGTH_SHORT).show();
-                popupWindow.dismiss();
-            });
 
-            popupView.findViewById(R.id.duplicate_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Duplicated", Toast.LENGTH_SHORT).show();
-                popupWindow.dismiss();
-            });
-
-            popupView.findViewById(R.id.share_item).setOnClickListener(view -> {
+            popupView.findViewById(R.id.schedule_share_item).setOnClickListener(view -> {
                 Toast.makeText(context, "Shared", Toast.LENGTH_SHORT).show();
                 popupWindow.dismiss();
             });
 
-            popupView.findViewById(R.id.trash_item).setOnClickListener(view -> {
+
+            popupView.findViewById(R.id.schedule_trash_item).setOnClickListener(view -> {
                 Toast.makeText(context, "Trashed", Toast.LENGTH_SHORT).show();
                 popupWindow.dismiss();
             });

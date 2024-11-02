@@ -1,141 +1,28 @@
-<!-- res/layout/dialog_menu.xml -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@drawable/overflow_menu_bg"
-    android:gravity="left|center">
-
-    <!-- View Item -->
-    <LinearLayout
-        android:id="@+id/view_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="12dp"
-        android:paddingEnd="80dp"
-        android:gravity="center_vertical"
-        android:clickable="true">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/open_in_icon"
-            android:contentDescription="View Icon" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="View"
-            android:textColor="@color/onBackGround"
-            android:textSize="16sp" />
+<!--  res/layout/dialog_menu.xml  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/overflow_menu_bg" android:gravity="left|center">
+    <!--  View Item  -->
+    <LinearLayout android:id="@+id/draft_view_item" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="12dp" android:paddingEnd="80dp" android:gravity="center_vertical" android:clickable="true">
+        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/open_in_icon" android:contentDescription="View Icon"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="View" android:textColor="@color/onBackGround" android:textSize="16sp"/>
     </LinearLayout>
-
-    <!-- Publish Item -->
-    <LinearLayout
-        android:id="@+id/publish_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:clickable="true"
-        >
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/publish_icon"
-            android:contentDescription="Publish Icon" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="Publish"
-            android:textColor="@color/onBackGround"
-            android:textSize="16sp" />
+    <!--  Publish Item  -->
+    <LinearLayout android:id="@+id/draft_publish_item" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="12dp" android:gravity="center_vertical" android:clickable="true">
+        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/publish_icon" android:contentDescription="Publish Icon"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="Publish" android:textColor="@color/onBackGround" android:textSize="16sp"/>
     </LinearLayout>
-
-    <!-- Duplicate Item -->
-    <LinearLayout
-        android:id="@+id/duplicate_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:clickable="true"
-        >
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/duplicate_icon"
-            android:contentDescription="Duplicate Icon" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="Duplicate"
-            android:textColor="@color/onBackGround"
-            android:textSize="16sp" />
+    <!--  Duplicate Item  -->
+    <LinearLayout android:id="@+id/draft_duplicate_item" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="12dp" android:gravity="center_vertical" android:clickable="true">
+        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/duplicate_icon" android:contentDescription="Duplicate Icon"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="Duplicate" android:textColor="@color/onBackGround" android:textSize="16sp"/>
     </LinearLayout>
-
-    <!-- Share Item -->
-    <LinearLayout
-        android:id="@+id/share_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:clickable="true"
-        >
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/share_icon"
-            android:contentDescription="Share Icon" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="Share"
-            android:textColor="@color/onBackGround"
-            android:textSize="16sp" />
+    <!--  Share Item  -->
+    <LinearLayout android:id="@+id/draft_share_item" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="12dp" android:gravity="center_vertical" android:clickable="true">
+        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/share_icon" android:contentDescription="Share Icon"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="Share" android:textColor="@color/onBackGround" android:textSize="16sp"/>
     </LinearLayout>
-
-    <!-- Trash Item -->
-    <LinearLayout
-        android:id="@+id/trash_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:clickable="true"
-        >
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/delete_icon"
-            app:tint="@color/red" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="Trash"
-            android:textColor="@color/red"
-            android:textSize="16sp" />
+    <!--  Trash Item  -->
+    <LinearLayout android:id="@+id/draft_trash_item" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="12dp" android:gravity="center_vertical" android:clickable="true">
+        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/delete_icon" app:tint="@color/red"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="Trash" android:textColor="@color/red" android:textSize="16sp"/>
     </LinearLayout>
-
 </LinearLayout>
