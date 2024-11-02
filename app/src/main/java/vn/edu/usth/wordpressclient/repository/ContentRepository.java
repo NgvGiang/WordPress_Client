@@ -1,8 +1,10 @@
 package vn.edu.usth.wordpressclient.repository;
 
 import android.content.Context;
+import android.text.Html;
 import android.util.Log;
 
+import androidx.core.text.HtmlCompat;
 import androidx.lifecycle.MutableLiveData;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -21,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import vn.edu.usth.wordpressclient.model.MediaCardModel;
+import vn.edu.usth.wordpressclient.model.ContentCardModel;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
 import vn.edu.usth.wordpressclient.utils.QueueManager;
 
@@ -142,27 +145,44 @@ public class ContentRepository {
         QueueManager.getInstance(context).addToRequestQueue(fetchMediaUrlsRequest);
     }
 
-//    public void fetchContent(String domain,String endpoint,String status) {
-//        //https://public-api.wordpress.com/wp/v2/sites/giangtestsite.wordpress.com/pages/?status=publish example url
-//        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + "?status=" + status;
-//        String accessToken = SessionManager.getInstance(context).getAccessToken();
-//        StringRequest fetchContentRequest = new StringRequest(
-//                Request.Method.GET,
-//                url,
-//                response -> {
-//                    try {
-//                        JSONArray responseArray = new JSONArray(response);
-//                        // Handle the response and update the LiveData
-//
-//                        contentLiveData.postValue(contentList);
-//
-//                    } catch (JSONException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                },
-//                error -> {
-//
-//                }
-//        ){};
-//    }
+    public void fetchContent(String domain, String endpoint, String status, MutableLiveData<ArrayList<ContentCardModel>> livedata) {
+        //https://public-api.wordpress.com/wp/v2/sites/giangtestsite.wordpress.com/pages/?status=publish example url
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + "?status=" + status;
+        String accessToken = SessionManager.getInstance(context).getAccessToken();
+        StringRequest fetchContentRequest = new StringRequest(
+                Request.Method.GET,
+                url,
+                response -> {
+                    try {
+                        JSONArray responseArray = new JSONArray(response);
+                        ArrayList<ContentCardModel> contentModels = new ArrayList<>();
+                        for (int i = 0; i < responseArray.length(); i++) {
+                            JSONObject postObject = responseArray.getJSONObject(i);
+                            String title = postObject.getJSONObject("title").getString("rendered");
+                            String date = postObject.getString("date");
+                            int id = postObject.getInt("id");
+                            String content = HtmlCompat.fromHtml(postObject.getJSONObject("content").getString("rendered"), HtmlCompat.FROM_HTML_MODE_LEGACY).toString();
+                            contentModels.add(new ContentCardModel(id, title, content, date));
+                            Log.i("fetch",title+ date +content);
+                        }
+                        livedata.setValue(contentModels);
+
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                error -> {
+                    VolleyLog.d("volley", "Error: " + error.getMessage());
+                    error.printStackTrace();
+                }
+        ){
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+        };
+        QueueManager.getInstance(context).addToRequestQueue(fetchContentRequest);
+    }
 }

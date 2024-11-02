@@ -30,6 +30,7 @@ import vn.edu.usth.wordpressclient.view.media.MediaActivity;
 import vn.edu.usth.wordpressclient.view.pages.PagesActivity;
 import vn.edu.usth.wordpressclient.view.posts.PostsActivity;
 import vn.edu.usth.wordpressclient.R;
+import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 import vn.edu.usth.wordpressclient.viewmodel.WebViewModel;
 
 public class UserWebManagement extends AppCompatActivity {
@@ -45,6 +46,8 @@ public class UserWebManagement extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_web_management);
+        ContentViewModel contentViewModel = new ViewModelProvider(UserWebManagement.this).get(ContentViewModel.class);
+        contentViewModel.fetchContent(DomainManager.getInstance().getSelectedDomain(), "posts", "publish");
         EdgeToEdge.enable(this);
         webViewModel = new ViewModelProvider(this).get(WebViewModel.class);
         Intent intent = getIntent();
