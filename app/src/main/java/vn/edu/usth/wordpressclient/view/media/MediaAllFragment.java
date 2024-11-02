@@ -11,9 +11,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.utils.DomainManager;
@@ -53,17 +50,6 @@ public class MediaAllFragment extends Fragment {
             }
         });
 
-
-//        mediaUrls = new ArrayList<MediaCardModel>();
-//        mediaUrls.add(new MediaCardModel("https://darkhent.wordpress.com/wp-content/uploads/2024/10/verybigimage.jpg"));
-//        mediaUrls.add(new MediaCardModel("https://darkhent.wordpress.com/wp-content/uploads/2024/10/440368991_122207255042004730_9005723163750922673_n.jpg"));
-//        mediaUrls.add(new MediaCardModel("https://darkhent.wordpress.com/wp-content/uploads/2024/10/yysagvvr.jpg"));
-//        mediaUrls.add(new MediaCardModel("https://darkhent.wordpress.com/wp-content/uploads/2024/10/screenshot-2024-03-06-122913.png"));
-//        mediaUrls.add(new MediaCardModel("https://darkhent.wordpress.com/wp-content/uploads/2024/10/454459059_1068935178132807_5855740790364600547_n.jpg"));
-//        mediaUrls.add(new MediaCardModel("https://darkhent.wordpress.com/wp-content/uploads/2024/10/screenshot-2024-03-06-122913.png"));
-//
-
-//        adapter.setMediaUrls(mediaUrls);
         return view;
     }
 }
