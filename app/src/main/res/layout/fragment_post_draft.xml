@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PostsFragments.DraftPostFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".view.posts.PostDraftFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/post_recycler_view"

@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,10 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WordPressClient">
         <activity
-            android:name=".Dont_have_site_activity"
+            android:name=".view.Dont_have_site_activity"
             android:exported="false" />
         <activity
-            android:name=".PagesTextEditor"
+            android:name=".view.ContentTextEditor"
             android:exported="false" />
         <activity
             android:name=".MeActivity.MyProfileActivity"
@@ -40,40 +42,38 @@
             android:name=".MeActivity.UsernameActivity"
             android:exported="false" />
         <activity
-            android:name=".Welcome_to_WordPress"
+            android:name=".view.Welcome_to_WordPress"
             android:exported="false" />
         <activity
-            android:name=".Create_new_site"
+            android:name=".view.sign_up_choose_display_name"
             android:exported="false" />
         <activity
-            android:name=".sign_up_choose_display_name"
+            android:name=".view.sign_up_choose_email"
             android:exported="false" />
         <activity
-            android:name=".sign_up_choose_email"
+            android:name=".view.Sign_Up_Page"
             android:exported="false" />
         <activity
-            android:name=".Sign_Up_Page"
+            android:name=".view.ChooseYourWeb"
             android:exported="false" />
         <activity
-            android:name=".Choose_your_web"
+            android:name=".view.posts.PostsActivity"
             android:exported="false" />
         <activity
-            android:name=".PostsActivity"
+            android:name=".view.Login_to_existing"
             android:exported="false" />
         <activity
-            android:name=".Login_to_existing"
+            android:name=".view.UserWebManagement"
             android:exported="false" />
         <activity
-            android:name=".UserWebManagement"
+            android:name=".view.pages.PagesActivity"
             android:exported="false" />
         <activity
-            android:name=".PagesActivity"
+            android:name=".view.media.MediaActivity"
             android:exported="false" />
         <activity
-            android:name=".WordPress_media"
-            android:exported="false" />
-        <activity
-            android:name=".FirstLoginActivity"
+            android:name=".view.auth.FirstLoginActivity"
+            android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -87,7 +87,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CommentActivity"
+            android:name=".view.comment.CommentActivity"
             android:exported="false">
 
         </activity>

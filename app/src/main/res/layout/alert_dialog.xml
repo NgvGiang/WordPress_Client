@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/overflow_menu_bg"
+    >
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Site Title"
+        android:textSize="24sp"
+        android:textColor="@color/onBackGround" />
+
+    <TextView
+        android:id="@+id/dialog_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="The Site Title is displayed in the title bar of a web browser and is displayed in the header for most themes."
+        android:textSize="14sp"
+        android:alpha="0.5"
+        android:textColor="@color/onBackGround" />
+
+    <EditText
+        android:id="@+id/dialog_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/onBackGround"
+        android:textColor="@color/onBackGround"
+        android:textColorHint="@color/onBackGround"
+        />
+</LinearLayout>

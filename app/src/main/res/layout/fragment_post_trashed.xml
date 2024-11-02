@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PostsFragments.DraftPostFragment">
+    tools:context=".view.posts.PostTrashedFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/post_trashed_recycler_view"
