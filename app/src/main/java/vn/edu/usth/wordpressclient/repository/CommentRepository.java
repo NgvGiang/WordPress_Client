@@ -60,13 +60,11 @@ public class CommentRepository {
                             long parentId = commentArrayJSONObject.getLong("parent");
                             long authorId = commentArrayJSONObject.getLong("author");
                             String authorName = commentArrayJSONObject.getString("author_name");
-                            String authorUrl = commentArrayJSONObject.getString("author_url");
                             String date = commentArrayJSONObject.getString("date");
                             String content = commentArrayJSONObject.getJSONObject("content").getString("rendered");
-                            String link = commentArrayJSONObject.getString("link");
                             String cmtStatus = commentArrayJSONObject.getString("status");
                             String authorAvatar = commentArrayJSONObject.getJSONObject("author_avatar_urls").getString("48");
-                            commentModels.add(new CommentCardModel(commentId, parentId, postId, authorId, authorName, authorUrl, date, content, link, cmtStatus, authorAvatar));
+                            commentModels.add(new CommentCardModel(commentId, parentId, postId, authorId, authorName, date, content, cmtStatus, authorAvatar));
                         }
                         commentModelLiveData.setValue(commentModels);
                     } catch (JSONException e){
