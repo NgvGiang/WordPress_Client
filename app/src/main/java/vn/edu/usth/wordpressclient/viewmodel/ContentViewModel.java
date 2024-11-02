@@ -14,7 +14,8 @@ import vn.edu.usth.wordpressclient.repository.ContentRepository;
 
 public class ContentViewModel extends AndroidViewModel {
     private final ContentRepository contentRepository = ContentRepository.getInstance(getApplication());
-    private final MutableLiveData<Boolean> successLiveData= new MutableLiveData<>();
+    private final MutableLiveData<Boolean> createSuccessLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> deleteSuccessLiveData = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<ContentCardModel>> publishPagesArrayLiveData = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<ContentCardModel>> draftPagesArrayLiveData = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<ContentCardModel>> scheduledPagesArrayLiveData = new MutableLiveData<>();
@@ -26,13 +27,41 @@ public class ContentViewModel extends AndroidViewModel {
     public ContentViewModel(@NonNull Application application) {
         super(application);
     }
-    public LiveData<Boolean> getSuccessLiveData() {
-        return successLiveData;
+    public LiveData<Boolean> getCreateSuccessLiveData() {
+        return createSuccessLiveData;
     }
+    public LiveData<Boolean> getDeleteSuccessLiveData() {
+        return deleteSuccessLiveData;
+    }
+    public LiveData<ArrayList<ContentCardModel>> getPublishPagesArrayLiveData() {
+        return publishPagesArrayLiveData;
+    }
+    public LiveData<ArrayList<ContentCardModel>> getDraftPagesArrayLiveData() {
+        return draftPagesArrayLiveData;
+    }
+    public LiveData<ArrayList<ContentCardModel>> getScheduledPagesArrayLiveData() {
+        return scheduledPagesArrayLiveData;
+    }
+    public LiveData<ArrayList<ContentCardModel>> getTrashedPagesArrayLiveData() {
+        return trashedPagesArrayLiveData;
+    }
+    public LiveData<ArrayList<ContentCardModel>> getPublishPostsArrayLiveData() {
+        return publishPostsArrayLiveData;
+    }
+    public LiveData<ArrayList<ContentCardModel>> getDraftPostsArrayLiveData() {
+        return draftPostsArrayLiveData;
+    }
+    public LiveData<ArrayList<ContentCardModel>> getScheduledPostsArrayLiveData() {
+        return scheduledPostsArrayLiveData;
+    }
+    public LiveData<ArrayList<ContentCardModel>> getTrashedPostsArrayLiveData() {
+        return trashedPostsArrayLiveData;
+    }
+
     //function use cross page to post, use to create page or post base on endpoint
     // endpoint: String: "pages" for pages api, "posts" for posts api
     public void createContent(String endpoint, String domain, String title, String content, String status, String date) {
-        contentRepository.createContent(endpoint, domain, title, content, status, date, successLiveData);
+        contentRepository.createContent(endpoint, domain, title, content, status, date, createSuccessLiveData);
     }
     public void fetchContent( String domain,String endpoint,String status) {
 //      endpoint: String: "pages" for pages api, "posts" for posts api
@@ -71,4 +100,8 @@ public class ContentViewModel extends AndroidViewModel {
                 break;
         }
     }
+    public void deleteContent(String endpoint, String domain, int id) {
+        contentRepository.deleteContent(endpoint, domain, id, deleteSuccessLiveData);
+    }
+
 }
