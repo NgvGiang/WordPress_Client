@@ -1,6 +1,7 @@
 package vn.edu.usth.wordpressclient.view.comment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +50,7 @@ public class CommentDetailActivity extends AppCompatActivity {
     Long parent;
     ImageView approvedIcon;
     TextView approvedText, spamText;
+    private AlertDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,7 @@ public class CommentDetailActivity extends AppCompatActivity {
 
         Picasso.get().load(getIntent().getStringExtra("authorAvatar")).error(R.drawable.blank_avatar).into(authorAvatar);
         authorName.setText(getIntent().getStringExtra("authorName"));
+        //Need API call to get Post title, comment doesn't have post title, it only has post id, will finish it later
         title.setText("MAGA");
         content.setText(Html.fromHtml(getIntent().getStringExtra("content"), Html.FROM_HTML_MODE_LEGACY).toString());
 
@@ -103,23 +107,30 @@ public class CommentDetailActivity extends AppCompatActivity {
         }
 
         commentViewModel = new ViewModelProvider(this).get(CommentViewModel.class);
-        commentViewModel.getSuccessLiveData().observe(this, success -> {
-            if (success) {
-                Snackbar.make(findViewById(android.R.id.content), "Reply comment successfully", 2500).show();
-                new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                }, 2500);
+        commentViewModel.getSuccessLiveData().observe(this, replyContent -> {
+            if (!content.equals("")) {
+//                View view = findViewById(R.id.upload_reply);
+//                Snackbar.make(findViewById(android.R.id.content), "Reply comment successfully", 2500).show();
+//                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+//                }, 2500);
+                progressDialog.dismiss();
+                editText.setText(Html.fromHtml(replyContent, Html.FROM_HTML_MODE_LEGACY).toString());
+                Toast.makeText(this, "Reply comment successfully", Toast.LENGTH_SHORT).show();
             }else {
-                Snackbar.make(findViewById(android.R.id.content), "Failed to reply comment, please try again", Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(this, "Failed to reply coment", Toast.LENGTH_SHORT).show();
             }
         });
 
         commentViewModel.getStatusLiveData().observe(this, success -> {
             if (success) {
-                Snackbar.make(findViewById(android.R.id.content), "Status changed successfully", 1000).show();
-                new Handler(Looper.getMainLooper()).postDelayed(this::finish, 500);
+//                Snackbar.make(findViewById(android.R.id.content), "Status changed successfully", 1000).show();
+//                new Handler(Looper.getMainLooper()).postDelayed(this::finish, 500);
+                progressDialog.dismiss();
+                Toast.makeText(this, "Sucessfully change comment status", Toast.LENGTH_SHORT).show();
+                finish();
             } else {
-                //occur network problem ?
-                Snackbar.make(findViewById(android.R.id.content), "Failed to change status, please try again", Snackbar.LENGTH_SHORT).show();
+//                Snackbar.make(findViewById(android.R.id.content), "Failed to change status, please try again", Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(this, "Failed to change comment status", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -128,8 +139,7 @@ public class CommentDetailActivity extends AppCompatActivity {
         });
 
         approve.setOnClickListener(v -> {
-            Log.i("check", "checked");
-            Log.i("status", status);
+            showLoadingDialog();
             if (status.equals("approved")) {
                 commentViewModel.updateCommentStatus(id, "hold");
             } else if (status.equals("spam") || status.equals("hold") || status.equals("trash")) {
@@ -138,10 +148,10 @@ public class CommentDetailActivity extends AppCompatActivity {
         });
 
         spam.setOnClickListener(v -> {
-            Log.i("check", "checked");
+            showLoadingDialog();
             if (status.equals("spam")) {
                 commentViewModel.updateCommentStatus(id, "approve");
-            } else if (status.equals("approved") || status.equals("hold")) {
+            } else if (status.equals("approved") || status.equals("hold") || status.equals("trash")) {
                 commentViewModel.updateCommentStatus(id, "spam");
             }
         });
@@ -159,6 +169,7 @@ public class CommentDetailActivity extends AppCompatActivity {
     }
 
     public void replyComment() {
+        showLoadingDialog();
         commentViewModel.replyComment(domain, editText.getText().toString(), parent, post);
     }
     private void showPopupMenu(View view) {
@@ -169,9 +180,11 @@ public class CommentDetailActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.move_to_trash) {
+                    showLoadingDialog();
                     commentViewModel.updateCommentStatus(id, "trash");
                     return true;
                 } else if (item.getItemId() == R.id.copy_address) {
+                    //This feature is under development.
                     Toast.makeText(CommentDetailActivity.this, "copy address", Toast.LENGTH_SHORT).show();
                     return true;
                 } else {
@@ -190,6 +203,7 @@ public class CommentDetailActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 Intent intent = new Intent();
                 if (item.getItemId() == R.id.delete_forever) {
+                    showLoadingDialog();
                     commentViewModel.deleteComment(id);
                     return true;
                 }else {
@@ -198,5 +212,13 @@ public class CommentDetailActivity extends AppCompatActivity {
             }
         });
         popupMenu.show();
+    }
+
+    private void showLoadingDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(new ProgressBar(this));
+        builder.setCancelable(false);
+        progressDialog = builder.create();
+        progressDialog.show();
     }
 }
