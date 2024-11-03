@@ -20,10 +20,16 @@ public class CommentViewModel extends AndroidViewModel {
     public CommentViewModel(@NonNull Application application) {
         super(application);
     }
+
     public LiveData<ArrayList<CommentCardModel>> getCommentModelsLiveData() {
         return commentModelsLiveData;
     }
+
     public void getComments(String accessToken, String domain, String status) {
         commentRepository.getComments(accessToken, domain, 100, status, commentModelsLiveData);
+    }
+
+    public void replyComment(String domain, String content, Long parent, Long post) {
+        commentRepository.replyComment(domain, content, parent, post, commentModelsLiveData);
     }
 }
