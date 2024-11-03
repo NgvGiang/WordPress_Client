@@ -116,7 +116,7 @@ public class ContentRepository {
     }
 
     public void fetchMediaUrls(String accessToken, String domain, MutableLiveData<ArrayList<MediaCardModel>> mediaModelsLiveData){
-        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain +"/media";
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain +"/media?per_page=100";
         StringRequest fetchMediaUrlsRequest = new StringRequest(
             Request.Method.GET,
             url,
