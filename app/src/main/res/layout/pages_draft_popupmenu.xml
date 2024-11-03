@@ -9,7 +9,7 @@
     android:gravity="left|center">
 
     <LinearLayout
-        android:id="@+id/draft_view_item"
+        android:id="@+id/draft_view_item_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -34,7 +34,32 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/draft_publish_item"
+        android:id="@+id/draft_set_parent_item_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:clickable="true"
+        >
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/set_parent"
+            android:contentDescription="Publish Icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Set Parent"
+            android:textColor="@color/onBackGround"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/draft_publish_item_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -52,13 +77,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="Publish"
+            android:text="Publish Now"
             android:textColor="@color/onBackGround"
             android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/draft_duplicate_item"
+        android:id="@+id/draft_duplicate_item_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -82,7 +107,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/draft_share_item"
+        android:id="@+id/draft_share_item_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -106,7 +131,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/draft_trash_item"
+        android:id="@+id/draft_trash_item_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
