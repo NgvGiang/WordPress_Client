@@ -5,31 +5,31 @@
 
     <item
         android:id="@+id/publish_button"
-        android:title="Publish"
+        android:title="@string/publish"
         android:iconTint="@color/onBackGround"
         app:showAsAction="always"
         />
 
     <item
         android:id="@+id/save_btn"
-        android:title="Save"
+        android:title="@string/save"
         app:showAsAction="never"
         />
     <item
         android:id="@+id/structure_btn"
-        android:title="Content structure"
+        android:title="@string/content_structure"
         app:showAsAction="never"
         />
 
     <item
         android:id="@+id/publish_date_btn"
-        android:title="Publish Date"
+        android:title="@string/publish_date"
         app:showAsAction="never" />
 
 
     <item
         android:id="@+id/help_btn"
-        android:title="Help"
+        android:title="@string/help"
         app:showAsAction="never"
         />
 
