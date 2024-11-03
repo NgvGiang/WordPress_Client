@@ -94,7 +94,7 @@ public class CommentRepository {
         QueueManager.getInstance(context).addToRequestQueue(fetchCommentRequest);
     }
 
-    public void replyComment(String domain, String content, Long parent, Long post, MutableLiveData<Boolean> successLiveData) {
+    public void replyComment(String domain, String content, Long parent, Long post, MutableLiveData<String> successLiveData) {
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments/";
         SessionManager session = SessionManager.getInstance(context);
         String accessToken = session.getAccessToken();
@@ -120,19 +120,20 @@ public class CommentRepository {
 //                    long authorId = response.getLong("author");
 //                    String authorName = response.getString("author_name");
                     String date = response.getString("date");
-//                    String cmtContent = response.getJSONObject("content").getString("rendered");
+                    String cmtContent = response.getJSONObject("content").getString("rendered");
 //                    String status = response.getString("status");
 //                    String authorAvatar = response.getJSONObject("author_avatar_urls").getString("48");
 //                    CommentCardModel newComment = new CommentCardModel(commentId, parentId, postId, authorId, authorName, date, cmtContent, status, authorAvatar);
                     Log.i("ContentRepository", "Content created at: " + date);
-                    successLiveData.postValue(true);
+
+                    successLiveData.postValue(cmtContent);
                 } catch (JSONException e) {
-                    successLiveData.postValue(false);
+                    successLiveData.postValue("");
                     throw new RuntimeException(e);
                 }
             },
             error -> {
-                successLiveData.postValue(false);
+                successLiveData.postValue("");
                 VolleyLog.d("volley", "Error: " + error.getMessage());
                 error.printStackTrace();
             }

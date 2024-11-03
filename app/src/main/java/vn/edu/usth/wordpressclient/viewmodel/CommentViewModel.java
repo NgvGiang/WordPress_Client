@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import vn.edu.usth.wordpressclient.model.CommentCardModel;
 import vn.edu.usth.wordpressclient.model.MediaCardModel;
@@ -22,7 +23,7 @@ public class CommentViewModel extends AndroidViewModel {
 //    private final MutableLiveData<ArrayList<CommentCardModel>> spamCommentModelsLiveData= new MutableLiveData<>();
 //    private final MutableLiveData<ArrayList<CommentCardModel>> trashCommentModelsLiveData= new MutableLiveData<>();
     private final MutableLiveData<ArrayList<CommentCardModel>> commentModelsLiveData= new MutableLiveData<>();
-    private final MutableLiveData<Boolean> successLiveData= new MutableLiveData<>();
+    private final MutableLiveData<String> successLiveData= new MutableLiveData<>();
     private final MutableLiveData<Boolean> statusLiveData= new MutableLiveData<>();
     public CommentViewModel(@NonNull Application application) {
         super(application);
@@ -32,7 +33,7 @@ public class CommentViewModel extends AndroidViewModel {
         return commentModelsLiveData;
     }
 
-    public MutableLiveData<Boolean> getSuccessLiveData() {
+    public MutableLiveData<String> getSuccessLiveData() {
         return successLiveData;
     }
 
