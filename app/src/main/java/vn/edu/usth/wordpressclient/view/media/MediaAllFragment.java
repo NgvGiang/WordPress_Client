@@ -22,12 +22,13 @@ import vn.edu.usth.wordpressclient.viewmodel.MediaViewModel;
 public class MediaAllFragment extends Fragment {
     private RecyclerView RecyclerView;
     private MediaViewModel mediaViewModel;
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_media_all, container, false);
-        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         String accessToken = SessionManager.getInstance(getContext()).getAccessToken();
         String domain = DomainManager.getInstance().getSelectedDomain();;
 

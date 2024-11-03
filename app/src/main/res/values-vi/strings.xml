@@ -222,6 +222,10 @@
     //fab
     <string name="title">Thêm tiêu đề</string>
     <string name="content">Bắt đầu viết... </string>
-
-
+    <string name="publish">Xuất bản</string>
+    <string name="content_structure">Cấu trúc nội dung</string>
+    <string name="save">Lưu</string>
+    <string name="publish_date">Lịch xuất bản</string>
+    <string name="content_created_successfully">Tạo nội dung thành công!</string>
+    <string name="failed_to_create_content_please_try_again">Tạo nội dung thất bại, thử lại sau!</string>
 </resources>

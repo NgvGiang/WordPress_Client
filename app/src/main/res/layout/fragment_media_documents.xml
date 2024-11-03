@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.media.MediaDocumentsFragment">
 
     <LinearLayout
@@ -31,10 +32,11 @@
             android:id="@+id/uploadMediaButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/upload_media"
-            android:textColor="@color/onButton"
             android:layout_marginTop="20dp"
-            android:textAllCaps="false" />
+            android:text="@string/upload_media"
+            android:textAllCaps="false"
+            android:textColor="@color/onButton"
+            app:cornerRadius="8dp" />
 
     </LinearLayout>
 
