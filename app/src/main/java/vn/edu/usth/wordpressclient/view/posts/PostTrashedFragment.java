@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -27,9 +29,10 @@ import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 public class PostTrashedFragment extends Fragment {
     Button CreateButton;
     private RecyclerView recyclerView;
-    private ConstraintLayout noPostsMessage;
+    private LinearLayout noPostsMessage;
     private PostsTrashedAdapter adapter;
     private ContentViewModel contentViewModel;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -39,6 +42,7 @@ public class PostTrashedFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.post_trashed_recycler_view);
         noPostsMessage = view.findViewById(R.id.no_post_screen_trashed);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout_trashed);
 
         String domain = DomainManager.getInstance().getSelectedDomain();
 
@@ -63,6 +67,15 @@ public class PostTrashedFragment extends Fragment {
 
             contentViewModel.fetchContent(domain,"posts","trash");
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                contentViewModel.fetchContent(domain,"posts","trash");
+                adapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
             CreateButton = view.findViewById(R.id.trashed_post_button);
         CreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,5 +86,12 @@ public class PostTrashedFragment extends Fragment {
             }
         });
         return view;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        String domain = DomainManager.getInstance().getSelectedDomain();
+        contentViewModel.fetchContent(domain,"posts","trash");
+        adapter.notifyDataSetChanged();
     }
 }
