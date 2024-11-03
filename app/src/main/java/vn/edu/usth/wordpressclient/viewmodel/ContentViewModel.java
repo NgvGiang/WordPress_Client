@@ -79,7 +79,7 @@ public class ContentViewModel extends AndroidViewModel {
                     contentRepository.fetchContent(domain, endpoint, "future", scheduledPagesArrayLiveData);
                     break;
                 case "trash":
-                    contentRepository.fetchContent(domain, endpoint, "post", trashedPagesArrayLiveData);
+                    contentRepository.fetchContent(domain, endpoint, "trash", trashedPagesArrayLiveData);
                     break;
             }
             case "posts":

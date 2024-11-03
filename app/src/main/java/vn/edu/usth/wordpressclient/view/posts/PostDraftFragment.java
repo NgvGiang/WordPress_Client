@@ -38,7 +38,7 @@ public class PostDraftFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.post_recycler_view);
         noPostsMessage = view.findViewById(R.id.no_post_screen);
-        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout_draft);
 
         String domain = DomainManager.getInstance().getSelectedDomain();
 
