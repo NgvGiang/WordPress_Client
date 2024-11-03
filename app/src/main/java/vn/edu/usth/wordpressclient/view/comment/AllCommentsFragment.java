@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.utils.DomainManager;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
@@ -21,6 +23,9 @@ import vn.edu.usth.wordpressclient.viewmodel.CommentViewModel;
 public class AllCommentsFragment extends Fragment {
     private RecyclerView recyclerView;
     private CommentViewModel commentViewModel;
+    private CommentAllAdapter adapter;
+    String accessToken;
+    String domain;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,23 +37,36 @@ public class AllCommentsFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.fragment_all_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        CommentAllAdapter adapter = new CommentAllAdapter(getContext());
+        adapter = new CommentAllAdapter(getContext());
         recyclerView.setAdapter(adapter);
-        commentViewModel = new ViewModelProvider(this).get(CommentViewModel.class);
-        commentViewModel.getCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
-            adapter.setCommentCardModels(commentModels);
-            adapter.notifyDataSetChanged();
-        });
-        commentViewModel.getComments(accessToken, domain, "all");
+        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
+        getComments();
+
+        commentViewModel.getComments("all");
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                commentViewModel.getComments(accessToken, domain, "all");
+                commentViewModel.getComments("all");
                 adapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
 
         return view;
+    }
+
+    public void getComments() {
+        commentViewModel.getCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
+            adapter.setCommentCardModels(commentModels);
+            adapter.notifyDataSetChanged();
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        commentViewModel.getCommentModelsLiveData().setValue(new ArrayList<>());
+        commentViewModel.getComments("all");
+        adapter.notifyDataSetChanged();
     }
 }

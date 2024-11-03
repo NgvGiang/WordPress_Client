@@ -16,20 +16,86 @@ import vn.edu.usth.wordpressclient.repository.ContentRepository;
 
 public class CommentViewModel extends AndroidViewModel {
     private final CommentRepository commentRepository= CommentRepository.getInstance(getApplication());
+//    private final MutableLiveData<ArrayList<CommentCardModel>> allCommentModelsLiveData= new MutableLiveData<>();
+//    private final MutableLiveData<ArrayList<CommentCardModel>> pendingCommentModelsLiveData= new MutableLiveData<>();
+//    private final MutableLiveData<ArrayList<CommentCardModel>> approvedCommentModelsLiveData= new MutableLiveData<>();
+//    private final MutableLiveData<ArrayList<CommentCardModel>> spamCommentModelsLiveData= new MutableLiveData<>();
+//    private final MutableLiveData<ArrayList<CommentCardModel>> trashCommentModelsLiveData= new MutableLiveData<>();
     private final MutableLiveData<ArrayList<CommentCardModel>> commentModelsLiveData= new MutableLiveData<>();
+    private final MutableLiveData<Boolean> successLiveData= new MutableLiveData<>();
+    private final MutableLiveData<Boolean> statusLiveData= new MutableLiveData<>();
     public CommentViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public LiveData<ArrayList<CommentCardModel>> getCommentModelsLiveData() {
+    public MutableLiveData<ArrayList<CommentCardModel>> getCommentModelsLiveData() {
         return commentModelsLiveData;
     }
 
-    public void getComments(String accessToken, String domain, String status) {
-        commentRepository.getComments(accessToken, domain, 100, status, commentModelsLiveData);
+    public MutableLiveData<Boolean> getSuccessLiveData() {
+        return successLiveData;
+    }
+
+    public MutableLiveData<Boolean> getStatusLiveData() {
+        return statusLiveData;
+    }
+//    public MutableLiveData<ArrayList<CommentCardModel>> getAllCommentModelsLiveData() {
+//        return allCommentModelsLiveData;
+//    }
+//
+//    public MutableLiveData<ArrayList<CommentCardModel>> getPendingCommentModelsLiveData() {
+//        return pendingCommentModelsLiveData;
+//    }
+//
+//    public MutableLiveData<ArrayList<CommentCardModel>> getApprovedCommentModelsLiveData() {
+//        return approvedCommentModelsLiveData;
+//    }
+//
+//    public MutableLiveData<ArrayList<CommentCardModel>> getSpamCommentModelsLiveData() {
+//        return spamCommentModelsLiveData;
+//    }
+//
+//    public MutableLiveData<ArrayList<CommentCardModel>> getTrashCommentModelsLiveData() {
+//        return trashCommentModelsLiveData;
+//    }
+//
+//    public void getComments(String accessToken, String domain, String status) {
+//        if (status.equals("all")) {
+//            commentRepository.getComments(accessToken, domain, 100, status, allCommentModelsLiveData);
+//            return;
+//        }
+//        if (status.equals("hold")) {
+//            commentRepository.getComments(accessToken, domain, 100, status, pendingCommentModelsLiveData);
+//            return;
+//        }
+//        if (status.equals("approve")) {
+//            commentRepository.getComments(accessToken, domain, 100, status, approvedCommentModelsLiveData);
+//            return;
+//        }
+//        if (status.equals("spam")) {
+//            commentRepository.getComments(accessToken, domain, 100, status, spamCommentModelsLiveData);
+//            return;
+//        }
+//        if (status.equals("trash")) {
+//            commentRepository.getComments(accessToken, domain, 100, status, trashCommentModelsLiveData);
+//            return;
+//        }
+//
+//    }
+
+    public void getComments(String status) {
+        commentRepository.getComments(100, status, commentModelsLiveData);
     }
 
     public void replyComment(String domain, String content, Long parent, Long post) {
-        commentRepository.replyComment(domain, content, parent, post, commentModelsLiveData);
+        commentRepository.replyComment(domain, content, parent, post, successLiveData);
+    }
+
+    public void updateCommentStatus(Long id, String status) {
+        commentRepository.updateCommentStatus(id, status, statusLiveData);
+    }
+
+    public void deleteComment(Long id) {
+        commentRepository.deleteComment(id, statusLiveData);
     }
 }

@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.utils.DomainManager;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
@@ -21,34 +23,49 @@ import vn.edu.usth.wordpressclient.viewmodel.CommentViewModel;
 public class PendingCommentsFragment extends Fragment {
     private RecyclerView recyclerView;
     private CommentViewModel commentViewModel;
+    private CommentAllAdapter adapter;
+    String accessToken;
+    String domain;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pending_comments, container, false);
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.pending_swipe_refresh_layout);
-        String accessToken = SessionManager.getInstance(getContext()).getAccessToken();
-        String domain = DomainManager.getInstance().getSelectedDomain();
+        accessToken = SessionManager.getInstance(getContext()).getAccessToken();
+        domain = DomainManager.getInstance().getSelectedDomain();
 
         recyclerView = view.findViewById(R.id.fragment_pending_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        CommentAllAdapter adapter = new CommentAllAdapter(getContext());
+        adapter = new CommentAllAdapter(getContext());
         recyclerView.setAdapter(adapter);
-        commentViewModel = new ViewModelProvider(this).get(CommentViewModel.class);
-        commentViewModel.getCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
-            adapter.setCommentCardModels(commentModels);
-            adapter.notifyDataSetChanged();
-        });
+        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
+        getComments();
 
-        commentViewModel.getComments(accessToken, domain, "hold");
+        commentViewModel.getComments("hold");
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                commentViewModel.getComments(accessToken, domain, "hold");
+                commentViewModel.getComments("hold");
                 adapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
 
         return view;
+    }
+
+    public void getComments() {
+        commentViewModel.getCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
+            adapter.setCommentCardModels(commentModels);
+            adapter.notifyDataSetChanged();
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        commentViewModel.getCommentModelsLiveData().setValue(new ArrayList<>());
+        commentViewModel.getComments("hold");
+        adapter.notifyDataSetChanged();
     }
 }
