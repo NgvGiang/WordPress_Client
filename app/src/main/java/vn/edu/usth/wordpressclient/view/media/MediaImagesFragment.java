@@ -38,6 +38,11 @@ public class MediaImagesFragment extends Fragment {
         mediaViewModel = new ViewModelProvider(this).get(MediaViewModel.class);
         mediaViewModel.getMediaModelsLiveData().observe(getViewLifecycleOwner(), mediaModels -> {
             adapter.setMediaUrls(mediaModels);
+            if(mediaModels.isEmpty()){
+                view.findViewById(R.id.dont_have_media).setVisibility(View.VISIBLE);
+            }else{
+                view.findViewById(R.id.dont_have_media).setVisibility(View.INVISIBLE);
+            }
             adapter.notifyDataSetChanged();
         });
         mediaViewModel.fetchMediaUrls(accessToken, domain);
