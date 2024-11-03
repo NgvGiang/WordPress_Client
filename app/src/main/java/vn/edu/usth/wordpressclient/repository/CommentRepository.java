@@ -1,6 +1,9 @@
 package vn.edu.usth.wordpressclient.repository;
 
+import static java.security.AccessController.getContext;
+
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
@@ -10,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
@@ -24,6 +28,7 @@ import java.util.stream.IntStream;
 
 import vn.edu.usth.wordpressclient.model.CommentCardModel;
 import vn.edu.usth.wordpressclient.model.MediaCardModel;
+import vn.edu.usth.wordpressclient.utils.DomainManager;
 import vn.edu.usth.wordpressclient.utils.QueueManager;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
 
@@ -42,7 +47,10 @@ public class CommentRepository {
         return instance;
     }
 
-    public void getComments(String accessToken, String domain, int perPage, String status, MutableLiveData<ArrayList<CommentCardModel>> commentModelLiveData) {
+    public void getComments(int perPage, String status, MutableLiveData<ArrayList<CommentCardModel>> commentModelLiveData) {
+        String accessToken = SessionManager.getInstance(context).getAccessToken();
+        String domain = DomainManager.getInstance().getSelectedDomain();
+
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&status=" + status;
 
         StringRequest fetchCommentRequest = new StringRequest(
@@ -84,5 +92,136 @@ public class CommentRepository {
             }
         };
         QueueManager.getInstance(context).addToRequestQueue(fetchCommentRequest);
+    }
+
+    public void replyComment(String domain, String content, Long parent, Long post, MutableLiveData<Boolean> successLiveData) {
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments/";
+        SessionManager session = SessionManager.getInstance(context);
+        String accessToken = session.getAccessToken();
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("post", post);
+            jsonBody.put("parent", parent);
+            jsonBody.put("content", content);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+            Request.Method.POST,
+            url,
+            jsonBody,
+            response -> {
+
+                try {
+//                    long commentId = response.getLong("id");
+//                    long postId = response.getLong("post");
+//                    long parentId = response.getLong("parent");
+//                    long authorId = response.getLong("author");
+//                    String authorName = response.getString("author_name");
+                    String date = response.getString("date");
+//                    String cmtContent = response.getJSONObject("content").getString("rendered");
+//                    String status = response.getString("status");
+//                    String authorAvatar = response.getJSONObject("author_avatar_urls").getString("48");
+//                    CommentCardModel newComment = new CommentCardModel(commentId, parentId, postId, authorId, authorName, date, cmtContent, status, authorAvatar);
+                    Log.i("ContentRepository", "Content created at: " + date);
+                    successLiveData.postValue(true);
+                } catch (JSONException e) {
+                    successLiveData.postValue(false);
+                    throw new RuntimeException(e);
+                }
+            },
+            error -> {
+                successLiveData.postValue(false);
+                VolleyLog.d("volley", "Error: " + error.getMessage());
+                error.printStackTrace();
+            }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+        };
+        QueueManager.getInstance(context).addToRequestQueue(jsonObjectRequest);
+    }
+
+    public void updateCommentStatus(Long id, String status, MutableLiveData<Boolean> successLiveData) {
+        String domain = DomainManager.getInstance().getSelectedDomain();
+        String accessToken = SessionManager.getInstance(context).getAccessToken();
+
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments/" + id;
+        Log.i("url", url);
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("status", status);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                jsonBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.i("response", response.getString("status"));
+                            successLiveData.postValue(true);
+                        } catch (JSONException e) {
+                            successLiveData.postValue(false);
+                            throw new RuntimeException(e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        successLiveData.postValue(false);
+                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+        };
+        QueueManager.getInstance(context).addToRequestQueue(jsonObjectRequest);
+    }
+
+    public void deleteComment(Long id, MutableLiveData<Boolean> successLiveData) {
+        String domain = DomainManager.getInstance().getSelectedDomain();
+        String accessToken = SessionManager.getInstance(context).getAccessToken();
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments/" + id +"?force=true";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.DELETE,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        successLiveData.postValue(true);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        successLiveData.postValue(false);
+                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+        };
+        QueueManager.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 }
