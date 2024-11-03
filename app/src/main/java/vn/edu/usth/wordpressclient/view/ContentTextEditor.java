@@ -23,8 +23,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import java.util.Calendar;
 
 import vn.edu.usth.wordpressclient.R;
@@ -69,7 +67,7 @@ public class ContentTextEditor extends AppCompatActivity {
         toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.vert_dot));
         //mapping viewmodel
         contentViewModel = new ViewModelProvider(this).get(ContentViewModel.class);
-        contentViewModel.getSuccessLiveData().observe(this, success -> {
+        contentViewModel.getCreateSuccessLiveData().observe(this, success -> {
             toolbarProgressBar.setVisibility(View.GONE);
             if (success) {
                 //just finish but after 2.5 second

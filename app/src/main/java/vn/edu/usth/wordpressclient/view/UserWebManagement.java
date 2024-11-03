@@ -30,6 +30,7 @@ import vn.edu.usth.wordpressclient.view.media.MediaActivity;
 import vn.edu.usth.wordpressclient.view.pages.PagesActivity;
 import vn.edu.usth.wordpressclient.view.posts.PostsActivity;
 import vn.edu.usth.wordpressclient.R;
+import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 import vn.edu.usth.wordpressclient.viewmodel.WebViewModel;
 
 public class UserWebManagement extends AppCompatActivity {
@@ -83,7 +84,6 @@ public class UserWebManagement extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showChangeTitleDialog();
-//                Snackbar.make(findViewById(android.R.id.content),"This function should be for changing the title", Snackbar.LENGTH_SHORT).show();
             }
         });
         domain.setOnClickListener(v -> { //done
@@ -164,6 +164,7 @@ public class UserWebManagement extends AppCompatActivity {
         dialogTitle = dialogView.findViewById(R.id.dialog_title);
         dialogMessage = dialogView.findViewById(R.id.dialog_message);
         dialogTitle.setText("Change Title");
+
         input.setText(title.getText().toString());
         AlertDialog.Builder builder = new AlertDialog.Builder(UserWebManagement.this);
         builder.setView(dialogView)

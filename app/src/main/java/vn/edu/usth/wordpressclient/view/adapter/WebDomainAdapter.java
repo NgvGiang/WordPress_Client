@@ -48,7 +48,7 @@ public class WebDomainAdapter extends RecyclerView.Adapter<WebDomainAdapter.MyVi
         // Assign values to the views based on the position of the RecyclerView
         WebCardModel currentWebModel = webModels.get(position);
         holder.WebTitle.setText(currentWebModel.getWeb_title());
-        holder.WebDomain.setText(currentWebModel.getWeb_domain());
+        holder.WebDomain.setText(currentWebModel.getWeb_domain().replace("https://", ""));
 //        holder.WebIcon.setImageResource(currentWebModel.getWeb_icon_url());
         Picasso.get()
                 .load(currentWebModel.getWeb_icon_url())   // URL của ảnh
