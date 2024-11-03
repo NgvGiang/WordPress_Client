@@ -12,7 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="8dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
         android:background="@color/transparent"
         android:clickable="true"
         android:focusable="true">
@@ -51,7 +54,7 @@
             android:text="Title"
             android:textColor="@color/onBackGround"
             android:textSize="18sp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="1dp"
             android:textStyle="bold" />
 
         <TextView
@@ -62,7 +65,7 @@
             android:textSize="14sp"
             android:textColor="@color/onBackGround"
             android:layout_marginRight="30dp"
-            android:maxLines="2"
+            android:maxLines="1"
             android:ellipsize="end"/>
 
     </LinearLayout>
@@ -71,7 +74,7 @@
         android:layout_below="@+id/content_cardview"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+
         android:background="@android:color/darker_gray" />
 
 </RelativeLayout>

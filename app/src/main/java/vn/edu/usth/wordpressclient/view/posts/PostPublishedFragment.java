@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import vn.edu.usth.wordpressclient.utils.DomainManager;
 import vn.edu.usth.wordpressclient.view.adapter.PostsPublishedAdapter;
@@ -25,9 +27,10 @@ import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 public class PostPublishedFragment extends Fragment {
     Button CreateButton;
     private RecyclerView recyclerView;
-    private ConstraintLayout noPostsMessage;
+    private LinearLayout noPostsMessage;
     private PostsPublishedAdapter adapter;
     private ContentViewModel contentViewModel;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +39,7 @@ public class PostPublishedFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.post_published_recycler_view);
         noPostsMessage = view.findViewById(R.id.no_post_screen_published);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout_published);
 
         String domain = DomainManager.getInstance().getSelectedDomain();
 
@@ -60,6 +64,15 @@ public class PostPublishedFragment extends Fragment {
 
         contentViewModel.fetchContent(domain,"posts","publish");
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                contentViewModel.fetchContent(domain,"posts","publish");
+                adapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
         CreateButton = view.findViewById(R.id.published_post_button);
         CreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +83,12 @@ public class PostPublishedFragment extends Fragment {
             }
         });
         return view;
-
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        String domain = DomainManager.getInstance().getSelectedDomain();
+        contentViewModel.fetchContent(domain,"posts","publish");
+        adapter.notifyDataSetChanged();
     }
 }
