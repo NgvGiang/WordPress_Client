@@ -220,6 +220,11 @@
     //fab
     <string name="title">Add title</string>
     <string name="content">Start writing...</string>
-
+    <string name="publish">Publish</string>
+    <string name="content_structure">Content structure</string>
+    <string name="save">Save</string>
+    <string name="publish_date">Publish Date</string>
+    <string name="content_created_successfully">Content created successfully!</string>
+    <string name="failed_to_create_content_please_try_again">Failed to create content, please try again!</string>
 
 </resources>

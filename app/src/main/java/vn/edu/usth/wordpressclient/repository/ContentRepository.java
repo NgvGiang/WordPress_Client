@@ -2,6 +2,7 @@ package vn.edu.usth.wordpressclient.repository;
 
 import android.content.Context;
 import android.text.Html;
+import android.text.format.DateUtils;
 import android.util.Log;
 
 import androidx.core.text.HtmlCompat;
@@ -17,6 +18,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -159,11 +163,14 @@ public class ContentRepository {
                         for (int i = 0; i < responseArray.length(); i++) {
                             JSONObject postObject = responseArray.getJSONObject(i);
                             String title = postObject.getJSONObject("title").getString("rendered");
-                            String date = postObject.getString("date");
+                            String tempDate = postObject.getString("date");
+                            long dateMillis = LocalDateTime.parse(tempDate, DateTimeFormatter.ISO_DATE_TIME)
+                                    .atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+                            String formattedDate = DateUtils.getRelativeTimeSpanString(dateMillis, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
                             int id = postObject.getInt("id");
                             String content = HtmlCompat.fromHtml(postObject.getJSONObject("content").getString("rendered"), HtmlCompat.FROM_HTML_MODE_LEGACY).toString();
-                            contentModels.add(new ContentCardModel(id, title, content, date));
-                            Log.i("fetch",title+ date +content);
+                            contentModels.add(new ContentCardModel(id, title, content, formattedDate));
+
                         }
                         livedata.setValue(contentModels);
 

@@ -71,7 +71,7 @@ public class ContentTextEditor extends AppCompatActivity {
             toolbarProgressBar.setVisibility(View.GONE);
             if (success) {
                 //just finish but after 2.5 second
-                Snackbar.make(findViewById(android.R.id.content), "Content created successfully", 2500).show();
+                Snackbar.make(findViewById(android.R.id.content), getString(R.string.content_created_successfully), 2500).show();
                 new Handler(Looper.getMainLooper()).postDelayed(this::finish, 2500);
             }else {
                 //occur network problem ?
