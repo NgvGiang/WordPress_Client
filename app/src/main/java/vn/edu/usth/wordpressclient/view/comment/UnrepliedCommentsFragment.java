@@ -41,12 +41,13 @@ public class UnrepliedCommentsFragment extends Fragment {
         String domain = DomainManager.getInstance().getSelectedDomain();
         noUnreplyComment = view.findViewById(R.id.no_unreply_comment);
 
+        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         recyclerView = view.findViewById(R.id.fragment_unreplied_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new CommentAllAdapter(getContext());
+//        adapter = new CommentAllAdapter(getContext(), commentViewModel, this);
         recyclerView.setAdapter(adapter);
-        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
-        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
         userViewModel.getUserInfoLiveData().observe(getViewLifecycleOwner(), jsonObject -> {
             try {
@@ -72,7 +73,7 @@ public class UnrepliedCommentsFragment extends Fragment {
     }
 
     public void getComments() {
-        Log.i("authorId", "" + authorId);
+        noUnreplyComment.setVisibility(View.INVISIBLE);
         commentViewModel.getUnrepliedCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
             adapter.setCommentCardModels(commentModels);
             if (commentModels.isEmpty()) {

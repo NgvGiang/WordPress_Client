@@ -1,5 +1,6 @@
 package vn.edu.usth.wordpressclient.view.comment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,11 +13,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import vn.edu.usth.wordpressclient.R;
+import vn.edu.usth.wordpressclient.model.CommentCardModel;
 import vn.edu.usth.wordpressclient.utils.DomainManager;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
 import vn.edu.usth.wordpressclient.view.adapter.CommentAllAdapter;
@@ -39,11 +45,12 @@ public class AllCommentsFragment extends Fragment {
         String domain = DomainManager.getInstance().getSelectedDomain();
         noAllComment = view.findViewById(R.id.no_all_comment);
 
+        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
         recyclerView = view.findViewById(R.id.fragment_all_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new CommentAllAdapter(getContext());
+//        adapter = new CommentAllAdapter(getContext(), commentViewModel, this);
         recyclerView.setAdapter(adapter);
-        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
         getComments();
 
         commentViewModel.getComments("all");
@@ -60,6 +67,7 @@ public class AllCommentsFragment extends Fragment {
     }
 
     public void getComments() {
+        noAllComment.setVisibility(View.INVISIBLE);
         commentViewModel.getAllCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
             adapter.setCommentCardModels(commentModels);
             if (commentModels.isEmpty()) {
@@ -74,7 +82,6 @@ public class AllCommentsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.i("check", "checked");
         commentViewModel.getComments("all");
         adapter.notifyDataSetChanged();
     }

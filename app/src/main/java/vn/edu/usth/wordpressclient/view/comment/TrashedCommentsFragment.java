@@ -37,11 +37,12 @@ public class TrashedCommentsFragment extends Fragment {
         domain = DomainManager.getInstance().getSelectedDomain();
         noTrashComment = view.findViewById(R.id.no_trash_comment);
 
+        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
         recyclerView = view.findViewById(R.id.fragment_trash_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new CommentAllAdapter(getContext());
+//        adapter = new CommentAllAdapter(getContext(), commentViewModel, this);
         recyclerView.setAdapter(adapter);
-        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
         getComments();
 
         commentViewModel.getComments("trash");
@@ -58,6 +59,7 @@ public class TrashedCommentsFragment extends Fragment {
     }
 
     public void getComments() {
+        noTrashComment.setVisibility(View.INVISIBLE);
         commentViewModel.getTrashCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
             adapter.setCommentCardModels(commentModels);
             if (commentModels.isEmpty()) {

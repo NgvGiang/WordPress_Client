@@ -3,6 +3,7 @@ package vn.edu.usth.wordpressclient.view.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -25,10 +30,20 @@ import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.model.CommentCardModel;
 import vn.edu.usth.wordpressclient.model.MediaCardModel;
 import vn.edu.usth.wordpressclient.view.comment.CommentDetailActivity;
+import vn.edu.usth.wordpressclient.viewmodel.CommentViewModel;
 
 public class CommentAllAdapter extends RecyclerView.Adapter<CommentAllAdapter.CommentCardViewHolder>{
     private Context context;
     private ArrayList<CommentCardModel> commentCardModels;
+//    private CommentViewModel commentViewModel;
+//    private LifecycleOwner lifecycleOwner;
+
+//    public CommentAllAdapter(Context context, CommentViewModel commentViewModel, LifecycleOwner lifecycleOwner) {
+//        this.context = context;
+//        this.commentCardModels = new ArrayList<>();
+//        this.commentViewModel = commentViewModel;
+//        this.lifecycleOwner = lifecycleOwner;
+//    }
 
     public CommentAllAdapter(Context context) {
         this.context = context;
@@ -50,17 +65,8 @@ public class CommentAllAdapter extends RecyclerView.Adapter<CommentAllAdapter.Co
 
     @Override
     public void onBindViewHolder(@NonNull CommentAllAdapter.CommentCardViewHolder holder, int position) {
-//        LocalDateTime date = LocalDateTime.parse(commentCardModels.get(position).getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
-//        Long dateInSeconds = Duration.between(date, LocalDateTime.now()).getSeconds();
-//        if (dateInSeconds <= 86400) {
-//            holder.date.setText(R.string.today);
-//        } else if (86400 < dateInSeconds && dateInSeconds <= 172800) {
-//            holder.date.setText(R.string.yesterday);
-//        } else {
-//            holder.date.setText(date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-//        }
         holder.date.setText(commentCardModels.get(position).getDate());
-        holder.authorNameAndPostName.setText(commentCardModels.get(position).getAuthorName() + " on Saturday, 12 October 2024");
+        holder.authorNameAndPostName.setText(commentCardModels.get(position).getAuthorName() + " on " + commentCardModels.get(position).getPostTitle());
         holder.content.setText(Html.fromHtml(commentCardModels.get(position).getContent(), Html.FROM_HTML_MODE_LEGACY).toString());
         Picasso.get().load(commentCardModels.get(position).getAuthorAvatar()).error(R.drawable.blank_avatar).into(holder.authorAvatar);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -100,5 +106,3 @@ public class CommentAllAdapter extends RecyclerView.Adapter<CommentAllAdapter.Co
         }
     }
 }
-
-

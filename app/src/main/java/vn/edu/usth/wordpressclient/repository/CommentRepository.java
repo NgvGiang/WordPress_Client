@@ -57,7 +57,6 @@ public class CommentRepository {
         String domain = DomainManager.getInstance().getSelectedDomain();
 
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&status=" + status;
-//        Log.i("url", url);
 
         StringRequest fetchCommentRequest = new StringRequest(
                 Request.Method.GET,
@@ -81,7 +80,19 @@ public class CommentRepository {
                             String link = commentArrayJSONObject.getString("link");
                             String cmtStatus = commentArrayJSONObject.getString("status");
                             String authorAvatar = commentArrayJSONObject.getJSONObject("author_avatar_urls").getString("48");
-                            commentModels.add(new CommentCardModel(commentId, postId, authorId, authorName, formattedDate, content, link, cmtStatus, authorAvatar));
+
+                            //Fraudulently get the post title to which the comment belongs
+                            String[] postTitles = link.split("/");
+                            String postTitleTemp = postTitles[6];
+                            String[] postTitlesTemp = postTitleTemp.split("-");
+                            String postTitle = "";
+                            for (int j = 0; j < postTitlesTemp.length; j++) {
+                                postTitle += postTitlesTemp[j] + " ";
+                            }
+
+                            CommentCardModel commentCardModel = new CommentCardModel(commentId, postId, authorId, authorName, formattedDate, content, link, cmtStatus, authorAvatar);
+                            commentCardModel.setPostTitle(postTitle);
+                            commentModels.add(commentCardModel);
                         }
                         commentModelLiveData.setValue(commentModels);
                     } catch (JSONException e){
@@ -123,18 +134,8 @@ public class CommentRepository {
             response -> {
 
                 try {
-//                    long commentId = response.getLong("id");
-//                    long postId = response.getLong("post");
-//                    long parentId = response.getLong("parent");
-//                    long authorId = response.getLong("author");
-//                    String authorName = response.getString("author_name");
                     String date = response.getString("date");
                     String cmtContent = response.getJSONObject("content").getString("rendered");
-//                    String status = response.getString("status");
-//                    String authorAvatar = response.getJSONObject("author_avatar_urls").getString("48");
-//                    CommentCardModel newComment = new CommentCardModel(commentId, parentId, postId, authorId, authorName, date, cmtContent, status, authorAvatar);
-                    Log.i("ContentRepository", "Content created at: " + date);
-
                     successLiveData.postValue(cmtContent);
                 } catch (JSONException e) {
                     successLiveData.postValue("");
@@ -263,11 +264,21 @@ public class CommentRepository {
                             String link = commentArrayJSONObject.getString("link");
                             String cmtStatus = commentArrayJSONObject.getString("status");
                             String authorAvatar = commentArrayJSONObject.getJSONObject("author_avatar_urls").getString("48");
+
+                            //Fraudulently get the post title to which the comment belongs
+                            String[] postTitles = link.split("/");
+                            String postTitleTemp = postTitles[6];
+                            String[] postTitlesTemp = postTitleTemp.split("-");
+                            String postTitle = "";
+                            for (int j = 0; j < postTitlesTemp.length; j++) {
+                                postTitle += postTitlesTemp[j] + " ";
+                            }
+                            CommentCardModel commentCardModel = new CommentCardModel(commentId, postId, authorId, authorName, formattedDate, content, link, cmtStatus, authorAvatar);
+                            commentCardModel.setPostTitle(postTitle);
                             boolean hasChildren = commentArrayJSONObject.getJSONObject("_links").has("children");
                             if (!hasChildren) {
-                                commentModels.add(new CommentCardModel(commentId, postId, authorId, authorName, tempDate, content, link, cmtStatus, authorAvatar));
+                                commentModels.add(commentCardModel);
                             }
-//                            commentModels.add(new CommentCardModel(commentId, postId, authorId, authorName, date, content, cmtStatus, authorAvatar));
                         }
                         commentModelLiveData.setValue(commentModels);
                     } catch (JSONException e){

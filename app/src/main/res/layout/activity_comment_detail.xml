@@ -71,7 +71,7 @@
                             android:ellipsize="end"
                             android:maxLines="2"
                             android:paddingLeft="8dp"
-                            android:text="on Barcelona vs RealMadrid matchday"
+                            android:text=""
                             android:textColor="#D7177C20"
                             android:textSize="14sp" />
 

@@ -37,11 +37,12 @@ public class PendingCommentsFragment extends Fragment {
         domain = DomainManager.getInstance().getSelectedDomain();
         noPendingComment = view.findViewById(R.id.no_pending_comment);
 
+        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
         recyclerView = view.findViewById(R.id.fragment_pending_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new CommentAllAdapter(getContext());
+//        adapter = new CommentAllAdapter(getContext(), commentViewModel, this);
         recyclerView.setAdapter(adapter);
-        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
         getComments();
 
         commentViewModel.getComments("hold");
@@ -58,6 +59,7 @@ public class PendingCommentsFragment extends Fragment {
     }
 
     public void getComments() {
+        noPendingComment.setVisibility(View.INVISIBLE);
         commentViewModel.getPendingCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
             adapter.setCommentCardModels(commentModels);
             if (commentModels.isEmpty()) {

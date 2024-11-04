@@ -37,11 +37,12 @@ public class ApprovedCommentsFragment extends Fragment {
         domain = DomainManager.getInstance().getSelectedDomain();
         noApprovedComment = view.findViewById(R.id.no_approved_comment);
 
+        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
         recyclerView = view.findViewById(R.id.fragment_approved_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new CommentAllAdapter(getContext());
+//        adapter = new CommentAllAdapter(getContext(), commentViewModel, this);
         recyclerView.setAdapter(adapter);
-        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
         getComments();
 
         commentViewModel.getComments("approve");
@@ -58,6 +59,7 @@ public class ApprovedCommentsFragment extends Fragment {
     }
 
     public void getComments() {
+        noApprovedComment.setVisibility(View.INVISIBLE);
         commentViewModel.getApprovedCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
             adapter.setCommentCardModels(commentModels);
             if (commentModels.isEmpty()) {

@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="Elenya Alquarinqua on Saturday, 12 October 2024"
+                android:text=""
                 android:paddingLeft="8dp"
                 android:textSize="16dp"/>
             <TextView

@@ -10,9 +10,9 @@ public class CommentCardModel {
     private String link;
     private String status;
     private String authorAvatar;
+    private String postTitle;
 
     public CommentCardModel() {
-
     }
 
     public CommentCardModel(int id, int post, int author, String authorName, String date, String content, String link, String status, String authorAvatar) {
@@ -69,5 +69,13 @@ public class CommentCardModel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getPostTitle() {
+        return postTitle;
+    }
+
+    public void setPostTitle(String postTitle) {
+        this.postTitle = postTitle;
     }
 }

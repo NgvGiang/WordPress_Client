@@ -37,11 +37,12 @@ public class SpamCommentsFragment extends Fragment {
         domain = DomainManager.getInstance().getSelectedDomain();
         noSpamComment = view.findViewById(R.id.no_spam_comment);
 
+        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
         recyclerView = view.findViewById(R.id.fragment_spam_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new CommentAllAdapter(getContext());
+//        adapter = new CommentAllAdapter(getContext(), commentViewModel, this);
         recyclerView.setAdapter(adapter);
-        commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
         getComments();
 
         commentViewModel.getComments("spam");
@@ -58,6 +59,7 @@ public class SpamCommentsFragment extends Fragment {
     }
 
     public void getComments() {
+        noSpamComment.setVisibility(View.INVISIBLE);
         commentViewModel.getSpamCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
             adapter.setCommentCardModels(commentModels);
             if (commentModels.isEmpty()) {

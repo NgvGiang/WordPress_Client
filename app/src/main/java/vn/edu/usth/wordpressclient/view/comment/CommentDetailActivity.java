@@ -121,7 +121,6 @@ public class CommentDetailActivity extends AppCompatActivity {
 
         commentViewModel.getPostOfComment().observe(this, jsonObject -> {
             try {
-                Log.i("hello", "set title");
                 title.setText(jsonObject.getString("title"));
             } catch (JSONException e) {
                 throw new RuntimeException(e);
