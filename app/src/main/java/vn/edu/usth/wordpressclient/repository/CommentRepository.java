@@ -31,6 +31,7 @@ import vn.edu.usth.wordpressclient.model.MediaCardModel;
 import vn.edu.usth.wordpressclient.utils.DomainManager;
 import vn.edu.usth.wordpressclient.utils.QueueManager;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
+import vn.edu.usth.wordpressclient.viewmodel.UserViewModel;
 
 public class CommentRepository {
     private static CommentRepository instance;
@@ -52,6 +53,7 @@ public class CommentRepository {
         String domain = DomainManager.getInstance().getSelectedDomain();
 
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&status=" + status;
+//        Log.i("url", url);
 
         StringRequest fetchCommentRequest = new StringRequest(
                 Request.Method.GET,
@@ -63,16 +65,16 @@ public class CommentRepository {
                         int length = commentArray.length();
                         for (int i=0; i<length; i++) {
                             JSONObject commentArrayJSONObject = commentArray.getJSONObject(i);
-                            long commentId = commentArrayJSONObject.getLong("id");
-                            long postId = commentArrayJSONObject.getLong("post");
-                            long parentId = commentArrayJSONObject.getLong("parent");
-                            long authorId = commentArrayJSONObject.getLong("author");
+                            int commentId = commentArrayJSONObject.getInt("id");
+                            int postId = commentArrayJSONObject.getInt("post");
+                            int authorId = commentArrayJSONObject.getInt("author");
                             String authorName = commentArrayJSONObject.getString("author_name");
                             String date = commentArrayJSONObject.getString("date");
                             String content = commentArrayJSONObject.getJSONObject("content").getString("rendered");
+                            String link = commentArrayJSONObject.getString("link");
                             String cmtStatus = commentArrayJSONObject.getString("status");
                             String authorAvatar = commentArrayJSONObject.getJSONObject("author_avatar_urls").getString("48");
-                            commentModels.add(new CommentCardModel(commentId, parentId, postId, authorId, authorName, date, content, cmtStatus, authorAvatar));
+                            commentModels.add(new CommentCardModel(commentId, postId, authorId, authorName, date, content, link, cmtStatus, authorAvatar));
                         }
                         commentModelLiveData.setValue(commentModels);
                     } catch (JSONException e){
@@ -94,7 +96,7 @@ public class CommentRepository {
         QueueManager.getInstance(context).addToRequestQueue(fetchCommentRequest);
     }
 
-    public void replyComment(String domain, String content, Long parent, Long post, MutableLiveData<String> successLiveData) {
+    public void replyComment(String domain, String content, int parent, int post, MutableLiveData<String> successLiveData) {
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments/";
         SessionManager session = SessionManager.getInstance(context);
         String accessToken = session.getAccessToken();
@@ -148,7 +150,7 @@ public class CommentRepository {
         QueueManager.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
-    public void updateCommentStatus(Long id, String status, MutableLiveData<Boolean> successLiveData) {
+    public void updateCommentStatus(int id, String status, MutableLiveData<Boolean> successLiveData) {
         String domain = DomainManager.getInstance().getSelectedDomain();
         String accessToken = SessionManager.getInstance(context).getAccessToken();
 
@@ -194,7 +196,7 @@ public class CommentRepository {
         QueueManager.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
-    public void deleteComment(Long id, MutableLiveData<Boolean> successLiveData) {
+    public void deleteComment(int id, MutableLiveData<Boolean> successLiveData) {
         String domain = DomainManager.getInstance().getSelectedDomain();
         String accessToken = SessionManager.getInstance(context).getAccessToken();
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments/" + id +"?force=true";
@@ -224,5 +226,86 @@ public class CommentRepository {
             }
         };
         QueueManager.getInstance(context).addToRequestQueue(jsonObjectRequest);
+    }
+
+    public void getUnrepliedComment(int perPage, int author, MutableLiveData<ArrayList<CommentCardModel>> commentModelLiveData) {
+        String accessToken = SessionManager.getInstance(context).getAccessToken();
+        String domain = DomainManager.getInstance().getSelectedDomain();
+
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&author_exclude=" + author;
+        Log.i("get unreplied url", url);
+        StringRequest fetchCommentRequest = new StringRequest(
+                Request.Method.GET,
+                url,
+                response -> {
+                    try{
+                        ArrayList<CommentCardModel> commentModels = new ArrayList<>();
+                        JSONArray commentArray = new JSONArray(response);
+                        int length = commentArray.length();
+                        for (int i=0; i<length; i++) {
+                            JSONObject commentArrayJSONObject = commentArray.getJSONObject(i);
+                            int commentId = commentArrayJSONObject.getInt("id");
+                            int postId = commentArrayJSONObject.getInt("post");
+                            int authorId = commentArrayJSONObject.getInt("author");
+                            String authorName = commentArrayJSONObject.getString("author_name");
+                            String date = commentArrayJSONObject.getString("date");
+                            String content = commentArrayJSONObject.getJSONObject("content").getString("rendered");
+                            String link = commentArrayJSONObject.getString("link");
+                            String cmtStatus = commentArrayJSONObject.getString("status");
+                            String authorAvatar = commentArrayJSONObject.getJSONObject("author_avatar_urls").getString("48");
+                            boolean hasChildren = commentArrayJSONObject.getJSONObject("_links").has("children");
+                            if (!hasChildren) {
+                                commentModels.add(new CommentCardModel(commentId, postId, authorId, authorName, date, content, link, cmtStatus, authorAvatar));
+                            }
+//                            commentModels.add(new CommentCardModel(commentId, postId, authorId, authorName, date, content, cmtStatus, authorAvatar));
+                        }
+                        commentModelLiveData.setValue(commentModels);
+                    } catch (JSONException e){
+                        throw new RuntimeException(e);
+                    }
+                },
+                error -> {
+                    VolleyLog.d("volley", "Error: " + error.getMessage());
+                    error.printStackTrace();
+                }
+        ) {
+            @Override
+            public Map<String,String> getHeaders(){
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+        };
+        QueueManager.getInstance(context).addToRequestQueue(fetchCommentRequest);
+    }
+
+    public void getPostOfComment(int id, MutableLiveData<JSONObject> postOfComment) {
+        String accessToken = SessionManager.getInstance(context).getAccessToken();
+        String domain = DomainManager.getInstance().getSelectedDomain();
+
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/posts/" + id;
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET,
+                url,
+                response -> {
+                    try{
+                        JSONObject post = new JSONObject(response);
+                        String title = post.getJSONObject("title").getString("rendered");
+                        int authorId = post.getInt("author");
+
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("title", title);
+                        jsonObject.put("authorId", authorId);
+                        postOfComment.postValue(jsonObject);
+                    } catch (JSONException e){
+                        throw new RuntimeException(e);
+                    }
+                },
+                error -> {
+                    VolleyLog.d("volley", "Error: " + error.getMessage());
+                    error.printStackTrace();
+                }
+        );
+        QueueManager.getInstance(context).addToRequestQueue(stringRequest);
     }
 }
