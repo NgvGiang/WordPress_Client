@@ -1,41 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/spam_swipe_refresh_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_spam_comments_rec_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical"/>
-        <RelativeLayout
-            android:id="@+id/no_spam_comment"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:id="@+id/no_spam_image"
+            android:layout_width="250dp"
+            android:layout_height="179dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/image37" />
+
+        <TextView
+            android:id="@+id/no_spam_noti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true">
-            <ImageView
-                android:id="@+id/no_spam_image"
-                android:layout_width="250dp"
-                android:layout_height="179dp"
-                android:layout_marginBottom="8dp"
-                android:src="@drawable/image37" />
-
-            <TextView
-                android:id="@+id/no_spam_noti"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/no_spam_image"
-                android:layout_centerHorizontal="true"
-                android:text="@string/no_spam_comments"
-                android:fontFamily="@font/roboto"
-                android:textSize="16dp"
-                android:textColor="@color/onBackGround"/>
-        </RelativeLayout>
+            android:layout_below="@+id/no_spam_image"
+            android:layout_centerHorizontal="true"
+            android:text="@string/no_spam_comments"
+            android:fontFamily="@font/roboto"
+            android:textSize="16dp"
+            android:textColor="@color/onBackGround"/>
     </RelativeLayout>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+</RelativeLayout>
