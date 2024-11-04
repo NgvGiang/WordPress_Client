@@ -36,6 +36,7 @@ public class CommentAllAdapter extends RecyclerView.Adapter<CommentAllAdapter.Co
     }
 
     public void setCommentCardModels(ArrayList<CommentCardModel> commentCardModels) {
+        this.commentCardModels.clear();
         this.commentCardModels = commentCardModels;
     }
 
@@ -72,7 +73,7 @@ public class CommentAllAdapter extends RecyclerView.Adapter<CommentAllAdapter.Co
                 intent.putExtra("post", commentCardModels.get(holder.getAdapterPosition()).getPost());
                 intent.putExtra("content", commentCardModels.get(holder.getAdapterPosition()).getContent());
                 intent.putExtra("status", commentCardModels.get(holder.getAdapterPosition()).getStatus());
-                intent.putExtra("parent", commentCardModels.get(holder.getAdapterPosition()).getParent());
+                intent.putExtra("link", commentCardModels.get(holder.getAdapterPosition()).getLink());
                 context.startActivity(intent);
             }
         });
