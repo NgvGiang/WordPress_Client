@@ -151,7 +151,7 @@ public class ContentRepository {
 
     public void fetchContent(String domain, String endpoint, String status, MutableLiveData<ArrayList<ContentCardModel>> livedata) {
         //https://public-api.wordpress.com/wp/v2/sites/giangtestsite.wordpress.com/pages/?status=publish example url
-        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + "?status=" + status;
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + "?status=" + status+"&per_page=20";
         String accessToken = SessionManager.getInstance(context).getAccessToken();
         StringRequest fetchContentRequest = new StringRequest(
                 Request.Method.GET,
@@ -201,13 +201,13 @@ public class ContentRepository {
                 Request.Method.DELETE,
                 url,
                 response -> {
-                    successLiveData.postValue(true);
+                    successLiveData.setValue(true);
                     Log.i("ContentRepository", "Content deleted successfully");
                 },
                 error -> {
                     VolleyLog.d("volley", "Error: " + error.getMessage());
                     error.printStackTrace();
-                    successLiveData.postValue(false);
+                    successLiveData.setValue(false);
                 }
         ) {
             @Override

@@ -23,36 +23,32 @@ import java.util.ArrayList;
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.model.ContentCardModel;
 
-public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAdapter.MyViewHolder> {
+public class PagesPublishedAdapter extends RecyclerView.Adapter<PagesPublishedAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<ContentCardModel> postList;
-    private PostsPublishedAdapter.OnMenuClickListener popupClickListener;
 
-    // Adapter constructor
-    public PostsPublishedAdapter(Context context) {
+    public PagesPublishedAdapter(Context context) {
         this.context = context;
         this.postList = new ArrayList<>();
     }
 
     @NonNull
     @Override
-    public PostsPublishedAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PagesPublishedAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the layout for each row
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.posts_cardview, parent, false);
-        return new PostsPublishedAdapter.MyViewHolder(view);
+        View view = inflater.inflate(R.layout.pages_cardview, parent, false);
+        return new PagesPublishedAdapter.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PostsPublishedAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PagesPublishedAdapter.MyViewHolder holder, int position) {
         ContentCardModel currentPost = postList.get(position);
 
         holder.Date.setText(currentPost.getDate());
         holder.Title.setText(currentPost.getTitle());
-        holder.Content.setText(currentPost.getContent());
         holder.Setting.setOnClickListener(v -> {
-            // Inflate the custom popup layout
-            View popupView = LayoutInflater.from(context).inflate(R.layout.post_published_popupmenu, null);
+            View popupView = LayoutInflater.from(context).inflate(R.layout.pages_published_popupmenu, null);
 
             // Create the PopupWindow with desired width and height
             final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -86,33 +82,43 @@ public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAd
             popupWindow.showAtLocation(v, 0, location[0], yOffset);
 
             // Set click listeners for each menu item
-            popupView.findViewById(R.id.published_view_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Viewed", Toast.LENGTH_SHORT).show();
+            popupView.findViewById(R.id.published_view_item_page).setOnClickListener(view -> {
+                Toast.makeText(context, "Viewed from publish page", Toast.LENGTH_SHORT).show();
                 popupWindow.dismiss();
             });
 
-            popupView.findViewById(R.id.published_move_to_draft_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Moved to draft", Toast.LENGTH_SHORT).show();
+            popupView.findViewById(R.id.published_set_parent_item_page).setOnClickListener(view -> {
+                Toast.makeText(context, "Set parent from publish page", Toast.LENGTH_SHORT).show();
                 popupWindow.dismiss();
             });
 
-            popupView.findViewById(R.id.published_duplicate_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Duplicated", Toast.LENGTH_SHORT).show();
+            popupView.findViewById(R.id.published_set_home_item_page).setOnClickListener(view -> {
+                Toast.makeText(context, "Set home from publish page", Toast.LENGTH_SHORT).show();
                 popupWindow.dismiss();
             });
 
-            popupView.findViewById(R.id.published_share_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Shared", Toast.LENGTH_SHORT).show();
+            popupView.findViewById(R.id.published_set_post_page_item_page).setOnClickListener(view -> {
+                Toast.makeText(context, "Set Post Page from publish page", Toast.LENGTH_SHORT).show();
                 popupWindow.dismiss();
             });
 
-            popupView.findViewById(R.id.published_comment_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Commented", Toast.LENGTH_SHORT).show();
+            popupView.findViewById(R.id.published_move_to_draft_item_page).setOnClickListener(view -> {
+                Toast.makeText(context, "Moved to draft from publish page", Toast.LENGTH_SHORT).show();
                 popupWindow.dismiss();
             });
 
-            popupView.findViewById(R.id.published_trash_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Trashed", Toast.LENGTH_SHORT).show();
+            popupView.findViewById(R.id.published_duplicate_item_page).setOnClickListener(view -> {
+                Toast.makeText(context, "Duplicated from publish page", Toast.LENGTH_SHORT).show();
+                popupWindow.dismiss();
+            });
+
+            popupView.findViewById(R.id.published_share_item_page).setOnClickListener(view -> {
+                Toast.makeText(context, "Share from publish page", Toast.LENGTH_SHORT).show();
+                popupWindow.dismiss();
+            });
+
+            popupView.findViewById(R.id.published_trash_item_page).setOnClickListener(view -> {
+                Toast.makeText(context, "Trashed from publish page", Toast.LENGTH_SHORT).show();
                 popupWindow.dismiss();
             });
         });
@@ -138,11 +144,12 @@ public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAd
             // Grabbing views
             Date = itemView.findViewById(R.id.item_date);
             Title = itemView.findViewById(R.id.item_title);
-            Content = itemView.findViewById(R.id.item_content);
             Setting = itemView.findViewById(R.id.content_setting_btn);
         }
     }
-    public void setPublishedPost(ArrayList<ContentCardModel> publishedPost){
-        this.postList = publishedPost;
+
+    public void setPublishedPage(ArrayList<ContentCardModel> publishedPage){
+        this.postList = publishedPage;
     }
+
 }
