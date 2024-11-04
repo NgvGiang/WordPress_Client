@@ -2,6 +2,9 @@ package vn.edu.usth.wordpressclient.view.comment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -31,6 +34,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.utils.DomainManager;
@@ -41,13 +46,12 @@ public class CommentDetailActivity extends AppCompatActivity {
     EditText editText;
     LinearLayout replyCommentField;
     RelativeLayout approve, spam, like, more;
-    String domain, status, editedContent;
-    Long id;
+    String domain, status, editedContent, link;
+    int id;
     CircleImageView authorAvatar;
     ImageView sendReply;
     CommentViewModel commentViewModel;
-    Long post;
-    Long parent;
+    int post;
     ImageView approvedIcon;
     TextView approvedText, spamText;
     private AlertDialog progressDialog;
@@ -83,14 +87,12 @@ public class CommentDetailActivity extends AppCompatActivity {
 
         Picasso.get().load(getIntent().getStringExtra("authorAvatar")).error(R.drawable.blank_avatar).into(authorAvatar);
         authorName.setText(getIntent().getStringExtra("authorName"));
-        //Need API call to get Post title, comment doesn't have post title, it only has post id, will finish it later
-        title.setText("MAGA");
         content.setText(Html.fromHtml(getIntent().getStringExtra("content"), Html.FROM_HTML_MODE_LEGACY).toString());
 
-        post = getIntent().getLongExtra("post", -1);
-        parent = getIntent().getLongExtra("parent", -1);
+        post = getIntent().getIntExtra("post", -1);
         status = getIntent().getStringExtra("status");
-        id = getIntent().getLongExtra("commentId", -1);
+        id = getIntent().getIntExtra("commentId", -1);
+        link = getIntent().getStringExtra("link");
 
         if (status.equals("approved")) {
             approvedIcon.setImageResource(R.drawable.baseline_done_green_24);
@@ -109,10 +111,6 @@ public class CommentDetailActivity extends AppCompatActivity {
         commentViewModel = new ViewModelProvider(this).get(CommentViewModel.class);
         commentViewModel.getSuccessLiveData().observe(this, replyContent -> {
             if (!content.equals("")) {
-//                View view = findViewById(R.id.upload_reply);
-//                Snackbar.make(findViewById(android.R.id.content), "Reply comment successfully", 2500).show();
-//                new Handler(Looper.getMainLooper()).postDelayed(() -> {
-//                }, 2500);
                 progressDialog.dismiss();
                 editText.setText(Html.fromHtml(replyContent, Html.FROM_HTML_MODE_LEGACY).toString());
                 Toast.makeText(this, "Reply comment successfully", Toast.LENGTH_SHORT).show();
@@ -121,16 +119,34 @@ public class CommentDetailActivity extends AppCompatActivity {
             }
         });
 
+        commentViewModel.getPostOfComment().observe(this, jsonObject -> {
+            try {
+                Log.i("hello", "set title");
+                title.setText(jsonObject.getString("title"));
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        commentViewModel.getPostOfComment(post);
+
         commentViewModel.getStatusLiveData().observe(this, success -> {
             if (success) {
-//                Snackbar.make(findViewById(android.R.id.content), "Status changed successfully", 1000).show();
-//                new Handler(Looper.getMainLooper()).postDelayed(this::finish, 500);
                 progressDialog.dismiss();
                 Toast.makeText(this, "Sucessfully change comment status", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
-//                Snackbar.make(findViewById(android.R.id.content), "Failed to change status, please try again", Snackbar.LENGTH_SHORT).show();
                 Toast.makeText(this, "Failed to change comment status", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        commentViewModel.getDeleteLiveData().observe(this, success -> {
+            if (success) {
+                progressDialog.dismiss();
+                Toast.makeText(this, "Deleted comment", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(this, "Failed to delete comment", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -170,7 +186,7 @@ public class CommentDetailActivity extends AppCompatActivity {
 
     public void replyComment() {
         showLoadingDialog();
-        commentViewModel.replyComment(domain, editText.getText().toString(), parent, post);
+        commentViewModel.replyComment(domain, editText.getText().toString(), id, post);
     }
     private void showPopupMenu(View view) {
         PopupMenu popupMenu = new PopupMenu(this, view);
@@ -185,6 +201,9 @@ public class CommentDetailActivity extends AppCompatActivity {
                     return true;
                 } else if (item.getItemId() == R.id.copy_address) {
                     //This feature is under development.
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("link", link);
+                    clipboard.setPrimaryClip(clip);
                     Toast.makeText(CommentDetailActivity.this, "copy address", Toast.LENGTH_SHORT).show();
                     return true;
                 } else {
