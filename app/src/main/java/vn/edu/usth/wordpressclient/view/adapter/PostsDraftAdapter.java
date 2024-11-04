@@ -26,9 +26,7 @@ import vn.edu.usth.wordpressclient.model.ContentCardModel;
 public class PostsDraftAdapter extends RecyclerView.Adapter<PostsDraftAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<ContentCardModel> postList;
-    private OnMenuClickListener popupClickListener;
 
-    // Adapter constructor
     public PostsDraftAdapter(Context context) {
         this.context = context;
         this.postList = new ArrayList<>();
@@ -39,7 +37,7 @@ public class PostsDraftAdapter extends RecyclerView.Adapter<PostsDraftAdapter.My
     public PostsDraftAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the layout for each row
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.page_post_cardview, parent, false);
+        View view = inflater.inflate(R.layout.posts_cardview, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -51,7 +49,6 @@ public class PostsDraftAdapter extends RecyclerView.Adapter<PostsDraftAdapter.My
         holder.Title.setText(currentPost.getTitle());
         holder.Content.setText(currentPost.getContent());
         holder.Setting.setOnClickListener(v -> {
-            // Inflate the custom popup layout
             View popupView = LayoutInflater.from(context).inflate(R.layout.post_draft_popupmenu, null);
 
             // Create the PopupWindow with desired width and height
@@ -62,8 +59,28 @@ public class PostsDraftAdapter extends RecyclerView.Adapter<PostsDraftAdapter.My
             popupWindow.setOutsideTouchable(true);
             popupWindow.setFocusable(true);
 
-            // Show the popup directly below the button that was clicked
-            popupWindow.showAsDropDown(v, 0, 0);
+            int screenHeight = context.getResources().getDisplayMetrics().heightPixels;
+            int[] location = new int[2];
+            v.getLocationOnScreen(location);
+            int anchorY = location[1];
+            int anchorHeight = v.getHeight();
+
+            // Measure the PopupWindow dimensions
+            popupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+            int popupHeight = popupView.getMeasuredHeight();
+
+            // Calculate y-offset based on available space
+            int yOffset;
+            if (anchorY + anchorHeight + popupHeight > screenHeight) {
+                // Not enough space below, show above the anchor
+                yOffset = anchorY - popupHeight;
+            } else {
+                // Enough space below, show below the anchor
+                yOffset = anchorY + anchorHeight;
+            }
+
+            // Show the PopupWindow at the calculated position
+            popupWindow.showAtLocation(v, 0, location[0], yOffset);
 
             // Set click listeners for each menu item
             popupView.findViewById(R.id.draft_view_item).setOnClickListener(view -> {

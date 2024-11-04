@@ -26,6 +26,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.model.MediaCardModel;
 import vn.edu.usth.wordpressclient.model.ContentCardModel;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
@@ -151,7 +152,7 @@ public class ContentRepository {
 
     public void fetchContent(String domain, String endpoint, String status, MutableLiveData<ArrayList<ContentCardModel>> livedata) {
         //https://public-api.wordpress.com/wp/v2/sites/giangtestsite.wordpress.com/pages/?status=publish example url
-        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + "?status=" + status;
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + "?status=" + status+"&per_page=20";
         String accessToken = SessionManager.getInstance(context).getAccessToken();
         StringRequest fetchContentRequest = new StringRequest(
                 Request.Method.GET,
@@ -225,5 +226,49 @@ public class ContentRepository {
         ));
 
         QueueManager.getInstance(context).addToRequestQueue(deleteRequest);
+    }
+    public void restoreContent(String endpoint, String domain, int id, MutableLiveData<Boolean> successLiveData) {
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + id;
+        String accessToken = SessionManager.getInstance(context).getAccessToken();
+
+        StringRequest restoreRequest = new StringRequest(
+                Request.Method.POST,
+                url,
+                response -> {
+                    successLiveData.setValue(true);
+                    Log.i("ContentRepository", "Content restored successfully");
+                },
+                error -> {
+                    VolleyLog.d("volley", "Error: " + error.getMessage());
+                    error.printStackTrace();
+                    successLiveData.setValue(false);
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+            @Override
+            public String getBodyContentType(){
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+            @Override
+            protected Map<String,String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("status", "draft");
+                return params;
+            }
+
+        };
+
+        restoreRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
+        QueueManager.getInstance(context).addToRequestQueue(restoreRequest);
     }
 }

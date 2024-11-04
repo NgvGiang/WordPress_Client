@@ -16,6 +16,7 @@ public class ContentViewModel extends AndroidViewModel {
     private final ContentRepository contentRepository = ContentRepository.getInstance(getApplication());
     private final MutableLiveData<Boolean> createSuccessLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> deleteSuccessLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> restoreSuccessLiveData = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<ContentCardModel>> publishPagesArrayLiveData = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<ContentCardModel>> draftPagesArrayLiveData = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<ContentCardModel>> scheduledPagesArrayLiveData = new MutableLiveData<>();
@@ -26,6 +27,9 @@ public class ContentViewModel extends AndroidViewModel {
     private final MutableLiveData<ArrayList<ContentCardModel>> trashedPostsArrayLiveData = new MutableLiveData<>();
     public ContentViewModel(@NonNull Application application) {
         super(application);
+    }
+    public LiveData<Boolean> getRestoreSuccessLiveData() {
+        return restoreSuccessLiveData;
     }
     public LiveData<Boolean> getCreateSuccessLiveData() {
         return createSuccessLiveData;
@@ -102,6 +106,9 @@ public class ContentViewModel extends AndroidViewModel {
     }
     public void deleteContent(String endpoint, String domain, int id) {
         contentRepository.deleteContent(endpoint, domain, id, deleteSuccessLiveData);
+    }
+    public void restoreContent(String endpoint, String domain, int id) {
+        contentRepository.restoreContent(endpoint, domain, id, restoreSuccessLiveData);
     }
 
 }
