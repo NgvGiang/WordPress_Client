@@ -131,7 +131,7 @@ public class CommentDetailActivity extends AppCompatActivity {
 
         commentViewModel.getStatusLiveData().observe(this, success -> {
             if (success) {
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
                 Toast.makeText(this, "Sucessfully change comment status", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
@@ -141,7 +141,7 @@ public class CommentDetailActivity extends AppCompatActivity {
 
         commentViewModel.getDeleteLiveData().observe(this, success -> {
             if (success) {
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
                 Toast.makeText(this, "Deleted comment", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
@@ -154,7 +154,7 @@ public class CommentDetailActivity extends AppCompatActivity {
         });
 
         approve.setOnClickListener(v -> {
-            showLoadingDialog();
+//            showLoadingDialog();
             if (status.equals("approved")) {
                 commentViewModel.updateCommentStatus(id, "hold");
             } else if (status.equals("spam") || status.equals("hold") || status.equals("trash")) {
@@ -163,7 +163,7 @@ public class CommentDetailActivity extends AppCompatActivity {
         });
 
         spam.setOnClickListener(v -> {
-            showLoadingDialog();
+//            showLoadingDialog();
             if (status.equals("spam")) {
                 commentViewModel.updateCommentStatus(id, "approve");
             } else if (status.equals("approved") || status.equals("hold") || status.equals("trash")) {
@@ -195,7 +195,7 @@ public class CommentDetailActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.move_to_trash) {
-                    showLoadingDialog();
+//                    showLoadingDialog();
                     commentViewModel.updateCommentStatus(id, "trash");
                     return true;
                 } else if (item.getItemId() == R.id.copy_address) {
@@ -221,7 +221,7 @@ public class CommentDetailActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 Intent intent = new Intent();
                 if (item.getItemId() == R.id.delete_forever) {
-                    showLoadingDialog();
+//                    showLoadingDialog();
                     commentViewModel.deleteComment(id);
                     return true;
                 }else {
