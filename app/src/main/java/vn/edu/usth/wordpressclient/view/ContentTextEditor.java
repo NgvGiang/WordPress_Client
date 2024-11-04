@@ -75,7 +75,7 @@ public class ContentTextEditor extends AppCompatActivity {
                 new Handler(Looper.getMainLooper()).postDelayed(this::finish, 2500);
             }else {
                 //occur network problem ?
-                Snackbar.make(findViewById(android.R.id.content), "Failed to create content, please try again", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(android.R.id.content), R.string.failed_to_create_content_please_try_again, Snackbar.LENGTH_SHORT).show();
             }
         });
 

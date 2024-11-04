@@ -16,20 +16,32 @@ import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.model.ContentCardModel;
+import vn.edu.usth.wordpressclient.utils.DomainManager;
+import vn.edu.usth.wordpressclient.view.pages.PageDraftFragment;
+import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 
 public class PagesDraftAdapter extends RecyclerView.Adapter<PagesDraftAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<ContentCardModel> postList;
-
-    public PagesDraftAdapter(Context context) {
+    private ContentViewModel contentViewModel;
+    private PageDraftFragment fragment;
+    String domain = DomainManager.getInstance().getSelectedDomain();
+    public PagesDraftAdapter(Context context,PageDraftFragment fragment) {
         this.context = context;
         this.postList = new ArrayList<>();
+        this.fragment = fragment;
+        this.contentViewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(ContentViewModel.class);
     }
 
     @NonNull
@@ -47,6 +59,7 @@ public class PagesDraftAdapter extends RecyclerView.Adapter<PagesDraftAdapter.My
 
         holder.Date.setText(currentPost.getDate());
         holder.Title.setText(currentPost.getTitle());
+        int id = currentPost.getId();
         holder.Setting.setOnClickListener(v -> {
             View popupView = LayoutInflater.from(context).inflate(R.layout.pages_draft_popupmenu, null);
 
@@ -108,7 +121,15 @@ public class PagesDraftAdapter extends RecyclerView.Adapter<PagesDraftAdapter.My
             });
 
             popupView.findViewById(R.id.draft_trash_item_page).setOnClickListener(view -> {
-                Toast.makeText(context, "Trashed from draft page", Toast.LENGTH_SHORT).show();
+                contentViewModel.deleteContent("pages",domain , id);
+                contentViewModel.getDeleteSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    if (success) {
+                       fragment.refresh();
+                        Snackbar.make(fragment.getView(), R.string.deleted_successfully, Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(fragment.getView(), R.string.deleted_failed, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
                 popupWindow.dismiss();
             });
         });
