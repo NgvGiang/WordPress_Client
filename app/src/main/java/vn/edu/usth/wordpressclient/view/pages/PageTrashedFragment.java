@@ -44,31 +44,19 @@ public class PageTrashedFragment extends Fragment {
 
         String domain = DomainManager.getInstance().getSelectedDomain();
 
-        adapter = new PagesTrashedAdapter(getContext());
+        adapter = new PagesTrashedAdapter(getContext(),this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
         contentViewModel = new ViewModelProvider(this).get(ContentViewModel.class);
-        contentViewModel.getTrashedPagesArrayLiveData().observe(getViewLifecycleOwner(), trashPageModel -> {
-            adapter.setTrashedPage(trashPageModel);
-            if (trashPageModel.isEmpty()) {
-                noPagesMessage.setVisibility(View.VISIBLE);
-            } else {
-                noPagesMessage.setVisibility(View.INVISIBLE) ;
-            }
-            adapter.notifyDataSetChanged();
+        refresh();
+
+
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            refresh();
+            swipeRefreshLayout.setRefreshing(false);
         });
 
-        contentViewModel.fetchContent(domain,"pages","trash");
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                contentViewModel.fetchContent(domain,"pages","trash");
-                adapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
 
         TrashedButton = view.findViewById(R.id.trashed_page_button);
         TrashedButton.setOnClickListener(new View.OnClickListener() {
@@ -81,5 +69,23 @@ public class PageTrashedFragment extends Fragment {
         });
 
         return view;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        refresh();
+    }
+    public void refresh(){
+        String domain = DomainManager.getInstance().getSelectedDomain();
+        contentViewModel.fetchContent(domain,"pages","trash");
+        contentViewModel.getTrashedPagesArrayLiveData().observe(getViewLifecycleOwner(), trashPageModel -> {
+            adapter.setTrashedPage(trashPageModel);
+            if (trashPageModel.isEmpty()) {
+                noPagesMessage.setVisibility(View.VISIBLE);
+            } else {
+                noPagesMessage.setVisibility(View.INVISIBLE);
+            }
+            adapter.notifyDataSetChanged();
+        });
     }
 }

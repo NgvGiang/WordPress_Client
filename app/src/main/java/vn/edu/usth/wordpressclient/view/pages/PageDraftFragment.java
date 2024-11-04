@@ -52,7 +52,7 @@ public class PageDraftFragment extends Fragment {
         contentViewModel = new ViewModelProvider(this).get(ContentViewModel.class);
         refresh();
 
-        contentViewModel.fetchContent(domain,"pages","draft");
+
 
         swipeRefreshLayout.setOnRefreshListener(() -> {
             refresh();
