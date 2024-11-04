@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
@@ -24,8 +25,9 @@ public class ApprovedCommentsFragment extends Fragment {
     private RecyclerView recyclerView;
     private CommentViewModel commentViewModel;
     private CommentAllAdapter adapter;
-    String accessToken;
-    String domain;
+    private RelativeLayout noApprovedComment;
+    private String accessToken;
+    private String domain;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class ApprovedCommentsFragment extends Fragment {
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.approved_swipe_refresh_layout);
         accessToken = SessionManager.getInstance(getContext()).getAccessToken();
         domain = DomainManager.getInstance().getSelectedDomain();
+        noApprovedComment = view.findViewById(R.id.no_approved_comment);
 
         recyclerView = view.findViewById(R.id.fragment_approved_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -55,8 +58,13 @@ public class ApprovedCommentsFragment extends Fragment {
     }
 
     public void getComments() {
-        commentViewModel.getCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
+        commentViewModel.getApprovedCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
             adapter.setCommentCardModels(commentModels);
+            if (commentModels.isEmpty()) {
+                noApprovedComment.setVisibility(View.VISIBLE);
+            } else {
+                noApprovedComment.setVisibility(View.INVISIBLE);
+            }
             adapter.notifyDataSetChanged();
         });
     }
@@ -64,7 +72,6 @@ public class ApprovedCommentsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        commentViewModel.getCommentModelsLiveData().setValue(new ArrayList<>());
         commentViewModel.getComments("approve");
         adapter.notifyDataSetChanged();
     }

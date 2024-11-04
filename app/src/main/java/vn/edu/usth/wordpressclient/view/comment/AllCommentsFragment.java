@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
@@ -23,9 +25,10 @@ import vn.edu.usth.wordpressclient.viewmodel.CommentViewModel;
 public class AllCommentsFragment extends Fragment {
     private RecyclerView recyclerView;
     private CommentViewModel commentViewModel;
+    private RelativeLayout noAllComment;
     private CommentAllAdapter adapter;
-    String accessToken;
-    String domain;
+    private String accessToken;
+    private String domain;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,6 +37,7 @@ public class AllCommentsFragment extends Fragment {
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         String accessToken = SessionManager.getInstance(getContext()).getAccessToken();
         String domain = DomainManager.getInstance().getSelectedDomain();
+        noAllComment = view.findViewById(R.id.no_all_comment);
 
         recyclerView = view.findViewById(R.id.fragment_all_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -56,8 +60,13 @@ public class AllCommentsFragment extends Fragment {
     }
 
     public void getComments() {
-        commentViewModel.getCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
+        commentViewModel.getAllCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
             adapter.setCommentCardModels(commentModels);
+            if (commentModels.isEmpty()) {
+                noAllComment.setVisibility(View.VISIBLE);
+            } else {
+                noAllComment.setVisibility(View.INVISIBLE);
+            }
             adapter.notifyDataSetChanged();
         });
     }
@@ -65,7 +74,7 @@ public class AllCommentsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        commentViewModel.getCommentModelsLiveData().setValue(new ArrayList<>());
+        Log.i("check", "checked");
         commentViewModel.getComments("all");
         adapter.notifyDataSetChanged();
     }

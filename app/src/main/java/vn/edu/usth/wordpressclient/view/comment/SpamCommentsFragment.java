@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
@@ -24,8 +25,9 @@ public class SpamCommentsFragment extends Fragment {
     private RecyclerView recyclerView;
     private CommentViewModel commentViewModel;
     private CommentAllAdapter adapter;
-    String domain;
-    String accessToken;
+    private RelativeLayout noSpamComment;
+    private String domain;
+    private String accessToken;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class SpamCommentsFragment extends Fragment {
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.spam_swipe_refresh_layout);
         accessToken = SessionManager.getInstance(getContext()).getAccessToken();
         domain = DomainManager.getInstance().getSelectedDomain();
+        noSpamComment = view.findViewById(R.id.no_spam_comment);
 
         recyclerView = view.findViewById(R.id.fragment_spam_comments_rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -55,8 +58,13 @@ public class SpamCommentsFragment extends Fragment {
     }
 
     public void getComments() {
-        commentViewModel.getCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
+        commentViewModel.getSpamCommentModelsLiveData().observe(getViewLifecycleOwner(), commentModels -> {
             adapter.setCommentCardModels(commentModels);
+            if (commentModels.isEmpty()) {
+                noSpamComment.setVisibility(View.VISIBLE);
+            } else {
+                noSpamComment.setVisibility(View.INVISIBLE);
+            }
             adapter.notifyDataSetChanged();
         });
     }
@@ -64,7 +72,6 @@ public class SpamCommentsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        commentViewModel.getCommentModelsLiveData().setValue(new ArrayList<>());
         commentViewModel.getComments("spam");
         adapter.notifyDataSetChanged();
     }
