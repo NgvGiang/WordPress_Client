@@ -230,4 +230,6 @@
     <string name="failed_to_create_content_please_try_again">Tạo nội dung thất bại, thử lại sau!</string>
     <string name="deleted_successfully">Xóa thành công!</string>
     <string name="deleted_failed">Xóa thất bại</string>
+    <string name="restore_successfully">Khôi phục thành công</string>
+    <string name="restore_failed">Khôi phục thất bại</string>
 </resources>

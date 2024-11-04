@@ -229,4 +229,6 @@
     <string name="failed_to_create_content_please_try_again">Failed to create content, please try again!</string>
     <string name="deleted_successfully">Deleted successfully!</string>
     <string name="deleted_failed">Deleted failed</string>
+    <string name="restore_successfully">Restore successfully</string>
+    <string name="restore_failed">Restore failed</string>
 </resources>
