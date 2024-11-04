@@ -4,7 +4,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/swipe_refresh_layout"
 android:layout_width="match_parent"
 android:layout_height="match_parent">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -14,6 +14,28 @@ android:layout_height="match_parent">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"/>
+        <RelativeLayout
+            android:id="@+id/no_all_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+            <ImageView
+                android:id="@+id/no_all_image"
+                android:layout_width="250dp"
+                android:layout_height="179dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/image37" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/no_all_noti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/no_all_image"
+                android:layout_centerHorizontal="true"
+                android:text="@string/no_all_comments"
+                android:fontFamily="@font/roboto"
+                android:textSize="16dp"
+                android:textColor="@color/onBackGround"/>
+        </RelativeLayout>
+    </RelativeLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

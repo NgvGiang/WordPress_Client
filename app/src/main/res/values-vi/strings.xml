@@ -100,7 +100,10 @@
     <string name="donald_trump_on_what_s_this">Donald Trump bình luận về what\'s this ??</string>
     <string name="greta_thunberg_on_what_s_this">Greta Thunberg bình luận về what\'s this ??</string>
     <string name="homalander_on_what_s_this">Homalander bình luận về what\'s this ??</string>
-    <string name="no_approved_comments">Không có comment nào đã duyệt</string>
+    <string name="no_approved_comments">Không có bình luận nào đã duyệt</string>
+    <string name="no_pending_comments">Không có bình luận nào chưa duyệt</string>
+    <string name="no_unreplied_comments">Không có bình luận nào chưa trả lời</string>
+    <string name="no_all_comments">Không có bình luận</string>
     <string name="namnhp_on_what_s_this">Namnhp bình luận về what\'s this ??</string>
     <string name="ng_vu_huy_khoi_on_what_s_this">Ng Vu Huy Khoi bình luận về what\'s this ??</string>
     <string name="le_chuck_on_what_s_this">Le chuck bình luận về what\'s this ??</string>
