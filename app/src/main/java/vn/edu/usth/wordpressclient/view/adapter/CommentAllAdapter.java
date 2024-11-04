@@ -50,16 +50,16 @@ public class CommentAllAdapter extends RecyclerView.Adapter<CommentAllAdapter.Co
 
     @Override
     public void onBindViewHolder(@NonNull CommentAllAdapter.CommentCardViewHolder holder, int position) {
-        LocalDateTime date = LocalDateTime.parse(commentCardModels.get(position).getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
-        Long dateInSeconds = Duration.between(date, LocalDateTime.now()).getSeconds();
-        if (dateInSeconds <= 86400) {
-            holder.date.setText(R.string.today);
-        } else if (86400 < dateInSeconds && dateInSeconds <= 172800) {
-            holder.date.setText(R.string.yesterday);
-        } else {
-            holder.date.setText(date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-        }
-
+//        LocalDateTime date = LocalDateTime.parse(commentCardModels.get(position).getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+//        Long dateInSeconds = Duration.between(date, LocalDateTime.now()).getSeconds();
+//        if (dateInSeconds <= 86400) {
+//            holder.date.setText(R.string.today);
+//        } else if (86400 < dateInSeconds && dateInSeconds <= 172800) {
+//            holder.date.setText(R.string.yesterday);
+//        } else {
+//            holder.date.setText(date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+//        }
+        holder.date.setText(commentCardModels.get(position).getDate());
         holder.authorNameAndPostName.setText(commentCardModels.get(position).getAuthorName() + " on Saturday, 12 October 2024");
         holder.content.setText(Html.fromHtml(commentCardModels.get(position).getContent(), Html.FROM_HTML_MODE_LEGACY).toString());
         Picasso.get().load(commentCardModels.get(position).getAuthorAvatar()).error(R.drawable.blank_avatar).into(holder.authorAvatar);

@@ -3,6 +3,7 @@ package vn.edu.usth.wordpressclient.repository;
 import static java.security.AccessController.getContext;
 
 import android.content.Context;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -20,6 +21,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,12 +73,15 @@ public class CommentRepository {
                             int postId = commentArrayJSONObject.getInt("post");
                             int authorId = commentArrayJSONObject.getInt("author");
                             String authorName = commentArrayJSONObject.getString("author_name");
-                            String date = commentArrayJSONObject.getString("date");
+                            String tempDate = commentArrayJSONObject.getString("date");
+                            long dateMillis = LocalDateTime.parse(tempDate, DateTimeFormatter.ISO_DATE_TIME)
+                                    .atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+                            String formattedDate = DateUtils.getRelativeTimeSpanString(dateMillis, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
                             String content = commentArrayJSONObject.getJSONObject("content").getString("rendered");
                             String link = commentArrayJSONObject.getString("link");
                             String cmtStatus = commentArrayJSONObject.getString("status");
                             String authorAvatar = commentArrayJSONObject.getJSONObject("author_avatar_urls").getString("48");
-                            commentModels.add(new CommentCardModel(commentId, postId, authorId, authorName, date, content, link, cmtStatus, authorAvatar));
+                            commentModels.add(new CommentCardModel(commentId, postId, authorId, authorName, formattedDate, content, link, cmtStatus, authorAvatar));
                         }
                         commentModelLiveData.setValue(commentModels);
                     } catch (JSONException e){
@@ -248,14 +255,17 @@ public class CommentRepository {
                             int postId = commentArrayJSONObject.getInt("post");
                             int authorId = commentArrayJSONObject.getInt("author");
                             String authorName = commentArrayJSONObject.getString("author_name");
-                            String date = commentArrayJSONObject.getString("date");
+                            String tempDate = commentArrayJSONObject.getString("date");
+                            long dateMillis = LocalDateTime.parse(tempDate, DateTimeFormatter.ISO_DATE_TIME)
+                                    .atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+                            String formattedDate = DateUtils.getRelativeTimeSpanString(dateMillis, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
                             String content = commentArrayJSONObject.getJSONObject("content").getString("rendered");
                             String link = commentArrayJSONObject.getString("link");
                             String cmtStatus = commentArrayJSONObject.getString("status");
                             String authorAvatar = commentArrayJSONObject.getJSONObject("author_avatar_urls").getString("48");
                             boolean hasChildren = commentArrayJSONObject.getJSONObject("_links").has("children");
                             if (!hasChildren) {
-                                commentModels.add(new CommentCardModel(commentId, postId, authorId, authorName, date, content, link, cmtStatus, authorAvatar));
+                                commentModels.add(new CommentCardModel(commentId, postId, authorId, authorName, tempDate, content, link, cmtStatus, authorAvatar));
                             }
 //                            commentModels.add(new CommentCardModel(commentId, postId, authorId, authorName, date, content, cmtStatus, authorAvatar));
                         }
