@@ -1,42 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/swipe_refresh_unreplied_layout"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    >
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_unreplied_comments_rec_view"
+        android:layout_height="wrap_content"
+        android:text="@string/today"
+        android:textColor="@color/onBackGround"
+        android:padding="8dp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical"/>
-        <RelativeLayout
-            android:id="@+id/no_unreply_comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true">
-            <ImageView
-                android:id="@+id/no_unreply_image"
-                android:layout_width="250dp"
-                android:layout_height="179dp"
-                android:layout_marginBottom="8dp"
-                android:src="@drawable/image37" />
-
-            <TextView
-                android:id="@+id/no_unreply_noti"
-                android:layout_width="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/no_unreply_image"
-                android:layout_centerHorizontal="true"
-                android:text="@string/no_unreplied_comments"
-                android:fontFamily="@font/roboto"
-                android:textSize="16dp"
-                android:textColor="@color/onBackGround"/>
-        </RelativeLayout>
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingBottom="8dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/blank_avatar"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ngv_giang_on_what_is_this"
+                        android:textStyle="bold"
+                        android:textColor="@color/onBackGround"
+                        android:paddingLeft="8dp" />
 
-    </RelativeLayout>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="hiiii"
+                        android:textColor="@color/onBackGround"
+                        android:alpha="0.5"
+                        android:paddingLeft="8dp"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingBottom="8dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/blank_avatar"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ngv_giang_on_what_is_this"
+                        android:textStyle="bold"
+                        android:textColor="@color/onBackGround"
+                        android:paddingLeft="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="tuyệt vời quá"
+                        android:textColor="@color/onBackGround"
+                        android:alpha="0.5"
+                        android:paddingLeft="8dp"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingBottom="8dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/blank_avatar"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ngv_giang_on_what_is_this"
+                        android:textStyle="bold"
+                        android:textColor="@color/onBackGround"
+                        android:paddingLeft="8dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/onBackGround"
+                        android:alpha="0.5"
+                        android:text="okela đấy chứ nhỉ"
+                        android:paddingLeft="8dp"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingBottom="8dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/blank_avatar"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ngv_giang_on_what_is_this"
+                        android:textStyle="bold"
+                        android:textColor="@color/onBackGround"
+                        android:paddingLeft="8dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="hehe"
+                        android:textColor="@color/onBackGround"
+                        android:alpha="0.5"
+                        android:paddingLeft="8dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
