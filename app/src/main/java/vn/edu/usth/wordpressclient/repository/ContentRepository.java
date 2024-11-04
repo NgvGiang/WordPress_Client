@@ -151,8 +151,7 @@ public class ContentRepository {
 
     public void fetchContent(String domain, String endpoint, String status, MutableLiveData<ArrayList<ContentCardModel>> livedata) {
         //https://public-api.wordpress.com/wp/v2/sites/giangtestsite.wordpress.com/pages/?status=publish example url
-        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + "?status=" + status;
-        Log.i("url", url);
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + "?status=" + status+"&per_page=20";
         String accessToken = SessionManager.getInstance(context).getAccessToken();
         StringRequest fetchContentRequest = new StringRequest(
                 Request.Method.GET,

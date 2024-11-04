@@ -1,53 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_refresh_layout_trashed_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".view.pages.PageTrashedFragment">
 
-    tools:context=".view.pages.PageDraftFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.pages.PageTrashedFragment">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/page_recycler_view_trashed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <LinearLayout
+            android:id="@+id/page_no_post_screen_trashed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:padding="16dp">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="220dp"
+                android:layout_height="150dp"
+                android:src="@drawable/empty_nothing"
+                />
 
-    <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/you_don_t_have_any_trashed_post"
+                android:textColor="@color/onBackGround"
+                android:textSize="16sp"
+                />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="173dp"
-        android:layout_height="164dp"
-        android:src="@drawable/empty_nothing"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38" />
+            <Button
+                android:id="@+id/trashed_page_button"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/create_a_page"
+                android:textColor="@color/onButton"
+                app:cornerRadius="8dp"
+                />
 
-    <Button
-        android:id="@+id/trashed_page_button"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:backgroundTint="@color/blue"
-        android:text="@string/create_a_page"
-        android:textColor="@color/onButton"
-        app:cornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="28dp"
-        android:text="@string/you_don_t_have_any_trashed_pages"
-        android:textColor="@color/onBackGround"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.54" />
+        </LinearLayout>
+    </RelativeLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    >
+
+    <LinearLayout
+        android:id="@+id/content_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="5dp"
+        android:paddingBottom="8dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:background="@color/transparent"
+        android:clickable="true"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/transparent"
+            >
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:text="Title"
+                android:layout_weight="1"
+                android:textColor="@color/onBackGround"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/content_setting_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/hort_dot"
+                android:clickable="true"
+                android:focusable="true"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12 Oct 2024"
+            android:alpha="0.5"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/onBackGround"
+            android:textSize="13sp"
+
+            />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@+id/content_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        android:background="@android:color/darker_gray" />
+
+</RelativeLayout>
