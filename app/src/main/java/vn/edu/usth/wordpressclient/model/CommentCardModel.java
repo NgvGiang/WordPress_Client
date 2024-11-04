@@ -1,13 +1,13 @@
 package vn.edu.usth.wordpressclient.model;
 
 public class CommentCardModel {
-    private Long id;
-    private Long post;
-    private Long parent;
-    private Long author;
+    private int id;
+    private int post;
+    private int author;
     private String authorName;
     private String date;
     private String content;
+    private String link;
     private String status;
     private String authorAvatar;
 
@@ -15,31 +15,27 @@ public class CommentCardModel {
 
     }
 
-    public CommentCardModel(Long id, Long parent, Long post, Long author, String authorName, String date, String content, String status, String authorAvatar) {
+    public CommentCardModel(int id, int post, int author, String authorName, String date, String content, String link, String status, String authorAvatar) {
         this.id = id;
-        this.parent = parent;
         this.post = post;
         this.author = author;
         this.authorName = authorName;
         this.date = date;
         this.content = content;
+        this.link = link;
         this.status = status;
         this.authorAvatar = authorAvatar;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public Long getPost() {
+    public int getPost() {
         return post;
     }
 
-    public Long getParent() {
-        return parent;
-    }
-
-    public Long getAuthor() {
+    public int getAuthor() {
         return author;
     }
 
@@ -53,6 +49,10 @@ public class CommentCardModel {
 
     public String getContent() {
         return content;
+    }
+
+    public String getLink() {
+        return link;
     }
 
     public String getStatus() {
