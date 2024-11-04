@@ -40,12 +40,10 @@ public class FirstLoginActivity extends AppCompatActivity {
             Intent intent;
             if(siteNumber == 0){
                 intent = new Intent(FirstLoginActivity.this, Dont_have_site_activity.class);
-                startActivity(intent);
                 Log.i("FirstLoginActivity.this","DONT HAVE ANY SITE");
             }else{
                 Log.i("FirstLoginActivity.this", "Num site: " + siteNumber);
                 intent = new Intent(FirstLoginActivity.this, ChooseYourWeb.class);
-                startActivity(intent);
             }
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
