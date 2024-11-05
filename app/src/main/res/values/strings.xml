@@ -100,6 +100,9 @@
     <string name="greta_thunberg_on_what_s_this">Greta Thunberg on what\'s this ??</string>
     <string name="homalander_on_what_s_this">Homalander on what\'s this ??</string>
     <string name="no_approved_comments">No approved comments</string>
+    <string name="no_pending_comments">No pending comments</string>
+    <string name="no_unreplied_comments">No unreplied comments</string>
+    <string name="no_all_comments">No comments</string>
     <string name="namnhp_on_what_s_this">Namnhp on what\'s this ??</string>
     <string name="ng_vu_huy_khoi_on_what_s_this">Ng Vu Huy Khoi on what\'s this ??</string>
     <string name="le_chuck_on_what_s_this">Le chuck on what\'s this ??</string>
@@ -108,6 +111,7 @@
     <string name="no_trashed_comments">No trashed comments</string>
     <string name="ngv_giang_on_what_is_this">Ngv Giang on what is this ??</string>
     <string name="luu_duc_on_what_s_this">Luu Duc on what\'s this ??</string>
+    <string name="yesterday">YESTERDAY</string>
 
     <!--    Phần của Minh Đức-->
     <string name="user_name">Site Title</string>
@@ -227,7 +231,10 @@
     <string name="content_created_successfully">Content created successfully!</string>
     <string name="failed_to_create_content_please_try_again">Failed to create content, please try again!</string>
     <string name="deleted_successfully">Deleted successfully!</string>
-    <string name="deleted_failed">Deleted failed</string>
-    <string name="restore_successfully">Restore successfully</string>
-    <string name="restore_failed">Restore failed</string>
+    <string name="deleted_failed">Deleted failed!</string>
+    <string name="restore_successfully">Restore successfully!</string>
+    <string name="restore_failed">Restore failed!</string>
+    <string name="copy_address">Address copied</string>
+    <string name="reply_success">Reply successfully!</string>
+    <string name="reply_faild">Reply failed, try again later!</string>
 </resources>
