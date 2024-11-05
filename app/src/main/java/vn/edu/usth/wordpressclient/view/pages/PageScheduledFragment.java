@@ -29,11 +29,12 @@ public class PageScheduledFragment extends Fragment {
     private PagesScheduledAdapter adapter;
     private ContentViewModel contentViewModel;
     private SwipeRefreshLayout swipeRefreshLayout;
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_page_scheduled, container, false);
+        view = inflater.inflate(R.layout.fragment_page_scheduled, container, false);
 
         recyclerView = view.findViewById(R.id.page_recycler_view_scheduled);
         noPagesMessage = view.findViewById(R.id.page_no_post_screen_scheduled);
@@ -41,30 +42,16 @@ public class PageScheduledFragment extends Fragment {
 
         String domain = DomainManager.getInstance().getSelectedDomain();
 
-        adapter = new PagesScheduledAdapter(getContext());
+        adapter = new PagesScheduledAdapter(getContext(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
         contentViewModel = new ViewModelProvider(this).get(ContentViewModel.class);
-        contentViewModel.getScheduledPagesArrayLiveData().observe(getViewLifecycleOwner(), scheduledPageModel -> {
-            adapter.setSchedulePage(scheduledPageModel);
-            if (scheduledPageModel.isEmpty()) {
-                noPagesMessage.setVisibility(View.VISIBLE);
-            } else {
-                noPagesMessage.setVisibility(View.INVISIBLE) ;
-            }
-            adapter.notifyDataSetChanged();
-        });
+        refresh();
 
-        contentViewModel.fetchContent(domain,"pages","schedule");
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                contentViewModel.fetchContent(domain,"pages","schedule");
-                adapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            refresh();
+            swipeRefreshLayout.setRefreshing(false);
         });
 
         ScheduledButton = view.findViewById(R.id.schedule_page_button);
@@ -77,5 +64,24 @@ public class PageScheduledFragment extends Fragment {
             }
         });
         return view;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        refresh();
+    }
+
+    public void refresh(){
+        String domain = DomainManager.getInstance().getSelectedDomain();
+        contentViewModel.fetchContent(domain,"pages","schedule");
+        contentViewModel.getScheduledPagesArrayLiveData().observe(getViewLifecycleOwner(), scheduledPageModel -> {
+            adapter.setSchedulePage(scheduledPageModel);
+            if (scheduledPageModel.isEmpty()) {
+                noPagesMessage.setVisibility(View.VISIBLE);
+            } else {
+                noPagesMessage.setVisibility(View.INVISIBLE) ;
+            }
+            adapter.notifyDataSetChanged();
+        });
     }
 }

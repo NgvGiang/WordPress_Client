@@ -235,4 +235,18 @@
     <string name="deleted_failed">Xóa thất bại</string>
     <string name="restore_successfully">Khôi phục thành công</string>
     <string name="restore_failed">Khôi phục thất bại</string>
+
+    //popupmenus
+    <string name="view">Xem</string>
+    <string name="publish_popup">Đăng</string>
+    <string name="publish_now">Đăng Ngay</string>
+    <string name="duplicate">Tạo bản sao</string>
+    <string name="share">Chia sẻ</string>
+    <string name="trash">Cho vào thùng rác</string>
+    <string name="move_to_draft">Chuyển về nháp</string>
+    <string name="comments_popup">Bình luận</string>
+    <string name="delete_permanently">Xóa</string>
+    <string name="set_parent">Chọn trang mẹ</string>
+    <string name="set_as_homepage">Cài làm trang chủ</string>
+    <string name="set_as_posts_page">Cài làm trang bài viết</string>
 </resources>

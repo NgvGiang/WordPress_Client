@@ -16,22 +16,36 @@ import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.model.ContentCardModel;
+import vn.edu.usth.wordpressclient.utils.DomainManager;
+import vn.edu.usth.wordpressclient.view.posts.PostDraftFragment;
+import vn.edu.usth.wordpressclient.view.posts.PostPublishedFragment;
+import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 
 public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<ContentCardModel> postList;
     private PostsPublishedAdapter.OnMenuClickListener popupClickListener;
+    private ContentViewModel contentViewModel;
+    private PostPublishedFragment fragment;
+    String domain = DomainManager.getInstance().getSelectedDomain();
 
     // Adapter constructor
-    public PostsPublishedAdapter(Context context) {
+    public PostsPublishedAdapter(Context context, PostPublishedFragment fragment) {
         this.context = context;
         this.postList = new ArrayList<>();
+        this.fragment = fragment;
+        this.contentViewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(ContentViewModel.class);
     }
 
     @NonNull
@@ -47,6 +61,7 @@ public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAd
     public void onBindViewHolder(@NonNull PostsPublishedAdapter.MyViewHolder holder, int position) {
         ContentCardModel currentPost = postList.get(position);
 
+        int id = currentPost.getId();
         holder.Date.setText(currentPost.getDate());
         holder.Title.setText(currentPost.getTitle());
         holder.Content.setText(currentPost.getContent());
@@ -92,7 +107,15 @@ public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAd
             });
 
             popupView.findViewById(R.id.published_move_to_draft_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Moved to draft", Toast.LENGTH_SHORT).show();
+                contentViewModel.restoreContent("posts",domain , id);
+                contentViewModel.getRestoreSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    if (success) {
+                        fragment.refresh();
+                        Snackbar.make(fragment.getView(), R.string.restore_successfully, Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(fragment.getView(), R.string.restore_failed, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
                 popupWindow.dismiss();
             });
 
@@ -112,7 +135,15 @@ public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAd
             });
 
             popupView.findViewById(R.id.published_trash_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Trashed", Toast.LENGTH_SHORT).show();
+                contentViewModel.trashContent("posts",domain , id);
+                contentViewModel.getDeleteSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    if (success) {
+                        fragment.refresh();
+                        Snackbar.make(fragment.getView(), R.string.deleted_successfully, Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(fragment.getView(), R.string.deleted_failed, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
                 popupWindow.dismiss();
             });
         });

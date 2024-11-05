@@ -29,12 +29,12 @@ public class PagePublishedFragment extends Fragment {
     private PagesPublishedAdapter adapter;
     private ContentViewModel contentViewModel;
     private SwipeRefreshLayout swipeRefreshLayout;
-
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_page_published, container, false);
+        view = inflater.inflate(R.layout.fragment_page_published, container, false);
 
         recyclerView = view.findViewById(R.id.page_recycler_view_published);
         noPagesMessage = view.findViewById(R.id.page_no_post_screen_published);
@@ -42,31 +42,18 @@ public class PagePublishedFragment extends Fragment {
 
         String domain = DomainManager.getInstance().getSelectedDomain();
 
-        adapter = new PagesPublishedAdapter(getContext());
+        adapter = new PagesPublishedAdapter(getContext(),this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
         contentViewModel = new ViewModelProvider(this).get(ContentViewModel.class);
-        contentViewModel.getPublishPagesArrayLiveData().observe(getViewLifecycleOwner(), publishedPageModel -> {
-            adapter.setPublishedPage(publishedPageModel);
-            if (publishedPageModel.isEmpty()) {
-                noPagesMessage.setVisibility(View.VISIBLE);
-            } else {
-                noPagesMessage.setVisibility(View.INVISIBLE) ;
-            }
-            adapter.notifyDataSetChanged();
+        refresh();
+
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            refresh();
+            swipeRefreshLayout.setRefreshing(false);
         });
 
-        contentViewModel.fetchContent(domain,"pages","publish");
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                contentViewModel.fetchContent(domain,"pages","publish");
-                adapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
 
         PublishedButton = view.findViewById(R.id.published_page_button);
         PublishedButton.setOnClickListener(new View.OnClickListener() {
@@ -78,5 +65,23 @@ public class PagePublishedFragment extends Fragment {
             }
         });
         return view;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        refresh();
+    }
+    public void refresh(){
+        String domain = DomainManager.getInstance().getSelectedDomain();
+        contentViewModel.fetchContent(domain,"pages","publish");
+        contentViewModel.getPublishPagesArrayLiveData().observe(getViewLifecycleOwner(), publishedPageModel -> {
+            adapter.setPublishedPage(publishedPageModel);
+            if (publishedPageModel.isEmpty()) {
+                noPagesMessage.setVisibility(View.VISIBLE);
+            } else {
+                noPagesMessage.setVisibility(View.INVISIBLE) ;
+            }
+            adapter.notifyDataSetChanged();
+        });
     }
 }

@@ -104,11 +104,15 @@ public class ContentViewModel extends AndroidViewModel {
                 break;
         }
     }
+
     public void deleteContent(String endpoint, String domain, int id) {
         contentRepository.deleteContent(endpoint, domain, id, deleteSuccessLiveData);
     }
     public void restoreContent(String endpoint, String domain, int id) {
         contentRepository.restoreContent(endpoint, domain, id, restoreSuccessLiveData);
+    }
+    public void trashContent(String endpoint, String domain, int id) {
+        contentRepository.trashContent(endpoint, domain, id, deleteSuccessLiveData);
     }
 
 }

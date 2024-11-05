@@ -37,6 +37,7 @@ public class PagesDraftAdapter extends RecyclerView.Adapter<PagesDraftAdapter.My
     private ContentViewModel contentViewModel;
     private PageDraftFragment fragment;
     String domain = DomainManager.getInstance().getSelectedDomain();
+
     public PagesDraftAdapter(Context context,PageDraftFragment fragment) {
         this.context = context;
         this.postList = new ArrayList<>();
@@ -121,7 +122,7 @@ public class PagesDraftAdapter extends RecyclerView.Adapter<PagesDraftAdapter.My
             });
 
             popupView.findViewById(R.id.draft_trash_item_page).setOnClickListener(view -> {
-                contentViewModel.deleteContent("pages",domain , id);
+                contentViewModel.trashContent("pages",domain , id);
                 contentViewModel.getDeleteSuccessLiveData().observe((LifecycleOwner) context, success -> {
                     if (success) {
                        fragment.refresh();

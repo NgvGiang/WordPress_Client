@@ -30,13 +30,12 @@ public class PageTrashedFragment extends Fragment {
     private PagesTrashedAdapter adapter;
     private ContentViewModel contentViewModel;
     private SwipeRefreshLayout swipeRefreshLayout;
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_page_trashed, container, false);
-
-
+        view = inflater.inflate(R.layout.fragment_page_trashed, container, false);
 
         recyclerView = view.findViewById(R.id.page_recycler_view_trashed);
         noPagesMessage = view.findViewById(R.id.page_no_post_screen_trashed);
