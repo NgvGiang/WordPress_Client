@@ -71,7 +71,7 @@
                             android:ellipsize="end"
                             android:maxLines="2"
                             android:paddingLeft="8dp"
-                            android:text=""
+                            android:text="on App"
                             android:textColor="#D7177C20"
                             android:textSize="14sp" />
 
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="16dp"
                     android:text="Hello, World!"
-                    android:textColor="@color/black"
+                    android:textColor="@color/onBackGround"
                     android:textSize="18sp" />
 
                 <LinearLayout
@@ -112,7 +112,8 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/done_icon_comment_detail"
                             android:layout_centerHorizontal="true"
-                            android:text="Approve" />
+                            android:text="Approve"
+                            android:textColor="@color/gray"/>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -123,6 +124,7 @@
                         android:gravity="center">
 
                         <ImageView
+                            
                             android:id="@+id/report_icon_comment_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -135,7 +137,8 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/report_icon_comment_detail"
                             android:layout_centerHorizontal="true"
-                            android:text="Spam" />
+                            android:text="Spam"
+                            android:textColor="@color/gray"/>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -146,6 +149,7 @@
                         android:gravity="center">
 
                         <ImageView
+                            
                             android:id="@+id/like_icon_comment_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -157,7 +161,8 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/like_icon_comment_detail"
                             android:layout_centerHorizontal="true"
-                            android:text="Like" />
+                            android:text="Like"
+                            android:textColor="@color/gray"/>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -168,6 +173,7 @@
                         android:gravity="center">
 
                         <ImageView
+                            
                             android:id="@+id/more_icon_comment_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -179,7 +185,8 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/more_icon_comment_detail"
                             android:layout_centerHorizontal="true"
-                            android:text="More" />
+                            android:text="More"
+                            android:textColor="@color/gray"/>
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -193,6 +200,7 @@
         </ScrollView>
 
         <LinearLayout
+            android:background="@drawable/comment_background"
             android:id="@+id/reply_cmt_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -200,12 +208,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:paddingBottom="50dp">
+            android:paddingBottom="70dp">
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="8dp"
                 android:background="#88B3B3B3" />
 
             <LinearLayout
@@ -214,6 +221,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    app:tint="@color/gray"
+                    android:layout_gravity="center"
                     android:id="@+id/span_edit_text_field"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -225,17 +234,22 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="5">
                     <EditText
+                        android:layout_gravity="center"
+                        android:textColor="@color/onBackGround"
                         android:id="@+id/input_reply"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Reply to comment...."
-                        android:maxLines="5"
+                        android:hint="Reply to comment..."
+                        android:textColorHint="@color/gray"                        android:maxLines="5"
                         android:minLines="1"
                         android:scrollbars="vertical"
                         android:inputType="textMultiLine"/>
                 </ScrollView>
 
                 <ImageView
+                    app:tint="@color/gray"
+                    android:layout_gravity="center"
+                    android:paddingTop="10dp"
                     android:id="@+id/upload_reply"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
