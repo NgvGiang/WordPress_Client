@@ -202,13 +202,13 @@ public class ContentRepository {
                 Request.Method.DELETE,
                 url,
                 response -> {
-                    successLiveData.setValue(true);
+                    successLiveData.postValue(true);
                     Log.i("ContentRepository", "Content deleted successfully");
                 },
                 error -> {
                     VolleyLog.d("volley", "Error: " + error.getMessage());
                     error.printStackTrace();
-                    successLiveData.setValue(false);
+                    successLiveData.postValue(false);
                 }
         ) {
             @Override
