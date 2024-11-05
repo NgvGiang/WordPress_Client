@@ -30,7 +30,7 @@ public class ChooseYourWeb extends AppCompatActivity {
     ImageView avatar;
     WebDomainAdapter adapter;
     RecyclerView recyclerView;
-    private final SessionManager session= SessionManager.getInstance(this);;
+    private SessionManager session;
     private WebViewModel webViewModel;
     private UserViewModel userViewModel;
     SwipeRefreshLayout swipeRefreshLayout ;
@@ -41,7 +41,7 @@ public class ChooseYourWeb extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_your_web);
         EdgeToEdge.enable(this);
-
+        session = SessionManager.getInstance(this);
         String accessToken = session.getAccessToken();
         Button create_site_btn = findViewById(R.id.create_site_btn);
         create_site_btn.setOnClickListener(new View.OnClickListener() {

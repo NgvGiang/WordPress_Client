@@ -5,54 +5,62 @@
     android:layout_width="match_parent"
     android:background="@color/transparent"
     android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/comment_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:paddingLeft="38dp"
+        android:paddingBottom="2dp"
         android:text="TODAY"
-        android:textSize="14dp"
-        android:paddingBottom="8dp"
         android:textColor="@color/onBackGround"
-        android:paddingLeft="56dp"/>
+        android:textSize="10dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/author_avatar_comment"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/blank_avatar"/>
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/blank_avatar"
+            android:layout_marginRight="8dp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="12dp">
+            >
+
             <TextView
                 android:id="@+id/author_name_comment_and_post_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Author"
                 android:textColor="@color/onBackGround"
-                android:textStyle="bold"
-                android:text=""
-                android:paddingLeft="8dp"
-                android:textSize="16dp"/>
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/comment_content"
-                android:paddingLeft="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="content"
-                android:maxLines="2"
                 android:textColor="@color/onBackGround"
-                android:ellipsize="end"/>
+                android:textSize="12dp" />
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#88B3B3B3"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="12dp"/>
+                android:layout_marginTop="10dp"
+                android:background="#88B3B3B3" />
         </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>
