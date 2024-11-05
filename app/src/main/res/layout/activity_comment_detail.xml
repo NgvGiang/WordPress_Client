@@ -125,7 +125,7 @@
 
                         <ImageView
                             
-                            android:id="@+id/report_icon_comment_detail"
+                            android:id="@+id/spam_icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
@@ -135,7 +135,7 @@
                             android:id="@+id/report_text_comment_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/report_icon_comment_detail"
+                            android:layout_below="@+id/spam_icon"
                             android:layout_centerHorizontal="true"
                             android:text="Spam"
                             android:textColor="@color/gray"/>

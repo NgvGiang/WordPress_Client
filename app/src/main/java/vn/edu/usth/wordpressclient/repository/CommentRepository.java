@@ -205,7 +205,6 @@ public class CommentRepository {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         successLiveData.setValue(false);
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
         ) {

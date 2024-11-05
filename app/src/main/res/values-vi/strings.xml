@@ -232,7 +232,10 @@
     <string name="content_created_successfully">Tạo nội dung thành công!</string>
     <string name="failed_to_create_content_please_try_again">Tạo nội dung thất bại, thử lại sau!</string>
     <string name="deleted_successfully">Xóa thành công!</string>
-    <string name="deleted_failed">Xóa thất bại</string>
-    <string name="restore_successfully">Khôi phục thành công</string>
-    <string name="restore_failed">Khôi phục thất bại</string>
+    <string name="deleted_failed">Xóa thất bại!</string>
+    <string name="restore_successfully">Khôi phục thành công!</string>
+    <string name="restore_failed">Khôi phục thất bại!</string>
+    <string name="copy_address">Đã sao chép địa chỉ!</string>
+    <string name="reply_success">Phản hồi thành công!</string>
+    <string name="reply_faild">Phản hồi thất bại, thử lại sau!</string>
 </resources>
