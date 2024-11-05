@@ -3,15 +3,12 @@ package vn.edu.usth.wordpressclient.view;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -19,25 +16,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
-import vn.edu.usth.wordpressclient.utils.SessionManager;
-import vn.edu.usth.wordpressclient.view.comment.CommentActivity;
-import vn.edu.usth.wordpressclient.utils.DomainManager;
 import vn.edu.usth.wordpressclient.MeActivity.MeWebsiteActivity;
 import vn.edu.usth.wordpressclient.MeActivity.UsernameActivity;
+import vn.edu.usth.wordpressclient.R;
+import vn.edu.usth.wordpressclient.utils.DomainManager;
+import vn.edu.usth.wordpressclient.utils.SessionManager;
+import vn.edu.usth.wordpressclient.view.comment.CommentActivity;
 import vn.edu.usth.wordpressclient.view.media.MediaActivity;
 import vn.edu.usth.wordpressclient.view.pages.PagesActivity;
 import vn.edu.usth.wordpressclient.view.posts.PostsActivity;
-import vn.edu.usth.wordpressclient.R;
-import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 import vn.edu.usth.wordpressclient.viewmodel.WebViewModel;
 
 public class UserWebManagement extends AppCompatActivity {
     RelativeLayout postsRow,pagesRow,mediaRow,commentRow,meRow,siteSettingRow,adminRow;
     ImageView chooseSites,siteImage,me_icon;
     TextView title,domain,dialogTitle,dialogMessage;
-    DomainManager domainManager;
     private WebViewModel webViewModel;
     String accessToken,domainString;
 
@@ -49,10 +45,8 @@ public class UserWebManagement extends AppCompatActivity {
         EdgeToEdge.enable(this);
         webViewModel = new ViewModelProvider(this).get(WebViewModel.class);
         Intent intent = getIntent();
-        domainManager = DomainManager.getInstance();
         accessToken = SessionManager.getInstance(this).getAccessToken();
         domainString = DomainManager.getInstance().getSelectedDomain();
-        String domainString = domainManager.getSelectedDomain();
 
         String titleString = intent.getStringExtra("title");
         String imgUrl = intent.getStringExtra("imgUrl");

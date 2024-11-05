@@ -205,7 +205,6 @@ public class CommentRepository {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         successLiveData.setValue(false);
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
         ) {
@@ -281,12 +280,24 @@ public class CommentRepository {
                             String authorAvatar = commentArrayJSONObject.getJSONObject("author_avatar_urls").getString("48");
 
                             //Fraudulently get the post title to which the comment belongs
-                            String[] postTitles = link.split("/");
-                            String postTitleTemp = postTitles[6];
-                            String[] postTitlesTemp = postTitleTemp.split("-");
-                            String postTitle = "";
-                            for (int j = 0; j < postTitlesTemp.length; j++) {
-                                postTitle += postTitlesTemp[j] + " ";
+//                            String[] postTitles = link.split("/");
+//                            String postTitleTemp = postTitles[6];
+//                            String[] postTitlesTemp = postTitleTemp.split("-");
+//                            String postTitle = "";
+//                            for (int j = 0; j < postTitlesTemp.length; j++) {
+//                                postTitle += postTitlesTemp[j] + " ";
+//                            }
+                            int commentPageIndex = link.indexOf("/comment-page");
+                            String postTitle= "";
+                            if (commentPageIndex != -1) {
+                                // Cắt phần chuỗi trước "/comment-page"
+                                String linkPart = link.substring(0, commentPageIndex);
+
+                                // Tìm vị trí của dấu "/" cuối cùng trước "/comment-page"
+                                int lastSlashIndex = linkPart.lastIndexOf('/');
+
+                                // Lấy phần chuỗi sau dấu "/" cuối cùng
+                                postTitle = linkPart.substring(lastSlashIndex + 1);
                             }
                             CommentCardModel commentCardModel = new CommentCardModel(commentId, postId, authorId, authorName, formattedDate, content, link, cmtStatus, authorAvatar);
                             commentCardModel.setPostTitle(postTitle);
