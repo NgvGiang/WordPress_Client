@@ -83,7 +83,8 @@ public class CommentRepository {
 
                             //Fraudulently get the post title to which the comment belongs
                             String[] postTitles = link.split("/");
-                            String postTitleTemp = postTitles[6];
+                            Log.i("length of link", "" + postTitles.length);
+                            String postTitleTemp = postTitles[postTitles.length - 3];
                             String[] postTitlesTemp = postTitleTemp.split("-");
                             String postTitle = "";
                             for (int j = 0; j < postTitlesTemp.length; j++) {
@@ -267,7 +268,7 @@ public class CommentRepository {
 
                             //Fraudulently get the post title to which the comment belongs
                             String[] postTitles = link.split("/");
-                            String postTitleTemp = postTitles[6];
+                            String postTitleTemp = postTitles[postTitles.length - 3];
                             String[] postTitlesTemp = postTitleTemp.split("-");
                             String postTitle = "";
                             for (int j = 0; j < postTitlesTemp.length; j++) {
