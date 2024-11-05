@@ -31,11 +31,12 @@ public class PostPublishedFragment extends Fragment {
     private PostsPublishedAdapter adapter;
     private ContentViewModel contentViewModel;
     private SwipeRefreshLayout swipeRefreshLayout;
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_post_published, container, false);
+        view= inflater.inflate(R.layout.fragment_post_published, container, false);
 
         recyclerView = view.findViewById(R.id.post_published_recycler_view);
         noPostsMessage = view.findViewById(R.id.no_post_screen_published);
@@ -43,34 +44,16 @@ public class PostPublishedFragment extends Fragment {
 
         String domain = DomainManager.getInstance().getSelectedDomain();
 
-        adapter = new PostsPublishedAdapter(getContext());
+        adapter = new PostsPublishedAdapter(getContext(),this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
         contentViewModel = new ViewModelProvider(this).get(ContentViewModel.class);
-        contentViewModel.getPublishPostsArrayLiveData().observe(getViewLifecycleOwner(), publishedPostModel -> {
-                    adapter.setPublishedPost(publishedPostModel);
-                    if (publishedPostModel.isEmpty()) {
+        refresh();
 
-                        noPostsMessage.setVisibility(View.VISIBLE);
-                        recyclerView.setVisibility(View.GONE);
-                    } else {
-
-                        noPostsMessage.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.VISIBLE);
-                    }
-            adapter.notifyDataSetChanged();
-        });
-
-        contentViewModel.fetchContent(domain,"posts","publish");
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                contentViewModel.fetchContent(domain,"posts","publish");
-                adapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            refresh();
+            swipeRefreshLayout.setRefreshing(false);
         });
 
         CreateButton = view.findViewById(R.id.published_post_button);
@@ -87,8 +70,19 @@ public class PostPublishedFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        refresh();
+    }
+    public void refresh(){
         String domain = DomainManager.getInstance().getSelectedDomain();
         contentViewModel.fetchContent(domain,"posts","publish");
-        adapter.notifyDataSetChanged();
+        contentViewModel.getPublishPostsArrayLiveData().observe(getViewLifecycleOwner(), publishedPostModel -> {
+            adapter.setPublishedPost(publishedPostModel);
+            if (publishedPostModel.isEmpty()) {
+                noPostsMessage.setVisibility(View.VISIBLE);
+            } else {
+                noPostsMessage.setVisibility(View.INVISIBLE) ;
+            }
+            adapter.notifyDataSetChanged();
+        });
     }
 }

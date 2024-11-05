@@ -231,10 +231,26 @@
     <string name="content_created_successfully">Content created successfully!</string>
     <string name="failed_to_create_content_please_try_again">Failed to create content, please try again!</string>
     <string name="deleted_successfully">Deleted successfully!</string>
+
+    //popupmenus
+    <string name="view">View</string>
+    <string name="publish_popup">Publish</string>
+    <string name="publish_now">Publish Now</string>
+    <string name="duplicate">Duplicate</string>
+    <string name="share">Share</string>
+    <string name="trash">Trash</string>
+    <string name="move_to_draft">Move to draft</string>
+    <string name="comments_popup">Comments</string>
+    <string name="delete_permanently">Delete Permanently</string>
+    <string name="set_parent">Set Parent</string>
+    <string name="set_as_homepage">Set as Homepage</string>
+    <string name="set_as_posts_page">Set as Posts Page</string>
+
     <string name="deleted_failed">Deleted failed!</string>
     <string name="restore_successfully">Restore successfully!</string>
     <string name="restore_failed">Restore failed!</string>
     <string name="copy_address">Address copied</string>
     <string name="reply_success">Reply successfully!</string>
     <string name="reply_faild">Reply failed, try again later!</string>
+
 </resources>

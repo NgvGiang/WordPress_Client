@@ -33,12 +33,12 @@ public class PostTrashedFragment extends Fragment {
     private PostsTrashedAdapter adapter;
     private ContentViewModel contentViewModel;
     private SwipeRefreshLayout swipeRefreshLayout;
-
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_post_trashed, container, false);
+        view =  inflater.inflate(R.layout.fragment_post_trashed, container, false);
 
         recyclerView = view.findViewById(R.id.post_trashed_recycler_view);
         noPostsMessage = view.findViewById(R.id.no_post_screen_trashed);
@@ -46,37 +46,19 @@ public class PostTrashedFragment extends Fragment {
 
         String domain = DomainManager.getInstance().getSelectedDomain();
 
-        adapter = new PostsTrashedAdapter(getContext());
+        adapter = new PostsTrashedAdapter(getContext(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
         contentViewModel = new ViewModelProvider(this).get(ContentViewModel.class);
-        contentViewModel.getTrashedPostsArrayLiveData().observe(getViewLifecycleOwner(), trashPostModel -> {
-            adapter.setTrashPost(trashPostModel);
-            if (trashPostModel.isEmpty()) {
+        refresh();
 
-                noPostsMessage.setVisibility(View.VISIBLE);
-                recyclerView.setVisibility(View.GONE);
-            } else {
-
-                noPostsMessage.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.VISIBLE);
-            }
-                adapter.notifyDataSetChanged();
-            });
-
-            contentViewModel.fetchContent(domain,"posts","trash");
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                contentViewModel.fetchContent(domain,"posts","trash");
-                adapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            refresh();
+            swipeRefreshLayout.setRefreshing(false);
         });
 
-            CreateButton = view.findViewById(R.id.trashed_post_button);
+        CreateButton = view.findViewById(R.id.trashed_post_button);
         CreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,8 +72,19 @@ public class PostTrashedFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        refresh();
+    }
+    public void refresh(){
         String domain = DomainManager.getInstance().getSelectedDomain();
         contentViewModel.fetchContent(domain,"posts","trash");
-        adapter.notifyDataSetChanged();
+        contentViewModel.getTrashedPostsArrayLiveData().observe(getViewLifecycleOwner(), trashPostModel -> {
+            adapter.setTrashPost(trashPostModel);
+            if (trashPostModel.isEmpty()) {
+                noPostsMessage.setVisibility(View.VISIBLE);
+            } else {
+                noPostsMessage.setVisibility(View.INVISIBLE) ;
+            }
+            adapter.notifyDataSetChanged();
+        });
     }
 }
