@@ -11,27 +11,41 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.model.ContentCardModel;
+import vn.edu.usth.wordpressclient.utils.DomainManager;
+import vn.edu.usth.wordpressclient.view.posts.PostDraftFragment;
+import vn.edu.usth.wordpressclient.view.posts.PostTrashedFragment;
+import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 
 public class PostsTrashedAdapter extends RecyclerView.Adapter<PostsTrashedAdapter.MyViewHolder>{
     private Context context;
     private ArrayList<ContentCardModel> postList;
-    private PostsTrashedAdapter.OnMenuClickListener popupClickListener;
+    private ContentViewModel contentViewModel;
+    private PostTrashedFragment fragment;
+    String domain = DomainManager.getInstance().getSelectedDomain();
 
     // Adapter constructor
-    public PostsTrashedAdapter(Context context) {
+    public PostsTrashedAdapter(Context context, PostTrashedFragment fragment ) {
         this.context = context;
         this.postList = new ArrayList<>();
+        this.fragment = fragment;
+        this.contentViewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(ContentViewModel.class);
     }
 
     @NonNull
@@ -47,9 +61,14 @@ public class PostsTrashedAdapter extends RecyclerView.Adapter<PostsTrashedAdapte
     public void onBindViewHolder(@NonNull PostsTrashedAdapter.MyViewHolder holder, int position) {
         ContentCardModel currentPost = postList.get(position);
 
+        int id = currentPost.getId();
         holder.Date.setText(currentPost.getDate());
         holder.Title.setText(currentPost.getTitle());
-        holder.Content.setText(currentPost.getContent());
+        if (currentPost.getContent().isEmpty()){
+            holder.Content.setVisibility(View.GONE);
+        }else{
+            holder.Content.setText(currentPost.getContent());
+        }
         holder.Setting.setOnClickListener(v -> {
             // Inflate the custom popup layout
             View popupView = LayoutInflater.from(context).inflate(R.layout.post_trashed_popupmenu, null);
@@ -85,21 +104,37 @@ public class PostsTrashedAdapter extends RecyclerView.Adapter<PostsTrashedAdapte
             popupWindow.showAtLocation(v, 0, location[0], yOffset);
 
             popupView.findViewById(R.id.trashed_move_to_draft_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Moved to draft", Toast.LENGTH_SHORT).show();
+                holder.progressBar.setVisibility(View.VISIBLE);
+                contentViewModel.restoreContent("posts",domain , id);
+                contentViewModel.getRestoreSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    holder.progressBar.setVisibility(View.INVISIBLE);
+                    if (success) {
+                        fragment.refresh();
+                        Snackbar.make(fragment.getView(), R.string.restore_successfully, Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(fragment.getView(), R.string.restore_failed, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
                 popupWindow.dismiss();
             });
 
-
             popupView.findViewById(R.id.trashed_trash_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Trashed", Toast.LENGTH_SHORT).show();
+                holder.progressBar.setVisibility(View.VISIBLE);
+                contentViewModel.deleteContent("posts",domain , id);
+                contentViewModel.getDeleteSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    holder.progressBar.setVisibility(View.INVISIBLE);
+                    if (success) {
+                        fragment.refresh();
+                        Snackbar.make(fragment.getView(), R.string.deleted_successfully, Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(fragment.getView(), R.string.deleted_failed, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
                 popupWindow.dismiss();
             });
         });
     }
 
-    public interface OnMenuClickListener {
-        void onMenuClick(View anchorView, int position);
-    }
 
     @Override
     public int getItemCount() {
@@ -111,7 +146,7 @@ public class PostsTrashedAdapter extends RecyclerView.Adapter<PostsTrashedAdapte
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView Date, Title, Content;
         ImageView Setting;
-
+        ProgressBar progressBar;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             // Grabbing views
@@ -119,6 +154,7 @@ public class PostsTrashedAdapter extends RecyclerView.Adapter<PostsTrashedAdapte
             Title = itemView.findViewById(R.id.item_title);
             Content = itemView.findViewById(R.id.item_content);
             Setting = itemView.findViewById(R.id.content_setting_btn);
+            progressBar = itemView.findViewById(R.id.progress_bar);
         }
     }
     public void setTrashPost(ArrayList<ContentCardModel> trashPost){

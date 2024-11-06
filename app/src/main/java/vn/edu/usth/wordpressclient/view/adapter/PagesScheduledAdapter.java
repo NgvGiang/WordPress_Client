@@ -16,20 +16,34 @@ import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.model.ContentCardModel;
+import vn.edu.usth.wordpressclient.utils.DomainManager;
+import vn.edu.usth.wordpressclient.view.pages.PageDraftFragment;
+import vn.edu.usth.wordpressclient.view.pages.PageScheduledFragment;
+import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 
 public class PagesScheduledAdapter extends RecyclerView.Adapter<PagesScheduledAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<ContentCardModel> postList;
+    private ContentViewModel contentViewModel;
+    private PageScheduledFragment fragment;
+    String domain = DomainManager.getInstance().getSelectedDomain();
 
-    public PagesScheduledAdapter(Context context) {
+    public PagesScheduledAdapter(Context context, PageScheduledFragment fragment) {
         this.context = context;
         this.postList = new ArrayList<>();
+        this.fragment = fragment;
+        this.contentViewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(ContentViewModel.class);
     }
 
     @NonNull
@@ -45,6 +59,7 @@ public class PagesScheduledAdapter extends RecyclerView.Adapter<PagesScheduledAd
     public void onBindViewHolder(@NonNull PagesScheduledAdapter.MyViewHolder holder, int position) {
         ContentCardModel currentPost = postList.get(position);
 
+        int id = currentPost.getId();
         holder.Date.setText(currentPost.getDate());
         holder.Title.setText(currentPost.getTitle());
         holder.Setting.setOnClickListener(v -> {
@@ -87,10 +102,6 @@ public class PagesScheduledAdapter extends RecyclerView.Adapter<PagesScheduledAd
                 popupWindow.dismiss();
             });
 
-            popupView.findViewById(R.id.scheduled_cancel_upload_item_page).setOnClickListener(view -> {
-                Toast.makeText(context, "Canceled upload from scheduled page", Toast.LENGTH_SHORT).show();
-                popupWindow.dismiss();
-            });
 
             popupView.findViewById(R.id.scheduled_set_parent_item_page).setOnClickListener(view -> {
                 Toast.makeText(context, "Set parent from scheduled page", Toast.LENGTH_SHORT).show();
@@ -98,14 +109,18 @@ public class PagesScheduledAdapter extends RecyclerView.Adapter<PagesScheduledAd
             });
 
             popupView.findViewById(R.id.scheduled_move_to_draft_item_page).setOnClickListener(view -> {
-                Toast.makeText(context, "Moved to draft from scheduled page", Toast.LENGTH_SHORT).show();
+                contentViewModel.restoreContent("pages",domain , id);
+                contentViewModel.getRestoreSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    if (success) {
+                        fragment.refresh();
+                        Snackbar.make(fragment.getView(), R.string.restore_successfully, Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(fragment.getView(), R.string.restore_failed, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
                 popupWindow.dismiss();
             });
 
-            popupView.findViewById(R.id.scheduled_duplicate_item_page).setOnClickListener(view -> {
-                Toast.makeText(context, "Duplicated from scheduled page", Toast.LENGTH_SHORT).show();
-                popupWindow.dismiss();
-            });
 
             popupView.findViewById(R.id.scheduled_share_item_page).setOnClickListener(view -> {
                 Toast.makeText(context, "Share from scheduled page", Toast.LENGTH_SHORT).show();
@@ -113,7 +128,15 @@ public class PagesScheduledAdapter extends RecyclerView.Adapter<PagesScheduledAd
             });
 
             popupView.findViewById(R.id.scheduled_trash_item_page).setOnClickListener(view -> {
-                Toast.makeText(context, "Trashed from scheduled page", Toast.LENGTH_SHORT).show();
+                contentViewModel.trashContent("pages",domain , id);
+                contentViewModel.getDeleteSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    if (success) {
+                        fragment.refresh();
+                        Snackbar.make(fragment.getView(), R.string.deleted_successfully, Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(fragment.getView(), R.string.deleted_failed, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
                 popupWindow.dismiss();
             });
         });

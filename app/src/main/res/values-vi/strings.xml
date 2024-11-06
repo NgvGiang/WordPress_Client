@@ -232,10 +232,27 @@
     <string name="content_created_successfully">Tạo nội dung thành công!</string>
     <string name="failed_to_create_content_please_try_again">Tạo nội dung thất bại, thử lại sau!</string>
     <string name="deleted_successfully">Xóa thành công!</string>
+
+
+    //popupmenus
+    <string name="view">Xem</string>
+    <string name="publish_popup">Đăng</string>
+    <string name="publish_now">Đăng Ngay</string>
+    <string name="duplicate">Tạo bản sao</string>
+    <string name="share">Chia sẻ</string>
+    <string name="trash">Cho vào thùng rác</string>
+    <string name="move_to_draft">Chuyển về nháp</string>
+    <string name="comments_popup">Bình luận</string>
+    <string name="delete_permanently">Xóa</string>
+    <string name="set_parent">Chọn trang mẹ</string>
+    <string name="set_as_homepage">Cài làm trang chủ</string>
+    <string name="set_as_posts_page">Cài làm trang bài viết</string>
+
     <string name="deleted_failed">Xóa thất bại!</string>
     <string name="restore_successfully">Khôi phục thành công!</string>
     <string name="restore_failed">Khôi phục thất bại!</string>
     <string name="copy_address">Đã sao chép địa chỉ!</string>
     <string name="reply_success">Phản hồi thành công!</string>
     <string name="reply_faild">Phản hồi thất bại, thử lại sau!</string>
+
 </resources>

@@ -11,12 +11,14 @@ import java.util.ArrayList;
 
 import vn.edu.usth.wordpressclient.model.ContentCardModel;
 import vn.edu.usth.wordpressclient.repository.ContentRepository;
+import vn.edu.usth.wordpressclient.utils.SingleLiveEvent;
 
 public class ContentViewModel extends AndroidViewModel {
+    private final SingleLiveEvent<Boolean> deleteSuccessLiveData = new SingleLiveEvent<>();
     private final ContentRepository contentRepository = ContentRepository.getInstance(getApplication());
-    private final MutableLiveData<Boolean> createSuccessLiveData = new MutableLiveData<>();
-    private final MutableLiveData<Boolean> deleteSuccessLiveData = new MutableLiveData<>();
-    private final MutableLiveData<Boolean> restoreSuccessLiveData = new MutableLiveData<>();
+    private final SingleLiveEvent<Boolean> createSuccessLiveData = new SingleLiveEvent<>();
+//    private final MutableLiveData<Boolean> deleteSuccessLiveData = new MutableLiveData<>();
+    private final SingleLiveEvent<Boolean> restoreSuccessLiveData = new SingleLiveEvent<>();
     private final MutableLiveData<ArrayList<ContentCardModel>> publishPagesArrayLiveData = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<ContentCardModel>> draftPagesArrayLiveData = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<ContentCardModel>> scheduledPagesArrayLiveData = new MutableLiveData<>();
@@ -28,13 +30,13 @@ public class ContentViewModel extends AndroidViewModel {
     public ContentViewModel(@NonNull Application application) {
         super(application);
     }
-    public LiveData<Boolean> getRestoreSuccessLiveData() {
+    public SingleLiveEvent<Boolean> getRestoreSuccessLiveData() {
         return restoreSuccessLiveData;
     }
-    public LiveData<Boolean> getCreateSuccessLiveData() {
+    public SingleLiveEvent<Boolean> getCreateSuccessLiveData() {
         return createSuccessLiveData;
     }
-    public LiveData<Boolean> getDeleteSuccessLiveData() {
+    public SingleLiveEvent<Boolean> getDeleteSuccessLiveData() {
         return deleteSuccessLiveData;
     }
     public LiveData<ArrayList<ContentCardModel>> getPublishPagesArrayLiveData() {
@@ -104,11 +106,15 @@ public class ContentViewModel extends AndroidViewModel {
                 break;
         }
     }
+
     public void deleteContent(String endpoint, String domain, int id) {
         contentRepository.deleteContent(endpoint, domain, id, deleteSuccessLiveData);
     }
     public void restoreContent(String endpoint, String domain, int id) {
         contentRepository.restoreContent(endpoint, domain, id, restoreSuccessLiveData);
+    }
+    public void trashContent(String endpoint, String domain, int id) {
+        contentRepository.trashContent(endpoint, domain, id, deleteSuccessLiveData);
     }
 
 }

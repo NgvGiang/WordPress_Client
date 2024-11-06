@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="View"
+            android:text="@string/view"
             android:textColor="@color/onBackGround"
             android:textSize="16sp" />
     </LinearLayout>
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="Set Parent"
+            android:text="@string/set_parent"
             android:textColor="@color/onBackGround"
             android:textSize="16sp" />
     </LinearLayout>
@@ -77,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="Publish Now"
+            android:text="@string/publish_now"
             android:textColor="@color/onBackGround"
             android:textSize="16sp" />
     </LinearLayout>
@@ -101,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="Duplicate"
+            android:text="@string/duplicate"
             android:textColor="@color/onBackGround"
             android:textSize="16sp" />
     </LinearLayout>
@@ -125,7 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="Share"
+            android:text="@string/share"
             android:textColor="@color/onBackGround"
             android:textSize="16sp" />
     </LinearLayout>
@@ -149,7 +149,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="Trash"
+            android:text="@string/trash"
             android:textColor="@color/red"
             android:textSize="16sp" />
     </LinearLayout>

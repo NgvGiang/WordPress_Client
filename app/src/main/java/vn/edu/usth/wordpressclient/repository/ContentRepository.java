@@ -46,6 +46,7 @@ import vn.edu.usth.wordpressclient.model.MediaCardModel;
 import vn.edu.usth.wordpressclient.model.ContentCardModel;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
 import vn.edu.usth.wordpressclient.utils.QueueManager;
+import vn.edu.usth.wordpressclient.utils.SingleLiveEvent;
 import vn.edu.usth.wordpressclient.view.media.RetrofitClient;
 import vn.edu.usth.wordpressclient.view.media.WordPressApi;
 
@@ -67,7 +68,7 @@ public class ContentRepository {
     }
 
     //this is the function declaration, which is call from ContentViewModel
-    public void createContent(String endpoint, String domain, String title, String content, String status, String date, MutableLiveData<Boolean> successLiveData) {
+    public void createContent(String endpoint, String domain, String title, String content, String status, String date, SingleLiveEvent<Boolean> successLiveData) {
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint;
         SessionManager session = SessionManager.getInstance(context);
         String accessToken = session.getAccessToken();
@@ -96,16 +97,16 @@ public class ContentRepository {
                         JSONObject jsonResponse = new JSONObject(response);
                         String responseDate = jsonResponse.getString("date");
                         Log.i("ContentRepository", "Content created at: " + responseDate);
-                        successLiveData.postValue(true);
+                        successLiveData.setValue(true);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        successLiveData.postValue(false);
+                        successLiveData.setValue(false);
                     }
                 },
                 error -> {
                     VolleyLog.d("volley", "Error: " + error.getMessage());
                     error.printStackTrace();
-                    successLiveData.postValue(false);
+                    successLiveData.setValue(false);
                 }
         ) {
             @Override
@@ -263,8 +264,8 @@ public class ContentRepository {
         QueueManager.getInstance(context).addToRequestQueue(fetchContentRequest);
     }
 
-    public void deleteContent(String endpoint, String domain, int id, MutableLiveData<Boolean> successLiveData){
-        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + id;
+    public void deleteContent(String endpoint, String domain, int id, SingleLiveEvent<Boolean> successLiveData){
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + id + "?force=true";
         String accessToken = SessionManager.getInstance(context).getAccessToken();
 
         StringRequest deleteRequest = new StringRequest(
@@ -296,7 +297,7 @@ public class ContentRepository {
 
         QueueManager.getInstance(context).addToRequestQueue(deleteRequest);
     }
-    public void restoreContent(String endpoint, String domain, int id, MutableLiveData<Boolean> successLiveData) {
+    public void restoreContent(String endpoint, String domain, int id, SingleLiveEvent<Boolean> successLiveData) {
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + id;
         String accessToken = SessionManager.getInstance(context).getAccessToken();
 
@@ -339,5 +340,38 @@ public class ContentRepository {
         ));
 
         QueueManager.getInstance(context).addToRequestQueue(restoreRequest);
+    }
+    public void trashContent(String endpoint, String domain, int id, SingleLiveEvent<Boolean> successLiveData){
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + id ;
+        String accessToken = SessionManager.getInstance(context).getAccessToken();
+
+        StringRequest deleteRequest = new StringRequest(
+                Request.Method.DELETE,
+                url,
+                response -> {
+                    successLiveData.setValue(true);
+                    Log.i("ContentRepository", "Content deleted successfully");
+                },
+                error -> {
+                    VolleyLog.d("volley", "Error: " + error.getMessage());
+                    error.printStackTrace();
+                    successLiveData.setValue(false);
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+        };
+
+        deleteRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
+        QueueManager.getInstance(context).addToRequestQueue(deleteRequest);
     }
 }

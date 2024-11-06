@@ -33,6 +33,7 @@ public class PagesTrashedAdapter extends RecyclerView.Adapter<PagesTrashedAdapte
     private ContentViewModel contentViewModel;
     private PageTrashedFragment fragment;
     String domain = DomainManager.getInstance().getSelectedDomain();
+
     public PagesTrashedAdapter(Context context, PageTrashedFragment fragment) {
         this.context = context;
         this.postList = new ArrayList<>();
@@ -104,7 +105,15 @@ public class PagesTrashedAdapter extends RecyclerView.Adapter<PagesTrashedAdapte
             });
 
             popupView.findViewById(R.id.trashed_trash_item_page).setOnClickListener(view -> {
-                Toast.makeText(context, "Trashed from trash page", Toast.LENGTH_SHORT).show();
+                contentViewModel.deleteContent("pages",domain , id);
+                contentViewModel.getDeleteSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    if (success) {
+                        fragment.refresh();
+                        Snackbar.make(fragment.getView(), R.string.deleted_successfully, Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(fragment.getView(), R.string.deleted_failed, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
                 popupWindow.dismiss();
             });
         });

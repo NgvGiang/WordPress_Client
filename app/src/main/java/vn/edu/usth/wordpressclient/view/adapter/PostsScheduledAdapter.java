@@ -11,27 +11,42 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.model.ContentCardModel;
+import vn.edu.usth.wordpressclient.utils.DomainManager;
+import vn.edu.usth.wordpressclient.view.posts.PostDraftFragment;
+import vn.edu.usth.wordpressclient.view.posts.PostScheduledFragment;
+import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 
 public class PostsScheduledAdapter extends RecyclerView.Adapter<PostsScheduledAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<ContentCardModel> postList;
     private PostsScheduledAdapter.OnMenuClickListener popupClickListener;
+    private ContentViewModel contentViewModel;
+    private PostScheduledFragment fragment;
+    String domain = DomainManager.getInstance().getSelectedDomain();
 
     // Adapter constructor
-    public PostsScheduledAdapter(Context context) {
+    public PostsScheduledAdapter(Context context, PostScheduledFragment fragment) {
         this.context = context;
         this.postList = new ArrayList<>();
+        this.fragment = fragment;
+        this.contentViewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(ContentViewModel.class);
     }
 
     @NonNull
@@ -47,9 +62,14 @@ public class PostsScheduledAdapter extends RecyclerView.Adapter<PostsScheduledAd
     public void onBindViewHolder(@NonNull PostsScheduledAdapter.MyViewHolder holder, int position) {
         ContentCardModel currentPost = postList.get(position);
 
+        int id = currentPost.getId();
         holder.Date.setText(currentPost.getDate());
         holder.Title.setText(currentPost.getTitle());
-        holder.Content.setText(currentPost.getContent());
+        if (currentPost.getContent().isEmpty()){
+            holder.Content.setVisibility(View.GONE);
+        }else{
+            holder.Content.setText(currentPost.getContent());
+        }
         holder.Setting.setOnClickListener(v -> {
             // Inflate the custom popup layout
             View popupView = LayoutInflater.from(context).inflate(R.layout.post_scheduled_popupmenu, null);
@@ -99,7 +119,17 @@ public class PostsScheduledAdapter extends RecyclerView.Adapter<PostsScheduledAd
 
 
             popupView.findViewById(R.id.schedule_trash_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Trashed", Toast.LENGTH_SHORT).show();
+                holder.progressBar.setVisibility(View.VISIBLE);
+                contentViewModel.trashContent("posts",domain , id);
+                contentViewModel.getDeleteSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    holder.progressBar.setVisibility(View.INVISIBLE);
+                    if (success) {
+                        fragment.refresh();
+                        Snackbar.make(fragment.getView(), R.string.deleted_successfully, Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(fragment.getView(), R.string.deleted_failed, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
                 popupWindow.dismiss();
             });
         });
@@ -119,7 +149,7 @@ public class PostsScheduledAdapter extends RecyclerView.Adapter<PostsScheduledAd
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView Date, Title, Content;
         ImageView Setting;
-
+        ProgressBar progressBar;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             // Grabbing views
@@ -127,6 +157,7 @@ public class PostsScheduledAdapter extends RecyclerView.Adapter<PostsScheduledAd
             Title = itemView.findViewById(R.id.item_title);
             Content = itemView.findViewById(R.id.item_content);
             Setting = itemView.findViewById(R.id.content_setting_btn);
+            progressBar = itemView.findViewById(R.id.progress_bar);
         }
     }
     public void setSchedulePost(ArrayList<ContentCardModel> schedulePost){

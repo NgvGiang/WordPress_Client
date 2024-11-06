@@ -11,25 +11,40 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.model.ContentCardModel;
+import vn.edu.usth.wordpressclient.utils.DomainManager;
+import vn.edu.usth.wordpressclient.view.pages.PageDraftFragment;
+import vn.edu.usth.wordpressclient.view.posts.PostDraftFragment;
+import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 
 public class PostsDraftAdapter extends RecyclerView.Adapter<PostsDraftAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<ContentCardModel> postList;
+    private ContentViewModel contentViewModel;
+    private PostDraftFragment fragment;
+    String domain = DomainManager.getInstance().getSelectedDomain();
 
-    public PostsDraftAdapter(Context context) {
+    public PostsDraftAdapter(Context context, PostDraftFragment fragment) {
         this.context = context;
         this.postList = new ArrayList<>();
+        this.fragment = fragment;
+        this.contentViewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(ContentViewModel.class);
     }
 
     @NonNull
@@ -45,9 +60,15 @@ public class PostsDraftAdapter extends RecyclerView.Adapter<PostsDraftAdapter.My
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ContentCardModel currentPost = postList.get(position);
 
+        int id = currentPost.getId();
         holder.Date.setText(currentPost.getDate());
         holder.Title.setText(currentPost.getTitle());
-        holder.Content.setText(currentPost.getContent());
+        if (currentPost.getContent().isEmpty()){
+            holder.Content.setVisibility(View.GONE);
+        }else{
+            holder.Content.setText(currentPost.getContent());
+        }
+
         holder.Setting.setOnClickListener(v -> {
             View popupView = LayoutInflater.from(context).inflate(R.layout.post_draft_popupmenu, null);
 
@@ -104,7 +125,17 @@ public class PostsDraftAdapter extends RecyclerView.Adapter<PostsDraftAdapter.My
             });
 
             popupView.findViewById(R.id.draft_trash_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Trashed", Toast.LENGTH_SHORT).show();
+                contentViewModel.trashContent("posts",domain , id);
+                holder.progressBar.setVisibility(View.VISIBLE);
+                contentViewModel.getDeleteSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    holder.progressBar.setVisibility(View.INVISIBLE);
+                    if (success) {
+                        fragment.refresh();
+                        Snackbar.make(fragment.getView(), R.string.deleted_successfully, Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(fragment.getView(), R.string.deleted_failed, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
                 popupWindow.dismiss();
             });
         });
@@ -122,6 +153,7 @@ public class PostsDraftAdapter extends RecyclerView.Adapter<PostsDraftAdapter.My
 
     // ViewHolder class
     class MyViewHolder extends RecyclerView.ViewHolder {
+        ProgressBar progressBar;
         TextView Date, Title, Content;
         ImageView Setting;
 
@@ -132,6 +164,7 @@ public class PostsDraftAdapter extends RecyclerView.Adapter<PostsDraftAdapter.My
             Title = itemView.findViewById(R.id.item_title);
             Content = itemView.findViewById(R.id.item_content);
             Setting = itemView.findViewById(R.id.content_setting_btn);
+            progressBar = itemView.findViewById(R.id.progress_bar);
         }
     }
 
