@@ -24,8 +24,6 @@ public class CommentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);;
         EdgeToEdge.enable(this);
-        Intent intent = getIntent();
-        domain = intent.getStringExtra("domain");
 
         Toolbar toolbar = findViewById(R.id.comment_tool_bar);
         setSupportActionBar(toolbar);
@@ -38,7 +36,7 @@ public class CommentActivity extends AppCompatActivity {
         });
         tabLayout = findViewById(R.id.comment_tab_mode);
         viewPager2 = findViewById(R.id.comment_view_pager);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this,domain);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
         viewPagerAdapter.addFragment(new AllCommentsFragment(), getString(R.string.ALL));
         viewPagerAdapter.addFragment(new PendingCommentsFragment(), getString(R.string.pending));
         viewPagerAdapter.addFragment(new UnrepliedCommentsFragment(), getString(R.string.unreplied));

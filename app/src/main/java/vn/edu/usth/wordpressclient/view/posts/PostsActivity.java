@@ -28,9 +28,6 @@ public class PostsActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_posts);
 
-        Intent intent = getIntent();
-        domain = intent.getStringExtra("domain");
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +49,7 @@ public class PostsActivity extends AppCompatActivity {
         });
         tabLayout = findViewById(R.id.PostsTabLayout);
         viewPager2 = findViewById(R.id.PostviewPager);
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this,domain);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
         viewPagerAdapter.addFragment(new PostPublishedFragment(), getString(R.string.published));
         viewPagerAdapter.addFragment(new PostDraftFragment(), getString(R.string.drafts));
         viewPagerAdapter.addFragment(new PostScheduledFragment(), getString(R.string.schedules));
