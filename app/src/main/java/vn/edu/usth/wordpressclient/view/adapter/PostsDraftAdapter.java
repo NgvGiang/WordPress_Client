@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,7 +63,12 @@ public class PostsDraftAdapter extends RecyclerView.Adapter<PostsDraftAdapter.My
         int id = currentPost.getId();
         holder.Date.setText(currentPost.getDate());
         holder.Title.setText(currentPost.getTitle());
-        holder.Content.setText(currentPost.getContent());
+        if (currentPost.getContent().isEmpty()){
+            holder.Content.setVisibility(View.GONE);
+        }else{
+            holder.Content.setText(currentPost.getContent());
+        }
+
         holder.Setting.setOnClickListener(v -> {
             View popupView = LayoutInflater.from(context).inflate(R.layout.post_draft_popupmenu, null);
 
@@ -120,7 +126,9 @@ public class PostsDraftAdapter extends RecyclerView.Adapter<PostsDraftAdapter.My
 
             popupView.findViewById(R.id.draft_trash_item).setOnClickListener(view -> {
                 contentViewModel.trashContent("posts",domain , id);
+                holder.progressBar.setVisibility(View.VISIBLE);
                 contentViewModel.getDeleteSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    holder.progressBar.setVisibility(View.INVISIBLE);
                     if (success) {
                         fragment.refresh();
                         Snackbar.make(fragment.getView(), R.string.deleted_successfully, Snackbar.LENGTH_SHORT).show();
@@ -145,6 +153,7 @@ public class PostsDraftAdapter extends RecyclerView.Adapter<PostsDraftAdapter.My
 
     // ViewHolder class
     class MyViewHolder extends RecyclerView.ViewHolder {
+        ProgressBar progressBar;
         TextView Date, Title, Content;
         ImageView Setting;
 
@@ -155,6 +164,7 @@ public class PostsDraftAdapter extends RecyclerView.Adapter<PostsDraftAdapter.My
             Title = itemView.findViewById(R.id.item_title);
             Content = itemView.findViewById(R.id.item_content);
             Setting = itemView.findViewById(R.id.content_setting_btn);
+            progressBar = itemView.findViewById(R.id.progress_bar);
         }
     }
 

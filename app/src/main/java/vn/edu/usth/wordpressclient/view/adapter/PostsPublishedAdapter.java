@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,7 +65,11 @@ public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAd
         int id = currentPost.getId();
         holder.Date.setText(currentPost.getDate());
         holder.Title.setText(currentPost.getTitle());
-        holder.Content.setText(currentPost.getContent());
+        if (currentPost.getContent().isEmpty()){
+            holder.Content.setVisibility(View.GONE);
+        }else{
+            holder.Content.setText(currentPost.getContent());
+        }
         holder.Setting.setOnClickListener(v -> {
             // Inflate the custom popup layout
             View popupView = LayoutInflater.from(context).inflate(R.layout.post_published_popupmenu, null);
@@ -135,8 +140,10 @@ public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAd
             });
 
             popupView.findViewById(R.id.published_trash_item).setOnClickListener(view -> {
+                holder.progressBar.setVisibility(View.VISIBLE);
                 contentViewModel.trashContent("posts",domain , id);
                 contentViewModel.getDeleteSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    holder.progressBar.setVisibility(View.INVISIBLE);
                     if (success) {
                         fragment.refresh();
                         Snackbar.make(fragment.getView(), R.string.deleted_successfully, Snackbar.LENGTH_SHORT).show();
@@ -163,7 +170,7 @@ public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAd
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView Date, Title, Content;
         ImageView Setting;
-
+        ProgressBar progressBar;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             // Grabbing views
@@ -171,6 +178,7 @@ public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAd
             Title = itemView.findViewById(R.id.item_title);
             Content = itemView.findViewById(R.id.item_content);
             Setting = itemView.findViewById(R.id.content_setting_btn);
+            progressBar = itemView.findViewById(R.id.progress_bar);
         }
     }
     public void setPublishedPost(ArrayList<ContentCardModel> publishedPost){
