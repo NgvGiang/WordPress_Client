@@ -1,4 +1,4 @@
-package vn.edu.usth.wordpressclient.MeActivity;
+package vn.edu.usth.wordpressclient.view.MeActivity;
 
 import android.os.Bundle;
 import android.view.View;

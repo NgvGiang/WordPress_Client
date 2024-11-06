@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import vn.edu.usth.wordpressclient.MeActivity.MeWebsiteActivity;
+import vn.edu.usth.wordpressclient.view.MeActivity.MeWebsiteActivity;
 import vn.edu.usth.wordpressclient.R;
 
 public class Dont_have_site_activity extends AppCompatActivity {

@@ -1,10 +1,14 @@
-package vn.edu.usth.wordpressclient.MeActivity;
+package vn.edu.usth.wordpressclient.view.MeActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.google.android.material.snackbar.Snackbar;
+import com.squareup.picasso.Picasso;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +19,9 @@ import vn.edu.usth.wordpressclient.utils.SessionManager;
 
 public class MeWebsiteActivity extends AppCompatActivity {
     SessionManager session;
+    ImageView avatar;
+    TextView userName, accountName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +37,30 @@ public class MeWebsiteActivity extends AppCompatActivity {
         LinearLayout share_wordpress_btn = findViewById(R.id.share_wordpress);
         LinearLayout wp_admin_btn = findViewById(R.id.wp_admin);
         LinearLayout log_out_btn = findViewById(R.id.log_out);
+        userName = findViewById(R.id.user_name);
+        accountName = findViewById(R.id.account_name);
+        avatar = findViewById(R.id.ic_profile_placeholder);
+        Intent intent = getIntent();
 
+        userName.setText(intent.getStringExtra("username"));
+        String account = "@" + intent.getStringExtra("account"); // Change to "account"
+        accountName.setText(account);
+        String imgUrl = intent.getStringExtra("avatar"); // Change to "avatar"
+        Picasso.get()
+                .load(imgUrl)
+                .placeholder(R.drawable.compass)
+                .error(R.drawable.compass)
+                .into(avatar);
         username_btn.setOnClickListener(view -> startActivity(new Intent(this, UsernameActivity.class)));
-        profile_btn.setOnClickListener(view -> startActivity(new Intent(this, MyProfileActivity.class)));
+        profile_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentProfile = new Intent(MeWebsiteActivity.this, MyProfileActivity.class);
+                intentProfile.putExtra("username", userName.getText().toString());
+                intentProfile.putExtra("account", accountName.getText().toString());
+                startActivity(intentProfile);
+            }
+        });
         account_settings_btn.setOnClickListener(view -> startActivity(new Intent(this, AccountSettingsActivity.class)));
         app_settings_btn.setOnClickListener(view -> startActivity(new Intent(this, AppSettingsActivity.class)));
         help_btn.setOnClickListener(view -> startActivity(new Intent(this, HelpActivity.class)));

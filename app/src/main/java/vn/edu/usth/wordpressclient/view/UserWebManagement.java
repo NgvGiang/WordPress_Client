@@ -19,8 +19,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
-import vn.edu.usth.wordpressclient.MeActivity.MeWebsiteActivity;
-import vn.edu.usth.wordpressclient.MeActivity.UsernameActivity;
+import org.json.JSONException;
+
+import vn.edu.usth.wordpressclient.view.MeActivity.MeWebsiteActivity;
+import vn.edu.usth.wordpressclient.view.MeActivity.UsernameActivity;
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.utils.DomainManager;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
@@ -28,6 +30,7 @@ import vn.edu.usth.wordpressclient.view.comment.CommentActivity;
 import vn.edu.usth.wordpressclient.view.media.MediaActivity;
 import vn.edu.usth.wordpressclient.view.pages.PagesActivity;
 import vn.edu.usth.wordpressclient.view.posts.PostsActivity;
+import vn.edu.usth.wordpressclient.viewmodel.UserViewModel;
 import vn.edu.usth.wordpressclient.viewmodel.WebViewModel;
 
 public class UserWebManagement extends AppCompatActivity {
@@ -35,9 +38,9 @@ public class UserWebManagement extends AppCompatActivity {
     ImageView chooseSites,siteImage,me_icon;
     TextView title,domain,dialogTitle,dialogMessage;
     private WebViewModel webViewModel;
-    String accessToken,domainString;
-
-
+    String accessToken,domainString,userName,accountName,avatarUrl;
+    UserViewModel userViewModel;
+    Intent intentMe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +50,10 @@ public class UserWebManagement extends AppCompatActivity {
         Intent intent = getIntent();
         accessToken = SessionManager.getInstance(this).getAccessToken();
         domainString = DomainManager.getInstance().getSelectedDomain();
-
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         String titleString = intent.getStringExtra("title");
         String imgUrl = intent.getStringExtra("imgUrl");
-
+//        String avatarUrl = intent.getStringExtra("avatar");
         title = findViewById(R.id.title);
         domain = findViewById(R.id.domain);
         siteImage = findViewById(R.id.user_pfp);
@@ -63,15 +66,32 @@ public class UserWebManagement extends AppCompatActivity {
                 .placeholder(R.drawable.compass)
                 .error(R.drawable.compass)
                 .into(siteImage);
-        Picasso.get()
-                .load(imgUrl)
+        userViewModel.getUserInfo(accessToken);
+        userViewModel.getUserInfoLiveData().observe(this,user ->{
+            try {
+                intentMe = new Intent(UserWebManagement.this, MeWebsiteActivity.class);
+
+                avatarUrl = user.getString("avatar_URL");
+                userName = user.getString("display_name");
+                accountName = user.getString("username");
+                intentMe.putExtra("username", userName);
+                intentMe.putExtra("account", accountName);
+                intentMe.putExtra("avatar", avatarUrl);
+                Picasso.get()
+                .load(avatarUrl)
                 .placeholder(R.drawable.compass)
                 .error(R.drawable.compass)
                 .into(me_icon);
+
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         siteImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(findViewById(android.R.id.content), "This function should be for changing the site picture", Snackbar.LENGTH_SHORT).show();
+//                Snackbar.make(findViewById(android.R.id.content), "This function should be for changing the site picture", Snackbar.LENGTH_SHORT).show();
             }
         });
         title.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +151,6 @@ public class UserWebManagement extends AppCompatActivity {
         });
 
         meRow.setOnClickListener(v -> {
-            Intent intentMe = new Intent(UserWebManagement.this, MeWebsiteActivity.class);
 
             startActivity(intentMe);
         });

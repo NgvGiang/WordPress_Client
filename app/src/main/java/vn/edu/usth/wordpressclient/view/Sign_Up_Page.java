@@ -13,7 +13,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import vn.edu.usth.wordpressclient.MeActivity.HelpActivity;
+import vn.edu.usth.wordpressclient.view.MeActivity.HelpActivity;
 import vn.edu.usth.wordpressclient.R;
 
 public class Sign_Up_Page extends AppCompatActivity {

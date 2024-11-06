@@ -1,4 +1,4 @@
-package vn.edu.usth.wordpressclient.MeActivity;
+package vn.edu.usth.wordpressclient.view.MeActivity;
 
 import android.os.Bundle;
 
@@ -9,17 +9,17 @@ import androidx.core.content.ContextCompat;
 
 import vn.edu.usth.wordpressclient.R;
 
-public class UsernameActivity extends AppCompatActivity {
+public class HelpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_username);
+        setContentView(R.layout.activity_help);
         EdgeToEdge.enable(this);
 
-        Toolbar toolbar = findViewById(R.id.toolbar_username);
+        Toolbar toolbar = findViewById(R.id.toolbar_help);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitle(getString(R.string.user_name));
+        toolbar.setTitle(getString(R.string.help));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> {
