@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -92,8 +93,10 @@ public class PagesTrashedAdapter extends RecyclerView.Adapter<PagesTrashedAdapte
 
             // Set click listeners for each menu item
             popupView.findViewById(R.id.trashed_move_to_draft_item_page).setOnClickListener(view -> {
+                holder.progressBar.setVisibility(View.VISIBLE);
                 contentViewModel.restoreContent("pages",domain , id);
                 contentViewModel.getRestoreSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    holder.progressBar.setVisibility(View.INVISIBLE);
                     if (success) {
                         fragment.refresh();
                         Snackbar.make(fragment.getView(), R.string.restore_successfully, Snackbar.LENGTH_SHORT).show();
@@ -105,8 +108,10 @@ public class PagesTrashedAdapter extends RecyclerView.Adapter<PagesTrashedAdapte
             });
 
             popupView.findViewById(R.id.trashed_trash_item_page).setOnClickListener(view -> {
+                holder.progressBar.setVisibility(View.VISIBLE);
                 contentViewModel.deleteContent("pages",domain , id);
                 contentViewModel.getDeleteSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    holder.progressBar.setVisibility(View.INVISIBLE);
                     if (success) {
                         fragment.refresh();
                         Snackbar.make(fragment.getView(), R.string.deleted_successfully, Snackbar.LENGTH_SHORT).show();
@@ -119,9 +124,6 @@ public class PagesTrashedAdapter extends RecyclerView.Adapter<PagesTrashedAdapte
         });
     }
 
-    public interface OnMenuClickListener {
-        void onMenuClick(View anchorView, int position);
-    }
 
     @Override
     public int getItemCount() {
@@ -133,13 +135,14 @@ public class PagesTrashedAdapter extends RecyclerView.Adapter<PagesTrashedAdapte
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView Date, Title, Content;
         ImageView Setting;
-
+        ProgressBar progressBar;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             // Grabbing views
             Date = itemView.findViewById(R.id.item_date);
             Title = itemView.findViewById(R.id.item_title);
             Setting = itemView.findViewById(R.id.content_setting_btn);
+            progressBar = itemView.findViewById(R.id.progress_bar);
         }
     }
 

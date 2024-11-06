@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -122,8 +123,10 @@ public class PagesDraftAdapter extends RecyclerView.Adapter<PagesDraftAdapter.My
             });
 
             popupView.findViewById(R.id.draft_trash_item_page).setOnClickListener(view -> {
+                holder.progressBar.setVisibility(View.VISIBLE);
                 contentViewModel.trashContent("pages",domain , id);
                 contentViewModel.getDeleteSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    holder.progressBar.setVisibility(View.INVISIBLE);
                     if (success) {
                        fragment.refresh();
                         Snackbar.make(fragment.getView(), R.string.deleted_successfully, Snackbar.LENGTH_SHORT).show();
@@ -150,13 +153,14 @@ public class PagesDraftAdapter extends RecyclerView.Adapter<PagesDraftAdapter.My
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView Date, Title, Content;
         ImageView Setting;
-
+        ProgressBar progressBar;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             // Grabbing views
             Date = itemView.findViewById(R.id.item_date);
             Title = itemView.findViewById(R.id.item_title);
             Setting = itemView.findViewById(R.id.content_setting_btn);
+            progressBar = itemView.findViewById(R.id.progress_bar);
         }
     }
 
