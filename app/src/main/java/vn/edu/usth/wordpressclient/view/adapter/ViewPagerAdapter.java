@@ -12,10 +12,9 @@ import java.util.ArrayList;
 public class ViewPagerAdapter extends FragmentStateAdapter {
     ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
     ArrayList<String> titleArrayList =  new ArrayList<>();
-    String domain;
-    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, String domain) {
+
+    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
-        this.domain = domain;
     }
 
     @NonNull
@@ -23,7 +22,6 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         Fragment fragment = fragmentArrayList.get(position);
         Bundle bundle = new Bundle();
-        bundle.putString("domain", domain);
         fragment.setArguments(bundle);
         return fragment;
     }

@@ -28,10 +28,6 @@ public class PagesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pages);;
         EdgeToEdge.enable(this);
         // Find the Toolbar and set it as the ActionBar
-
-        Intent intent = getIntent();
-        String domain = intent.getStringExtra("domain");
-
         FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +52,7 @@ public class PagesActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.PagetabLayout);
         viewPager2 = findViewById(R.id.PageviewPager);
 
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, domain);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
         viewPagerAdapter.addFragment(new PagePublishedFragment(), getString(R.string.published));
         viewPagerAdapter.addFragment(new PageDraftFragment(), getString(R.string.drafts));
         viewPagerAdapter.addFragment(new PageScheduledFragment(), getString(R.string.schedules));

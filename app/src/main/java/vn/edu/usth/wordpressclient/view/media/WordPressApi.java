@@ -13,7 +13,6 @@ public interface WordPressApi {
     @POST("media")
     Call<ResponseBody> uploadImage(
             @Header("Authorization") String authToken,
-            @Part MultipartBody.Part file,
-            @Part("description") RequestBody description
+            @Part MultipartBody.Part file
     );
 }
