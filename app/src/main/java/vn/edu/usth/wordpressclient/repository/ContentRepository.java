@@ -31,6 +31,7 @@ import vn.edu.usth.wordpressclient.model.MediaCardModel;
 import vn.edu.usth.wordpressclient.model.ContentCardModel;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
 import vn.edu.usth.wordpressclient.utils.QueueManager;
+import vn.edu.usth.wordpressclient.utils.SingleLiveEvent;
 
 public class ContentRepository {
     private static ContentRepository instance;
@@ -48,7 +49,7 @@ public class ContentRepository {
     }
 
     //this is the function declaration, which is call from ContentViewModel
-    public void createContent(String endpoint, String domain, String title, String content, String status, String date, MutableLiveData<Boolean> successLiveData) {
+    public void createContent(String endpoint, String domain, String title, String content, String status, String date, SingleLiveEvent<Boolean> successLiveData) {
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint;
         SessionManager session = SessionManager.getInstance(context);
         String accessToken = session.getAccessToken();
@@ -194,7 +195,7 @@ public class ContentRepository {
         QueueManager.getInstance(context).addToRequestQueue(fetchContentRequest);
     }
 
-    public void deleteContent(String endpoint, String domain, int id, MutableLiveData<Boolean> successLiveData){
+    public void deleteContent(String endpoint, String domain, int id, SingleLiveEvent<Boolean> successLiveData){
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + id + "?force=true";
         String accessToken = SessionManager.getInstance(context).getAccessToken();
 
@@ -227,7 +228,7 @@ public class ContentRepository {
 
         QueueManager.getInstance(context).addToRequestQueue(deleteRequest);
     }
-    public void restoreContent(String endpoint, String domain, int id, MutableLiveData<Boolean> successLiveData) {
+    public void restoreContent(String endpoint, String domain, int id, SingleLiveEvent<Boolean> successLiveData) {
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + id;
         String accessToken = SessionManager.getInstance(context).getAccessToken();
 
@@ -271,7 +272,7 @@ public class ContentRepository {
 
         QueueManager.getInstance(context).addToRequestQueue(restoreRequest);
     }
-    public void trashContent(String endpoint, String domain, int id, MutableLiveData<Boolean> successLiveData){
+    public void trashContent(String endpoint, String domain, int id, SingleLiveEvent<Boolean> successLiveData){
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + id ;
         String accessToken = SessionManager.getInstance(context).getAccessToken();
 
