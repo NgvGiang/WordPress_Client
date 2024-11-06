@@ -1,22 +1,30 @@
 package vn.edu.usth.wordpressclient.repository;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.core.text.HtmlCompat;
 import androidx.lifecycle.MutableLiveData;
+import androidx.loader.content.CursorLoader;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -26,19 +34,30 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.model.MediaCardModel;
 import vn.edu.usth.wordpressclient.model.ContentCardModel;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
 import vn.edu.usth.wordpressclient.utils.QueueManager;
 import vn.edu.usth.wordpressclient.utils.SingleLiveEvent;
+import vn.edu.usth.wordpressclient.view.media.RetrofitClient;
+import vn.edu.usth.wordpressclient.view.media.WordPressApi;
 
 public class ContentRepository {
     private static ContentRepository instance;
     private final Context context;
+    private WordPressApi apiService;
 
     private ContentRepository(Context context) {
         this.context = context.getApplicationContext();
+        this.apiService = RetrofitClient.getClient().create(WordPressApi.class);
     }
 
     public static synchronized ContentRepository getInstance(Context context) {
@@ -117,6 +136,8 @@ public class ContentRepository {
         QueueManager.getInstance(context).addToRequestQueue(contentRequest);
     }
 
+
+    //MEDIA
     public void fetchMediaUrls(String accessToken, String domain, MutableLiveData<ArrayList<MediaCardModel>> mediaModelsLiveData){
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain +"/media" + "?per_page=100";
         StringRequest fetchMediaUrlsRequest = new StringRequest(
@@ -149,6 +170,54 @@ public class ContentRepository {
             }
         };
         QueueManager.getInstance(context).addToRequestQueue(fetchMediaUrlsRequest);
+    }
+
+    public void uploadImageToWordPress(Uri fileUri, String accessToken, View rootview) {
+        String filePath = getRealPathFromURI(fileUri);
+        if (filePath == null) {
+            Snackbar.make(rootview, "Unable to get file path", Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+        File file = new File(filePath);
+
+        // Chuẩn bị Multipart cho ảnh
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+        // Chuẩn bị mô tả ảnh
+        Call<ResponseBody> call = apiService.uploadImage(accessToken, body);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Snackbar.make(rootview, "Upload successful", Snackbar.LENGTH_SHORT).show();
+                    Log.d("Upload", "Success: " + response.message());
+                } else {
+                    Snackbar.make(rootview, "Upload failed", Snackbar.LENGTH_SHORT).show();
+                    Log.e("Upload", "Failure: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Snackbar.make(rootview, "Upload error: " + t.getMessage(), Snackbar.LENGTH_LONG).show();
+                Log.e("Upload error:", t.getMessage());
+            }
+        });
+    }
+
+    private String getRealPathFromURI(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        CursorLoader loader = new CursorLoader(context, uri, projection, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        if(cursor != null) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            String result = cursor.getString(column_index);
+            cursor.close();
+            return result;
+        }
+        return null;
     }
 
     public void fetchContent(String domain, String endpoint, String status, MutableLiveData<ArrayList<ContentCardModel>> livedata) {
