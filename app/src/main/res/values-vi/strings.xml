@@ -256,7 +256,7 @@
     <string name="trash">Cho vào thùng rác</string>
     <string name="move_to_draft">Chuyển về nháp</string>
     <string name="comments_popup">Bình luận</string>
-    <string name="delete_permanently">Xóa</string>
+    <string name="delete_permanently">Xóa vĩnh viễn</string>
     <string name="set_parent">Chọn trang mẹ</string>
     <string name="set_as_homepage">Cài làm trang chủ</string>
     <string name="set_as_posts_page">Cài làm trang bài viết</string>
@@ -267,5 +267,7 @@
     <string name="copy_address">Đã sao chép địa chỉ!</string>
     <string name="reply_success">Phản hồi thành công!</string>
     <string name="reply_faild">Phản hồi thất bại, thử lại sau!</string>
+
+    <string name="copy_link_address">Sao chép địa chỉ </string>
 
 </resources>
