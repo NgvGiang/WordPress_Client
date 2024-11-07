@@ -52,9 +52,9 @@ public class CommentRepository {
         return instance;
     }
 
-    public void getComments(int perPage, String status, MutableLiveData<ArrayList<CommentCardModel>> commentModelLiveData) {
-        String accessToken = SessionManager.getInstance(context).getAccessToken();
-        String domain = DomainManager.getInstance().getSelectedDomain();
+    public void getComments(String accessToken, String domain, int perPage, String status, MutableLiveData<ArrayList<CommentCardModel>> commentModelLiveData) {
+//        String accessToken = SessionManager.getInstance(context).getAccessToken();
+//        String domain = DomainManager.getInstance().getSelectedDomain();
 
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&status=" + status;
 

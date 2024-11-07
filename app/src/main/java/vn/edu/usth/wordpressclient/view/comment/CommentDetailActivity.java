@@ -16,6 +16,7 @@ import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -122,7 +123,6 @@ public class CommentDetailActivity extends AppCompatActivity {
         if (status.equals("trash")) {
             approvedIcon.setImageResource(R.drawable.baseline_restore_24);
             approvedText.setText(getString(R.string.restore_a_comment));
-            approvedText.setText(R.string.move_comment_to_trash);
         }
 
         commentViewModel = new ViewModelProvider(this).get(CommentViewModel.class);
@@ -156,15 +156,15 @@ public class CommentDetailActivity extends AppCompatActivity {
 //            }
 //        });
 
-//        commentViewModel.getDeleteLiveData().observe(this, success -> {
-//            if (success) {
-////                progressDialog.dismiss();
-//                Toast.makeText(this, "Deleted comment", Toast.LENGTH_SHORT).show();
-//                finish();
-//            } else {
-//                Toast.makeText(this, "Failed to delete comment", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        commentViewModel.getDeleteLiveData().observe(this, success -> {
+            if (success) {
+                progressDialog.dismiss();
+                Toast.makeText(this, "Deleted comment", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(this, "Failed to delete comment", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         sendReply.setOnClickListener(v -> {
             replyComment();
@@ -228,7 +228,7 @@ public class CommentDetailActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.move_to_trash) {
-//                    showLoadingDialog();
+                    showLoadingDialog();
                     finish();
 
                     commentViewModel.updateCommentStatus(id, "trash");
@@ -255,8 +255,7 @@ public class CommentDetailActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.delete_forever) {
-//                    showLoadingDialog();
-                    finish();
+                    showLoadingDialog();
                     commentViewModel.deleteComment(id);
 
                     return true;
