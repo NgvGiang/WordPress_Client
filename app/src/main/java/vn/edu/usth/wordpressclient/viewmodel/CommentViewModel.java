@@ -76,22 +76,22 @@ public class CommentViewModel extends AndroidViewModel {
         return trashCommentModelsLiveData;
     }
 
-    public void getComments(String status, String accessToken, String domain) {
+    public void getComments(String status) {
         switch (status) {
             case "all":
-                commentRepository.getComments(accessToken, domain, 100, status, allCommentModelsLiveData);
+                commentRepository.getComments(100, status, allCommentModelsLiveData);
                 break;
             case "hold":
-                commentRepository.getComments(accessToken, domain,100, status, pendingCommentModelsLiveData);
+                commentRepository.getComments(100, status, pendingCommentModelsLiveData);
                 break;
             case "approve":
-                commentRepository.getComments( accessToken, domain,100, status, approvedCommentModelsLiveData);
+                commentRepository.getComments( 100, status, approvedCommentModelsLiveData);
                 break;
             case "spam":
-                commentRepository.getComments( accessToken, domain,100, status, spamCommentModelsLiveData);
+                commentRepository.getComments( 100, status, spamCommentModelsLiveData);
                 break;
             case "trash":
-                commentRepository.getComments(accessToken, domain,100, status, trashCommentModelsLiveData);
+                commentRepository.getComments(100, status, trashCommentModelsLiveData);
                 break;
         }
     }
@@ -108,8 +108,8 @@ public class CommentViewModel extends AndroidViewModel {
         commentRepository.deleteComment(id, deleteLiveData);
     }
 
-    public void getUnrepliedComment(String accessToken, String domain, int id) {
-        commentRepository.getUnrepliedComment(accessToken, domain, 100, id, unrepliedCommentModelsLiveData);
+    public void getUnrepliedComment(int id) {
+        commentRepository.getUnrepliedComment(100, id, unrepliedCommentModelsLiveData);
     }
 
     public void getPostOfComment(int id) {

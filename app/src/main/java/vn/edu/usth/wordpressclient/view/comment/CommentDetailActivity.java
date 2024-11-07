@@ -34,7 +34,7 @@ import vn.edu.usth.wordpressclient.utils.DomainManager;
 import vn.edu.usth.wordpressclient.viewmodel.CommentViewModel;
 
 public class CommentDetailActivity extends AppCompatActivity {
-    TextView authorName, title, content,approvedText, spamText;
+    TextView authorName, title, content,approvedText, spamText, likeText, moreText;
     EditText editText;
     LinearLayout replyCommentField;
     RelativeLayout approve, spam, like, more;
@@ -74,12 +74,16 @@ public class CommentDetailActivity extends AppCompatActivity {
         approvedIcon = findViewById(R.id.done_icon_comment_detail);
         approvedText = findViewById(R.id.done_text_comment_detail);
         spamText = findViewById(R.id.report_text_comment_detail);
+        likeText = findViewById(R.id.like_comment_detail);
+        moreText = findViewById(R.id.more_action_on_comment_detail);
         spamIcon = findViewById(R.id.spam_icon);
         like = findViewById(R.id.like_comment);
         starIcon = findViewById(R.id.like_icon_comment_detail);
         Picasso.get().load(getIntent().getStringExtra("authorAvatar")).error(R.drawable.blank_avatar).into(authorAvatar);
         authorName.setText(getIntent().getStringExtra("authorName"));
         content.setText(Html.fromHtml(getIntent().getStringExtra("content"), Html.FROM_HTML_MODE_LEGACY).toString());
+        likeText.setText(R.string.like_a_comment);
+        moreText.setText(R.string.more_action_on_cmt);
 
         post = getIntent().getIntExtra("post", -1);
         status = getIntent().getStringExtra("status");
@@ -98,10 +102,12 @@ public class CommentDetailActivity extends AppCompatActivity {
         if (status.equals("approved")) {
             approvedIcon.setImageResource(R.drawable.baseline_done_green_24);
             approvedText.setTextColor(Color.parseColor("#26A41A"));
+            approvedText.setText(R.string.approve_status);
         }
         if (status.equals("hold")) {
             approvedIcon.setImageResource(R.drawable.baseline_done_24);
             approvedText.setTextColor(ContextCompat.getColor(this, R.color.onBackGround));
+            approvedText.setText(R.string.approve_status);
         }
 
         if (status.equals("spam")) {
@@ -115,7 +121,8 @@ public class CommentDetailActivity extends AppCompatActivity {
 
         if (status.equals("trash")) {
             approvedIcon.setImageResource(R.drawable.baseline_restore_24);
-            approvedText.setText("Restore");
+            approvedText.setText(getString(R.string.restore_a_comment));
+            approvedText.setText(R.string.move_comment_to_trash);
         }
 
         commentViewModel = new ViewModelProvider(this).get(CommentViewModel.class);

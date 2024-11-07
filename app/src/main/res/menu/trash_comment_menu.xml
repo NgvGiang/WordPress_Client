@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/delete_forever"
-        android:title="Delete"
+        android:title="@string/delete_a_comment"
         app:showAsAction="never"
         />
 </menu>

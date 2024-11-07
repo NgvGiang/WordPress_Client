@@ -112,7 +112,14 @@
     <string name="ngv_giang_on_what_is_this">Ngv Giang on what is this ??</string>
     <string name="luu_duc_on_what_s_this">Luu Duc on what\'s this ??</string>
     <string name="yesterday">YESTERDAY</string>
-
+    <string name="approve_status">Approve</string>
+    <string name="like_a_comment">Like</string>
+    <string name="move_comment_to_trash">Trash</string>
+    <string name="copy_link_comment">Copy link address</string>
+    <string name="restore_a_comment">Restore</string>
+    <string name="delete_a_comment">Delete</string>
+    <string name="more_action_on_cmt">More</string>
+    <string name="reply_to_comment">Reply to comment...</string>
     <!--    Phần của Minh Đức-->
     <string name="user_name">Site Title</string>
     <string name="account_name">\@Account name</string>
