@@ -112,7 +112,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/done_icon_comment_detail"
                             android:layout_centerHorizontal="true"
-                            android:text="Approve"
+                            android:text="@string/approve_status"
                             android:textColor="@color/gray"/>
                     </RelativeLayout>
 
@@ -157,6 +157,7 @@
                             android:src="@drawable/baseline_star_outline_24" />
 
                         <TextView
+                            android:id="@+id/like_comment_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/like_icon_comment_detail"
@@ -181,6 +182,7 @@
                             android:src="@drawable/baseline_more_horiz_24" />
 
                         <TextView
+                            android:id="@+id/more_action_on_comment_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/more_icon_comment_detail"
@@ -239,7 +241,7 @@
                         android:id="@+id/input_reply"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Reply to comment..."
+                        android:hint="@string/reply_to_comment"
                         android:textColorHint="@color/gray"                        android:maxLines="5"
                         android:minLines="1"
                         android:scrollbars="vertical"

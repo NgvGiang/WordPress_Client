@@ -45,11 +45,11 @@ public class TrashedCommentsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         getComments();
 
-        commentViewModel.getComments("trash");
+        commentViewModel.getComments(accessToken, domain,"trash");
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                commentViewModel.getComments("trash");
+                commentViewModel.getComments(accessToken, domain,"trash");
                 adapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -74,7 +74,7 @@ public class TrashedCommentsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        commentViewModel.getComments("trash");
+        commentViewModel.getComments(accessToken, domain,"trash");
         adapter.notifyDataSetChanged();
     }
 }
