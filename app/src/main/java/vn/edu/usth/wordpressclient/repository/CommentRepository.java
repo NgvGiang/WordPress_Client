@@ -54,9 +54,9 @@ public class CommentRepository {
         return instance;
     }
 
-    public void getComments(int perPage, String status, MutableLiveData<ArrayList<CommentCardModel>> commentModelLiveData) {
-        String accessToken = SessionManager.getInstance(context).getAccessToken();
-        String domain = DomainManager.getInstance().getSelectedDomain();
+    public void getComments(String accessToken, String domain, int perPage, String status, MutableLiveData<ArrayList<CommentCardModel>> commentModelLiveData) {
+//        String accessToken = SessionManager.getInstance(context).getAccessToken();
+//        String domain = DomainManager.getInstance().getSelectedDomain();
 
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&status=" + status;
 
@@ -250,9 +250,9 @@ public class CommentRepository {
         QueueManager.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
-    public void getUnrepliedComment(int perPage, int author, MutableLiveData<ArrayList<CommentCardModel>> commentModelLiveData) {
-        String accessToken = SessionManager.getInstance(context).getAccessToken();
-        String domain = DomainManager.getInstance().getSelectedDomain();
+    public void getUnrepliedComment(String accessToken, String domain, int perPage, int author, MutableLiveData<ArrayList<CommentCardModel>> commentModelLiveData) {
+//        String accessToken = SessionManager.getInstance(context).getAccessToken();
+//        String domain = DomainManager.getInstance().getSelectedDomain();
 
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&author_exclude=" + author;
         Log.i("get unreplied url", url);
