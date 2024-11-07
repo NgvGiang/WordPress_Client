@@ -253,10 +253,10 @@ public class CommentDetailActivity extends AppCompatActivity {
         popupWindow.showAtLocation(anchorView, 0, location[0], yOffset);
 
         popupView.findViewById(R.id.move_to_trash).setOnClickListener(view -> {
+            showLoadingDialog();
             // Dismiss popup and execute the "Move to Trash" action
             popupWindow.dismiss();
             // Original code from PopupMenu: finish() and update status to "trash"
-            finish();
             commentViewModel.updateCommentStatus(id, "trash");
         });
 
@@ -297,9 +297,8 @@ public class CommentDetailActivity extends AppCompatActivity {
         popupWindow.showAtLocation(anchorView, 0, location[0], yOffset);
 
         popupView.findViewById(R.id.delete_forever).setOnClickListener(view -> {
+            showLoadingDialog();
             popupWindow.dismiss();
-
-            finish();
             commentViewModel.deleteComment(id);
         });
     }
