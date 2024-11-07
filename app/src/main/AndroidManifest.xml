@@ -25,25 +25,25 @@
             android:name=".view.ContentTextEditor"
             android:exported="false" />
         <activity
-            android:name=".MeActivity.MyProfileActivity"
+            android:name=".view.MeActivity.MyProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".MeActivity.HelpActivity"
+            android:name=".view.MeActivity.HelpActivity"
             android:exported="false" />
         <activity
-            android:name=".MeActivity.AppSettingsActivity"
+            android:name=".view.MeActivity.AppSettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".MeActivity.AccountSettingsActivity"
+            android:name=".view.MeActivity.AccountSettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".MeActivity.AboutWordpressActivity"
+            android:name=".view.MeActivity.AboutWordpressActivity"
             android:exported="false" />
         <activity
-            android:name=".MeActivity.MeWebsiteActivity"
+            android:name=".view.MeActivity.MeWebsiteActivity"
             android:exported="false" />
         <activity
-            android:name=".MeActivity.UsernameActivity"
+            android:name=".view.MeActivity.UsernameActivity"
             android:exported="false" />
         <activity
             android:name=".view.Welcome_to_WordPress"

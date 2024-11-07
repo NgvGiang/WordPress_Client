@@ -59,4 +59,11 @@ public class MediaAllFragment extends Fragment {
 
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mediaViewModel.fetchMediaUrls(SessionManager.getInstance(getContext()).getAccessToken(), DomainManager.getInstance().getSelectedDomain());
+        RecyclerView.getAdapter().notifyDataSetChanged();
+    }
 }

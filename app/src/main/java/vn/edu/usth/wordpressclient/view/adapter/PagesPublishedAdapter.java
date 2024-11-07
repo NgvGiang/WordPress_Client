@@ -11,25 +11,41 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.model.ContentCardModel;
+import vn.edu.usth.wordpressclient.utils.DomainManager;
+import vn.edu.usth.wordpressclient.view.pages.PageDraftFragment;
+import vn.edu.usth.wordpressclient.view.pages.PagePublishedFragment;
+import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 
 public class PagesPublishedAdapter extends RecyclerView.Adapter<PagesPublishedAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<ContentCardModel> postList;
+    private ContentViewModel contentViewModel;
+    private PagePublishedFragment fragment;
+    String domain = DomainManager.getInstance().getSelectedDomain();
 
-    public PagesPublishedAdapter(Context context) {
+
+    public PagesPublishedAdapter(Context context,PagePublishedFragment fragment) {
         this.context = context;
         this.postList = new ArrayList<>();
+        this.fragment = fragment;
+        this.contentViewModel = new ViewModelProvider((ViewModelStoreOwner) context).get(ContentViewModel.class);
     }
 
     @NonNull
@@ -45,6 +61,7 @@ public class PagesPublishedAdapter extends RecyclerView.Adapter<PagesPublishedAd
     public void onBindViewHolder(@NonNull PagesPublishedAdapter.MyViewHolder holder, int position) {
         ContentCardModel currentPost = postList.get(position);
 
+        int id = currentPost.getId();
         holder.Date.setText(currentPost.getDate());
         holder.Title.setText(currentPost.getTitle());
         holder.Setting.setOnClickListener(v -> {
@@ -103,7 +120,17 @@ public class PagesPublishedAdapter extends RecyclerView.Adapter<PagesPublishedAd
             });
 
             popupView.findViewById(R.id.published_move_to_draft_item_page).setOnClickListener(view -> {
-                Toast.makeText(context, "Moved to draft from publish page", Toast.LENGTH_SHORT).show();
+                holder.progressBar.setVisibility(View.VISIBLE);
+                contentViewModel.restoreContent("pages",domain , id);
+                contentViewModel.getRestoreSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    holder.progressBar.setVisibility(View.INVISIBLE);
+                    if (success) {
+                        fragment.refresh();
+                        Snackbar.make(fragment.getView(), R.string.restore_successfully, Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(fragment.getView(), R.string.restore_failed, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
                 popupWindow.dismiss();
             });
 
@@ -118,7 +145,17 @@ public class PagesPublishedAdapter extends RecyclerView.Adapter<PagesPublishedAd
             });
 
             popupView.findViewById(R.id.published_trash_item_page).setOnClickListener(view -> {
-                Toast.makeText(context, "Trashed from publish page", Toast.LENGTH_SHORT).show();
+                holder.progressBar.setVisibility(View.VISIBLE);
+                contentViewModel.trashContent("pages",domain , id);
+                contentViewModel.getDeleteSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    holder.progressBar.setVisibility(View.INVISIBLE);
+                    if (success) {
+                        fragment.refresh();
+                        Snackbar.make(fragment.getView(), R.string.deleted_successfully, Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(fragment.getView(), R.string.deleted_failed, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
                 popupWindow.dismiss();
             });
         });
@@ -138,13 +175,14 @@ public class PagesPublishedAdapter extends RecyclerView.Adapter<PagesPublishedAd
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView Date, Title, Content;
         ImageView Setting;
-
+        ProgressBar progressBar;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             // Grabbing views
             Date = itemView.findViewById(R.id.item_date);
             Title = itemView.findViewById(R.id.item_title);
             Setting = itemView.findViewById(R.id.content_setting_btn);
+            progressBar = itemView.findViewById(R.id.progress_bar);
         }
     }
 

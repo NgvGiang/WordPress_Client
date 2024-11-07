@@ -45,11 +45,11 @@ public class PendingCommentsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         getComments();
 
-        commentViewModel.getComments("hold");
+        commentViewModel.getComments(accessToken, domain, "hold");
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                commentViewModel.getComments("hold");
+                commentViewModel.getComments(accessToken, domain, "hold");
                 adapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -74,7 +74,7 @@ public class PendingCommentsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        commentViewModel.getComments("hold");
+        commentViewModel.getComments(accessToken, domain, "hold");
         adapter.notifyDataSetChanged();
     }
 }

@@ -30,11 +30,12 @@ public class PostDraftFragment extends Fragment {
     private PostsDraftAdapter adapter;
     private ContentViewModel contentViewModel;
     private SwipeRefreshLayout swipeRefreshLayout;
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_post_draft, container, false);
+        view = inflater.inflate(R.layout.fragment_post_draft, container, false);
 
         recyclerView = view.findViewById(R.id.post_recycler_view);
         noPostsMessage = view.findViewById(R.id.no_post_screen);
@@ -42,30 +43,16 @@ public class PostDraftFragment extends Fragment {
 
         String domain = DomainManager.getInstance().getSelectedDomain();
 
-        adapter = new PostsDraftAdapter(getContext());
+        adapter = new PostsDraftAdapter(getContext(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
         contentViewModel = new ViewModelProvider(this).get(ContentViewModel.class);
-        contentViewModel.getDraftPostsArrayLiveData().observe(getViewLifecycleOwner(), draftPostModel -> {
-            adapter.setDraftPost(draftPostModel);
-            if (draftPostModel.isEmpty()) {
-                noPostsMessage.setVisibility(View.VISIBLE);
-            } else {
-                noPostsMessage.setVisibility(View.INVISIBLE) ;
-            }
-            adapter.notifyDataSetChanged();
-        });
+        refresh();
 
-        contentViewModel.fetchContent(domain,"posts","draft");
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                contentViewModel.fetchContent(domain,"posts","draft");
-                adapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            refresh();
+            swipeRefreshLayout.setRefreshing(false);
         });
 
         CreateButton = view.findViewById(R.id.draft_post_button);
@@ -80,12 +67,22 @@ public class PostDraftFragment extends Fragment {
 
         return view;
     }
-
     @Override
     public void onResume() {
         super.onResume();
+        refresh();
+    }
+    public void refresh(){
         String domain = DomainManager.getInstance().getSelectedDomain();
         contentViewModel.fetchContent(domain,"posts","draft");
-        adapter.notifyDataSetChanged();
+        contentViewModel.getDraftPostsArrayLiveData().observe(getViewLifecycleOwner(), draftPostModel -> {
+            adapter.setDraftPost(draftPostModel);
+            if (draftPostModel.isEmpty()) {
+                noPostsMessage.setVisibility(View.VISIBLE);
+            } else {
+                noPostsMessage.setVisibility(View.INVISIBLE) ;
+            }
+            adapter.notifyDataSetChanged();
+        });
     }
 }
