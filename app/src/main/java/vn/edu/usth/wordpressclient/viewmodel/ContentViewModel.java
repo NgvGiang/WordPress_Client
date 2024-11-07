@@ -14,11 +14,11 @@ import vn.edu.usth.wordpressclient.repository.ContentRepository;
 import vn.edu.usth.wordpressclient.utils.SingleLiveEvent;
 
 public class ContentViewModel extends AndroidViewModel {
-    private final SingleLiveEvent<Boolean> deleteSuccessLiveData = new SingleLiveEvent<>();
     private final ContentRepository contentRepository = ContentRepository.getInstance(getApplication());
+    private final SingleLiveEvent<Boolean> deleteSuccessLiveData = new SingleLiveEvent<>();
     private final SingleLiveEvent<Boolean> createSuccessLiveData = new SingleLiveEvent<>();
-//    private final MutableLiveData<Boolean> deleteSuccessLiveData = new MutableLiveData<>();
     private final SingleLiveEvent<Boolean> restoreSuccessLiveData = new SingleLiveEvent<>();
+    private final SingleLiveEvent<Boolean> editSuccessLiveData = new SingleLiveEvent<>();
     private final MutableLiveData<ArrayList<ContentCardModel>> publishPagesArrayLiveData = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<ContentCardModel>> draftPagesArrayLiveData = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<ContentCardModel>> scheduledPagesArrayLiveData = new MutableLiveData<>();
@@ -38,6 +38,9 @@ public class ContentViewModel extends AndroidViewModel {
     }
     public SingleLiveEvent<Boolean> getDeleteSuccessLiveData() {
         return deleteSuccessLiveData;
+    }
+    public SingleLiveEvent<Boolean> getEditSuccessLiveData(){
+        return editSuccessLiveData;
     }
     public LiveData<ArrayList<ContentCardModel>> getPublishPagesArrayLiveData() {
         return publishPagesArrayLiveData;
@@ -116,5 +119,7 @@ public class ContentViewModel extends AndroidViewModel {
     public void trashContent(String endpoint, String domain, int id) {
         contentRepository.trashContent(endpoint, domain, id, deleteSuccessLiveData);
     }
-
+    public void editContent(String endpoint, String domain, int id, String title, String content, String status, String date) {
+        contentRepository.editContent(endpoint, domain, id, title, content, status, date, editSuccessLiveData);
+    }
 }

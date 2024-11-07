@@ -229,7 +229,11 @@
     <string name="save">Save</string>
     <string name="publish_date">Publish Date</string>
     <string name="content_created_successfully">Content created successfully!</string>
+    <string name="content_edited_successfully">Content edited successfully!</string>
     <string name="failed_to_create_content_please_try_again">Failed to create content, please try again!</string>
+    <string name="failed_to_edit_content_please_try_again">Failed to edit content, please try again!</string>
+    <string name="upload_image_successfully">Upload image successfully!</string>
+    <string name="upload_image_failed">Upload image failed!</string>
     <string name="deleted_successfully">Deleted successfully!</string>
 
     //popupmenus

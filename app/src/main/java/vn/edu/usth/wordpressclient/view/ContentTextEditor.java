@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -78,7 +79,23 @@ public class ContentTextEditor extends AppCompatActivity {
                 Snackbar.make(findViewById(android.R.id.content), R.string.failed_to_create_content_please_try_again, Snackbar.LENGTH_SHORT).show();
             }
         });
-
+        contentViewModel.getEditSuccessLiveData().observe(this, success -> {
+            toolbarProgressBar.setVisibility(View.GONE);
+            if (success) {
+                Snackbar.make(findViewById(android.R.id.content),R.string.content_edited_successfully,2500).show();
+                new Handler(Looper.getMainLooper()).postDelayed(this::finish, 2500);
+            }
+            else {
+                Snackbar.make(findViewById(android.R.id.content), R.string.failed_to_edit_content_please_try_again, Snackbar.LENGTH_SHORT).show();
+            }
+        });
+        Intent intent = getIntent();
+        if (intent != null) {
+            String title = intent.getStringExtra("title");
+            String content = intent.getStringExtra("content");
+            editTextTitle.setText(title);
+            editTextContent.setText(content);
+        }
     }
 
     @Override
@@ -195,14 +212,22 @@ public class ContentTextEditor extends AppCompatActivity {
         return String.format("%d-%02d-%02dT%02d:%02d", year, month + 1, day, hour, minute);
     }
 
-    public void createContentByAPI(String status, String endpoint){
+    public void createContentByAPI(String status, String endpoint) {
         toolbarProgressBar.setVisibility(View.VISIBLE);
         String title = editTextTitle.getText().toString();
         String content = editTextContent.getText().toString();
         if (title.trim().isEmpty()) {
             title = "Untitled";
         }
-        contentViewModel.createContent(endpoint, domain, title, content, status, Date);
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("id", -1);
+        endpoint = getIntent().getStringExtra("endpoint");
+        if (id != -1) {
+            // Nếu id tồn tại, gọi hàm editContent
+            contentViewModel.editContent(endpoint, domain, id, title, content, status, Date);
+        } else {
+            contentViewModel.createContent(endpoint, domain, title, content, status, Date);
+        }
     }
 }
 

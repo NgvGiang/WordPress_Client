@@ -230,7 +230,11 @@
     <string name="save">Lưu</string>
     <string name="publish_date">Lịch xuất bản</string>
     <string name="content_created_successfully">Tạo nội dung thành công!</string>
+    <string name="content_edited_successfully">Chỉnh sửa nội dung thành công!</string>
     <string name="failed_to_create_content_please_try_again">Tạo nội dung thất bại, thử lại sau!</string>
+    <string name="failed_to_edit_content_please_try_again">Chỉnh sửa nội dung thất bại, thử lại sau!</string>
+    <string name="upload_image_successfully">Đăng tải ảnh thành công!</string>
+    <string name="upload_image_failed">Đăng tải ảnh thất bại!</string>
     <string name="deleted_successfully">Xóa thành công!</string>
 
 

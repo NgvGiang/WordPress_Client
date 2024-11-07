@@ -1,20 +1,18 @@
 package vn.edu.usth.wordpressclient.view.adapter;
 
 import android.content.Context;
-
-
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
@@ -29,7 +27,7 @@ import java.util.ArrayList;
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.model.ContentCardModel;
 import vn.edu.usth.wordpressclient.utils.DomainManager;
-import vn.edu.usth.wordpressclient.view.posts.PostDraftFragment;
+import vn.edu.usth.wordpressclient.view.ContentTextEditor;
 import vn.edu.usth.wordpressclient.view.posts.PostPublishedFragment;
 import vn.edu.usth.wordpressclient.viewmodel.ContentViewModel;
 
@@ -70,6 +68,16 @@ public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAd
         }else{
             holder.Content.setText(currentPost.getContent());
         }
+
+        holder.content_cardview.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ContentTextEditor.class);
+            intent.putExtra("id", id);
+            intent.putExtra("title", currentPost.getTitle());
+            intent.putExtra("content", currentPost.getContent());
+            intent.putExtra("endpoint", "posts");
+            context.startActivity(intent);
+        });
+
         holder.Setting.setOnClickListener(v -> {
             // Inflate the custom popup layout
             View popupView = LayoutInflater.from(context).inflate(R.layout.post_published_popupmenu, null);
@@ -171,6 +179,7 @@ public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAd
         TextView Date, Title, Content;
         ImageView Setting;
         ProgressBar progressBar;
+        LinearLayout content_cardview;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             // Grabbing views
@@ -179,6 +188,22 @@ public class PostsPublishedAdapter extends RecyclerView.Adapter<PostsPublishedAd
             Content = itemView.findViewById(R.id.item_content);
             Setting = itemView.findViewById(R.id.content_setting_btn);
             progressBar = itemView.findViewById(R.id.progress_bar);
+            content_cardview = itemView.findViewById(R.id.content_cardview);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        ContentCardModel currentPost = postList.get(position);
+                        Intent intentToEditor = new Intent(context, ContentTextEditor.class);
+                        intentToEditor.putExtra("id", currentPost.getId());
+                        intentToEditor.putExtra("title", currentPost.getTitle());
+                        intentToEditor.putExtra("content", currentPost.getContent());
+                        intentToEditor.putExtra("endpoint", "posts");
+                        context.startActivity(intentToEditor);
+                }
+            }
+            });
         }
     }
     public void setPublishedPost(ArrayList<ContentCardModel> publishedPost){
