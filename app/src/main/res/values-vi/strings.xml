@@ -113,7 +113,14 @@
     <string name="ngv_giang_on_what_is_this">Ngv Giang bình luận về what\'s this ??</string>
     <string name="luu_duc_on_what_s_this">Luu Duc bình luận về what\'s this ??</string>
     <string name="yesterday">Hôm qua</string>
-
+    <string name="approve_status">Duyệt</string>
+    <string name="like_a_comment">Thích</string>
+    <string name="move_comment_to_trash">Rác</string>
+    <string name="copy_link_comment">Sao chép địa chỉ</string>
+    <string name="restore_a_comment">Khôi phục</string>
+    <string name="delete_a_comment">Xoá</string>
+    <string name="more_action_on_cmt">Thêm</string>
+    <string name="reply_to_comment">Trả lời bình luận...</string>
     <!--    Phần của Minh Đức-->
     <string name="user_name">Tên người dùng</string>
     <string name="account_name">\@Tên tài khoản</string>

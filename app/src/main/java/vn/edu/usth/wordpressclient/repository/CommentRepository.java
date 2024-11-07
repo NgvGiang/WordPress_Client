@@ -7,7 +7,6 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 
 import com.android.volley.Request;
@@ -32,7 +31,6 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 import vn.edu.usth.wordpressclient.model.CommentCardModel;
-import vn.edu.usth.wordpressclient.model.ContentCardModel;
 import vn.edu.usth.wordpressclient.model.MediaCardModel;
 import vn.edu.usth.wordpressclient.utils.DomainManager;
 import vn.edu.usth.wordpressclient.utils.QueueManager;
@@ -54,9 +52,9 @@ public class CommentRepository {
         return instance;
     }
 
-    public void getComments(int perPage, String status, MutableLiveData<ArrayList<CommentCardModel>> commentModelLiveData) {
-        String accessToken = SessionManager.getInstance(context).getAccessToken();
-        String domain = DomainManager.getInstance().getSelectedDomain();
+    public void getComments(String accessToken, String domain, int perPage, String status, MutableLiveData<ArrayList<CommentCardModel>> commentModelLiveData) {
+//        String accessToken = SessionManager.getInstance(context).getAccessToken();
+//        String domain = DomainManager.getInstance().getSelectedDomain();
 
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&status=" + status;
 
@@ -84,25 +82,12 @@ public class CommentRepository {
                             String authorAvatar = commentArrayJSONObject.getJSONObject("author_avatar_urls").getString("48");
 
                             //Fraudulently get the post title to which the comment belongs
-//                            String[] postTitles = link.split("/");
-//                            String postTitleTemp = postTitles[6];
-//                            String[] postTitlesTemp = postTitleTemp.split("-");
-//                            String postTitle = "";
-//                            for (int j = 0; j < postTitlesTemp.length; j++) {
-//                                postTitle += postTitlesTemp[j] + " ";
-//                            }
-                            // Tìm vị trí của "/comment-page"
-                            int commentPageIndex = link.indexOf("/comment-page");
-                            String postTitle= "";
-                            if (commentPageIndex != -1) {
-                                // Cắt phần chuỗi trước "/comment-page"
-                                String linkPart = link.substring(0, commentPageIndex);
-
-                                // Tìm vị trí của dấu "/" cuối cùng trước "/comment-page"
-                                int lastSlashIndex = linkPart.lastIndexOf('/');
-
-                                // Lấy phần chuỗi sau dấu "/" cuối cùng
-                                postTitle = linkPart.substring(lastSlashIndex + 1);
+                            String[] postTitles = link.split("/");
+                            String postTitleTemp = postTitles[6];
+                            String[] postTitlesTemp = postTitleTemp.split("-");
+                            String postTitle = "";
+                            for (int j = 0; j < postTitlesTemp.length; j++) {
+                                postTitle += postTitlesTemp[j] + " ";
                             }
 
                             CommentCardModel commentCardModel = new CommentCardModel(commentId, postId, authorId, authorName, formattedDate, content, link, cmtStatus, authorAvatar);
@@ -151,14 +136,14 @@ public class CommentRepository {
                 try {
                     String date = response.getString("date");
                     String cmtContent = response.getJSONObject("content").getString("rendered");
-                    successLiveData.setValue(cmtContent);
+                    successLiveData.postValue(cmtContent);
                 } catch (JSONException e) {
-                    successLiveData.setValue("");
+                    successLiveData.postValue("");
                     throw new RuntimeException(e);
                 }
             },
             error -> {
-                successLiveData.setValue("");
+                successLiveData.postValue("");
                 VolleyLog.d("volley", "Error: " + error.getMessage());
                 error.printStackTrace();
             }
@@ -194,9 +179,9 @@ public class CommentRepository {
                     public void onResponse(JSONObject response) {
                         try {
                             Log.i("response", response.getString("status"));
-                            successLiveData.setValue(true);
+                            successLiveData.postValue(true);
                         } catch (JSONException e) {
-                            successLiveData.setValue(false);
+                            successLiveData.postValue(false);
                             throw new RuntimeException(e);
                         }
                     }
@@ -204,7 +189,8 @@ public class CommentRepository {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        successLiveData.setValue(false);
+                        successLiveData.postValue(false);
+                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
         ) {
@@ -229,13 +215,13 @@ public class CommentRepository {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        successLiveData.setValue(true);
+                        successLiveData.postValue(true);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        successLiveData.setValue(false);
+                        successLiveData.postValue(false);
                         Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -280,24 +266,12 @@ public class CommentRepository {
                             String authorAvatar = commentArrayJSONObject.getJSONObject("author_avatar_urls").getString("48");
 
                             //Fraudulently get the post title to which the comment belongs
-//                            String[] postTitles = link.split("/");
-//                            String postTitleTemp = postTitles[6];
-//                            String[] postTitlesTemp = postTitleTemp.split("-");
-//                            String postTitle = "";
-//                            for (int j = 0; j < postTitlesTemp.length; j++) {
-//                                postTitle += postTitlesTemp[j] + " ";
-//                            }
-                            int commentPageIndex = link.indexOf("/comment-page");
-                            String postTitle= "";
-                            if (commentPageIndex != -1) {
-                                // Cắt phần chuỗi trước "/comment-page"
-                                String linkPart = link.substring(0, commentPageIndex);
-
-                                // Tìm vị trí của dấu "/" cuối cùng trước "/comment-page"
-                                int lastSlashIndex = linkPart.lastIndexOf('/');
-
-                                // Lấy phần chuỗi sau dấu "/" cuối cùng
-                                postTitle = linkPart.substring(lastSlashIndex + 1);
+                            String[] postTitles = link.split("/");
+                            String postTitleTemp = postTitles[6];
+                            String[] postTitlesTemp = postTitleTemp.split("-");
+                            String postTitle = "";
+                            for (int j = 0; j < postTitlesTemp.length; j++) {
+                                postTitle += postTitlesTemp[j] + " ";
                             }
                             CommentCardModel commentCardModel = new CommentCardModel(commentId, postId, authorId, authorName, formattedDate, content, link, cmtStatus, authorAvatar);
                             commentCardModel.setPostTitle(postTitle);
@@ -343,7 +317,7 @@ public class CommentRepository {
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.put("title", title);
                         jsonObject.put("authorId", authorId);
-                        postOfComment.setValue(jsonObject);
+                        postOfComment.postValue(jsonObject);
                     } catch (JSONException e){
                         throw new RuntimeException(e);
                     }

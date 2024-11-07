@@ -53,11 +53,11 @@ public class AllCommentsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         getComments();
 
-        commentViewModel.getComments("all");
+        commentViewModel.getComments(accessToken, domain, "all");
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                commentViewModel.getComments("all");
+                commentViewModel.getComments(accessToken, domain,"all");
                 adapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -82,7 +82,7 @@ public class AllCommentsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        commentViewModel.getComments("all");
+        commentViewModel.getComments(accessToken, domain,"all");
         adapter.notifyDataSetChanged();
     }
 }

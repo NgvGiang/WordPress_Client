@@ -4,12 +4,12 @@
 
     <item
         android:id="@+id/move_to_trash"
-        android:title="Trash"
+        android:title="@string/move_comment_to_trash"
         app:showAsAction="never"
         />
 
     <item
         android:id="@+id/copy_address"
-        android:title="Copy link address"
+        android:title="@string/copy_link_comment"
         app:showAsAction="never" />
 </menu>

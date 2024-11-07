@@ -45,11 +45,11 @@ public class ApprovedCommentsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         getComments();
 
-        commentViewModel.getComments("approve");
+        commentViewModel.getComments(accessToken, domain,"approve");
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                commentViewModel.getComments("approve");
+                commentViewModel.getComments(accessToken, domain,"approve");
                 adapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -74,7 +74,7 @@ public class ApprovedCommentsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        commentViewModel.getComments("approve");
+        commentViewModel.getComments(accessToken, domain,"approve");
         adapter.notifyDataSetChanged();
     }
 }
