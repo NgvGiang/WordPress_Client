@@ -45,11 +45,11 @@ public class SpamCommentsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         getComments();
 
-        commentViewModel.getComments("spam");
+        commentViewModel.getComments(accessToken, domain,"spam");
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                commentViewModel.getComments("spam");
+                commentViewModel.getComments(accessToken, domain,"spam");
                 adapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -74,7 +74,7 @@ public class SpamCommentsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        commentViewModel.getComments("spam");
+        commentViewModel.getComments(accessToken, domain,"spam");
         adapter.notifyDataSetChanged();
     }
 }

@@ -32,6 +32,12 @@
 <!--        <item name="android:textSize">16dp</item>-->
 <!--        <item name="dialogCornerRadius">10dp</item>-->
 <!--    </style>-->
+    <style name="popupBackgroundComment" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:textColorPrimary">@color/onBackGround</item>
+        <item name="actionMenuTextColor">@color/onBackGround</item>
+        <item name="popupMenuBackground">@drawable/overflow_menu_bg</item>
+        <item name="android:gravity">center</item>
+    </style>
 
     <style name="popupBackground" parent="Widget.AppCompat.PopupMenu">
         <item name="android:popupBackground">@drawable/overflow_menu_bg</item>

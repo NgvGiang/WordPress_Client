@@ -5,20 +5,26 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -34,7 +40,7 @@ import vn.edu.usth.wordpressclient.utils.DomainManager;
 import vn.edu.usth.wordpressclient.viewmodel.CommentViewModel;
 
 public class CommentDetailActivity extends AppCompatActivity {
-    TextView authorName, title, content,approvedText, spamText;
+    TextView authorName, title, content,approvedText, spamText, likeText, moreText;
     EditText editText;
     LinearLayout replyCommentField;
     RelativeLayout approve, spam, like, more;
@@ -74,12 +80,16 @@ public class CommentDetailActivity extends AppCompatActivity {
         approvedIcon = findViewById(R.id.done_icon_comment_detail);
         approvedText = findViewById(R.id.done_text_comment_detail);
         spamText = findViewById(R.id.report_text_comment_detail);
+        likeText = findViewById(R.id.like_comment_detail);
+        moreText = findViewById(R.id.more_action_on_comment_detail);
         spamIcon = findViewById(R.id.spam_icon);
         like = findViewById(R.id.like_comment);
         starIcon = findViewById(R.id.like_icon_comment_detail);
         Picasso.get().load(getIntent().getStringExtra("authorAvatar")).error(R.drawable.blank_avatar).into(authorAvatar);
         authorName.setText(getIntent().getStringExtra("authorName"));
         content.setText(Html.fromHtml(getIntent().getStringExtra("content"), Html.FROM_HTML_MODE_LEGACY).toString());
+        likeText.setText(R.string.like_a_comment);
+        moreText.setText(R.string.more_action_on_cmt);
 
         post = getIntent().getIntExtra("post", -1);
         status = getIntent().getStringExtra("status");
@@ -98,10 +108,12 @@ public class CommentDetailActivity extends AppCompatActivity {
         if (status.equals("approved")) {
             approvedIcon.setImageResource(R.drawable.baseline_done_green_24);
             approvedText.setTextColor(Color.parseColor("#26A41A"));
+            approvedText.setText(R.string.approve_status);
         }
         if (status.equals("hold")) {
             approvedIcon.setImageResource(R.drawable.baseline_done_24);
             approvedText.setTextColor(ContextCompat.getColor(this, R.color.onBackGround));
+            approvedText.setText(R.string.approve_status);
         }
 
         if (status.equals("spam")) {
@@ -115,7 +127,7 @@ public class CommentDetailActivity extends AppCompatActivity {
 
         if (status.equals("trash")) {
             approvedIcon.setImageResource(R.drawable.baseline_restore_24);
-            approvedText.setText("Restore");
+            approvedText.setText(getString(R.string.restore_a_comment));
         }
 
         commentViewModel = new ViewModelProvider(this).get(CommentViewModel.class);
@@ -149,15 +161,15 @@ public class CommentDetailActivity extends AppCompatActivity {
 //            }
 //        });
 
-//        commentViewModel.getDeleteLiveData().observe(this, success -> {
-//            if (success) {
-////                progressDialog.dismiss();
-//                Toast.makeText(this, "Deleted comment", Toast.LENGTH_SHORT).show();
-//                finish();
-//            } else {
-//                Toast.makeText(this, "Failed to delete comment", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        commentViewModel.getDeleteLiveData().observe(this, success -> {
+            if (success) {
+                progressDialog.dismiss();
+                Toast.makeText(this, "Deleted comment", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(this, "Failed to delete comment", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         sendReply.setOnClickListener(v -> {
             replyComment();
@@ -213,53 +225,86 @@ public class CommentDetailActivity extends AppCompatActivity {
         showLoadingDialog();
         commentViewModel.replyComment(domain, editText.getText().toString(), id, post);
     }
-    private void showPopupMenu(View view) {
-        PopupMenu popupMenu = new PopupMenu(this, view);
-        popupMenu.getMenuInflater().inflate(R.menu.comment_detail_menu, popupMenu.getMenu());
+    private void showPopupMenu(View anchorView) {
 
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.move_to_trash) {
-//                    showLoadingDialog();
-                    finish();
+        View popupView = LayoutInflater.from(anchorView.getContext()).inflate(R.layout.wpopupmenu_comment_detail, null);
 
-                    commentViewModel.updateCommentStatus(id, "trash");
-                    return true;
-                } else if (item.getItemId() == R.id.copy_address) {
-                    //This feature is under development.
-                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("link", link);
-                    clipboard.setPrimaryClip(clip);
-                    Snackbar.make(findViewById(android.R.id.content), R.string.copy_address, Snackbar.LENGTH_SHORT).show();
-                    return true;
-                } else {
-                    return true;
-                }
-            }
+        final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(true);
+
+        int screenHeight = anchorView.getContext().getResources().getDisplayMetrics().heightPixels;
+        int[] location = new int[2];
+        anchorView.getLocationOnScreen(location);
+        int anchorY = location[1];
+        int anchorHeight = anchorView.getHeight();
+
+        popupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        int popupHeight = popupView.getMeasuredHeight();
+
+        int yOffset;
+        if (anchorY + anchorHeight + popupHeight > screenHeight) {
+            yOffset = anchorY - popupHeight;
+        } else {
+            yOffset = anchorY + anchorHeight;
+        }
+
+        popupWindow.showAtLocation(anchorView, 0, location[0], yOffset);
+
+        popupView.findViewById(R.id.move_to_trash).setOnClickListener(view -> {
+            // Dismiss popup and execute the "Move to Trash" action
+            popupWindow.dismiss();
+            // Original code from PopupMenu: finish() and update status to "trash"
+            finish();
+            commentViewModel.updateCommentStatus(id, "trash");
         });
-        popupMenu.show();
+
+        popupView.findViewById(R.id.copy_address).setOnClickListener(view -> {
+            ClipboardManager clipboard = (ClipboardManager) anchorView.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("link", link);
+            clipboard.setPrimaryClip(clip);
+            Snackbar.make(anchorView.getRootView(), R.string.copy_address, Snackbar.LENGTH_SHORT).show();
+            popupWindow.dismiss();
+        });
     }
 
-    private void showTrashPopupMenu(View view) {
-        PopupMenu popupMenu = new PopupMenu(this, view);
-        popupMenu.getMenuInflater().inflate(R.menu.trash_comment_menu, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.delete_forever) {
-//                    showLoadingDialog();
-                    finish();
-                    commentViewModel.deleteComment(id);
+    private void showTrashPopupMenu(View anchorView) {
+        View popupView = LayoutInflater.from(anchorView.getContext()).inflate(R.layout.wpopupmenu_comment_trash, null);
 
-                    return true;
-                }else {
-                    return true;
-                }
-            }
+        final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(true);
+
+        int screenHeight = anchorView.getContext().getResources().getDisplayMetrics().heightPixels;
+        int[] location = new int[2];
+        anchorView.getLocationOnScreen(location);
+        int anchorY = location[1];
+        int anchorHeight = anchorView.getHeight();
+
+        popupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        int popupHeight = popupView.getMeasuredHeight();
+
+        int yOffset;
+        if (anchorY + anchorHeight + popupHeight > screenHeight) {
+            yOffset = anchorY - popupHeight;
+        } else {
+            yOffset = anchorY + anchorHeight;
+        }
+
+        popupWindow.showAtLocation(anchorView, 0, location[0], yOffset);
+
+        popupView.findViewById(R.id.delete_forever).setOnClickListener(view -> {
+            popupWindow.dismiss();
+
+            finish();
+            commentViewModel.deleteComment(id);
         });
-        popupMenu.show();
     }
+
 
     private void showLoadingDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

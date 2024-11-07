@@ -76,22 +76,22 @@ public class CommentViewModel extends AndroidViewModel {
         return trashCommentModelsLiveData;
     }
 
-    public void getComments(String status) {
+    public void getComments(String accessToken, String domain, String status) {
         switch (status) {
             case "all":
-                commentRepository.getComments(100, status, allCommentModelsLiveData);
+                commentRepository.getComments( accessToken, domain, 100, status, allCommentModelsLiveData);
                 break;
             case "hold":
-                commentRepository.getComments(100, status, pendingCommentModelsLiveData);
+                commentRepository.getComments( accessToken, domain, 100, status, pendingCommentModelsLiveData);
                 break;
             case "approve":
-                commentRepository.getComments( 100, status, approvedCommentModelsLiveData);
+                commentRepository.getComments( accessToken, domain, 100, status, approvedCommentModelsLiveData);
                 break;
             case "spam":
-                commentRepository.getComments( 100, status, spamCommentModelsLiveData);
+                commentRepository.getComments( accessToken, domain, 100, status, spamCommentModelsLiveData);
                 break;
             case "trash":
-                commentRepository.getComments(100, status, trashCommentModelsLiveData);
+                commentRepository.getComments(accessToken, domain, 100, status, trashCommentModelsLiveData);
                 break;
         }
     }
