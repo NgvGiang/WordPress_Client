@@ -260,4 +260,6 @@
     <string name="reply_success">Reply successfully!</string>
     <string name="reply_faild">Reply failed, try again later!</string>
 
+    <string name="copy_link_address">Copy link address</string>
+
 </resources>
