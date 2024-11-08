@@ -387,6 +387,10 @@ public class ContentRepository {
             contentData.put("status", status);
             if (date != null && !date.isEmpty()) {
                 contentData.put("date", date + ":00");
+            } else {
+                Calendar calendar = Calendar.getInstance();
+                date = String.format("%d-%02d-%02dT%02d:%02d:%02d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND));
+                contentData.put("date", date);
             }
         } catch (JSONException e) {
             e.printStackTrace();
