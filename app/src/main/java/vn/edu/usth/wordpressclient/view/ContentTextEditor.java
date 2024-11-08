@@ -37,7 +37,7 @@ public class ContentTextEditor extends AppCompatActivity {
     private EditText editTextContent;
     private String domain;
     private String Date;
-    private SessionManager session;
+    private String buttonTitle;
     private ContentViewModel contentViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +95,10 @@ public class ContentTextEditor extends AppCompatActivity {
             String content = intent.getStringExtra("content");
             editTextTitle.setText(title);
             editTextContent.setText(content);
+            String setTitle = intent.getStringExtra("create");
+            if("publish".equals(setTitle)){
+                buttonTitle = getString(R.string.publish);
+            }
         }
     }
 
@@ -103,7 +107,13 @@ public class ContentTextEditor extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.fab_menu, menu);
         return true;
-}
+    }
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem publishButton = menu.findItem(R.id.publish_button);
+        publishButton.setTitle(buttonTitle);
+        return super.onPrepareOptionsMenu(menu);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -223,7 +233,6 @@ public class ContentTextEditor extends AppCompatActivity {
         int id = intent.getIntExtra("id", -1);
         endpoint = getIntent().getStringExtra("endpoint");
         if (id != -1) {
-            // Nếu id tồn tại, gọi hàm editContent
             contentViewModel.editContent(endpoint, domain, id, title, content, status, Date);
         } else {
             contentViewModel.createContent(endpoint, domain, title, content, status, Date);

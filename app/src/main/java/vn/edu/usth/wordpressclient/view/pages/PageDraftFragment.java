@@ -65,6 +65,7 @@ public class PageDraftFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ContentTextEditor.class);
                 intent.putExtra("endpoint", "pages");
+                intent.putExtra("create","publish");
                 startActivity(intent);
             }
         });
