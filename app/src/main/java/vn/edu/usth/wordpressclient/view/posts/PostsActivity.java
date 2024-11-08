@@ -34,6 +34,7 @@ public class PostsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(PostsActivity.this, ContentTextEditor.class);
                 intent.putExtra("endpoint", "posts");
+                intent.putExtra("create","publish");
                 startActivity(intent);
             }
         });

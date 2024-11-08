@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/publish_button"
-        android:title="@string/publish"
+        android:title="@string/update"
         android:iconTint="@color/onBackGround"
         app:showAsAction="always"
         />
