@@ -222,6 +222,7 @@ public class CommentDetailActivity extends AppCompatActivity {
 
     public void replyComment() {
         showLoadingDialog();
+        commentViewModel.updateCommentStatus(id, "approve");
         commentViewModel.replyComment(domain, editText.getText().toString(), id, post);
     }
     private void showPopupMenu(View anchorView) {
