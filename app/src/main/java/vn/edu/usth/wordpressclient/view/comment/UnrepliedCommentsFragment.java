@@ -37,8 +37,8 @@ public class UnrepliedCommentsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_unreplied_comments, container, false);
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_unreplied_layout);
-        String accessToken = SessionManager.getInstance(getContext()).getAccessToken();
-        String domain = DomainManager.getInstance().getSelectedDomain();
+        accessToken = SessionManager.getInstance(getContext()).getAccessToken();
+        domain = DomainManager.getInstance().getSelectedDomain();
         noUnreplyComment = view.findViewById(R.id.no_unreply_comment);
 
         commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);

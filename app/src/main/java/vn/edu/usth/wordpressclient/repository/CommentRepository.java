@@ -21,8 +21,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,10 +74,16 @@ public class CommentRepository {
                             int postId = commentArrayJSONObject.getInt("post");
                             int authorId = commentArrayJSONObject.getInt("author");
                             String authorName = commentArrayJSONObject.getString("author_name");
-                            String tempDate = commentArrayJSONObject.getString("date");
-                            long dateMillis = LocalDateTime.parse(tempDate, DateTimeFormatter.ISO_DATE_TIME)
-                                    .atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
-                            String formattedDate = DateUtils.getRelativeTimeSpanString(dateMillis, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+                            String tempDate = commentArrayJSONObject.getString("date_gmt");
+                            DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneOffset.UTC);
+                            Instant dateInstant = LocalDateTime.parse(tempDate, formatter).toInstant(ZoneOffset.UTC);
+                            long dateMillis = dateInstant.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+
+                            String formattedDate = DateUtils.getRelativeTimeSpanString(
+                                    dateMillis,
+                                    System.currentTimeMillis(),
+                                    DateUtils.MINUTE_IN_MILLIS
+                            ).toString();
                             String content = commentArrayJSONObject.getJSONObject("content").getString("rendered");
                             String link = commentArrayJSONObject.getString("link");
                             String cmtStatus = commentArrayJSONObject.getString("status");
@@ -256,10 +264,16 @@ public class CommentRepository {
                             int postId = commentArrayJSONObject.getInt("post");
                             int authorId = commentArrayJSONObject.getInt("author");
                             String authorName = commentArrayJSONObject.getString("author_name");
-                            String tempDate = commentArrayJSONObject.getString("date");
-                            long dateMillis = LocalDateTime.parse(tempDate, DateTimeFormatter.ISO_DATE_TIME)
-                                    .atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
-                            String formattedDate = DateUtils.getRelativeTimeSpanString(dateMillis, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+                            String tempDate = commentArrayJSONObject.getString("date_gmt");
+                            DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME.withZone(ZoneOffset.UTC);
+                            Instant dateInstant = LocalDateTime.parse(tempDate, formatter).toInstant(ZoneOffset.UTC);
+                            long dateMillis = dateInstant.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+
+                            String formattedDate = DateUtils.getRelativeTimeSpanString(
+                                    dateMillis,
+                                    System.currentTimeMillis(),
+                                    DateUtils.MINUTE_IN_MILLIS
+                            ).toString();
                             String content = commentArrayJSONObject.getJSONObject("content").getString("rendered");
                             String link = commentArrayJSONObject.getString("link");
                             String cmtStatus = commentArrayJSONObject.getString("status");

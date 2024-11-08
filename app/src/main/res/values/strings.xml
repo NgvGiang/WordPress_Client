@@ -122,10 +122,16 @@
     <string name="like_a_comment">Like</string>
     <string name="move_comment_to_trash">Trash</string>
     <string name="copy_link_comment">Copy link address</string>
+    <string name="spam_comment_status">Spam</string>
+    <string name="not_spam_status">Not Spam</string>
     <string name="restore_a_comment">Restore</string>
     <string name="delete_a_comment">Delete</string>
     <string name="more_action_on_cmt">More</string>
     <string name="reply_to_comment">Reply to comment...</string>
+    <string name="sucessfully_change_comment_status">Sucessfully change comment status</string>
+    <string name="failed_to_change_comment_status">Failed to change comment status</string>
+    <string name="deleted_comment">Deleted comment</string>
+    <string name="failed_to_delete_comment">Failed to delete comment</string>
     <!--    Phần của Minh Đức-->
     <string name="user_name">Site Title</string>
     <string name="account_name">\@Account name</string>

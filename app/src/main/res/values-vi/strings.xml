@@ -121,12 +121,18 @@
     <string name="yesterday">Hôm qua</string>
     <string name="approve_status">Duyệt</string>
     <string name="like_a_comment">Thích</string>
-    <string name="move_comment_to_trash">Rác</string>
+    <string name="move_comment_to_trash">Thùng rác</string>
     <string name="copy_link_comment">Sao chép địa chỉ</string>
+    <string name="spam_comment_status">Spam</string>
+    <string name="not_spam_status">Không Spam</string>
     <string name="restore_a_comment">Khôi phục</string>
     <string name="delete_a_comment">Xoá</string>
     <string name="more_action_on_cmt">Thêm</string>
     <string name="reply_to_comment">Trả lời bình luận...</string>
+    <string name="sucessfully_change_comment_status">Thay đổi trạng thái bình luận thành công</string>
+    <string name="failed_to_change_comment_status">Thay đổi trạng thái bình luận thất bại</string>
+    <string name="deleted_comment">Đã xoá bình luận</string>
+    <string name="failed_to_delete_comment">Xoá bình luận thất bại</string>
     <!--    Phần của Minh Đức-->
     <string name="user_name">Tên người dùng</string>
     <string name="account_name">\@Tên tài khoản</string>

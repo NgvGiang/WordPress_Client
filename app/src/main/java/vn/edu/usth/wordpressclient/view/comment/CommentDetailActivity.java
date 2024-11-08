@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -117,10 +116,10 @@ public class CommentDetailActivity extends AppCompatActivity {
         }
 
         if (status.equals("spam")) {
-            spamText.setText("Not Spam");
+            spamText.setText(getString(R.string.not_spam_status));
             spamIcon.setImageResource(R.drawable.baseline_report_red_24);
         }else{
-            spamText.setText("Spam");
+            spamText.setText(getString(R.string.spam_comment_status));
             spamIcon.setImageResource(R.drawable.baseline_report_24);
         }
 
@@ -151,23 +150,23 @@ public class CommentDetailActivity extends AppCompatActivity {
 
         commentViewModel.getPostOfComment(post);
 
-//        commentViewModel.getStatusLiveData().observe(this, success -> {
-//            if (success) {
-////                progressDialog.dismiss();
-//                Toast.makeText(this, "Sucessfully change comment status", Toast.LENGTH_SHORT).show();
-//                finish();
-//            } else {
-//                Toast.makeText(this, "Failed to change comment status", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        commentViewModel.getStatusLiveData().observe(this, success -> {
+            if (success) {
+                progressDialog.dismiss();
+                Toast.makeText(this, getString(R.string.sucessfully_change_comment_status), Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(this, getString(R.string.failed_to_change_comment_status), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         commentViewModel.getDeleteLiveData().observe(this, success -> {
             if (success) {
                 progressDialog.dismiss();
-                Toast.makeText(this, "Deleted comment", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.deleted_comment), Toast.LENGTH_SHORT).show();
                 finish();
             } else {
-                Toast.makeText(this, "Failed to delete comment", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.failed_to_delete_comment), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -176,38 +175,38 @@ public class CommentDetailActivity extends AppCompatActivity {
         });
 
         approve.setOnClickListener(v -> {
+            showLoadingDialog();
             if (status.equals("approved")) {
                 approvedIcon.setImageResource(R.drawable.baseline_done_24);
                 approvedText.setTextColor(ContextCompat.getColor(this, R.color.onBackGround));
-                status = "hold";
-            } else {
+                commentViewModel.updateCommentStatus(id, "hold");
+            } else if (status.equals("hold") || status.equals("trash") || status.equals("spam")) {
                 approvedIcon.setImageResource(R.drawable.baseline_done_green_24);
                 approvedText.setTextColor(Color.parseColor("#26A41A"));
-                status = "approved";
+                commentViewModel.updateCommentStatus(id, "approve");
             }
-            commentViewModel.updateCommentStatus(id, status);
         });
 
-//        spam.setOnClickListener(v -> {
-////            showLoadingDialog();
-//            if (status.equals("spam")) {
-//                commentViewModel.updateCommentStatus(id, "approve");
-//            } else if (status.equals("approved") || status.equals("hold") || status.equals("trash")) {
-//                commentViewModel.updateCommentStatus(id, "spam");
-//            }
-//        });
         spam.setOnClickListener(v -> {
+            showLoadingDialog();
             if (status.equals("spam")) {
-                spamText.setText("Spam");
-                spamIcon.setImageResource(R.drawable.baseline_report_24);
-                status = "approved";
-            } else {
-                spamText.setText("Not Spam");
-                spamIcon.setImageResource(R.drawable.baseline_report_red_24);
-                status = "spam";
+                commentViewModel.updateCommentStatus(id, "approve");
+            } else if (status.equals("approved") || status.equals("hold") || status.equals("trash")) {
+                commentViewModel.updateCommentStatus(id, "spam");
             }
-            commentViewModel.updateCommentStatus(id, status);
         });
+//        spam.setOnClickListener(v -> {
+//            if (status.equals("spam")) {
+//                spamText.setText("Spam");
+//                spamIcon.setImageResource(R.drawable.baseline_report_24);
+//                status = "approved";
+//            } else {
+//                spamText.setText("Not Spam");
+//                spamIcon.setImageResource(R.drawable.baseline_report_red_24);
+//                status = "spam";
+//            }
+//            commentViewModel.updateCommentStatus(id, status);
+//        });
 
         more.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -254,10 +253,10 @@ public class CommentDetailActivity extends AppCompatActivity {
         popupWindow.showAtLocation(anchorView, 0, location[0], yOffset);
 
         popupView.findViewById(R.id.move_to_trash).setOnClickListener(view -> {
+            showLoadingDialog();
             // Dismiss popup and execute the "Move to Trash" action
             popupWindow.dismiss();
             // Original code from PopupMenu: finish() and update status to "trash"
-            finish();
             commentViewModel.updateCommentStatus(id, "trash");
         });
 
@@ -298,9 +297,8 @@ public class CommentDetailActivity extends AppCompatActivity {
         popupWindow.showAtLocation(anchorView, 0, location[0], yOffset);
 
         popupView.findViewById(R.id.delete_forever).setOnClickListener(view -> {
+            showLoadingDialog();
             popupWindow.dismiss();
-
-            finish();
             commentViewModel.deleteComment(id);
         });
     }

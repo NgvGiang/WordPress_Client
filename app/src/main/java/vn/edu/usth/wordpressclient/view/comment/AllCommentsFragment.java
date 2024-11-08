@@ -41,8 +41,8 @@ public class AllCommentsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_comments, container, false);
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
-        String accessToken = SessionManager.getInstance(getContext()).getAccessToken();
-        String domain = DomainManager.getInstance().getSelectedDomain();
+        accessToken = SessionManager.getInstance(getContext()).getAccessToken();
+        domain = DomainManager.getInstance().getSelectedDomain();
         noAllComment = view.findViewById(R.id.no_all_comment);
 
         commentViewModel = new ViewModelProvider(requireActivity()).get(CommentViewModel.class);
@@ -81,6 +81,7 @@ public class AllCommentsFragment extends Fragment {
 
     @Override
     public void onResume() {
+        Log.i("onResume method all cmt fragment", "checked");
         super.onResume();
         commentViewModel.getComments(accessToken, domain,"all");
         adapter.notifyDataSetChanged();
