@@ -69,9 +69,15 @@
     <string name="hint_create_new_site">Example: example1.wordpress.com</string>
 
     <!--    //Phần của Đức-->
+    <string name="you_don_t_have_any_media">You don\'t have any media</string>
+    <string name="you_don_t_have_any_image">You don\'t have any image</string>
+    <string name="you_don_t_have_any_videos">You don\'t have any videos</string>
     <string name="you_don_t_have_any_documents">You don\'t have any documents</string>
     <string name="upload_media">Upload media</string>
-    <string name="you_don_t_have_any_videos">You don\'t have any videos</string>
+    <string name="upgrade_to_Prenium_plan_VideoPress">Upgrade to Premium plan to enable VideoPress</string>
+    <string name="upgrade_to_Prenium_plan_DocumentPress">Upgrade to Premium plan to enable DocumentPress</string>
+    <string name="upgrade_now">Upgrade now</string>
+    <string name="no_money">You don\'t have enough money!</string>
     <string name="ALL">All</string>
     <string name="images">Images</string>
     <string name="documents">Documents</string>
@@ -236,7 +242,7 @@
     <string name="save">Save</string>
     <string name="publish_date">Publish Date</string>
     <string name="content_created_successfully">Content created successfully!</string>
-    <string name="content_edited_successfully">Content edited successfully!</string>
+    <string name="content_edited_successfully">Content updated successfully!</string>
     <string name="failed_to_create_content_please_try_again">Failed to create content, please try again!</string>
     <string name="failed_to_edit_content_please_try_again">Failed to edit content, please try again!</string>
     <string name="upload_image_successfully">Upload image successfully!</string>

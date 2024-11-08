@@ -53,6 +53,9 @@ public class MediaActivity extends AppCompatActivity {
                         // Gọi hàm upload ảnh lên WordPress
                         mediaViewModel.uploadImage(fileUri, authToken, rootView);
                     }
+                    if (result.getResultCode() == Activity.RESULT_CANCELED){
+                        toolbarProgressBar.setVisibility(View.GONE);
+                    }
                 }
         );
         mediaViewModel.getUploadSuccessLiveData().observe(this, success ->{
