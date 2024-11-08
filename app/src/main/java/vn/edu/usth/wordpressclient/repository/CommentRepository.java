@@ -171,7 +171,7 @@ public class CommentRepository {
         String accessToken = SessionManager.getInstance(context).getAccessToken();
 
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments/" + id;
-        Log.i("url", url);
+//        Log.i("url", url);
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("status", status);
@@ -185,20 +185,14 @@ public class CommentRepository {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        try {
-                            Log.i("response", response.getString("status"));
-                            successLiveData.postValue(true);
-                        } catch (JSONException e) {
-                            successLiveData.postValue(false);
-                            throw new RuntimeException(e);
-                        }
+                        successLiveData.postValue(true);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         successLiveData.postValue(false);
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        VolleyLog.d("volley", "Error: " + error.getMessage());
                     }
                 }
         ) {
@@ -230,7 +224,7 @@ public class CommentRepository {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         successLiveData.postValue(false);
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        VolleyLog.d("volley", "Error: " + error.getMessage());
                     }
                 }
         ) {
@@ -249,7 +243,7 @@ public class CommentRepository {
         String domain = DomainManager.getInstance().getSelectedDomain();
 
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&author_exclude=" + author;
-        Log.i("get unreplied url", url);
+//        Log.i("get unreplied url", url);
         StringRequest fetchCommentRequest = new StringRequest(
                 Request.Method.GET,
                 url,
