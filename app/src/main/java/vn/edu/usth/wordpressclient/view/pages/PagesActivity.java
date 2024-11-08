@@ -35,6 +35,7 @@ public class PagesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(PagesActivity.this, ContentTextEditor.class);
                 intent.putExtra("endpoint", "pages");
+                intent.putExtra("create","publish");
                 startActivity(intent);
             }
         });

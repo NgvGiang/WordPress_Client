@@ -61,6 +61,7 @@ public class PostDraftFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ContentTextEditor.class);
                 intent.putExtra("endpoint", "posts");
+                intent.putExtra("create","publish");
                 startActivity(intent);
             }
         });

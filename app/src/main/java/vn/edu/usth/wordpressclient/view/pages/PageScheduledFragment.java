@@ -60,6 +60,7 @@ public class PageScheduledFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ContentTextEditor.class);
                 intent.putExtra("endpoint", "pages");
+                intent.putExtra("create","publish");
                 startActivity(intent);
             }
         });
