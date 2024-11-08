@@ -23,20 +23,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/you_don_t_have_any_documents"
+            android:text="@string/upgrade_to_Prenium_plan_DocumentPress"
             android:textColor="@color/onBackGround"
             android:textSize="16sp"
             android:layout_marginTop="20dp"/>
 
         <Button
+            app:cornerRadius="8dp"
             android:id="@+id/uploadMediaButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/upload_media"
-            android:textAllCaps="false"
+            android:layout_height="40dp"
+            android:text="@string/upgrade_now"
             android:textColor="@color/onButton"
-            app:cornerRadius="8dp" />
+            android:layout_marginTop="20dp"
+            android:textAllCaps="false" />
 
     </LinearLayout>
 

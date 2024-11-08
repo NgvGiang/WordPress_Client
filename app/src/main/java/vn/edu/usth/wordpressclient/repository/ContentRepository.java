@@ -172,7 +172,7 @@ public class ContentRepository {
         QueueManager.getInstance(context).addToRequestQueue(fetchMediaUrlsRequest);
     }
 
-    public void uploadImageToWordPress(Uri fileUri, String accessToken, View rootview) {
+    public void uploadImageToWordPress(Uri fileUri, String accessToken, View rootview, SingleLiveEvent<Boolean> successLiveData) {
         String filePath = getRealPathFromURI(fileUri);
         if (filePath == null) {
             Snackbar.make(rootview, "Unable to get file path", Snackbar.LENGTH_SHORT).show();
@@ -190,10 +190,10 @@ public class ContentRepository {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Snackbar.make(rootview, "Upload successful", Snackbar.LENGTH_SHORT).show();
+                    successLiveData.setValue(true);
                     Log.d("Upload", "Success: " + response.message());
                 } else {
-                    Snackbar.make(rootview, "Upload failed", Snackbar.LENGTH_SHORT).show();
+                    successLiveData.setValue(false);
                     Log.e("Upload", "Failure: " + response.message());
                 }
             }
@@ -201,6 +201,7 @@ public class ContentRepository {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Snackbar.make(rootview, "Upload error: " + t.getMessage(), Snackbar.LENGTH_LONG).show();
+                successLiveData.setValue(false);
                 Log.e("Upload error:", t.getMessage());
             }
         });
@@ -373,5 +374,62 @@ public class ContentRepository {
         ));
 
         QueueManager.getInstance(context).addToRequestQueue(deleteRequest);
+    }
+
+    public void editContent(String endpoint, String domain, int id, String title, String content, String status, String date, SingleLiveEvent<Boolean> successLiveData) {
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + id;
+        String accessToken = SessionManager.getInstance(context).getAccessToken();
+
+        JSONObject contentData = new JSONObject();
+        try {
+            contentData.put("title", title);
+            contentData.put("content", content);
+            contentData.put("status", status);
+            if (date != null && !date.isEmpty()) {
+                contentData.put("date", date + ":00");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        StringRequest contentRequest = new StringRequest(
+                Request.Method.POST,
+                url,
+                response -> {
+                    successLiveData.setValue(true);
+                    Log.i("ContentRepository", "Content edited successfully");
+
+                },
+                error -> {
+                    VolleyLog.d("volley", "Error: " + error.getMessage());
+                    error.printStackTrace();
+                    successLiveData.setValue(false);
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=UTF-8";
+            }
+
+            @Override
+            public byte[] getBody() {
+                return contentData.toString().getBytes(StandardCharsets.UTF_8);
+            }
+        };
+
+        contentRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
+        QueueManager.getInstance(context).addToRequestQueue(contentRequest);
     }
 }
