@@ -81,7 +81,6 @@ public class AllCommentsFragment extends Fragment {
 
     @Override
     public void onResume() {
-        Log.i("onResume method all cmt fragment", "checked");
         super.onResume();
         commentViewModel.getComments(accessToken, domain,"all");
         adapter.notifyDataSetChanged();

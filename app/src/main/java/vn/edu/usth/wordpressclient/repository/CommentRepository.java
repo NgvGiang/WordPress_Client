@@ -89,13 +89,16 @@ public class CommentRepository {
                             String cmtStatus = commentArrayJSONObject.getString("status");
                             String authorAvatar = commentArrayJSONObject.getJSONObject("author_avatar_urls").getString("48");
 
-                            //Fraudulently get the post title to which the comment belongs
-                            String[] postTitles = link.split("/");
-                            String postTitleTemp = postTitles[6];
-                            String[] postTitlesTemp = postTitleTemp.split("-");
-                            String postTitle = "";
-                            for (int j = 0; j < postTitlesTemp.length; j++) {
-                                postTitle += postTitlesTemp[j] + " ";
+                            // Tìm vị trí của "/comment-page"
+                            int commentPageIndex = link.indexOf("/comment-page");
+                            String postTitle= "";
+                            if (commentPageIndex != -1) {
+                                // Cắt phần chuỗi trước "/comment-page"
+                                String linkPart = link.substring(0, commentPageIndex);
+                                // Tìm vị trí của dấu "/" cuối cùng trước "/comment-page"
+                                int lastSlashIndex = linkPart.lastIndexOf('/');
+                                // Lấy phần chuỗi sau dấu "/" cuối cùng
+                                postTitle = linkPart.substring(lastSlashIndex + 1);
                             }
 
                             CommentCardModel commentCardModel = new CommentCardModel(commentId, postId, authorId, authorName, formattedDate, content, link, cmtStatus, authorAvatar);
@@ -171,7 +174,7 @@ public class CommentRepository {
         String accessToken = SessionManager.getInstance(context).getAccessToken();
 
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments/" + id;
-        Log.i("url", url);
+//        Log.i("url", url);
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("status", status);
@@ -185,20 +188,14 @@ public class CommentRepository {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        try {
-                            Log.i("response", response.getString("status"));
-                            successLiveData.postValue(true);
-                        } catch (JSONException e) {
-                            successLiveData.postValue(false);
-                            throw new RuntimeException(e);
-                        }
+                        successLiveData.postValue(true);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         successLiveData.postValue(false);
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        VolleyLog.d("volley", "Error: " + error.getMessage());
                     }
                 }
         ) {
@@ -230,7 +227,7 @@ public class CommentRepository {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         successLiveData.postValue(false);
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        VolleyLog.d("volley", "Error: " + error.getMessage());
                     }
                 }
         ) {
@@ -249,7 +246,7 @@ public class CommentRepository {
         String domain = DomainManager.getInstance().getSelectedDomain();
 
         String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/comments?per_page=" + perPage + "&author_exclude=" + author;
-        Log.i("get unreplied url", url);
+//        Log.i("get unreplied url", url);
         StringRequest fetchCommentRequest = new StringRequest(
                 Request.Method.GET,
                 url,
@@ -279,13 +276,16 @@ public class CommentRepository {
                             String cmtStatus = commentArrayJSONObject.getString("status");
                             String authorAvatar = commentArrayJSONObject.getJSONObject("author_avatar_urls").getString("48");
 
-                            //Fraudulently get the post title to which the comment belongs
-                            String[] postTitles = link.split("/");
-                            String postTitleTemp = postTitles[6];
-                            String[] postTitlesTemp = postTitleTemp.split("-");
-                            String postTitle = "";
-                            for (int j = 0; j < postTitlesTemp.length; j++) {
-                                postTitle += postTitlesTemp[j] + " ";
+                            // Tìm vị trí của "/comment-page"
+                            int commentPageIndex = link.indexOf("/comment-page");
+                            String postTitle= "";
+                            if (commentPageIndex != -1) {
+                                // Cắt phần chuỗi trước "/comment-page"
+                                String linkPart = link.substring(0, commentPageIndex);
+                                // Tìm vị trí của dấu "/" cuối cùng trước "/comment-page"
+                                int lastSlashIndex = linkPart.lastIndexOf('/');
+                                // Lấy phần chuỗi sau dấu "/" cuối cùng
+                                postTitle = linkPart.substring(lastSlashIndex + 1);
                             }
                             CommentCardModel commentCardModel = new CommentCardModel(commentId, postId, authorId, authorName, formattedDate, content, link, cmtStatus, authorAvatar);
                             commentCardModel.setPostTitle(postTitle);
