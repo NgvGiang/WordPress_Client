@@ -98,6 +98,8 @@ public class ContentTextEditor extends AppCompatActivity {
             String setTitle = intent.getStringExtra("create");
             if("publish".equals(setTitle)){
                 buttonTitle = getString(R.string.publish);
+            } else {
+                buttonTitle = getString(R.string.update);
             }
         }
     }
