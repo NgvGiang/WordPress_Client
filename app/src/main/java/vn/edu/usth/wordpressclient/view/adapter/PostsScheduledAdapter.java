@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,7 +114,10 @@ public class PostsScheduledAdapter extends RecyclerView.Adapter<PostsScheduledAd
 
             // Set click listeners for each menu item
             popupView.findViewById(R.id.schedule_view_item).setOnClickListener(view -> {
-                Toast.makeText(context, "Viewed", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Viewed", Toast.LENGTH_SHORT).show();
+                String url = currentPost.getLink();
+                Intent domainIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                context.startActivity(domainIntent);
                 popupWindow.dismiss();
             });
 

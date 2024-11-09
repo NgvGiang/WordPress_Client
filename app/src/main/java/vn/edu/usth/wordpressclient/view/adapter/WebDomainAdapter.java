@@ -48,12 +48,20 @@ public class WebDomainAdapter extends RecyclerView.Adapter<WebDomainAdapter.MyVi
         // Assign values to the views based on the position of the RecyclerView
         WebCardModel currentWebModel = webModels.get(position);
         holder.WebTitle.setText(currentWebModel.getWeb_title());
-        holder.WebDomain.setText(currentWebModel.getWeb_domain().replace("https://", ""));
+        String domain = currentWebModel.getWeb_domain();
+        if (domain.startsWith("https://")) {
+            domain = domain.substring(8);
+        } else if (domain.startsWith("http://")) {
+            domain = domain.substring(7);
+        }
+        holder.WebDomain.setText(domain);
+
+
 //        holder.WebIcon.setImageResource(currentWebModel.getWeb_icon_url());
         Picasso.get()
-                .load(currentWebModel.getWeb_icon_url())   // URL của ảnh
-                .placeholder(R.drawable.compass)  // Hình ảnh hiển thị khi đang tải
-                .error(R.drawable.compass)              // Hình ảnh hiển thị nếu có lỗi
+                .load(currentWebModel.getWeb_icon_url())
+                .placeholder(R.drawable.compass)
+                .error(R.drawable.compass)
                 .into(holder.WebIcon);
     }
 
@@ -78,24 +86,26 @@ public class WebDomainAdapter extends RecyclerView.Adapter<WebDomainAdapter.MyVi
             WebDomain = itemView.findViewById(R.id.web_domain);
 
             // Handle item click event
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        // Get the clicked WebCardModel
-                        WebCardModel clickedWebsite = webModels.get(position);
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    // Get the clicked WebCardModel
+                    WebCardModel clickedWebsite = webModels.get(position);
 
-                        Intent intent = new Intent(context, UserWebManagement.class);
-                        String tempDomain = clickedWebsite.getWeb_domain();
-                        String domain = tempDomain.replace("https://", "");
-//                        intent.putExtra("domain", domain);
-                        intent.putExtra("title", clickedWebsite.getWeb_title());
-                        intent.putExtra("imgUrl",clickedWebsite.getWeb_icon_url());
-                        DomainManager.getInstance().setSelectedDomain(domain);
-                        context.startActivity(intent);
-
+                    Intent intent = new Intent(context, UserWebManagement.class);
+                    String tempDomain = clickedWebsite.getWeb_domain();
+                    String domain = tempDomain;
+                    if (domain.startsWith("https://")) {
+                        domain = domain.substring(8);
+                    } else if (domain.startsWith("http://")) {
+                        domain = domain.substring(7);
                     }
+
+                    intent.putExtra("title", clickedWebsite.getWeb_title());
+                    intent.putExtra("imgUrl",clickedWebsite.getWeb_icon_url());
+                    DomainManager.getInstance().setSelectedDomain(domain);
+                    context.startActivity(intent);
+
                 }
             });
         }

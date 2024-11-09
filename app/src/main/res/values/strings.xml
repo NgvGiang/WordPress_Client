@@ -278,5 +278,7 @@
     <string name="reply_faild">Reply failed, try again later!</string>
 
     <string name="copy_link_address">Copy link address</string>
+    <string name="publish_successfully">Publish successfully</string>
+    <string name="publish_failed">Publish failed</string>
 
 </resources>

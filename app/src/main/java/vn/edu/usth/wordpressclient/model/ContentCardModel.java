@@ -5,14 +5,18 @@ public class ContentCardModel {
     String title;
     String content;
     String date;
+    String link;
 
-    public ContentCardModel(int id, String title, String content, String date) {
+    public ContentCardModel(int id, String title, String content, String date,String link) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.date = date;
+        this.link = link;
     }
-
+    public String getLink(){
+        return link;
+    }
     public int getId() {
         return id;
     }

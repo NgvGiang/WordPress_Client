@@ -21,11 +21,11 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
-import vn.edu.usth.wordpressclient.view.MeActivity.MeWebsiteActivity;
-import vn.edu.usth.wordpressclient.view.MeActivity.UsernameActivity;
 import vn.edu.usth.wordpressclient.R;
 import vn.edu.usth.wordpressclient.utils.DomainManager;
 import vn.edu.usth.wordpressclient.utils.SessionManager;
+import vn.edu.usth.wordpressclient.view.MeActivity.MeWebsiteActivity;
+import vn.edu.usth.wordpressclient.view.MeActivity.UsernameActivity;
 import vn.edu.usth.wordpressclient.view.comment.CommentActivity;
 import vn.edu.usth.wordpressclient.view.media.MediaActivity;
 import vn.edu.usth.wordpressclient.view.pages.PagesActivity;

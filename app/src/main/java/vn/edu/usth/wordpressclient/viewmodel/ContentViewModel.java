@@ -18,6 +18,7 @@ public class ContentViewModel extends AndroidViewModel {
     private final SingleLiveEvent<Boolean> deleteSuccessLiveData = new SingleLiveEvent<>();
     private final SingleLiveEvent<Boolean> createSuccessLiveData = new SingleLiveEvent<>();
     private final SingleLiveEvent<Boolean> restoreSuccessLiveData = new SingleLiveEvent<>();
+    private final SingleLiveEvent<Boolean> publishSuccessLiveData = new SingleLiveEvent<>();
     private final SingleLiveEvent<Boolean> editSuccessLiveData = new SingleLiveEvent<>();
     private final MutableLiveData<ArrayList<ContentCardModel>> publishPagesArrayLiveData = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<ContentCardModel>> draftPagesArrayLiveData = new MutableLiveData<>();
@@ -42,6 +43,10 @@ public class ContentViewModel extends AndroidViewModel {
     public SingleLiveEvent<Boolean> getEditSuccessLiveData(){
         return editSuccessLiveData;
     }
+    public SingleLiveEvent<Boolean> getPublishSuccessLiveData(){
+        return publishSuccessLiveData;
+    }
+
     public LiveData<ArrayList<ContentCardModel>> getPublishPagesArrayLiveData() {
         return publishPagesArrayLiveData;
     }
@@ -66,6 +71,7 @@ public class ContentViewModel extends AndroidViewModel {
     public LiveData<ArrayList<ContentCardModel>> getTrashedPostsArrayLiveData() {
         return trashedPostsArrayLiveData;
     }
+
 
     //function use cross page to post, use to create page or post base on endpoint
     // endpoint: String: "pages" for pages api, "posts" for posts api
@@ -121,5 +127,8 @@ public class ContentViewModel extends AndroidViewModel {
     }
     public void editContent(String endpoint, String domain, int id, String title, String content, String status, String date) {
         contentRepository.editContent(endpoint, domain, id, title, content, status, date, editSuccessLiveData);
+    }
+    public void publishContent(String endpoint, String domain, int id) {
+        contentRepository.publishContent(endpoint, domain, id, publishSuccessLiveData);
     }
 }

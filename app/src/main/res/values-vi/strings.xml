@@ -280,5 +280,7 @@
     <string name="reply_faild">Phản hồi thất bại, thử lại sau!</string>
 
     <string name="copy_link_address">Sao chép địa chỉ </string>
+    <string name="publish_successfully">Xuất bản thành công</string>
+    <string name="publish_failed">Xuất bản thất bại</string>
 
 </resources>

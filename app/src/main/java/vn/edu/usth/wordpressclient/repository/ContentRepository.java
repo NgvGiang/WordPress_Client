@@ -234,14 +234,15 @@ public class ContentRepository {
                         ArrayList<ContentCardModel> contentModels = new ArrayList<>();
                         for (int i = 0; i < responseArray.length(); i++) {
                             JSONObject postObject = responseArray.getJSONObject(i);
-                            String title = postObject.getJSONObject("title").getString("rendered");
+                            String title = postObject.getJSONObject("title").getString("rendered").replace("&nbsp;"," ");
                             String tempDate = postObject.getString("date");
                             long dateMillis = LocalDateTime.parse(tempDate, DateTimeFormatter.ISO_DATE_TIME)
                                     .atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
                             String formattedDate = DateUtils.getRelativeTimeSpanString(dateMillis, System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
                             int id = postObject.getInt("id");
-                            String content = HtmlCompat.fromHtml(postObject.getJSONObject("content").getString("rendered"), HtmlCompat.FROM_HTML_MODE_LEGACY).toString();
-                            contentModels.add(new ContentCardModel(id, title, content, formattedDate));
+                            String content = HtmlCompat.fromHtml(postObject.getJSONObject("content").getString("rendered"), HtmlCompat.FROM_HTML_MODE_LEGACY).toString().replace("&nbsp;", "");
+                            String link = postObject.getString("link");
+                            contentModels.add(new ContentCardModel(id, title, content, formattedDate,link));
 
                         }
                         livedata.setValue(contentModels);
@@ -329,6 +330,49 @@ public class ContentRepository {
             protected Map<String,String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("status", "draft");
+                return params;
+            }
+
+        };
+
+        restoreRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+
+        QueueManager.getInstance(context).addToRequestQueue(restoreRequest);
+    }
+    public void publishContent(String endpoint, String domain, int id, SingleLiveEvent<Boolean> successLiveData) {
+        String url = "https://public-api.wordpress.com/wp/v2/sites/" + domain + "/" + endpoint + "/" + id;
+        String accessToken = SessionManager.getInstance(context).getAccessToken();
+
+        StringRequest restoreRequest = new StringRequest(
+                Request.Method.POST,
+                url,
+                response -> {
+                    successLiveData.setValue(true);
+                },
+                error -> {
+                    VolleyLog.d("volley", "Error: " + error.getMessage());
+                    error.printStackTrace();
+                    successLiveData.setValue(false);
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+            @Override
+            public String getBodyContentType(){
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+            @Override
+            protected Map<String,String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("status", "publish");
                 return params;
             }
 

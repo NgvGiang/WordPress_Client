@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,7 +106,10 @@ public class PagesDraftAdapter extends RecyclerView.Adapter<PagesDraftAdapter.My
 
             // Set click listeners for each menu item
             popupView.findViewById(R.id.draft_view_item_page).setOnClickListener(view -> {
-                Toast.makeText(context, "Viewed from draft page", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Viewed from draft page", Toast.LENGTH_SHORT).show();
+                String url = currentPost.getLink();
+                Intent domainIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                context.startActivity(domainIntent);
                 popupWindow.dismiss();
             });
 
@@ -115,7 +119,18 @@ public class PagesDraftAdapter extends RecyclerView.Adapter<PagesDraftAdapter.My
             });
 
             popupView.findViewById(R.id.draft_publish_item_page).setOnClickListener(view -> {
-                Toast.makeText(context, "Published from draft page", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Published from draft page", Toast.LENGTH_SHORT).show();
+                holder.progressBar.setVisibility(View.VISIBLE);
+                contentViewModel.publishContent("pages",domain , id);
+                contentViewModel.getPublishSuccessLiveData().observe((LifecycleOwner) context, success -> {
+                    holder.progressBar.setVisibility(View.INVISIBLE);
+                    if (success) {
+                        fragment.refresh();
+                        Snackbar.make(fragment.getView(), R.string.publish_successfully, Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        Snackbar.make(fragment.getView(), R.string.publish_failed, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
                 popupWindow.dismiss();
             });
 
